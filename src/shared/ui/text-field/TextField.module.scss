@@ -1,0 +1,170 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.iconSearch {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+
+  width: 26px;
+  height: 26px;
+
+  color: var(--color-text);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-light-900);
+}
+
+.clearIcon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+}
+
+.inputContainer:focus-within .iconSearch,
+.inputContainer:focus-within .icon,
+.inputContainer:focus-within .clearIcon {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.input {
+  all: unset;
+
+  box-sizing: border-box;
+  width: 100%;
+
+  font-family: var(--font-onest);
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-400);
+  line-height: var(--line-height-xs);
+
+  border: 1px solid #1114341A;
+  border-radius: 4px;
+
+  transition: border-color 0.3s ease;
+
+  &::placeholder {
+    color: var(--color-text);
+    opacity: 0.4;
+  }
+
+  &.text {
+    padding: 20px;
+
+    &:focus {
+      outline: 1px solid var(--color-accent-1);
+    }
+  
+    &:hover {
+      outline: 1px solid var(--color-accent-1);
+    }
+  
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
+
+  &.search {
+    padding: 15px;
+    padding-left: 50px;
+
+    &:focus {
+      outline: 1px solid var(--color-accent-1);
+    }
+  
+    &:hover {
+      outline: 1px solid var(--color-accent-1);
+    }
+  
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
+
+  &.password {
+    padding-right: 32px;
+  }
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:hover {
+  box-shadow: 0 0 0 30px var(--color-dark-500) inset;
+
+  -webkit-text-fill-color: var(--color-light-100);
+}
+
+.input input[type='search']::-webkit-search-cancel-button {
+  display: none;
+  appearance: none;
+}
+
+/* Chrome, Edge и Safari,
+Ensure consistent autofill styling in all states (hover, focus, active) */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:active,
+.input:-webkit-autofill:focus {
+  --webkit-text-fill-color: var(--color-light-100);
+
+  background-color: var(--color-dark-900);
+  transition: background-color 3000s ease-in-out 0s;
+}
+
+.input.error:-webkit-autofill,
+.input.error:-webkit-autofill:hover,
+.input.error:-webkit-autofill:focus,
+.input.error:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-danger-300);
+}
+
+.passwordControl {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+
+  display: none;
+
+  padding: 0;
+
+  background: none;
+  border: none;
+
+  &:hover {
+    background: none;
+  }
+}
+
+.showIcon {
+  display: flex;
+}
+
+.error {
+  color: var(--color-accent-red);
+  border-color: var(--color-accent-red);
+}
+
+.disabled {
+  cursor: default;
+}

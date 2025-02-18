@@ -1,95 +1,108 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import { Pagination } from "@/shared/ui/pagination";
+import s from "./page.module.scss";
+import { Checkbox } from "@/shared/ui/checkbox";
+import { TextField } from "@/shared/ui/text-field";
+import { Typography } from "@/shared/ui/typography";
+import { Button } from "@/shared/ui/button";
+import {
+  ArrowLeftIcon,
+  ArrowRightUpIcon,
+  ArrowSmLeftIcon,
+  BurgerIcon,
+  ShoppingCartIcon,
+} from "@/shared/assets";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className={s.page}>
+      <Typography variant="h1">Headline 1</Typography>
+      <Typography variant="h1_discount">Headline 1</Typography>
+      <Typography variant="h2">Headline 1</Typography>
+      <Typography variant="h3">Headline 1</Typography>
+      <Typography variant="h4">Headline 1</Typography>
+      <Typography variant="h5">Headline 1</Typography>
+      <Typography variant="h6">Headline 1</Typography>
+      <Typography variant="body_1">Headline 1</Typography>
+      <Typography variant="body_1" isRequired={true}>
+        Headline 1
+      </Typography>
+      <Typography variant="body_2">Headline 1</Typography>
+      <Typography variant="body_3">Headline 1</Typography>
+      <Typography variant="body_4">Headline 1</Typography>
+      <Typography variant="body_5">Headline 1</Typography>
+      <Typography variant="body_6">Headline 1</Typography>
+      <Typography variant="body_7">Headline 1</Typography>
+      <Typography variant="button">Headline 1</Typography>
+      <Typography variant="placeholder">Headline 1</Typography>
+      <Typography variant="discount">Headline 1</Typography>
+      <Button variant="burger">
+        <BurgerIcon />
+        Каталог
+      </Button>
+      <Button variant="burger" disabled={true}>
+        <BurgerIcon />
+        Каталог
+      </Button>
+      <Button variant="primary">Перейти в каталог</Button>
+      <Button variant="primary" disabled={true}>
+        Перейти в каталог
+      </Button>
+      <Button variant="secondary">Применить</Button>
+      <Button variant="secondary" disabled={true}>
+        Применить
+      </Button>
+      <Button variant="nav_1">
+        <ArrowLeftIcon />
+      </Button>
+      <Button variant="nav_1" disabled={true}>
+        <ArrowLeftIcon />
+      </Button>
+      <Button variant="nav_2">
+        <ArrowLeftIcon />
+      </Button>
+      <Button variant="nav_2" disabled={true}>
+        <ArrowLeftIcon />
+      </Button>
+      <Button variant="link">
+        Подробнее
+        <ArrowRightUpIcon />
+      </Button>
+      <Button variant="link" disabled={true}>
+        Подробнее
+        <ArrowRightUpIcon />
+      </Button>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <Button variant="link">
+        <ArrowSmLeftIcon /> Назад к новостям
+      </Button>
+      <Button variant="link" disabled={true}>
+        <ArrowSmLeftIcon /> Назад к новостям
+      </Button>
+
+      <Button variant="icon_outlined">
+        <ShoppingCartIcon />
+      </Button>
+      <Button variant="icon_outlined" disabled={true}>
+        <ShoppingCartIcon />
+      </Button>
+
+      <TextField placeholder="Введите ваше имя" />
+      <TextField placeholder="Введите ваше имя" disabled={true} />
+
+      <TextField placeholder="Поиск по сайту" variant="search" />
+      <TextField
+        placeholder="Поиск по сайту"
+        variant="search"
+        disabled={true}
+      />
+
+      <Checkbox />
+      <Checkbox />
+      <Checkbox disabled={true} />
+      <Checkbox disabled={true} />
+
+      <Pagination totalPages="10" />
     </div>
   );
 }

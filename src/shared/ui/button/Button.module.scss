@@ -1,0 +1,232 @@
+.button {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  font-family: var(--font-onest);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-600);
+  line-height: var(--line-height-s);
+
+  border: none;
+  border-radius: 4px;
+  outline: none;
+
+  color: inherit;
+  text-align: center;
+
+  & > a {
+    color: inherit;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.primary {
+  color: var(--color-white);
+  background-color: var(--color-accent-1);
+  padding: 15px 12px;
+
+  &:hover {
+    background-color: var(--color-text);
+  }
+
+  &:active {
+    color: var(--color-accent-2);
+    background-color: var(--color-text);
+  }
+
+  &:focus-visible {
+    color: var(--color-accent-2);
+    background-color: var(--color-text);
+  }
+
+  &:disabled {
+    color: var(--color-bg-overlay);
+    background-color: var(--color-grey);
+  }
+}
+
+.secondary {
+  color: var(--color-white);
+  background-color: var(--color-text);
+  padding: 10px 12px;
+
+  &:hover {
+    background-color: var(--color-accent-1);
+  }
+
+  &:active {
+    background-color: var(--color-accent-1);
+    box-shadow: 0px 0px 5px 0px #25338C80;
+  }
+
+  &:focus-visible {
+    background-color: var(--color-accent-1);
+    box-shadow: 0px 0px 5px 0px #25338C80;
+  }
+
+  &:disabled {
+    color: var(--color-white);
+    background-color: var(--color-text);
+    opacity: 0.5;
+  }
+}
+
+.burger {
+  color: var(--color-text);
+  background-color: var(--color-accent-2);
+  padding: 15px 24px;
+  gap: 10px;
+
+  &:hover {
+    color: var(--color-white);
+    background-color: var(--color-accent-1);
+  }
+
+  &:active {
+    color: var(--color-white);
+    background-color: var(--color-text);
+  }
+
+  &:focus-visible {
+    color: var(--color-white);
+    background-color: var(--color-text);
+  }
+
+  &:disabled {
+    color: var(--color-bg-overlay);
+    background-color: var(--color-grey);
+  }
+}
+
+.nav_1 {
+  color: var(--color-text);
+  background-color: var(--color-white);
+  padding: 17px;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: var(--color-accent-2);
+  }
+
+  &:active {
+    background-color: var(--color-accent-2);
+  }
+
+  &:focus-visible {
+    background-color: var(--color-accent-2);
+  }
+
+  &:disabled {
+    color: var(--color-bg-overlay);
+    background-color: var(--color-grey);
+  }
+}
+
+.nav_2 {
+  color: var(--color-text);
+  background-color: var(--color-accent-2);
+  padding: 17px;
+  border-radius: 50%;
+
+  &:hover {
+    color: var(--color-white);
+    background-color: var(--color-accent-1);
+  }
+
+  &:active {
+    color: var(--color-white);
+    background-color: var(--color-accent-1);
+    box-shadow: 0px 0px 5px 0px #25338C80;
+  }
+
+  &:focus-visible {
+    color: var(--color-white);
+    background-color: var(--color-accent-1);
+    box-shadow: 0px 0px 5px 0px #25338C80;
+  }
+
+  &:disabled {
+    color: var(--color-bg-overlay);
+    background-color: var(--color-grey);
+  }
+}
+
+.link{
+  color: var(--color-text);
+  background-color: transparent;
+  gap: 4px; 
+
+  &:hover {
+    & > svg {
+      color: var(--color-accent-1);
+    }
+  }
+
+  &:disabled {
+    color: var(--color-bg-overlay);
+  }
+}
+
+.icon {
+  color: var(--color-accent-1);
+  background-color: transparent;
+  padding: 0;
+  border-radius: 50%;
+
+  &:hover {
+    color: var(--color-text);
+  }
+
+  &:active {
+    color: var(--color-accent-1);
+    outline: 1px solid var(--color-text);
+  }
+
+  &:focus-visible {
+    color: var(--color-accent-1);
+    outline: 1px solid var(--color-text);
+  }
+
+  &:disabled {
+    color: var(--color-bg-overlay);
+  }
+}
+
+
+.icon_outlined {
+  color: var(--color-white);
+  background-color: var(--color-accent-1);
+  padding: 11px;
+
+  &:hover {
+    background-color: var(--color-text);
+  }
+
+  &:active {
+    background-color: var(--color-text);
+    box-shadow: 0px 0px 5px 0px #11143480;
+  }
+
+  &:focus-visible {
+    background-color: var(--color-text);
+    box-shadow: 0px 0px 5px 0px #11143480;
+  }
+
+  &:disabled {
+    color: var(--color-white);
+    background-color: var(--color-text);
+    opacity: 0.5;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}

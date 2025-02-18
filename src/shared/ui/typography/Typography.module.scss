@@ -1,0 +1,148 @@
+@mixin typography($fontSize, $lineHeight, $fontWeight) {
+  margin: 0;
+  padding: 0;
+
+  color: var(--color-text);
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  font-family: var(--font-onest);
+
+  background-color: transparent;
+  border: none;
+}
+
+.h1 {
+  @include typography(var(--font-size-xxxl), var(--line-height-xxxl), var(--font-weight-600));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(30px, 39px, 600);
+  }
+}
+
+.h1_discount {
+  @include typography(var(--font-size-xxl), var(--line-height-xxl), var(--font-weight-600));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(30px, 39px, 600);
+  }
+}
+
+.h2 {
+  @include typography(var(--font-size-xl), var(--line-height-xl), var(--font-weight-600));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(22px, 26.07px, 600);
+  }
+}
+
+.h3 {
+  @include typography(var(--font-size-l), var(--line-height-l), var(--font-weight-600));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(19px, 26.6px, 500);
+  }
+}
+
+.h4 {
+  @include typography(var(--font-size-m), var(--line-height-l), var(--font-weight-600));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(18px, 21.33px, 500);
+  }
+}
+
+.h5 {
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-600));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(14px, 19.6px, 600);
+  }
+}
+
+.h6 {
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-600));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(14px, 19.6px, 600);
+  }
+}
+
+.body_1 {
+  @include typography(var(--font-size-m), var(--line-height-l), var(--font-weight-400));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(16px, 22.4px, 400);
+  }
+}
+
+.body_2 {
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-400));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(16px, 22.4px, 600);
+  }
+}
+
+.body_3 {
+  @include typography(var(--font-size-xxs), var(--line-height-xs), var(--font-weight-500));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(14px, 19.6px, 400);
+  }
+}
+
+.body_4 {
+  @include typography(var(--font-size-xxxs), var(--line-height-xxs), var(--font-weight-500));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(14px, 16.6px, 400);
+  }
+}
+
+.body_5 {
+  @include typography(var(--font-size-xxxs), var(--line-height-xxs), var(--font-weight-400));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(14px, 19.6px, 600);
+  }
+}
+
+.body_6 {
+  @include typography(var(--font-size-xxxxs), var(--line-height-xxxs), var(--font-weight-400));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(11px, 15.4px, 400);
+  }
+}
+
+.body_7 {
+  @include typography(var(--font-size-xxxxs), var(--line-height-xxxxs), var(--font-weight-400));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(11px, 15.4px, 600);
+  }
+}
+
+.button {
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-600));
+  cursor: pointer;
+  @media (max-width: var(--mobile-width)) {
+    @include typography(20px, 28px, 600);
+  }
+}
+
+.placeholder {
+  @include typography(var(--font-size-xxs), var(--line-height-xs), var(--font-weight-400));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(16px, 22.4px, 400);
+  }
+} 
+
+.discount {
+  text-decoration: line-through;
+  @include typography(var(--font-size-xxxs), var(--line-height-xxs), var(--font-weight-500));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(16px, 22.4px, 400);
+  }
+} 
+
+.error {
+  @include typography(var(--font-size-xxxxs), var(--line-height-xxxxs), var(--font-weight-400));
+  @media (max-width: var(--mobile-width)) {
+    @include typography(11px, 15.4px, 600);
+  }
+}
+
+.required {
+  &::after {
+    content: '*';
+    color: var(--color-accent-red);
+  }
+}

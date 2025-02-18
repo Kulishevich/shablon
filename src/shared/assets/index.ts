@@ -1,0 +1,12 @@
+export { default as BurgerIcon } from "./BurgerIcon";
+export { default as ArrowLeftIcon } from "./ArrowLeftIcon";
+export { default as ArrowRightUpIcon } from "./ArrowRightUpIcon";
+export { default as ArrowSmLeftIcon } from "./ArrowSmLeftIcon";
+export { default as ShoppingCartIcon } from "./ShoppingCartIcon";
+export { default as SearchIcon } from "./SearchIcon";
+export { default as CheckedIcon } from "./CheckedIcon";
+export { default as ArrowRightIcon } from "./ArrowRightIcon";
+export { default as DiscountCircleIcon } from "./DiscountCircleIcon";
+export { default as LocationIcon } from "./LocationIcon";
+export { default as ClockIcon } from "./ClockIcon";
+export { default as PhoneIcon } from "./PhoneIcon";
