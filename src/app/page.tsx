@@ -52,16 +52,16 @@ export default function Home() {
       <Button variant="secondary" disabled={true}>
         Применить
       </Button>
-      <Button variant="nav_1">
+      <Button variant="icon_1">
         <ArrowLeftIcon />
       </Button>
-      <Button variant="nav_1" disabled={true}>
+      <Button variant="icon_1" disabled={true}>
         <ArrowLeftIcon />
       </Button>
-      <Button variant="nav_2">
+      <Button variant="icon_2">
         <ArrowLeftIcon />
       </Button>
-      <Button variant="nav_2" disabled={true}>
+      <Button variant="icon_2" disabled={true}>
         <ArrowLeftIcon />
       </Button>
       <Button variant="link">

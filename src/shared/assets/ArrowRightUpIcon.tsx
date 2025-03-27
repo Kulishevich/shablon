@@ -16,9 +16,9 @@ const ArrowRightUpIcon = (
     <path
       d="M5 15.5L15 5.5M15 5.5H7.5M15 5.5V13"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

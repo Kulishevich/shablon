@@ -1,3 +1,4 @@
+'use client';
 import {
   ChangeEvent,
   ComponentPropsWithoutRef,
@@ -8,22 +9,21 @@ import {
   useId,
   useRef,
   useState,
-} from "react";
-import clsx from "clsx";
+} from 'react';
+import clsx from 'clsx';
 
-import s from "./TextField.module.scss";
-import { Typography } from "../typography";
-import { Button } from "../button";
-import { SearchIcon } from "../../assets";
+import s from './TextField.module.scss';
+import { Typography } from '../typography';
+import { SearchIcon } from '../../assets';
 
 export type TextFieldProps = {
   errorMessage?: ReactNode | string;
   isRequired?: boolean;
   label?: string;
-  variant?: "password" | "search" | "text";
-} & ComponentPropsWithoutRef<"input">;
+  variant?: 'password' | 'search' | 'text';
+} & ComponentPropsWithoutRef<'input'>;
 
-type TextFieldRef = ElementRef<"input">;
+type TextFieldRef = ElementRef<'input'>;
 
 export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
   (props, ref) => {
@@ -36,7 +36,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
       onChange,
       placeholder,
       value,
-      variant = "text",
+      variant = 'text',
       ...rest
     } = props;
 
@@ -45,9 +45,9 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
 
     const id = useId();
 
-    const isPassword = variant === "password";
-    const inputType = !showPassword && isPassword ? "password" : "text";
-    const isSearch = variant === "search";
+    const isPassword = variant === 'password';
+    const inputType = !showPassword && isPassword ? 'password' : 'text';
+    const isSearch = variant === 'search';
 
     const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
       onChange?.(e);
@@ -68,7 +68,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
 
     useEffect(() => {
       if (inputRef) {
-        if (typeof value === "string" && inputRef.current) {
+        if (typeof value === 'string' && inputRef.current) {
           inputRef.current.value = value;
         }
       }
@@ -78,7 +78,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
       <div className={s.container}>
         {label && (
           <Typography
-            as={"label"}
+            as={'label'}
             className={clsx(disabled && s.disabled)}
             htmlFor={id}
             isRequired={isRequired}
@@ -140,7 +140,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
           )} */}
         </div>
         {errorMessage && (
-          <Typography as={"span"} variant={"error"}>
+          <Typography as={'span'} variant={'error'}>
             {errorMessage}
           </Typography>
         )}
@@ -149,4 +149,4 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
   }
 );
 
-TextField.displayName = "TextField";
+TextField.displayName = 'TextField';

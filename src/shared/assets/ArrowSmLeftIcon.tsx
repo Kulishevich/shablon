@@ -16,9 +16,9 @@ const ArrowSmLeftIcon = (
     <path
       d="M5 10.4997H15M5 10.4997L9.16667 6.33301M5 10.4997L9.16667 14.6663"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

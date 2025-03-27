@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 24px 0;
+
+    & > p {
+        color: #ffffff65;
+        & > a {
+            color: var(--color-white);
+
+            &:hover {
+                color: var(--color-accent-1);
+            }
+        }
+    }
+}
+
+.paymentMethod {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}

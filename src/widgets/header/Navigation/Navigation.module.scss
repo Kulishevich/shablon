@@ -52,6 +52,7 @@
         
         & > svg {
             color: var(--color-accent-1);
+            flex-shrink: 0 ;
         }
 
         &:nth-child(1) {

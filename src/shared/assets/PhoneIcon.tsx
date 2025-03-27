@@ -1,4 +1,4 @@
-import { Ref, SVGProps, forwardRef, memo } from "react";
+import { Ref, SVGProps, forwardRef, memo } from 'react';
 
 const PhoneIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg

@@ -16,20 +16,20 @@ const BurgerIcon = (
     <path
       d="M1 1H27"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
     <path
       d="M1 9H22"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
     <path
       d="M1 17H17"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
   </svg>
 );
