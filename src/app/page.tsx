@@ -1,17 +1,17 @@
-"use client";
-import { Pagination } from "@/shared/ui/pagination";
-import s from "./page.module.scss";
-import { Checkbox } from "@/shared/ui/checkbox";
-import { TextField } from "@/shared/ui/text-field";
-import { Typography } from "@/shared/ui/typography";
-import { Button } from "@/shared/ui/button";
+'use client';
+import { Pagination } from '@/shared/ui/pagination';
+import s from './page.module.scss';
+import { Checkbox } from '@/shared/ui/checkbox';
+import { TextField } from '@/shared/ui/text-field';
+import { Typography } from '@/shared/ui/typography';
+import { Button } from '@/shared/ui/button';
 import {
   ArrowLeftIcon,
   ArrowRightUpIcon,
   ArrowSmLeftIcon,
   BurgerIcon,
   ShoppingCartIcon,
-} from "@/shared/assets";
+} from '@/shared/assets';
 
 export default function Home() {
   return (

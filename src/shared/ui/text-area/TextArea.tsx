@@ -1,23 +1,23 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
-import { Typography } from '@/components/ui'
-import { clsx } from 'clsx'
+import { clsx } from 'clsx';
 
-import s from './TextArea.module.scss'
+import s from './TextArea.module.scss';
+import { Typography } from '../typography';
 
 export type TextAreaProps = {
-  errorMessage?: string
-  label?: string
-} & ComponentPropsWithoutRef<'textarea'>
+  errorMessage?: string;
+  label?: string;
+} & ComponentPropsWithoutRef<'textarea'>;
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ className, errorMessage, label, ...rest }, ref) => {
-    const showError = !!errorMessage
+    const showError = !!errorMessage;
 
     return (
       <div className={s.container}>
         {label && (
-          <Typography className={s.label} variant={'regular_text_14'}>
+          <Typography className={s.label} variant={'body_1'}>
             {label}
           </Typography>
         )}
@@ -28,11 +28,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         />
 
         {showError && (
-          <Typography className={s.error} variant={'regular_text_14'}>
+          <Typography className={s.error} variant={'body_1'}>
             {errorMessage}
           </Typography>
         )}
       </div>
-    )
+    );
   }
-)
+);

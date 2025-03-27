@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./Header.module.scss";
+import s from "./Navigation.module.scss";
 import Link from "next/link";
 import { Typography } from "@/shared/ui/typography";
 import {
@@ -9,7 +9,7 @@ import {
   PhoneIcon,
 } from "@/shared/assets";
 
-export const Header = () => {
+export const Navigation = () => {
   return (
     <div className={s.container}>
       <div className={s.content}>

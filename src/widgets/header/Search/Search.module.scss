@@ -1,0 +1,17 @@
+.container {
+    width: 1296px;
+    margin: 0 auto;
+    
+    display: flex;
+}
+
+.cart{
+    display: flex;
+    gap: 8px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
