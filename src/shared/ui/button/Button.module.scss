@@ -160,14 +160,16 @@
 }
 
 .link{
-  color: var(--color-text);
+  color: var(--color-accent-1);
   background-color: transparent;
   gap: 4px; 
-
+  width: fit-content;
+  text-decoration: none;
   &:hover {
-    & > svg {
-      color: var(--color-accent-1);
-    }
+      color: var(--color-text);
+      & > svg {
+        color: var(--color-accent-1);
+      }
   }
 
   &:disabled {

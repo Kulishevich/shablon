@@ -5,10 +5,11 @@
     padding: 24px 0;
 
     & > p {
-        color: #ffffff65;
+        color: #ffffff;
+
+        opacity: 0.5;
         & > a {
             color: var(--color-white);
-
             &:hover {
                 color: var(--color-accent-1);
             }

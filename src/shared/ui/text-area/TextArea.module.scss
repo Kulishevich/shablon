@@ -7,11 +7,11 @@
   width: 100%;
   padding: 6px 12px 8px;
 
-  font-size: var(--font-size-m);
+  font-family: Onest;
   font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: var(--color-light-900);
+  font-size: 17px;
+  line-height: 140%;
+  color: var(--color-text);
 
   background-color: var(--color-dark-500);
   border-radius: 2px;
@@ -35,7 +35,8 @@
   }
 
   &::placeholder {
-    color: var(--color-light-900);
+    color: var(--color-text);
+    opacity: 0.4;
   }
 
   &:focus {

@@ -79,6 +79,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
         {label && (
           <Typography
             as={'label'}
+            variant='h6'
             className={clsx(disabled && s.disabled)}
             htmlFor={id}
             isRequired={isRequired}

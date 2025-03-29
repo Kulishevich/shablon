@@ -17,7 +17,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <div className={s.container}>
         {label && (
-          <Typography className={s.label} variant={'body_1'}>
+          <Typography className={s.label} variant={'h6'}>
             {label}
           </Typography>
         )}

@@ -12,10 +12,16 @@ import {
   BurgerIcon,
   ShoppingCartIcon,
 } from '@/shared/assets';
+import { ProductCard } from '@/entities/product-card';
+import { NewsCard } from '@/entities/news-card';
+import { FeedbackForm } from '@/entities/feedback-form';
 
 export default function Home() {
   return (
     <div className={s.page}>
+      <FeedbackForm/>
+      <NewsCard/>
+      <ProductCard/>
       <Typography variant="h1">Headline 1</Typography>
       <Typography variant="h1_discount">Headline 1</Typography>
       <Typography variant="h2">Headline 1</Typography>

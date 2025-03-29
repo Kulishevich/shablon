@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    gap: 48px;
+}
+
+.imageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    width: 612px;
+
+    & > img {
+        border-radius: 6px;
+    }
+    & > .textContent {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
