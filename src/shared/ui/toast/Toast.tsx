@@ -1,29 +1,27 @@
-import { CSSProperties, ReactNode } from 'react'
+import { clsx } from 'clsx';
+import { ToastT, Toaster, toast } from 'sonner';
 
-import { Typography } from '@/components/ui'
-import { CloseIcon } from '@/components/ui/icons'
-import { clsx } from 'clsx'
-import { ToastT, Toaster, toast } from 'sonner'
+import styles from './Toast.module.scss';
+import { Typography } from '../typography';
+import { ErrorIcon, SuccessIcon } from '@/shared/assets';
 
-import styles from './Toast.module.scss'
+const DEFAULT_DURATION = 5000;
+const DEFAULT_POSITION = 'bottom-left';
 
-const DEFAULT_DURATION = 5000
-const DEFAULT_POSITION = 'bottom-left'
-
-type ToastType = 'error' | 'info' | 'success' | 'warning'
+type ToastType = 'error' | 'info' | 'success' | 'warning';
 type ToastOptions = {
-  message: ReactNode
-  progress?: boolean
-  variant?: ToastType
-} & Omit<ToastT, 'id'>
+  message: string;
+  title: string;
+  variant?: ToastType;
+} & Omit<ToastT, 'id'>;
 
 const showToast = ({
   className,
   duration = DEFAULT_DURATION,
   icon,
   message,
+  title,
   position = DEFAULT_POSITION,
-  progress = false,
   variant = 'success',
   ...props
 }: ToastOptions) => {
@@ -32,28 +30,19 @@ const showToast = ({
     info: styles.info,
     success: styles.success,
     warning: styles.warning,
-  }[variant]
-
-  const renderProgress = () =>
-    progress && (
-      <div
-        className={styles.progressBar}
-        style={{ '--animation-duration': `${duration}ms` } as CSSProperties}
-      />
-    )
+  }[variant];
 
   toast.custom(
-    t => (
+    (t) => (
       <div className={clsx(styles.rootClass, typesClass, className)}>
-        <div className={clsx(styles.contentWrapper)}>
-          <Typography className={styles.message} variant={'regular_text_16'}>
-            {message}
-          </Typography>
-          {renderProgress()}
-        </div>
-        <button className={styles.closeButton} onClick={() => toast.dismiss(t)} type={'button'}>
-          {icon || <CloseIcon />}
-        </button>
+        <Typography className={styles.title} variant={'h5'}>
+          {variant === 'error' && <ErrorIcon />}
+          {variant === 'success' && <SuccessIcon />}
+          {title}
+        </Typography>
+        <Typography className={styles.message} variant={'body_7'}>
+          {message}
+        </Typography>
       </div>
     ),
     {
@@ -61,7 +50,7 @@ const showToast = ({
       position,
       ...props,
     }
-  )
-}
+  );
+};
 
-export { Toaster, showToast }
+export { Toaster, showToast };

@@ -6,6 +6,7 @@ import { TextField } from '@/shared/ui/text-field';
 import { TextArea } from '@/shared/ui/text-area';
 import { Checkbox } from '@/shared/ui/checkbox';
 import { Button } from '@/shared/ui/button';
+import { showToast } from '@/shared/ui/toast';
 
 export const FeedbackForm = () => {
   return (
@@ -33,10 +34,26 @@ export const FeedbackForm = () => {
             label="Ваш телефон"
             isRequired
           />
-          <TextArea placeholder="Комментарий" label="Комментарий" />
+          <TextArea
+            placeholder="Комментарий"
+            label="Комментарий"
+            className={s.textarea}
+          />
           <Checkbox label="Согласие на обработку персональных данных" />
         </div>
-        <Button>Отправить</Button>
+        <Button
+          onClick={() =>
+            showToast({
+              variant: 'success',
+              title: 'Спасибо за вашу заявку!',
+              message:
+                'Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы',
+            })
+          }
+          className={s.submitButton}
+        >
+          Отправить
+        </Button>
       </div>
     </div>
   );

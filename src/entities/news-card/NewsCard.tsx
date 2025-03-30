@@ -16,7 +16,7 @@ export const NewsCard = () => {
   return (
     <div className={s.cotnainer}>
       <Image src={news.image_path} width={306} height={220} alt="news" />
-      <Typography variant="body_4" className={s.date}>
+      <Typography variant="tag" className={s.date}>
         {news.date}
       </Typography>
       <Typography variant="h5">{news.title}</Typography>

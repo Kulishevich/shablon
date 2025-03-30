@@ -17,7 +17,7 @@
   height: 32px;
 
   background-color: var(--color-white);
-  border: 1px solid #1114341A;
+  border: 1px solid #1114341a;
   border-radius: 2px;
 
   & > button {
@@ -25,19 +25,19 @@
   }
 
   &:hover {
-    border: 1px solid #25338C;
+    border: 1px solid #25338c;
   }
 
   &:disabled {
     cursor: default;
     background-color: transparent;
-    border: 1px solid #1114341A
+    border: 1px solid #1114341a;
   }
 
   &[data-state='checked'] {
     width: 32px;
     height: 32px;
-  
+
     background-color: var(--color-accent-1);
     border-radius: 2px;
 
@@ -72,11 +72,12 @@
 }
 
 .label {
+  opacity: 0.5;
   &.disabled {
-    color: var(--color-grey);
+    color: var(--color-accent-red);
   }
 }
 
 .disabledIcon {
-  color: var(--color-grey);
+  color: var(--color-accent-red);
 }

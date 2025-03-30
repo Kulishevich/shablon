@@ -4,15 +4,15 @@ import {
   ReactNode,
   forwardRef,
   useId,
-} from "react";
+} from 'react';
 
-import * as RadixCheckbox from "@radix-ui/react-checkbox";
-import { clsx } from "clsx";
+import * as RadixCheckbox from '@radix-ui/react-checkbox';
+import { clsx } from 'clsx';
 
-import { CheckedIcon } from "../../assets";
-import { Typography } from "../typography";
+import { CheckedIcon } from '../../assets';
+import { Typography } from '../typography';
 
-import s from "./Checkbox.module.scss";
+import s from './Checkbox.module.scss';
 
 export type CheckboxProps = {
   error?: string;
@@ -44,7 +44,8 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         </RadixCheckbox.Root>
         {label && (
           <Typography
-            as={"label"}
+            as={'label'}
+            variant="body_4"
             className={clsx(s.label, disabled && s.disabled)}
             htmlFor={checkboxId}
             isRequired={isRequired}
@@ -54,7 +55,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         )}
       </div>
       {error && (
-        <Typography as={"span"} variant={"error"}>
+        <Typography as={'span'} variant={'error'}>
           {error}
         </Typography>
       )}
@@ -62,4 +63,4 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
   );
 });
 
-Checkbox.displayName = "Checkbox";
+Checkbox.displayName = 'Checkbox';

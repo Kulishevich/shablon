@@ -1,25 +1,33 @@
-import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
+import {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  ReactNode,
+  forwardRef,
+} from 'react';
 
-import { ArrowIosDownOutlineIcon } from '@/components/ui/icons'
-import { Typography } from '@/components/ui/typography'
-import * as RadixSelect from '@radix-ui/react-select'
-import { SelectGroup, SelectItem } from '@radix-ui/react-select'
-import { clsx } from 'clsx'
+import * as RadixSelect from '@radix-ui/react-select';
+import { SelectGroup, SelectItem } from '@radix-ui/react-select';
+import { clsx } from 'clsx';
 
-import s from './Select.module.scss'
+import s from './Select.module.scss';
+import { Typography } from '../typography';
+import { ArrowDownIcon } from '@/shared/assets';
 
 export type OptionsValue = {
-  icon?: ReactNode
-  option: string
-  value: string
-}
+  icon?: ReactNode;
+  option: string;
+  value: string;
+};
 export type SelectProps = {
-  className?: string
-  label?: string
-  options?: OptionsValue[]
-  placeHolder?: string
-} & ComponentPropsWithoutRef<typeof RadixSelect.Root>
-export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectProps>(
+  className?: string;
+  label?: string;
+  options?: OptionsValue[];
+  placeHolder?: string;
+} & ComponentPropsWithoutRef<typeof RadixSelect.Root>;
+export const Select = forwardRef<
+  ElementRef<typeof RadixSelect.Trigger>,
+  SelectProps
+>(
   (
     {
       className,
@@ -35,15 +43,19 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
     ref
   ) => {
     const mappedOptions = options?.map((item, index) => (
-      <SelectItem className={s.selectItem} key={item.value + index} value={item.value}>
+      <SelectItem
+        className={s.selectItem}
+        key={item.value + index}
+        value={item.value}
+      >
         <RadixSelect.ItemText asChild>
           <div className={s.option}>
             {item.icon}
-            {item.option}
+            <Typography variant="body_7">{item.option}</Typography>
           </div>
         </RadixSelect.ItemText>
       </SelectItem>
-    ))
+    ));
 
     return (
       <RadixSelect.Root
@@ -54,14 +66,14 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
         {...rest}
       >
         {label && (
-          <Typography as={'label'} grey>
+          <Typography as={'label'} variant="body_7">
             {label}
           </Typography>
         )}
         <RadixSelect.Trigger className={clsx(s.trigger, className)} ref={ref}>
           <RadixSelect.Value placeholder={placeHolder} />
           <RadixSelect.Icon asChild>
-            <ArrowIosDownOutlineIcon className={s.icon} />
+            <ArrowDownIcon className={s.icon} />
           </RadixSelect.Icon>
         </RadixSelect.Trigger>
         <RadixSelect.Portal>
@@ -72,6 +84,6 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
           </RadixSelect.Content>
         </RadixSelect.Portal>
       </RadixSelect.Root>
-    )
+    );
   }
-)
+);

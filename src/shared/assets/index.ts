@@ -15,3 +15,6 @@ export { default as ViberIcon } from './ViberIcon';
 export { default as WhatsAppIcon } from './WhatsAppIcon';
 export { default as MasterCardIcon } from './MasterCardIcon';
 export { default as VisaIcon } from './VisaIcon';
+export { default as ErrorIcon } from './ErrorIcon';
+export { default as SuccessIcon } from './SuccessIcon';
+export { default as ArrowDownIcon } from './ArrowDownIcon';

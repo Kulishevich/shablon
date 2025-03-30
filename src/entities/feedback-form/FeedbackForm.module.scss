@@ -1,34 +1,47 @@
 .container {
-    display: flex;
-    gap: 48px;
+  display: flex;
+  gap: 48px;
+  width: fit-content;
 }
 
 .imageContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-    width: 612px;
+  width: 612px;
 
-    & > img {
-        border-radius: 6px;
-    }
-    & > .textContent {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-}
-
-.formContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: start;
-}
-
-.form {
+  & > img {
+    border-radius: 6px;
+  }
+  & > .textContent {
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: start;
+
+  width: 636px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.textarea {
+  height: 144px;
+  resize: none;
+}
+
+.submitButton {
+  width: 220px;
 }

@@ -3,6 +3,7 @@ import { Onest } from 'next/font/google';
 import '@/shared/config/styles/index.scss';
 import { Header } from '@/widgets/header';
 import { Footer } from '@/widgets/footer';
+import { Toaster } from 'sonner';
 
 const onest = Onest({
   variable: '--font-onest',
@@ -26,6 +27,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

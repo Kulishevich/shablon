@@ -15,13 +15,42 @@ import {
 import { ProductCard } from '@/entities/product-card';
 import { NewsCard } from '@/entities/news-card';
 import { FeedbackForm } from '@/entities/feedback-form';
+import { DiscountCard } from '@/entities/discount-card';
+import { DeliverySection } from '@/widgets/delivery-section';
+import { Select } from '@/shared/ui/select';
 
 export default function Home() {
+  const options = [
+    {
+      option: 'Популярные',
+      value: 'popular',
+    },
+    {
+      option: 'Сначала дешевые',
+      value: 'min',
+    },
+    {
+      option: 'Сначала дорогие',
+      value: 'max',
+    },
+    {
+      option: 'По алфавиту А-Я',
+      value: 'desc',
+    },
+    {
+      option: 'По алфавиту Я-А',
+      value: 'asc',
+    },
+  ];
+
   return (
     <div className={s.page}>
-      <FeedbackForm/>
-      <NewsCard/>
-      <ProductCard/>
+      <Select placeHolder="placeholder" options={options} />
+      <DeliverySection />
+      <DiscountCard />
+      <FeedbackForm />
+      <NewsCard />
+      <ProductCard />
       <Typography variant="h1">Headline 1</Typography>
       <Typography variant="h1_discount">Headline 1</Typography>
       <Typography variant="h2">Headline 1</Typography>

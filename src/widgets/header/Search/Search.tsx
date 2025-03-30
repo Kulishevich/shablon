@@ -1,19 +1,33 @@
+'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/shared/ui/button';
 import { BurgerIcon, ShoppingCartIcon } from '@/shared/assets';
 import { TextField } from '@/shared/ui/text-field';
 import { Typography } from '@/shared/ui/typography';
 import s from './Search.module.scss';
+import { NavigationPopup } from '@/entities/navigation-popup';
 
 export const Search = () => {
+  const [isOpenNavigation, setIsOpenNavigation] = useState(false);
+
   return (
     <div className={s.container}>
       <Image src="/logo.png" width={220} height={86} alt="logo" />
-      <Button variant="burger" className={s.button}>
-        <BurgerIcon />
-        Каталог
-      </Button>
+      <div className={s.burgerMenu}>
+        <Button
+          variant="burger"
+          className={s.button}
+          onClick={() => setIsOpenNavigation(true)}
+        >
+          <BurgerIcon />
+          Каталог
+        </Button>
+        <NavigationPopup
+          isOpen={isOpenNavigation}
+          setIsOpen={setIsOpenNavigation}
+        />
+      </div>
       <TextField
         placeholder="Поиск по сайту"
         variant="search"

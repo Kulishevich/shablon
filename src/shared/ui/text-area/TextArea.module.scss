@@ -1,6 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
+
+  gap: 8px;
 }
 
 .textarea {
@@ -13,24 +15,25 @@
   line-height: 140%;
   color: var(--color-text);
 
-  background-color: var(--color-dark-500);
+  background-color: var(--color-white);
   border-radius: 2px;
-  outline: 1px solid var(--color-dark-100);
-  outline: none;
+  outline: 1px solid #1114341a;
+  border: none;
 
   &::-webkit-scrollbar {
-    width: 4px;
-    background: var(--color-dark-300);
+    width: 6px;
+    background: var(--color-grey);
     border-radius: 2px;
   }
 
   &::-webkit-scrollbar-thumb {
     flex: 1;
-    background: var(--color-dark-100);
+    background: var(--color-bg-overlay);
     border-radius: 3px;
 
     &:hover {
-      background: var(--color-light-900);
+      background: var(--color-text);
+      cursor: pointer;
     }
   }
 
@@ -40,47 +43,46 @@
   }
 
   &:focus {
-    color: var(--color-light-100);
-    outline: 2px solid var(--color-info-700);
-    outline: none;
+    color: var(--color-text);
+    outline: 1px solid var(--color-accent-1);
 
     &::placeholder {
-      color: var(--color-light-100);
+      color: var(--color-text);
     }
   }
 
   &:active {
-    color: var(--color-light-100);
-    outline: 2px solid var(--color-light-100);
+    color: var(--color-text);
+    outline: 1px solid var(--color-accent-1);
 
     &::placeholder {
-      color: var(--color-light-100);
+      color: var(--color-text);
     }
   }
 
   &:disabled {
     pointer-events: none;
     cursor: not-allowed;
-    outline-color: var(--color-dark-100);
+    opacity: 0.2;
 
     &::placeholder {
-      color: var(--color-dark-100);
+      color: var(--color-bg-overlay);
     }
   }
 
   &.error {
-    outline: 1px solid var(--color-danger-500);
+    outline: 1px solid var(--color-accent-red);
 
     &::placeholder {
-      color: var(--color-light-100);
+      color: var(var(--color-bg-overlay));
     }
   }
 }
 
 .label {
-  color: var(--color-light-900);
+  color: var(--color-text);
 }
 
 .error {
-  color: var(--color-danger-500);
+  color: var(--color-accent-red);
 }
