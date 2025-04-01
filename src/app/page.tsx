@@ -54,7 +54,7 @@ export default function Home() {
       <PopularProductsSection />
       <AboutUsSection />
       <AdvantagesSection />
-      <NewsSliderSection />
+      <NewsSliderSection title="Новости" />
       <FeedbackForm />
       {/* <Select placeHolder="placeholder" options={options} />
       <DeliverySection />

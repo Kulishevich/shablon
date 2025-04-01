@@ -1,35 +1,26 @@
-import React from "react";
-import s from "./Navigation.module.scss";
-import Link from "next/link";
-import { Typography } from "@/shared/ui/typography";
+import React from 'react';
+import s from './Navigation.module.scss';
+import Link from 'next/link';
+import { Typography } from '@/shared/ui/typography';
 import {
   ClockIcon,
   DiscountCircleIcon,
   LocationIcon,
   PhoneIcon,
-} from "@/shared/assets";
+} from '@/shared/assets';
+import { navigation } from '@/shared/config/constants/navigation';
 
 export const Navigation = () => {
   return (
     <div className={s.container}>
       <div className={s.content}>
         <nav className={s.navigation}>
-          <Typography variant="body_3" as={Link} href={"/"}>
-            Главная
-          </Typography>
-          <Typography variant="body_3" as={Link} href={"/"}>
-            <DiscountCircleIcon />
-            Акции
-          </Typography>
-          <Typography variant="body_3" as={Link} href={"/"}>
-            Новости
-          </Typography>
-          <Typography variant="body_3" as={Link} href={"/"}>
-            Оплата и доставка
-          </Typography>
-          <Typography variant="body_3" as={Link} href={"/"}>
-            Контакты
-          </Typography>
+          {navigation.map((nav, index) => (
+            <Typography variant="body_3" as={Link} href={nav.path} key={index}>
+              {nav.title === 'Акции' && <DiscountCircleIcon />}
+              {nav.title}
+            </Typography>
+          ))}
         </nav>
         <div className={s.info}>
           <div>

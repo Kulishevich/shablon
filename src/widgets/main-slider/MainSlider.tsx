@@ -57,8 +57,8 @@ export const MainSlider = () => {
       }}
       autoplay={{ delay: 5000 }}
     >
-      {slides.map((slide) => (
-        <SwiperSlide>
+      {slides.map((slide, index) => (
+        <SwiperSlide key={index}>
           <div className={s.slide}>
             <Image src={slide.image_path} alt="Slide 1" fill />
             <div className={s.content}>

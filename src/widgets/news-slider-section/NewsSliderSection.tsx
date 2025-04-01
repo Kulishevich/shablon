@@ -4,10 +4,10 @@ import s from './NewsSliderSection.module.scss';
 import { Slider } from '@/shared/ui/slider';
 import { NewsCard } from '@/entities/news-card';
 
-export const NewsSliderSection = () => {
+export const NewsSliderSection = ({ title }: { title: string }) => {
   return (
     <div className={s.container}>
-      <Typography variant="h2">Новости</Typography>
+      <Typography variant="h2">{title}</Typography>
       <Slider itemWidth={330}>
         <NewsCard />
         <NewsCard />

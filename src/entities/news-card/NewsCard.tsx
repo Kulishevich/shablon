@@ -5,6 +5,7 @@ import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import { ArrowRightUpIcon } from '@/shared/assets';
 import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 const news = {
   title: 'Фурнитура для мебели: как выбрать?',
@@ -20,7 +21,7 @@ export const NewsCard = () => {
         {news.date}
       </Typography>
       <Typography variant="h5">{news.title}</Typography>
-      <Button variant="link" as={Link} href="/">
+      <Button variant="link" as={Link} href={`${paths.news}/1`}>
         Подробнее
         <ArrowRightUpIcon />
       </Button>
