@@ -22,6 +22,7 @@ import { AboutUsSection } from '@/widgets/about-us-section';
 import { PopularProductsSection } from '@/widgets/popular-products-section';
 import { NewsSliderSection } from '@/widgets/news-slider-section';
 import { AdvantagesSection } from '@/widgets/advantages-section';
+import { MainSlider } from '@/widgets/main-slider';
 
 export default function Home() {
   const options = [
@@ -49,6 +50,7 @@ export default function Home() {
 
   return (
     <div className={s.page}>
+      <MainSlider />
       <PopularProductsSection />
       <AboutUsSection />
       <AdvantagesSection />

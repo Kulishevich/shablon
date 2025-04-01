@@ -143,8 +143,8 @@ export const NavigationPopup = ({
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Content className={s.content}>
         <div className={s.categoryList}>
-          {mockNav.map((category) => (
-            <Typography variant="h6" as={Link} href="/">
+          {mockNav.map((category, index) => (
+            <Typography variant="h6" as={Link} href="/" key={index}>
               {category.title}
             </Typography>
           ))}
@@ -152,8 +152,8 @@ export const NavigationPopup = ({
         <div className={s.subcategoryList}>
           <Typography variant="h3">{mockNav[0].title}</Typography>
           <div className={s.subcategories}>
-            {mockNav[0].subcategories.map((subcategory) => (
-              <Typography variant="body_4" as={Link} href={'/'}>
+            {mockNav[0].subcategories.map((subcategory, index) => (
+              <Typography variant="body_4" as={Link} href={'/'} key={index}>
                 {subcategory}
               </Typography>
             ))}
