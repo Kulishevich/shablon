@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  & > .content {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+}
+
+.newsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+}
