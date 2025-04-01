@@ -1,0 +1,45 @@
+.container{
+    position: relative;
+    width: 1296px;
+
+    @media (max-width: 768px) {
+        width: 336px;
+    }
+}
+
+.itemsContainer {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.iconLeft{
+    position: absolute;
+    left: -76px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    & > svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+.iconRight{
+    position: absolute;
+    right: -76px;   
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    & > svg {
+        width: 22px;
+        height: 22px;
+    }
+}

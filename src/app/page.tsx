@@ -18,6 +18,10 @@ import { FeedbackForm } from '@/entities/feedback-form';
 import { DiscountCard } from '@/entities/discount-card';
 import { DeliverySection } from '@/widgets/delivery-section';
 import { Select } from '@/shared/ui/select';
+import { AboutUsSection } from '@/widgets/about-us-section';
+import { PopularProductsSection } from '@/widgets/popular-products-section';
+import { NewsSliderSection } from '@/widgets/news-slider-section';
+import { AdvantagesSection } from '@/widgets/advantages-section';
 
 export default function Home() {
   const options = [
@@ -45,10 +49,14 @@ export default function Home() {
 
   return (
     <div className={s.page}>
-      <Select placeHolder="placeholder" options={options} />
+      <PopularProductsSection />
+      <AboutUsSection />
+      <AdvantagesSection />
+      <NewsSliderSection />
+      <FeedbackForm />
+      {/* <Select placeHolder="placeholder" options={options} />
       <DeliverySection />
       <DiscountCard />
-      <FeedbackForm />
       <NewsCard />
       <ProductCard />
       <Typography variant="h1">Headline 1</Typography>
@@ -137,7 +145,7 @@ export default function Home() {
       <Checkbox disabled={true} />
       <Checkbox disabled={true} />
 
-      <Pagination totalPages="10" />
+      <Pagination totalPages="10" /> */}
     </div>
   );
 }
