@@ -6,4 +6,5 @@ export const paths = {
   contacts: '/contacts',
   privacy_policy: '/privacy-policy',
   catalog: '/catalog',
+  product: '/product',
 };

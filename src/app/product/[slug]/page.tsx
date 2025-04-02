@@ -1,14 +1,14 @@
 'use client';
 import { FeedbackForm } from '@/entities/feedback-form';
-import { CatalogSection } from '@/widgets/catalog-section';
 import { SliderWrapper } from '@/entities/slider-wrapper';
 import Image from 'next/image';
 import s from './page.module.scss';
+import { ProductSection } from '@/widgets/product-info';
 
-export default function Catalog() {
+export default function Product() {
   return (
     <div className={s.page}>
-      <CatalogSection />
+      <ProductSection />
       <SliderWrapper title={'Вы смотрели ранее'} itemWidth={220}>
         {new Array(9).fill('').map((_, index) => (
           <Image

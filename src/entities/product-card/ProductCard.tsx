@@ -3,6 +3,8 @@ import s from './ProductCard.module.scss';
 import Image from 'next/image';
 import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
+import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 const product = {
   name: 'Свеча Jo Malone',
@@ -19,13 +21,15 @@ export const ProductCard = () => {
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
-        <Image
-          src={product.image_path}
-          width={306}
-          height={306}
-          alt="product"
-          className={s.image}
-        />
+        <Link href={`${paths.product}/1`}>
+          <Image
+            src={product.image_path}
+            width={306}
+            height={306}
+            alt="product"
+            className={s.image}
+          />
+        </Link>
         <div className={s.tagsContainer}>
           {product.isNew && (
             <Typography as="span" variant="tag">

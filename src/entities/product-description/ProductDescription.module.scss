@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation {
+  display: flex;
+  text-align: center;
+
+  & > button {
+    border-bottom: 3px solid var(--color-grey);
+    padding-bottom: 16px;
+    flex: 1;
+
+    &.active {
+      border-bottom: 3px solid var(--color-accent-1);
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: var(--color-accent-1);
+      opacity: 0.8;
+    }
+  }
+}
+
+.content {
+  padding-top: 24px;
+}

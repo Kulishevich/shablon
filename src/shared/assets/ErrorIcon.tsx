@@ -19,7 +19,7 @@ const ErrorIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
       d="M19.3327 12.6667L12.666 19.3333M12.666 12.6666L19.3327 19.3333"
       stroke="white"
       strokeWidth="1.5"
-      stroke-linecap="round"
+      strokeLinecap="round"
     />
   </svg>
 );

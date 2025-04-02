@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+  margin-bottom: 48px;
+}
+
+.images {
+  display: flex;
+  gap: 24px;
+
+  margin-right: 48px;
+
+  & > .miniImages {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    & > button {
+      height: 86px;
+      border-radius: 6px;
+      background-color: var(--color-grey);
+      border: none;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  & > .imageContainer {
+    position: relative;
+    background-color: var(--color-grey);
+    border-radius: 6px;
+    height: fit-content;
+    height: 392px;
+
+    & > .tagsContainer {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      & > p {
+        padding: 2px 6px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        color: var(--color-white);
+        width: fit-content;
+        opacity: 0.8;
+
+        &:nth-child(1) {
+          background-color: var(--color-accent-orange);
+        }
+        &:nth-child(2) {
+          background-color: var(--color-accent-red);
+        }
+      }
+    }
+  }
+}
+
+.characteristics {
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  margin-right: 110px;
+
+  & > div > ul {
+    list-style: disc inside;
+  }
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  & > .totalPrice {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+
+    & > p {
+      color: var(--color-accent-red);
+    }
+    & > span {
+      opacity: 0.3;
+    }
+  }
+
+  & > button {
+    width: 170px;
+    margin-top: 16px;
+    margin-bottom: 26px;
+  }
+
+  & > .details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    & > p {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}

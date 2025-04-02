@@ -30,3 +30,4 @@ export { default as HoursIcon } from './HoursIcon';
 export { default as PriceTagIcon } from './PriceTagIcon';
 export { default as QualityStarIcon } from './QualityStarIcon';
 export { default as ShopIcon } from './ShopIcon';
+export { default as DocumentIcon } from './DocumentIcon';

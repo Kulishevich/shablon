@@ -22,7 +22,7 @@ const SuccessIcon = (
       d="M11.334 16.6667L14.0007 19.3334L20.6673 12.6667"
       stroke="white"
       strokeWidth="1.5"
-      stroke-linecap="round"
+      strokeLinecap="round"
       stroke-linejoin="round"
     />
   </svg>
