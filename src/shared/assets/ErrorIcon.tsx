@@ -13,12 +13,12 @@ const ErrorIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     <path
       d="M15.9993 29.3333C23.3631 29.3333 29.3327 23.3638 29.3327 16C29.3327 8.63616 23.3631 2.66663 15.9993 2.66663C8.63555 2.66663 2.66602 8.63616 2.66602 16C2.66602 23.3638 8.63555 29.3333 15.9993 29.3333Z"
       stroke="white"
-      stroke-width="1.5"
+      strokeWidth="1.5"
     />
     <path
       d="M19.3327 12.6667L12.666 19.3333M12.666 12.6666L19.3327 19.3333"
       stroke="white"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       stroke-linecap="round"
     />
   </svg>

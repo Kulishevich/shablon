@@ -16,12 +16,12 @@ const SuccessIcon = (
     <path
       d="M15.9993 29.3334C23.3631 29.3334 29.3327 23.3639 29.3327 16.0001C29.3327 8.63628 23.3631 2.66675 15.9993 2.66675C8.63555 2.66675 2.66602 8.63628 2.66602 16.0001C2.66602 23.3639 8.63555 29.3334 15.9993 29.3334Z"
       stroke="white"
-      stroke-width="1.5"
+      strokeWidth="1.5"
     />
     <path
       d="M11.334 16.6667L14.0007 19.3334L20.6673 12.6667"
       stroke="white"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
     />

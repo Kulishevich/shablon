@@ -4,4 +4,5 @@ export const paths = {
   news: '/news',
   payment_and_delivery: '/payment-and-delivery',
   contacts: '/contacts',
+  privacy_policy: '/privacy-policy',
 };

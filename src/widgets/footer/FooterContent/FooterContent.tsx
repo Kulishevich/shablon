@@ -11,6 +11,7 @@ import {
   WhatsAppIcon,
 } from '@/shared/assets';
 import Link from 'next/link';
+import { navigation } from '@/shared/config/constants/navigation';
 
 export const FooterContent = () => {
   const mockArr = [
@@ -24,15 +25,6 @@ export const FooterContent = () => {
     'Декор для дома',
     'Ароматы для дома',
     'Мебель',
-  ];
-
-  const mockNavigation = [
-    'Главная',
-    'Акции',
-    'Новости',
-    'Оплата и доставка',
-    'Контакты',
-    'Политика конфиденциальности',
   ];
 
   return (
@@ -52,8 +44,8 @@ export const FooterContent = () => {
       <div className={s.elem}>
         <Typography variant="h5">Каталог</Typography>
         <div className={s.catalog}>
-          {mockArr.map((category) => (
-            <Typography variant="body_3" as={Link} href={'/'}>
+          {mockArr.map((category, index) => (
+            <Typography variant="body_3" as={Link} href={'/'} key={index}>
               {category}
             </Typography>
           ))}
@@ -63,9 +55,9 @@ export const FooterContent = () => {
       <div className={s.elem}>
         <Typography variant="h5">Покупателям</Typography>
         <div className={s.navigation}>
-          {mockNavigation.map((nav) => (
-            <Typography variant="body_6" as={Link} href={'/'}>
-              {nav}
+          {navigation.map((nav, index) => (
+            <Typography variant="body_6" as={Link} href={nav.path} key={index}>
+              {nav.title}
             </Typography>
           ))}
         </div>
