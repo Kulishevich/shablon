@@ -1,14 +1,19 @@
 'use client';
 import { FeedbackForm } from '@/entities/feedback-form';
 import s from './page.module.scss';
-import { NewsSliderSection } from '@/widgets/news-slider-section';
 import { NewsInfoSection } from '@/widgets/news-info-section';
+import { SliderWrapper } from '@/entities/slider-wrapper';
+import { NewsCard } from '@/entities/news-card';
 
 export default function New() {
   return (
     <div className={s.page}>
       <NewsInfoSection />
-      <NewsSliderSection title={'Другие новости'} />
+      <SliderWrapper title="Другие новости">
+        {new Array(9).fill('').map((_, index) => (
+          <NewsCard key={index} />
+        ))}
+      </SliderWrapper>
       <FeedbackForm />
     </div>
   );
