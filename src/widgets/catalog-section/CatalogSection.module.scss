@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  & > h1 {
+    margin-bottom: 24px;
+  }
+}
+
+.navigation {
+  display: flex;
+  gap: 24px;
+
+  margin-bottom: 44px;
+  & > button {
+    background-color: var(--color-grey);
+    border-radius: 4px;
+    padding: 12px 24px;
+
+    &.active {
+      color: var(--color-white);
+      background-color: var(--color-accent-1);
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: var(--color-white);
+      background-color: var(--color-accent-1);
+      opacity: 0.8;
+    }
+  }
+}
+
+.catalog {
+  display: flex;
+  gap: 48px;
+}
+
+.filters {
+  width: 282px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.productsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 135px;
+
+  & > div {
+    display: flex;
+    gap: 24px;
+    width: 635px;
+    flex-shrink: 0;
+    & > button {
+      width: 150px;
+    }
+  }
+}
+
+.productList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

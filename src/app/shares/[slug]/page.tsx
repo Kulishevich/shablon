@@ -1,14 +1,19 @@
 'use client';
 import { FeedbackForm } from '@/entities/feedback-form';
-import { OtherShares } from '@/widgets/other-shares';
 import { ShareInfo } from '@/widgets/share-info';
 import s from './page.module.scss';
+import { SliderWrapper } from '@/entities/slider-wrapper';
+import { DiscountCard } from '@/entities/discount-card';
 
 export default function Share() {
   return (
     <div className={s.page}>
       <ShareInfo />
-      <OtherShares />
+      <SliderWrapper title="Другие акции" itemWidth={440}>
+        {new Array(12).fill('').map((_, index) => (
+          <DiscountCard key={index} />
+        ))}
+      </SliderWrapper>
       <FeedbackForm />
     </div>
   );

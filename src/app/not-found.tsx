@@ -1,8 +1,8 @@
 import { Typography } from '@/shared/ui/typography';
-import s from './page.module.scss';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import s from './page.module.scss';
 
 export default function NotFound() {
   return (

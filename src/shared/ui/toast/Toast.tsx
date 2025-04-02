@@ -6,7 +6,7 @@ import { Typography } from '../typography';
 import { ErrorIcon, SuccessIcon } from '@/shared/assets';
 
 const DEFAULT_DURATION = 5000;
-const DEFAULT_POSITION = 'bottom-left';
+const DEFAULT_POSITION = 'top-center';
 
 type ToastType = 'error' | 'info' | 'success' | 'warning';
 type ToastOptions = {

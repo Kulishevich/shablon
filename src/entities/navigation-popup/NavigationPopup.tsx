@@ -3,6 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import s from './NavigationPopup.module.scss';
 import { Typography } from '@/shared/ui/typography';
 import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 type NavigationPopupProps = {
   isOpen: boolean;
@@ -144,7 +145,12 @@ export const NavigationPopup = ({
       <Dialog.Content className={s.content}>
         <div className={s.categoryList}>
           {mockNav.map((category, index) => (
-            <Typography variant="h6" as={Link} href="/" key={index}>
+            <Typography
+              variant="h6"
+              as={Link}
+              href={`${paths.catalog}/1`}
+              key={index}
+            >
               {category.title}
             </Typography>
           ))}
