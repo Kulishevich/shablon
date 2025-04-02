@@ -5,6 +5,7 @@ import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import { ArrowRightUpIcon } from '@/shared/assets';
 import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 const discount = {
   title: 'Скидка 10% на кухонные стулья! ',
@@ -28,7 +29,7 @@ export const DiscountCard = () => {
         <Typography variant="h5" className={s.title}>
           {discount.title}
         </Typography>
-        <Button variant="link" as={Link} href="/">
+        <Button variant="link" as={Link} href={`${paths.shares}/1`}>
           Подробнее
           <ArrowRightUpIcon />
         </Button>
