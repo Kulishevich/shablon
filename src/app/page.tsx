@@ -13,15 +13,15 @@ export default function Home() {
     <div className={s.page}>
       <MainSlider />
       <SliderWrapper title="Популярные товары">
-        {new Array(9).fill('').map((elem) => (
-          <ProductCard />
+        {new Array(9).fill('').map((_, index) => (
+          <ProductCard key={index} />
         ))}
       </SliderWrapper>
       <AboutUsSection />
       <AdvantagesSection />
       <SliderWrapper title="Новости">
-        {new Array(9).fill('').map((elem) => (
-          <NewsCard />
+        {new Array(9).fill('').map((_, index) => (
+          <NewsCard key={index} />
         ))}
       </SliderWrapper>
       <FeedbackForm />

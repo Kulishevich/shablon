@@ -1,19 +1,19 @@
-"use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { getPaginationPages } from "@/shared/lib/getPaginationPages";
-import s from "./Pagination.module.scss";
-import cn from "clsx";
-import { Button } from "../button";
-import { Typography } from "../typography";
-import { ArrowLeftIcon, ArrowRightIcon } from "../../assets";
+'use client';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { getPaginationPages } from '@/shared/lib/getPaginationPages';
+import s from './Pagination.module.scss';
+import cn from 'clsx';
+import { Button } from '../button';
+import { Typography } from '../typography';
+import { ArrowLeftIcon, ArrowRightIcon } from '../../assets';
 
 interface Props {
   totalPages: string;
   currentPage?: string;
 }
 
-export const Pagination = ({ totalPages, currentPage = "1" }: Props) => {
+export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
   const [paginationPages, setPaginationPages] = useState<number[]>([]);
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -26,7 +26,7 @@ export const Pagination = ({ totalPages, currentPage = "1" }: Props) => {
     return () => {
       const params = new URLSearchParams(searchParams);
 
-      params.set("page", page.toString());
+      params.set('page', page.toString());
 
       const url = `${pathname}?${params.toString()}`;
       router.push(url);
@@ -49,7 +49,7 @@ export const Pagination = ({ totalPages, currentPage = "1" }: Props) => {
   return (
     <div className={s.container}>
       <Button
-        variant={"icon"}
+        variant={'icon'}
         className={s.button}
         onClick={handlePageChange(currentPageNumber - 1)}
         disabled={currentPageNumber === 1}
@@ -75,7 +75,7 @@ export const Pagination = ({ totalPages, currentPage = "1" }: Props) => {
       </div>
       {currentPageNumber !== totalPagesNumber && (
         <Button
-          variant={"icon"}
+          variant={'icon'}
           className={s.button}
           onClick={handlePageChange(currentPageNumber + 1)}
         >

@@ -7,4 +7,5 @@ export const paths = {
   privacy_policy: '/privacy-policy',
   catalog: '/catalog',
   product: '/product',
+  cart: '/cart',
 };

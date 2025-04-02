@@ -7,6 +7,8 @@ import { Typography } from '@/shared/ui/typography';
 import s from './Search.module.scss';
 import { NavigationPopup } from '@/entities/navigation-popup';
 import { Logo } from '@/shared/ui/logo';
+import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 export const Search = () => {
   const [isOpenNavigation, setIsOpenNavigation] = useState(false);
@@ -33,15 +35,17 @@ export const Search = () => {
         variant="search"
         className={s.input}
       />
-      <div className={s.cart}>
-        <Button variant="icon_2">
+      <Link className={s.buttonCart} href={paths.cart}>
+        <Button variant="icon_2" as="span">
           <ShoppingCartIcon width={32} height={32} />
         </Button>
         <div className={s.content}>
           <Typography variant="body_4">Корзина</Typography>
-          <Typography variant="body_7">0 товаров(0 BYN)</Typography>
+          <Typography variant="body_7" as="span">
+            0 товаров(0 BYN)
+          </Typography>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

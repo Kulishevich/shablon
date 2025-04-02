@@ -12,7 +12,7 @@
   margin-right: 24px;
 }
 
-.cart {
+.buttonCart {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -21,13 +21,30 @@
   width: 192px;
   margin-left: 52px;
 
-  & > button {
+  background-color: transparent;
+  border: none;
+
+  text-decoration: none;
+  & > span {
     padding: 11px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    & > span {
+      background-color: var(--color-accent-1);
+      color: var(--color-white);
+    }
   }
 }
 
 .content {
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 2px;
+
+  & > span {
+    opacity: 0.4;
+  }
 }
