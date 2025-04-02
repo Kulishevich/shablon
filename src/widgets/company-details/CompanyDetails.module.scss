@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  width: 966px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.elem {
+  width: 416px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

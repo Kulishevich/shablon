@@ -1,0 +1,65 @@
+.rootState {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-bottom: 1px solid #1114341a;
+  padding: 32px 16px;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: none;
+  background-color: var(--color-white);
+
+  & > span {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    cursor: pointer;
+    & > p {
+      color: var(--color-accent-1);
+    }
+    & > span {
+      background-color: var(--color-accent-1);
+      color: var(--color-white);
+    }
+  }
+  &[data-state='open'] {
+    & > span {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.content {
+  overflow: hidden;
+  &[data-state='open'] {
+    animation: slideDown 300ms ease-out;
+  }
+  &[data-state='closed'] {
+    animation: slideUp 300ms ease-out;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

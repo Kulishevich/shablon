@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.elem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.map {
+  height: 498px;
+  width: 856px;
+}

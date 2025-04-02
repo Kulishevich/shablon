@@ -8,7 +8,7 @@ export const SharesSection = () => {
   return (
     <div className={s.container}>
       <div className={s.content}>
-        <Typography variant="h1">Акции</Typography>
+        <Typography variant="h2">Акции</Typography>
         <div className={s.newsList}>
           {new Array(12).fill('').map((_, index) => (
             <DiscountCard key={index} />
