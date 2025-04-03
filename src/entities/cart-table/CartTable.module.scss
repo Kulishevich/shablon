@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 856px;
+}
+
+.tableHeader {
+  display: flex;
+  background-color: var(--color-grey);
+  height: 63px;
+  align-items: center;
+  border-radius: 12px;
+
+  padding: 0 37px 0 48px;
+
+  & > p:nth-child(1) {
+    margin-right: 93px;
+  }
+  & > p:nth-child(2) {
+    margin-right: 82px;
+  }
+  & > p:nth-child(3) {
+    margin-right: 79px;
+  }
+}

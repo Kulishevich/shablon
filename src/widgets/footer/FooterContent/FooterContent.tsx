@@ -12,6 +12,7 @@ import {
 } from '@/shared/assets';
 import Link from 'next/link';
 import { navigation } from '@/shared/config/constants/navigation';
+import { Logo } from '@/shared/ui/logo';
 
 export const FooterContent = () => {
   const mockArr = [
@@ -30,7 +31,7 @@ export const FooterContent = () => {
   return (
     <div className={s.container}>
       <div className={s.elem}>
-        <Image src="/logo.png" width={196} height={78} alt="logo" />
+        <Logo width={196} height={78} />
         <Typography variant="body_7">
           Мебель и товары для дома с доставкой по Минску
         </Typography>
