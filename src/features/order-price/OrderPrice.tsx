@@ -1,10 +1,11 @@
-import React from 'react';
-import s from './CartPrice.module.scss';
-import { TextField } from '@/shared/ui/text-field';
 import { Button } from '@/shared/ui/button';
+import { TextField } from '@/shared/ui/text-field';
 import { Typography } from '@/shared/ui/typography';
+import React from 'react';
+import s from './OrderPrice.module.scss';
+import { Checkbox } from '@/shared/ui/checkbox';
 
-export const CartPrice = () => {
+export const OrderPrice = () => {
   return (
     <div className={s.container}>
       <div className={s.promocode}>
@@ -22,14 +23,15 @@ export const CartPrice = () => {
         </div>
         <div className={s.elem}>
           <Typography variant="body_7">Стоимость доставки</Typography>
-          <Typography variant="h5">При оформлении</Typography>
+          <Typography variant="h5">30 BYN</Typography>
         </div>
       </div>
       <div className={s.elem}>
         <Typography variant="h5">Итого</Typography>
-        <Typography variant="h3">440 BYN</Typography>
+        <Typography variant="h3">470 BYN</Typography>
       </div>
-      <Button>К оформлению</Button>
+      <Checkbox label="Согласие на обработку персональных данных" />
+      <Button className={s.button}>Оформить заказ</Button>
     </div>
   );
 };

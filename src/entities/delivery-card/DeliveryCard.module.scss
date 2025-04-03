@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: start;
+
+  box-sizing: border-box;
+  border: 1px solid #1114341a;
+  border-radius: 6px;
+  background-color: transparent;
+
+  width: 196px;
+  height: 174px;
+  padding: 16px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-accent-1);
+    opacity: 0.8;
+    p {
+      color: var(--color-white);
+    }
+  }
+}
+
+.active {
+  background-color: var(--color-accent-1);
+  border: none;
+
+  p {
+    color: var(--color-white);
+  }
+}

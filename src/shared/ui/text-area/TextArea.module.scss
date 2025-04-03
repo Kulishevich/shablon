@@ -7,7 +7,7 @@
 
 .textarea {
   width: 100%;
-  padding: 6px 12px 8px;
+  padding: 20px;
 
   font-family: Onest;
   font-weight: 400;
@@ -19,6 +19,7 @@
   border-radius: 2px;
   outline: 1px solid #1114341a;
   border: none;
+  resize: none;
 
   &::-webkit-scrollbar {
     width: 6px;

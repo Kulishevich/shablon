@@ -1,6 +1,6 @@
 import { Typography } from '@/shared/ui/typography';
 import React from 'react';
-import { RowProductCart } from '../row-product-cart';
+import { RowProductCart } from '../../entities/row-product-cart';
 import s from './CartTable.module.scss';
 
 const products = [

@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+
+  width: 636px;
+}
+.elem {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    background-color: var(--color-accent-1);
+    color: var(--color-white);
+    padding: 6px 15px;
+    border-radius: 50%;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+  }
+}
+
+.contacts {
+  display: grid;
+  grid-template-columns: repeat(2, 306px);
+  gap: 16px 24px;
+}
+
+.delivery {
+  display: flex;
+  gap: 24px;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .textarea {
+    height: 124px;
+  }
+}
+
+.paymentMethod {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}

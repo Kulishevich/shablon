@@ -3,9 +3,8 @@ import s from './CartSection.module.scss';
 import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import { ArrowRightUpIcon } from '@/shared/assets';
-import { RowProductCart } from '@/entities/row-product-cart';
-import { CartTable } from '@/entities/cart-table';
-import { CartPrice } from '@/entities/cart-price';
+import { CartTable } from '@/features/cart-table';
+import { CartPrice } from '@/features/cart-price';
 
 export const CartSection = () => {
   return (
