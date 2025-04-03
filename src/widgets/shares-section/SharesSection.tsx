@@ -1,7 +1,8 @@
+'use client';
 import { DiscountCard } from '@/entities/discount-card';
 import { Pagination } from '@/shared/ui/pagination';
 import { Typography } from '@/shared/ui/typography';
-import React from 'react';
+import React, { Suspense } from 'react';
 import s from './SharesSection.module.scss';
 
 export const SharesSection = () => {
@@ -15,7 +16,10 @@ export const SharesSection = () => {
           ))}
         </div>
       </div>
-      <Pagination totalPages="10" />
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <Pagination totalPages="10" />
+      </Suspense>
+      ;
     </div>
   );
 };

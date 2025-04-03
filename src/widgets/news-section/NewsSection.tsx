@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { Suspense } from 'react';
 import s from './NewsSection.module.scss';
 import { Typography } from '@/shared/ui/typography';
 import { NewsCard } from '@/entities/news-card';
@@ -15,7 +16,10 @@ export const NewsSection = () => {
           ))}
         </div>
       </div>
-      <Pagination totalPages="10" />
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <Pagination totalPages="10" />
+      </Suspense>
+      ;
     </div>
   );
 };
