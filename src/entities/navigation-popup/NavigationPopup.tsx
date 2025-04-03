@@ -4,11 +4,7 @@ import s from './NavigationPopup.module.scss';
 import { Typography } from '@/shared/ui/typography';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
-
-type NavigationPopupProps = {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 const mockNav = [
   {
@@ -139,9 +135,15 @@ const mockNav = [
 export const NavigationPopup = ({
   isOpen,
   setIsOpen,
-}: NavigationPopupProps) => {
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+      <VisuallyHidden>
+        <Dialog.Title>Каталог</Dialog.Title>
+      </VisuallyHidden>
       <Dialog.Content className={s.content}>
         <div className={s.categoryList}>
           {mockNav.map((category, index) => (
