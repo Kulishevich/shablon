@@ -1,4 +1,3 @@
-'use client';
 import React, { Suspense } from 'react';
 import s from './NewsSection.module.scss';
 import { Typography } from '@/shared/ui/typography';
@@ -16,7 +15,7 @@ export const NewsSection = () => {
           ))}
         </div>
       </div>
-      <Suspense fallback={<div>Загрузка...</div>}>
+      <Suspense fallback={<Typography variant="h4">Загрузка...</Typography>}>
         <Pagination totalPages="10" />
       </Suspense>
       ;

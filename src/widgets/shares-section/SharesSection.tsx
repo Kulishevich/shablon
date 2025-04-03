@@ -1,4 +1,3 @@
-'use client';
 import { DiscountCard } from '@/entities/discount-card';
 import { Pagination } from '@/shared/ui/pagination';
 import { Typography } from '@/shared/ui/typography';
@@ -16,7 +15,7 @@ export const SharesSection = () => {
           ))}
         </div>
       </div>
-      <Suspense fallback={<div>Загрузка...</div>}>
+      <Suspense fallback={<Typography variant="h4">Загрузка...</Typography>}>
         <Pagination totalPages="10" />
       </Suspense>
       ;
