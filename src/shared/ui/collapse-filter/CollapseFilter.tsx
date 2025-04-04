@@ -23,8 +23,8 @@ export const CollapseFilter = ({
         <Typography variant="h5">{title}</Typography>
         <ArrowDownIcon />
       </Collapsible.Trigger>
-      <Collapsible.Content className={s.content}>
-        {children}
+      <Collapsible.Content className={s.wrapper}>
+        <div className={s.content}>{children}</div>
       </Collapsible.Content>
     </Collapsible.Root>
   );

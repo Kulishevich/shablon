@@ -4,7 +4,6 @@
   background-color: var(--color-grey);
   padding: 16px;
   border-radius: 6px;
-  gap: 12px;
 }
 
 .trigger {
@@ -34,11 +33,19 @@
   }
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.wrapper {
   overflow: hidden;
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  & > :first-child {
+    margin-top: 12px;
+  }
+
   &[data-state='open'] {
     animation: slideDown 300ms ease-out;
   }
