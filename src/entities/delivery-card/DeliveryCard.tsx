@@ -18,10 +18,10 @@ export const DeliveryCard = ({
 }) => {
   return (
     <button className={clsx(s.container, active && s.active)} onClick={onClick}>
-      <div>
+      <span className={s.content}>
         <Typography variant="h5">{title}</Typography>
         <Typography variant="body_6">{description}</Typography>
-      </div>
+      </span>
       <Typography variant="h5">
         {!!price ? `${price} BYN` : 'Бесплатно'}
       </Typography>

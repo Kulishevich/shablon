@@ -3,6 +3,12 @@
   position: relative;
   border-radius: 5px;
   box-sizing: border-box;
+
+  &:hover {
+    .imageContainer {
+      box-shadow: 4px 14px 15px 0px #0b0c1908;
+    }
+  }
 }
 .imageContainer {
   position: relative;

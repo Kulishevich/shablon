@@ -10,7 +10,7 @@ const DEFAULT_POSITION = 'top-center';
 
 type ToastType = 'error' | 'info' | 'success' | 'warning';
 type ToastOptions = {
-  message: string;
+  message?: string;
   title: string;
   variant?: ToastType;
 } & Omit<ToastT, 'id'>;
@@ -40,9 +40,11 @@ const showToast = ({
           {variant === 'success' && <SuccessIcon />}
           {title}
         </Typography>
-        <Typography className={styles.message} variant={'body_7'}>
-          {message}
-        </Typography>
+        {!!message && (
+          <Typography className={styles.message} variant={'body_7'}>
+            {message}
+          </Typography>
+        )}
       </div>
     ),
     {

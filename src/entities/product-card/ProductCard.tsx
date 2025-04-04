@@ -5,6 +5,7 @@ import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import { showToast } from '@/shared/ui/toast';
 
 const product = {
   name: 'Свеча Jo Malone',
@@ -62,7 +63,14 @@ export const ProductCard = () => {
           </Typography>
           <Typography variant="h4">{product.priceWithDiscount} BYN</Typography>
         </div>
-        <Button fullWidth>В корзину</Button>
+        <Button
+          fullWidth
+          onClick={() =>
+            showToast({ title: 'Добавлено в корзину', variant: 'success' })
+          }
+        >
+          В корзину
+        </Button>
       </div>
     </div>
   );

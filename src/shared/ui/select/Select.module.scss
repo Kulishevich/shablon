@@ -57,7 +57,6 @@
 .content {
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
-
   padding: 12px;
 
   border: 1px solid #1114341a;
@@ -71,6 +70,11 @@
 .selectItem {
   transition: all 0.3s;
 
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
   &:focus {
     outline: none;
   }

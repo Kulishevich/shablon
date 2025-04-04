@@ -1,7 +1,7 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getPaginationPages } from '@/shared/lib/getPaginationPages';
+import { getPaginationPages } from '@/shared/lib/utils/getPaginationPages';
 import s from './Pagination.module.scss';
 import cn from 'clsx';
 import { Button } from '../button';

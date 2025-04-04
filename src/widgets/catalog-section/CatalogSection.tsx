@@ -98,11 +98,7 @@ export const CatalogSection = () => {
               />
               <Button>Искать</Button>
             </div>
-            <Select
-              options={options}
-              className={s.select}
-              defaultValue={options[0].value}
-            />
+            <Select options={options} defaultValue={options[0].value} />
           </div>
           <div className={s.productList}>
             {products.map((_, index) => (
