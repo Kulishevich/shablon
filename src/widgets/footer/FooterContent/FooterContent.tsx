@@ -13,6 +13,7 @@ import {
 import Link from 'next/link';
 import { navigation } from '@/shared/config/constants/navigation';
 import { Logo } from '@/shared/ui/logo';
+import { paths } from '@/shared/config/constants/paths';
 
 export const FooterContent = () => {
   const mockArr = [
@@ -31,7 +32,7 @@ export const FooterContent = () => {
   return (
     <div className={s.container}>
       <div className={s.elem}>
-        <Logo width={196} height={78} />
+        <Logo variant="secondary" />
         <Typography variant="body_7">
           Мебель и товары для дома с доставкой по Минску
         </Typography>
@@ -42,25 +43,35 @@ export const FooterContent = () => {
         </div>
       </div>
 
-      <div className={s.elem}>
-        <Typography variant="h5">Каталог</Typography>
-        <div className={s.catalog}>
-          {mockArr.map((category, index) => (
-            <Typography variant="body_3" as={Link} href={'/'} key={index}>
-              {category}
-            </Typography>
-          ))}
+      <div className={s.catalogContainer}>
+        <div className={s.elem}>
+          <Typography variant="h5">Каталог</Typography>
+          <div className={s.catalog}>
+            {mockArr.map((category, index) => (
+              <Typography variant="body_3" as={Link} href={'/'} key={index}>
+                {category}
+              </Typography>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className={s.elem}>
-        <Typography variant="h5">Покупателям</Typography>
-        <div className={s.navigation}>
-          {navigation.map((nav, index) => (
-            <Typography variant="body_6" as={Link} href={nav.path} key={index}>
-              {nav.title}
+        <div className={s.elem}>
+          <Typography variant="h5">Покупателям</Typography>
+          <div className={s.navigation}>
+            {navigation.map((nav, index) => (
+              <Typography
+                variant="body_6"
+                as={Link}
+                href={nav.path}
+                key={index}
+              >
+                {nav.title}
+              </Typography>
+            ))}
+            <Typography variant="body_6" as={Link} href={paths.privacy_policy}>
+              Политика конфиденциальности
             </Typography>
-          ))}
+          </div>
         </div>
       </div>
 
@@ -70,7 +81,7 @@ export const FooterContent = () => {
           <div className={s.contactElem}>
             <LocationIcon />
             <Typography variant="body_6">
-              г. Минск, пр-т Независимости, 11
+              г. Минск, пр-т Независимости,11
             </Typography>
           </div>
           <div className={s.contactElem}>
@@ -80,7 +91,8 @@ export const FooterContent = () => {
           <div className={s.contactElem}>
             <PhoneIcon />
             <Typography variant="body_6">
-              +375 (29) 999-99-99 (А1) +375 (29) 999-99-99 (МТС)
+              +375 (29) 999-99-99 (А1) <br />
+              +375 (29) 999-99-99 (МТС)
             </Typography>
           </div>
         </div>
@@ -88,8 +100,11 @@ export const FooterContent = () => {
 
       <div className={s.elem}>
         <Typography variant="body_7">
-          ООО “Альфа” УНП 999999999 22004, РБ, г. Минск, пр-т Независимости, 11
-          В торговом реестре с января 2024, номер регистрации 550930
+          ООО “Альфа”
+          <br />
+          УНП 999999999
+          <br /> 22004, РБ, г. Минск, пр-т Независимости, 11
+          <br /> В торговом реестре с января 2024, номер регистрации 550930
         </Typography>
       </div>
     </div>

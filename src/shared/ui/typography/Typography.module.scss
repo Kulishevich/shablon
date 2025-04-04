@@ -18,7 +18,7 @@
     var(--line-height-xxxl),
     var(--font-weight-600)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(30px, 39px, 600);
   }
 }
@@ -29,7 +29,7 @@
     var(--line-height-xxl),
     var(--font-weight-600)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(30px, 39px, 600);
   }
 }
@@ -40,7 +40,7 @@
     var(--line-height-xl),
     var(--font-weight-600)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(22px, 26.07px, 600);
   }
 }
@@ -51,7 +51,7 @@
     var(--line-height-l),
     var(--font-weight-600)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(19px, 26.6px, 500);
   }
 }
@@ -62,7 +62,7 @@
     var(--line-height-l),
     var(--font-weight-600)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(18px, 21.33px, 500);
   }
 }
@@ -73,7 +73,7 @@
     var(--line-height-m),
     var(--font-weight-600)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(14px, 19.6px, 600);
   }
 }
@@ -84,7 +84,7 @@
     var(--line-height-s),
     var(--font-weight-600)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(14px, 19.6px, 600);
   }
 }
@@ -95,7 +95,7 @@
     var(--line-height-l),
     var(--font-weight-400)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(16px, 22.4px, 400);
   }
 }
@@ -106,7 +106,7 @@
     var(--line-height-m),
     var(--font-weight-400)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(16px, 22.4px, 600);
   }
 }
@@ -117,7 +117,7 @@
     var(--line-height-xs),
     var(--font-weight-500)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(14px, 19.6px, 400);
   }
 }
@@ -128,7 +128,7 @@
     var(--line-height-xxs),
     var(--font-weight-500)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(14px, 16.6px, 400);
   }
 }
@@ -139,7 +139,7 @@
     var(--line-height-xxs),
     var(--font-weight-400)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(14px, 19.6px, 600);
   }
 }
@@ -150,7 +150,7 @@
     var(--line-height-xxxs),
     var(--font-weight-400)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(11px, 15.4px, 400);
   }
 }
@@ -161,7 +161,7 @@
     var(--line-height-xxxxs),
     var(--font-weight-400)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(11px, 15.4px, 600);
   }
 }
@@ -173,7 +173,7 @@
     var(--font-weight-600)
   );
   cursor: pointer;
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(20px, 28px, 600);
   }
 }
@@ -184,7 +184,7 @@
     var(--line-height-xs),
     var(--font-weight-400)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(16px, 22.4px, 400);
   }
 }
@@ -196,7 +196,7 @@
     var(--line-height-xxs),
     var(--font-weight-500)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(16px, 22.4px, 400);
   }
 }
@@ -207,7 +207,7 @@
     var(--line-height-xxxxs),
     var(--font-weight-400)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(11px, 15.4px, 600);
   }
 }
@@ -218,7 +218,7 @@
     var(--line-height-xxxs),
     var(--font-weight-500)
   );
-  @media (max-width: var(--mobile-width)) {
+  @media (max-width: 768px) {
     @include typography(11px, 15.4px, 600);
   }
 }

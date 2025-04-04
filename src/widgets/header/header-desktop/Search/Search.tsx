@@ -8,7 +8,7 @@ import { CartButton } from '@/entities/cart-button';
 export const Search = () => {
   return (
     <div className={s.container}>
-      <Logo />
+      <Logo variant="primary" />
       <BurgerButton />
       <SearchInput />
       <CartButton />

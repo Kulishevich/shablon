@@ -20,7 +20,7 @@ export const AboutUsSection = () => {
             на рынке.
           </Typography>
         </div>
-        <Logo />
+        <Logo variant="primary" />
       </div>
       <Image src={'/about-us.png'} width={636} height={396} alt="about-us" />
     </div>

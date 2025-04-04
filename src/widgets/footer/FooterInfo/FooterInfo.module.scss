@@ -1,24 +1,48 @@
 .container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    padding: 24px 0;
+  padding: 24px 0;
+  p {
+    color: #ffffff;
 
-    & > p {
-        color: #ffffff;
-
-        opacity: 0.5;
-        & > a {
-            color: var(--color-white);
-            &:hover {
-                color: var(--color-accent-1);
-            }
-        }
+    opacity: 0.5;
+  }
+  @media (max-width: 768px) {
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    & > p:first-child {
+      order: 2; // Двигаем © 2025 website.by вниз
     }
+
+    .productBy {
+      order: 3;
+    }
+
+    .paymentMethod {
+      order: 1; // Поднимаем блок с платежными системами вверх
+    }
+  }
 }
 
 .paymentMethod {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    gap: 12px;
+  }
+}
+
+.productBy {
+  display: flex;
+
+  & > a {
+    color: var(--color-white);
+    &:hover {
+      color: var(--color-accent-1);
+    }
+  }
 }

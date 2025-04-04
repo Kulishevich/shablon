@@ -12,7 +12,7 @@ import {
 export const HeaderMobile = () => {
   return (
     <div className={s.container}>
-      <Logo width={106} height={41} />
+      <Logo variant="secondary" />
       <div className={s.buttonsContainer}>
         <Button variant="icon_secondary">
           <PhoneOutlinedIcon width={22} height={22} />
