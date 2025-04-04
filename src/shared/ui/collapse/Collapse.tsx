@@ -22,7 +22,7 @@ export const Collapse = ({
     >
       <Collapsible.Trigger className={s.trigger}>
         <Typography variant="h2">{title}</Typography>
-        <Button variant="icon_2" as="span">
+        <Button variant="icon_secondary" as="span">
           <ArrowRightIcon />
         </Button>
       </Collapsible.Trigger>

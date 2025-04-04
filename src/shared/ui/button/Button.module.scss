@@ -106,7 +106,7 @@
   }
 }
 
-.icon_1 {
+.icon_primary {
   width: fit-content;
   color: var(--color-text);
   background-color: var(--color-white);
@@ -131,7 +131,7 @@
   }
 }
 
-.icon_2 {
+.icon_secondary {
   width: fit-content;
   color: var(--color-text);
   background-color: var(--color-accent-2);
@@ -158,6 +158,10 @@
   &:disabled {
     color: var(--color-bg-overlay);
     background-color: var(--color-grey);
+  }
+
+  @media (max-width: 768px) {
+    padding: 9px;
   }
 }
 

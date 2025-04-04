@@ -35,3 +35,5 @@ export { default as CloseIcon } from './CloseIcon';
 export { default as CashIcon } from './CashIcon';
 export { default as EripIcon } from './EripIcon';
 export { default as CreditCardIcon } from './CreditCardIcon';
+export { default as PhoneOutlinedIcon } from './PhoneOutlinedIcon';
+export { default as BurgerMobileIcon } from './BurgerMobileIcon';

@@ -72,13 +72,13 @@ export const MainSlider = () => {
         </SwiperSlide>
       ))}
       <Button
-        variant="icon_1"
+        variant="icon_primary"
         className={`swiper-button-prev-custom ${s.iconLeft}`}
       >
         <ArrowLeftIcon />
       </Button>
       <Button
-        variant="icon_1"
+        variant="icon_primary"
         className={`swiper-button-next-custom ${s.iconRight}`}
       >
         <ArrowRightIcon />

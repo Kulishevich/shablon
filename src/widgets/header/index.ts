@@ -1,3 +1,3 @@
-export * from "./Header/Header";
-export * from "./Search/Search";
-export * from "./Navigation/Navigation";
+export * from './header-desktop/HeaderDesktop';
+export * from './header-desktop/Search/Search';
+export * from './header-desktop/Navigation/Navigation';

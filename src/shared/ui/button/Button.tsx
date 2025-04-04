@@ -15,8 +15,8 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   variant?:
     | 'icon'
     | 'icon_outlined'
-    | 'icon_1'
-    | 'icon_2'
+    | 'icon_primary'
+    | 'icon_secondary'
     | 'link'
     | 'burger'
     | 'primary'

@@ -26,7 +26,7 @@ export const Slider = ({ children, itemWidth }: SliderProps) => {
   return (
     <div className={s.container}>
       <Button
-        variant="icon_2"
+        variant="icon_secondary"
         className={s.iconLeft}
         onClick={() => scroll('left')}
       >
@@ -37,7 +37,7 @@ export const Slider = ({ children, itemWidth }: SliderProps) => {
         {children}
       </div>
       <Button
-        variant="icon_2"
+        variant="icon_secondary"
         className={s.iconRight}
         onClick={() => scroll('right')}
       >

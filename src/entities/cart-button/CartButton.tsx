@@ -9,7 +9,7 @@ import { Typography } from '@/shared/ui/typography';
 export const CartButton = () => {
   return (
     <Link className={s.buttonCart} href={paths.cart}>
-      <Button variant="icon_2" as="span">
+      <Button variant="icon_secondary" as="span">
         <ShoppingCartIcon width={32} height={32} />
       </Button>
       <div className={s.content}>
