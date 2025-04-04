@@ -62,6 +62,7 @@
     flex-shrink: 0;
     & > button {
       width: 150px;
+      flex-shrink: 0;
     }
   }
 }

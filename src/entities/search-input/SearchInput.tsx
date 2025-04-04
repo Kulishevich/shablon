@@ -5,14 +5,7 @@ import { TextField } from '@/shared/ui/text-field';
 import { SearchPopup } from '../search-popup';
 
 export const SearchInput = () => {
-  const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-
-  useEffect(() => {
-    if (!!searchValue) {
-      setIsOpenSearch(true);
-    }
-  }, [searchValue]);
 
   return (
     <div className={s.searchContainer}>
@@ -22,7 +15,7 @@ export const SearchInput = () => {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
-      <SearchPopup isOpen={isOpenSearch} setIsOpen={setIsOpenSearch} />
+      {!!searchValue && <SearchPopup />}
     </div>
   );
 };
