@@ -16,12 +16,9 @@ const discount = {
 export const DiscountCard = () => {
   return (
     <div className={s.container}>
-      <Image
-        src={discount.image_path}
-        width={416}
-        height={240}
-        alt="discount"
-      />
+      <div className={s.imageContainer}>
+        <Image src={discount.image_path} fill alt="discount" />
+      </div>
       <div className={s.content}>
         <Typography variant="tag" className={s.tag}>
           {discount.date}
