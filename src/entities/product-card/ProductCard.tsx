@@ -6,6 +6,8 @@ import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { showToast } from '@/shared/ui/toast';
+import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
+import { ShoppingCartIcon } from '@/shared/assets';
 
 const product = {
   name: 'Свеча Jo Malone',
@@ -19,14 +21,15 @@ const product = {
 };
 
 export const ProductCard = () => {
+  const { isMobile } = useBreakpoint();
+
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
         <Link href={`${paths.product}/1`}>
           <Image
             src={product.image_path}
-            width={306}
-            height={306}
+            fill
             alt="product"
             className={s.image}
           />
@@ -63,14 +66,20 @@ export const ProductCard = () => {
           </Typography>
           <Typography variant="h4">{product.priceWithDiscount} BYN</Typography>
         </div>
-        <Button
-          fullWidth
-          onClick={() =>
-            showToast({ title: 'Добавлено в корзину', variant: 'success' })
-          }
-        >
-          В корзину
-        </Button>
+        {!isMobile ? (
+          <Button
+            fullWidth
+            onClick={() =>
+              showToast({ title: 'Добавлено в корзину', variant: 'success' })
+            }
+          >
+            В корзину
+          </Button>
+        ) : (
+          <Button variant={'icon_outlined'}>
+            <ShoppingCartIcon />
+          </Button>
+        )}
       </div>
     </div>
   );

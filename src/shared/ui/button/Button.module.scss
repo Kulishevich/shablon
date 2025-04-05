@@ -234,6 +234,10 @@
     background-color: var(--color-text);
     opacity: 0.5;
   }
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 }
 
 .fullWidth {
