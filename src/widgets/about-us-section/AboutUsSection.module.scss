@@ -2,12 +2,10 @@
   width: 1296px;
   margin: 0 auto;
   position: relative;
-  & > img {
-    border-radius: 6px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(0, -50%);
+
+  @media (max-width: 768px) {
+    width: 336px;
+    margin-bottom: 117px;
   }
 }
 
@@ -27,5 +25,43 @@
     flex-direction: column;
 
     gap: 16px;
+    @media (max-width: 768px) {
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    padding: 32px 24px 97px;
+    gap: 20px;
+
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.imageContainer {
+  width: 636px;
+  height: 396px;
+  border-radius: 6px;
+  overflow: hidden;
+
+  position: absolute;
+  bottom: 50%;
+  right: 0;
+  transform: translate(0, 50%);
+
+  & > img {
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    width: 287px;
+    height: 178px;
+    border-radius: 4px;
+    bottom: -117px;
+    right: 50%;
+    transform: translate(50%, 0);
   }
 }

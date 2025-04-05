@@ -22,7 +22,9 @@ export const AboutUsSection = () => {
         </div>
         <Logo variant="primary" />
       </div>
-      <Image src={'/about-us.png'} width={636} height={396} alt="about-us" />
+      <div className={s.imageContainer}>
+        <Image src={'/about-us.png'} fill alt="about-us" />
+      </div>
     </div>
   );
 };

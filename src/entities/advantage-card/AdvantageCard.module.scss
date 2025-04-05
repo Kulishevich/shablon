@@ -10,4 +10,16 @@
   height: 210px;
   background-color: var(--color-grey);
   border-radius: 6px;
+
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 160px;
+    gap: 8px;
+    padding: 24px 15px 0px;
+
+    & > svg {
+      width: 54px;
+      height: 54px;
+    }
+  }
 }

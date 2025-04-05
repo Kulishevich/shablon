@@ -4,6 +4,7 @@
 
   @media (max-width: 768px) {
     width: 336px;
+    margin-bottom: 70px;
   }
 }
 
@@ -17,29 +18,45 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 768px) {
+    gap: 15px;
+  }
 }
 
 .iconLeft {
   position: absolute;
-  left: -76px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: -90px;
+  bottom: 50%;
+  transform: translateY(50%);
 
   & > svg {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
+  }
+
+  @media (max-width: 768px) {
+    bottom: -72px;
+    left: 112px;
+    transform: translate(0, 0);
   }
 }
 
 .iconRight {
   position: absolute;
-  right: -76px;
+  right: -90px;
 
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 50%;
+  transform: translateY(50%);
 
   & > svg {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
+  }
+
+  @media (max-width: 768px) {
+    bottom: -72px;
+    right: 112px;
+    transform: translate(0, 0);
   }
 }
