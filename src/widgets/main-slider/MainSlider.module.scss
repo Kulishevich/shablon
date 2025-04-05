@@ -1,6 +1,10 @@
 .container {
   width: 100vw;
   height: 601px;
+
+  @media (max-width: 768px) {
+    height: 577px;
+  }
 }
 
 .slide {
@@ -25,6 +29,21 @@
         top: 0;
         left: 0;
       }
+      @media (max-width: 768px) {
+        width: 100%;
+        gap: 12px;
+      }
+    }
+
+    & > button {
+      width: 220px;
+    }
+
+    @media (max-width: 768px) {
+      width: 336px;
+      gap: 20px;
+      justify-content: start;
+      margin-top: 72px;
     }
   }
   & > img {
@@ -57,6 +76,11 @@
   left: 50% !important;
   transform: translateX(-625px);
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    transform: translateX(-170px);
+    bottom: 36px !important;
+  }
 }
 
 .bullet {
@@ -70,5 +94,9 @@
 
   &.swiper-pagination-bullet-active {
     background-color: black;
+  }
+
+  @media (max-width: 768px) {
+    width: 50px;
   }
 }
