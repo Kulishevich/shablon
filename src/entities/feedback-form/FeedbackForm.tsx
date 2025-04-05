@@ -11,7 +11,7 @@ import { showToast } from '@/shared/ui/toast';
 export const FeedbackForm = () => {
   return (
     <div className={s.container}>
-      <div className={s.imageContainer}>
+      <div className={s.titleContainer}>
         <div className={s.textContent}>
           <Typography variant="h2">Связаться с нами</Typography>
           <Typography variant="body_2">
@@ -19,7 +19,9 @@ export const FeedbackForm = () => {
             телефону или заполните форму обратной связи.
           </Typography>
         </div>
-        <Image src={'/feedback.png'} width={612} height={355} alt="feedback" />
+        <div className={s.imageContainer}>
+          <Image src={'/feedback.png'} fill alt="feedback" />
+        </div>
       </div>
 
       <div className={s.formContainer}>
