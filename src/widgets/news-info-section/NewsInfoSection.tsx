@@ -10,8 +10,8 @@ import { paths } from '@/shared/config/constants/paths';
 export const NewsInfoSection = () => {
   return (
     <div className={s.container}>
-      <div className={s.title}>
-        <div>
+      <div className={s.titleContainer}>
+        <div className={s.title}>
           <Typography variant="tag" as="span">
             12.02.2025
           </Typography>
@@ -19,7 +19,9 @@ export const NewsInfoSection = () => {
             Фурнитура для мебели: как выбрать?
           </Typography>
         </div>
-        <Image src={'/news.png'} width={636} height={457} alt="new" />
+        <div className={s.imageContainer}>
+          <Image src={'/news.png'} fill alt="new" />
+        </div>
       </div>
       <div className={s.content}>
         <div className={s.info}>

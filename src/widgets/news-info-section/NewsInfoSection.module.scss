@@ -4,12 +4,13 @@
   gap: 42px;
   align-items: center;
 }
-.title {
+
+.titleContainer {
   display: flex;
   gap: 48px;
   align-items: center;
 
-  & > div {
+  & > .title {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -21,10 +22,28 @@
       color: var(--color-white);
       background-color: var(--color-accent-1);
     }
+
+    @media (max-width: 768px) {
+      text-align: center;
+      align-items: center;
+    }
   }
 
-  & > img {
-    border-radius: 6px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 636px;
+  height: 457px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  @media (max-width: 768px) {
+    width: 335px;
+    height: 240px;
   }
 }
 
@@ -32,6 +51,11 @@
   display: flex;
   flex-direction: column;
   gap: 48px;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
 }
 
 .info {
@@ -40,6 +64,11 @@
   gap: 32px;
 
   width: 856px;
+
+  @media (max-width: 768px) {
+    width: 336px;
+    gap: 12px;
+  }
 }
 
 .elem {
@@ -48,6 +77,10 @@
   gap: 20px;
   & > p > ul {
     list-style-position: inside;
+  }
+
+  @media (max-width: 768px) {
+    gap: 12px;
   }
 }
 
@@ -61,5 +94,15 @@
 
   & > img {
     border-radius: 6px;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 }

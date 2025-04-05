@@ -1,39 +1,41 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 }
 
 .button {
-    display: flex;
-    align-items: center;
-    background-color: transparent;
-    border: none;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
 }
 .pagination {
-    display: flex;
-    gap: 4px;
+  display: flex;
+  gap: 4px;
 }
 .paginationElem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    
-    width: 42px;
-    height: 42px;
-    padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 
-    color: var(--color-text);
-    background-color: transparent;
-    border: none;
-    border-radius: 50%; 
-    &.active {
-        background-color: var(--color-accent-2);
-        & > span {
-            color: var(--color-text);
-        }
+  width: 42px;
+  height: 42px;
+  padding: 0;
+
+  color: var(--color-text);
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  &.active {
+    background-color: var(--color-accent-2);
+    & > span {
+      color: var(--color-text);
     }
-
+  }
 }

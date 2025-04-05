@@ -2,11 +2,11 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getPaginationPages } from '@/shared/lib/utils/getPaginationPages';
-import s from './Pagination.module.scss';
 import cn from 'clsx';
 import { Button } from '../button';
 import { Typography } from '../typography';
 import { ArrowLeftIcon, ArrowRightIcon } from '../../assets';
+import s from './Pagination.module.scss';
 
 interface Props {
   totalPages: string;
@@ -49,7 +49,7 @@ export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
   return (
     <div className={s.container}>
       <Button
-        variant={'icon'}
+        variant={'icon_primary'}
         className={s.button}
         onClick={handlePageChange(currentPageNumber - 1)}
         disabled={currentPageNumber === 1}
@@ -75,7 +75,7 @@ export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
       </div>
       {currentPageNumber !== totalPagesNumber && (
         <Button
-          variant={'icon'}
+          variant={'icon_primary'}
           className={s.button}
           onClick={handlePageChange(currentPageNumber + 1)}
         >
