@@ -26,6 +26,12 @@
   &:disabled {
     cursor: default;
   }
+
+  @media (max-width: 768px) {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 140%;
+  }
 }
 
 .primary {

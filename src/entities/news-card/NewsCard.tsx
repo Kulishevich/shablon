@@ -16,7 +16,9 @@ const news = {
 export const NewsCard = () => {
   return (
     <div className={s.cotnainer}>
-      <Image src={news.image_path} width={306} height={220} alt="news" />
+      <div className={s.imageContainer}>
+        <Image src={news.image_path} fill alt="news" />
+      </div>
       <Typography variant="tag" className={s.date}>
         {news.date}
       </Typography>

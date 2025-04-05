@@ -4,14 +4,25 @@
   align-items: start;
   gap: 12px;
 
-  width: 306px;
-
-  & > img {
-    border-radius: 6px;
-  }
-
   &:hover {
     box-shadow: 1px 4px 8px 0px #0b0c1908;
+  }
+
+  .imageContainer {
+    position: relative;
+    width: 306px;
+    height: 220px;
+    border-radius: 6px;
+    overflow: hidden;
+    @media (max-width: 768px) {
+      width: 160px;
+      height: 110px;
+      border-radius: 4px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: 8px;
   }
 }
 
