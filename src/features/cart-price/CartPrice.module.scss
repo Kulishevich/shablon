@@ -17,16 +17,17 @@
 .promocode {
   display: flex;
   gap: 12px;
-
+  & > div {
+    width: 50%;
+  }
   & > button {
-    width: 170px;
+    width: 50%;
     height: 44px;
     flex-shrink: 0;
   }
 }
 
 .input {
-  width: 170px;
   height: 44px;
   padding: 10px 20px;
 }
@@ -37,6 +38,10 @@
   gap: 12px;
   padding-bottom: 24px;
   border-bottom: 1px solid #11143413;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 }
 
 .elem {

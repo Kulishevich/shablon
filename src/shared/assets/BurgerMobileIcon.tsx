@@ -19,8 +19,8 @@ const BurgerMobileIcon = (
       x2="21.25"
       y2="7.5"
       stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
     <line
       x1="0.75"
@@ -28,8 +28,8 @@ const BurgerMobileIcon = (
       x2="21.25"
       y2="14.833"
       stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
   </svg>
 );

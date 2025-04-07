@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { showToast } from '@/shared/ui/toast';
 import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
-import { ShoppingCartIcon } from '@/shared/assets';
+import { CloseIcon, ShoppingCartIcon } from '@/shared/assets';
 
 const product = {
   name: 'Свеча Jo Malone',
@@ -20,7 +20,11 @@ const product = {
   isDiscount: true,
 };
 
-export const ProductCard = () => {
+export const ProductCard = ({
+  productInCart = false,
+}: {
+  productInCart?: boolean;
+}) => {
   const { isMobile } = useBreakpoint();
 
   return (
@@ -51,6 +55,11 @@ export const ProductCard = () => {
             </Typography>
           )}
         </div>
+        {productInCart && (
+          <Button variant="icon_secondary" className={s.deleteButton}>
+            <CloseIcon />
+          </Button>
+        )}
       </div>
       <Typography variant="h5" className={s.title}>
         {product.name}

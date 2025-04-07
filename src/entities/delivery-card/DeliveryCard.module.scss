@@ -21,6 +21,11 @@
       color: var(--color-white);
     }
   }
+
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 150px;
+  }
 }
 
 .active {

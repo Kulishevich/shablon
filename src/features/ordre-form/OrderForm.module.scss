@@ -4,11 +4,18 @@
   gap: 36px;
 
   width: 636px;
+
+  @media (max-width: 768px) {
+    width: 336px;
+  }
 }
 .elem {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
 }
 
 .title {
@@ -17,9 +24,13 @@
   gap: 10px;
 
   span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--color-accent-1);
     color: var(--color-white);
-    padding: 6px 15px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
   }
 
@@ -29,17 +40,35 @@
     gap: 10px;
     margin-right: auto;
   }
+
+  @media (max-width: 768px) {
+    & > a {
+      display: none;
+    }
+    gap: 8px;
+  }
 }
 
 .contacts {
   display: grid;
   grid-template-columns: repeat(2, 306px);
   gap: 16px 24px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
 .delivery {
   display: flex;
   gap: 24px;
+
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    gap: 15px;
+  }
 }
 
 .address {
@@ -53,7 +82,11 @@
 }
 
 .paymentMethod {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 24px;
+
+  @media (max-width: 768px) {
+    gap: 15px;
+  }
 }

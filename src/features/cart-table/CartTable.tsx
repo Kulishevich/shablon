@@ -1,7 +1,10 @@
+'use client';
 import { Typography } from '@/shared/ui/typography';
 import React from 'react';
 import { RowProductCart } from '../../entities/row-product-cart';
 import s from './CartTable.module.scss';
+import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
+import { ProductCard } from '@/entities/product-card';
 
 const products = [
   {
@@ -39,6 +42,8 @@ const products = [
 ];
 
 export const CartTable = () => {
+  const { isMobile } = useBreakpoint();
+
   return (
     <div className={s.container}>
       <div className={s.tableHeader}>
@@ -47,9 +52,13 @@ export const CartTable = () => {
         <Typography variant="h6">Цена за шт.</Typography>
         <Typography variant="h6">Сумма (BYN)</Typography>
       </div>
-      {products.map((product) => (
-        <RowProductCart {...product} key={product.id} />
-      ))}
+      {products.map((product) =>
+        !isMobile ? (
+          <RowProductCart {...product} key={product.id} />
+        ) : (
+          <ProductCard productInCart />
+        )
+      )}
     </div>
   );
 };

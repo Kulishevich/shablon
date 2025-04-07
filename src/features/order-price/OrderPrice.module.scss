@@ -23,12 +23,20 @@
     height: 44px;
     flex-shrink: 0;
   }
+  @media (max-width: 768px) {
+    & > button {
+      width: 140px;
+    }
+  }
 }
 
 .input {
   width: 304px;
   height: 44px;
   padding: 10px 20px;
+  @media (max-width: 768px) {
+    width: 143px;
+  }
 }
 
 .price {
