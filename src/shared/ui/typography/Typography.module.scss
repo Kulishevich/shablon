@@ -15,177 +15,177 @@
 .h1 {
   @include typography(
     var(--font-size-xxxl),
-    var(--line-height-xxxl),
+    --line-height-s,
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(30px, 39px, 600);
+    @include typography(32px, --line-height-s, 600);
   }
 }
 
 .h1_discount {
   @include typography(
     var(--font-size-xxl),
-    var(--line-height-xxl),
+    --line-height-s,
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(30px, 39px, 600);
+    @include typography(28px, --line-height-s, 600);
   }
 }
 
 .h2 {
   @include typography(
     var(--font-size-xl),
-    var(--line-height-xl),
+    --line-height-s,
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(22px, 26.07px, 600);
+    @include typography(26px, --line-height-s, 600);
   }
 }
 
 .h3 {
   @include typography(
     var(--font-size-l),
-    var(--line-height-l),
+    --line-height-s,
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(19px, 26.6px, 500);
+    @include typography(20px, --line-height-s, 500);
   }
 }
 
 .h4 {
   @include typography(
     var(--font-size-m),
-    var(--line-height-l),
+    --line-height-l,
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(18px, 21.33px, 500);
+    @include typography(18px, --line-height-l, 600);
   }
 }
 
 .h5 {
   @include typography(
     var(--font-size-s),
-    var(--line-height-m),
+    --line-height-l,
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(14px, 19.6px, 600);
+    @include typography(16px, --line-height-l, 600);
   }
 }
 
 .h6 {
   @include typography(
     var(--font-size-xs),
-    var(--line-height-s),
+    --line-height-l,
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(14px, 19.6px, 600);
+    @include typography(14px, --line-height-l, 600);
   }
 }
 
 .body_1 {
   @include typography(
     var(--font-size-m),
-    var(--line-height-l),
+    --line-height-l,
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(16px, 22.4px, 400);
+    @include typography(20px, --line-height-l, 400);
   }
 }
 
 .body_2 {
   @include typography(
     var(--font-size-s),
-    var(--line-height-m),
+    --line-height-l,
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(16px, 22.4px, 600);
+    @include typography(18px, --line-height-l, 400);
   }
 }
 
 .body_3 {
   @include typography(
     var(--font-size-xxs),
-    var(--line-height-xs),
+    --line-height-l,
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(14px, 19.6px, 400);
+    @include typography(15px, --line-height-l, 400);
   }
 }
 
 .body_4 {
   @include typography(
     var(--font-size-xxxs),
-    var(--line-height-xxs),
+    --line-height-l,
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(14px, 16.6px, 400);
+    @include typography(14px, --line-height-l, 500);
   }
 }
 
 .body_5 {
   @include typography(
     var(--font-size-xxxs),
-    var(--line-height-xxs),
+    --line-height-l,
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(14px, 19.6px, 600);
+    @include typography(13px, --line-height-l, 400);
   }
 }
 
 .body_6 {
   @include typography(
     var(--font-size-xxxxs),
-    var(--line-height-xxxs),
+    --line-height-l,
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(11px, 15.4px, 400);
+    @include typography(13px, --line-height-l, 300);
   }
 }
 
 .body_7 {
   @include typography(
     var(--font-size-xxxxs),
-    var(--line-height-xxxxs),
+    --line-height-m,
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(11px, 15.4px, 600);
+    @include typography(12px, --line-height-l, 300);
   }
 }
 
 .button {
   @include typography(
     var(--font-size-xs),
-    var(--line-height-s),
+    --line-height-l,
     var(--font-weight-600)
   );
   cursor: pointer;
   @media (max-width: 768px) {
-    @include typography(20px, 28px, 600);
+    @include typography(16px, --line-height-l, 600);
   }
 }
 
 .placeholder {
   @include typography(
     var(--font-size-xxs),
-    var(--line-height-xs),
+    --line-height-l,
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(16px, 22.4px, 400);
+    @include typography(15px, --line-height-l, 400);
   }
 }
 
@@ -193,11 +193,11 @@
   text-decoration: line-through;
   @include typography(
     var(--font-size-xxxs),
-    var(--line-height-xxs),
+    --line-height-l,
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(16px, 22.4px, 400);
+    @include typography(13px, --line-height-l, 500);
   }
 }
 
@@ -215,11 +215,11 @@
 .tag {
   @include typography(
     var(--font-size-xxxxs),
-    var(--line-height-xxxs),
+    --line-height-l,
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(11px, 15.4px, 600);
+    @include typography(10px, --line-height-l, 500);
   }
 }
 
