@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { HeaderBurgerMenu } from '@/features/header-burger-menu';
+import { HeaderSearchPopup } from '@/features/header-search-popup';
 
 export const HeaderMobile = () => {
   return (
@@ -20,9 +21,7 @@ export const HeaderMobile = () => {
         <Button variant="icon_secondary">
           <PhoneOutlinedIcon width={22} height={22} />
         </Button>
-        <Button variant="icon_secondary">
-          <SearchIcon width={22} height={22} />
-        </Button>
+        <HeaderSearchPopup />
         <Button variant="icon_secondary" as={Link} href={paths.cart}>
           <ShoppingCartIcon width={22} height={22} />
         </Button>

@@ -22,7 +22,7 @@ export const CollapseHeader = ({
     >
       <Collapsible.Trigger className={s.trigger}>
         <Typography variant="h2">{title}</Typography>
-        <ArrowRightIcon />
+        <ArrowRightIcon width={24} height={24} />
       </Collapsible.Trigger>
       <Collapsible.Content className={s.content}>
         <div className={s.wrapper}>{children}</div>

@@ -8,6 +8,25 @@
   display: flex;
   align-items: center;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  background-color: var(--color-grey);
+  border-radius: 6px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 72px;
+    height: 72px;
+    border-radius: 4px;
+  }
 }
 
 .content {

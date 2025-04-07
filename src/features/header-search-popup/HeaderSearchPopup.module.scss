@@ -1,0 +1,48 @@
+.container {
+  position: absolute;
+  top: 73px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  width: 335px;
+  height: 541px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  background-color: var(--color-white);
+  border-radius: 6px;
+  overflow: auto;
+
+  animation: fadeIn 0.3s ease-out;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

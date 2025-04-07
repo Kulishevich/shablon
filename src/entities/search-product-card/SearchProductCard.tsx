@@ -19,7 +19,9 @@ export const SearchProductCard = ({
   return (
     <div className={s.container}>
       <div className={s.card}>
-        <Image src={image_path} width={92} height={92} alt="product" />
+        <div className={s.imageContainer}>
+          <Image src={image_path} fill alt="product" />
+        </div>
         <div className={s.content}>
           <Typography variant="body_4">{name}</Typography>
           <div className={s.price}>
