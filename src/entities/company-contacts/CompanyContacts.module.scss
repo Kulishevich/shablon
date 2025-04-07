@@ -1,0 +1,18 @@
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contactElem {
+  display: flex;
+  gap: 6px;
+
+  & > p {
+    color: var(--color-white);
+  }
+  & > svg {
+    color: var(--color-accent-1);
+    flex-shrink: 0;
+  }
+}

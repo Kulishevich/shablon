@@ -1,3 +1,3 @@
-export * from './Footer/Footer';
+export * from './Footer';
 export * from './FooterContent/FooterContent';
 export * from './FooterInfo/FooterInfo';

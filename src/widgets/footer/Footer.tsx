@@ -1,6 +1,6 @@
 import React from 'react';
-import { FooterContent } from '../FooterContent/FooterContent';
-import { FooterInfo } from '../FooterInfo/FooterInfo';
+import { FooterContent } from './FooterContent/FooterContent';
+import { FooterInfo } from './FooterInfo/FooterInfo';
 import s from './Footer.module.scss';
 
 export const Footer = () => {

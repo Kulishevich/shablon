@@ -1,0 +1,74 @@
+.rootState {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+
+  border: none;
+  background-color: var(--color-white);
+
+  & > svg {
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    border: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    & > p {
+      color: var(--color-accent-1);
+    }
+    & > svg {
+      color: var(--color-accent-1);
+    }
+  }
+  &[data-state='open'] {
+    & > svg {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.content {
+  overflow: hidden;
+  &[data-state='open'] {
+    animation: slideDown 300ms ease-out;
+  }
+  &[data-state='closed'] {
+    animation: slideUp 300ms ease-out;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

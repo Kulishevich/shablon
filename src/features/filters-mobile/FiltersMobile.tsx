@@ -2,7 +2,6 @@ import { CloseIcon, FilterIcon } from '@/shared/assets';
 import { Button } from '@/shared/ui/button';
 import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import s from './FiltersMobile.module.scss';
 import { Filters } from '../filters/Filters';
 import { Typography } from '@/shared/ui/typography';
