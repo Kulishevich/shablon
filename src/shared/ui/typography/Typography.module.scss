@@ -19,7 +19,7 @@
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(32px, --line-height-s, 600);
+    @include typography(32px, --line-height-s, --font-weight-600);
   }
 }
 
@@ -30,7 +30,7 @@
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(28px, --line-height-s, 600);
+    @include typography(28px, --line-height-s, --font-weight-600);
   }
 }
 
@@ -41,7 +41,7 @@
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(26px, --line-height-s, 600);
+    @include typography(26px, --line-height-s, --font-weight-600);
   }
 }
 
@@ -52,7 +52,7 @@
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(20px, --line-height-s, 500);
+    @include typography(20px, --line-height-s, --font-weight-500);
   }
 }
 
@@ -63,7 +63,7 @@
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(18px, --line-height-l, 600);
+    @include typography(18px, --line-height-l, --font-weight-600);
   }
 }
 
@@ -74,7 +74,7 @@
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(16px, --line-height-l, 600);
+    @include typography(16px, --line-height-l, --font-weight-600);
   }
 }
 
@@ -85,7 +85,7 @@
     var(--font-weight-600)
   );
   @media (max-width: 768px) {
-    @include typography(14px, --line-height-l, 600);
+    @include typography(14px, --line-height-l, --font-weight-600);
   }
 }
 
@@ -96,7 +96,7 @@
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(20px, --line-height-l, 400);
+    @include typography(20px, --line-height-l, --font-weight-400);
   }
 }
 
@@ -107,7 +107,7 @@
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(18px, --line-height-l, 400);
+    @include typography(18px, --line-height-l, --font-weight-400);
   }
 }
 
@@ -118,7 +118,7 @@
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(15px, --line-height-l, 400);
+    @include typography(15px, --line-height-l, --font-weight-400);
   }
 }
 
@@ -129,7 +129,7 @@
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(14px, --line-height-l, 500);
+    @include typography(14px, --line-height-l, --font-weight-500);
   }
 }
 
@@ -140,7 +140,7 @@
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(13px, --line-height-l, 400);
+    @include typography(13px, --line-height-l, --font-weight-400);
   }
 }
 
@@ -151,7 +151,7 @@
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(13px, --line-height-l, 300);
+    @include typography(13px, --line-height-l, --font-weight-300);
   }
 }
 
@@ -162,7 +162,7 @@
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(12px, --line-height-l, 300);
+    @include typography(12px, --line-height-l, --font-weight-300);
   }
 }
 
@@ -174,7 +174,7 @@
   );
   cursor: pointer;
   @media (max-width: 768px) {
-    @include typography(16px, --line-height-l, 600);
+    @include typography(16px, --line-height-l, --font-weight-600);
   }
 }
 
@@ -185,7 +185,7 @@
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(15px, --line-height-l, 400);
+    @include typography(15px, --line-height-l, --font-weight-400);
   }
 }
 
@@ -197,7 +197,7 @@
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(13px, --line-height-l, 500);
+    @include typography(13px, --line-height-l, --font-weight-500);
   }
 }
 
@@ -208,7 +208,7 @@
     var(--font-weight-400)
   );
   @media (max-width: 768px) {
-    @include typography(11px, 15.4px, 600);
+    @include typography(11px, 15.4px, --font-weight-600);
   }
 }
 
@@ -219,7 +219,7 @@
     var(--font-weight-500)
   );
   @media (max-width: 768px) {
-    @include typography(10px, --line-height-l, 500);
+    @include typography(10px, --line-height-l, --font-weight-500);
   }
 }
 
