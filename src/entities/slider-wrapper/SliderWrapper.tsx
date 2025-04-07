@@ -7,18 +7,32 @@ import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 export const SliderWrapper = ({
   title,
   children,
-  itemWidth = 330,
+  variant,
 }: {
   title: string;
   children: ReactNode;
-  itemWidth?: number;
+  variant?: 'news' | 'product' | 'discount' | 'mini_product';
 }) => {
   const { isMobile } = useBreakpoint();
+
+  const itemWidth = () => {
+    switch (variant) {
+      case 'product':
+        return 330;
+      case 'mini_product':
+        return !isMobile ? 220 : 117;
+      case 'news':
+        return !isMobile ? 330 : 174;
+      case 'discount':
+        return !isMobile ? 440 : 350;
+    }
+    return 330;
+  };
 
   return (
     <div className={s.container}>
       <Typography variant="h2">{title}</Typography>
-      <Slider itemWidth={!isMobile ? itemWidth : 175}>{children}</Slider>
+      <Slider itemWidth={itemWidth()}>{children}</Slider>
     </div>
   );
 };

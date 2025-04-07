@@ -32,4 +32,18 @@
       width: 252px;
     }
   }
+
+  @media (max-width: 768px) {
+    width: 336px;
+
+    & > p {
+      font-weight: 600;
+      font-size: 150px;
+      line-height: 120%;
+    }
+
+    & > div {
+      gap: 16px;
+    }
+  }
 }

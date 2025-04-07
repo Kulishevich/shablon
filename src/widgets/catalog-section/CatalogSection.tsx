@@ -3,12 +3,14 @@ import s from './CatalogSection.module.scss';
 import { Typography } from '@/shared/ui/typography';
 import clsx from 'clsx';
 import { ProductCard } from '@/entities/product-card';
-import { CollapseFilter } from '@/shared/ui/collapse-filter';
-import { Checkbox } from '@/shared/ui/checkbox';
 import { Button } from '@/shared/ui/button';
 import { TextField } from '@/shared/ui/text-field';
 import { Select } from '@/shared/ui/select';
 import { Pagination } from '@/shared/ui/pagination';
+import { Filters } from '@/features/filters';
+import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
+import { FilterIcon } from '@/shared/assets';
+import { FiltersMobile } from '@/features/filters-mobile';
 
 const category = {
   title: 'Мебель',
@@ -51,6 +53,7 @@ export const CatalogSection = () => {
   const [activeSubcategory, setActiveSubcategory] = useState<number>(
     category.subcategories[0].id
   );
+  const { isMobile } = useBreakpoint();
 
   return (
     <div className={s.container}>
@@ -71,26 +74,10 @@ export const CatalogSection = () => {
         ))}
       </div>
       <div className={s.catalog}>
-        <div className={s.filters}>
-          <CollapseFilter title="Бренд">
-            {products.slice(0, 5).map((_, index) => (
-              <Checkbox label="Casio" key={index} />
-            ))}
-          </CollapseFilter>
-
-          <CollapseFilter title="Бренд">
-            {products.slice(0, 5).map((_, index) => (
-              <Checkbox label="Casio" key={index} />
-            ))}
-          </CollapseFilter>
-
-          <Button variant={'secondary'} fullWidth>
-            Сбросить фильтр
-          </Button>
-        </div>
+        {!isMobile && <Filters />}
         <div className={s.productsContainer}>
           <div className={s.search}>
-            <div>
+            <div className={s.searchContainer}>
               <TextField
                 variant="search"
                 placeholder="Поиск по категориям"
@@ -98,7 +85,10 @@ export const CatalogSection = () => {
               />
               <Button>Искать</Button>
             </div>
-            <Select options={options} defaultValue={options[0].value} />
+            <div className={s.selectContainer}>
+              <Select options={options} defaultValue={options[0].value} />
+              {isMobile && <FiltersMobile />}
+            </div>
           </div>
           <div className={s.productList}>
             {products.map((_, index) => (

@@ -1,0 +1,13 @@
+.productLink {
+  position: relative;
+  width: 196px;
+  height: 196px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 101px;
+    height: 101px;
+  }
+}

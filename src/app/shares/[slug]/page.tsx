@@ -9,7 +9,7 @@ export default function Share() {
   return (
     <div className={s.page}>
       <ShareInfo />
-      <SliderWrapper title="Другие акции" itemWidth={440}>
+      <SliderWrapper title="Другие акции" variant="discount">
         {new Array(12).fill('').map((_, index) => (
           <DiscountCard key={index} />
         ))}

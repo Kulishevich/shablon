@@ -22,4 +22,9 @@
 .map {
   height: 320px;
   width: 526px;
+
+  @media (max-width: 768px) {
+    width: 303px;
+    height: 180px;
+  }
 }

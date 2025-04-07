@@ -9,7 +9,7 @@ export default function New() {
   return (
     <div className={s.page}>
       <NewsInfoSection />
-      <SliderWrapper title="Другие новости">
+      <SliderWrapper title="Другие новости" variant="news">
         {new Array(9).fill('').map((_, index) => (
           <NewsCard key={index} />
         ))}

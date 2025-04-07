@@ -15,7 +15,7 @@ export default function Home() {
       <PopularProductsSection />
       <AboutUsSection />
       <AdvantagesSection />
-      <SliderWrapper title="Новости">
+      <SliderWrapper title="Новости" variant="news">
         {new Array(9).fill('').map((_, index) => (
           <NewsCard key={index} />
         ))}

@@ -12,6 +12,7 @@
   gap: 24px;
 
   margin-bottom: 44px;
+
   & > button {
     background-color: var(--color-grey);
     border-radius: 4px;
@@ -29,33 +30,44 @@
       opacity: 0.8;
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 16px;
+    width: 336px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    margin-bottom: 32px;
+
+    & > button {
+      padding: 10px 20px;
+    }
+  }
 }
 
 .catalog {
   display: flex;
   gap: 48px;
-}
 
-.filters {
-  width: 282px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .productsContainer {
   display: flex;
   flex-direction: column;
   gap: 28px;
+
+  @media (max-width: 768px) {
+    gap: 24px;
+  }
 }
 
 .search {
   display: flex;
   align-items: center;
-  gap: 135px;
-
-  & > div {
+  justify-content: space-between;
+  .searchContainer {
     display: flex;
     gap: 24px;
     width: 635px;
@@ -65,12 +77,49 @@
       flex-shrink: 0;
     }
   }
+
+  .selectContainer {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      & > button:nth-child(1) {
+        width: 176px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 16px;
+
+    .searchContainer {
+      gap: 16px;
+      width: 336px;
+      flex-shrink: 0;
+
+      .input {
+        height: 46px;
+      }
+      & > button {
+        width: 100px;
+        height: 46px;
+        flex-shrink: 0;
+      }
+    }
+  }
 }
 
 .productList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 15px;
+  }
 }
 
 .pagination {
@@ -78,4 +127,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 }

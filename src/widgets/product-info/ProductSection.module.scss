@@ -9,4 +9,8 @@
   & > h1 {
     margin-bottom: 24px;
   }
+  @media (max-width: 768px) {
+    align-items: center;
+    width: 336px;
+  }
 }

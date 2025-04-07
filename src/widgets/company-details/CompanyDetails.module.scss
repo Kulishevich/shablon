@@ -4,11 +4,20 @@
   gap: 24px;
 
   width: 966px;
+
+  @media (max-width: 768px) {
+    width: 336px;
+  }
 }
 
 .content {
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
 .elem {
@@ -16,4 +25,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    width: 336px;
+    gap: 8px;
+  }
 }
