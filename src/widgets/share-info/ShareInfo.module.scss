@@ -1,19 +1,21 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   position: relative;
-  height: 765px;
+  height: vw-1440(765);
 
   & > .content {
-    top: 171px;
+    top: vw-1440(171);
     left: 50%;
     transform: translateX(-50%);
     position: absolute;
 
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: vw-1440(24);
 
-    width: 952px;
-    padding: 48px;
+    width: vw-1440(952);
+    padding: vw-1440(48);
 
     background-color: var(--color-white);
     border-radius: 6px;
@@ -38,7 +40,7 @@
 
 .imageContainer {
   width: 100vw;
-  height: 450px;
+  height: vw-1440(450);
   position: relative;
 
   & > img {

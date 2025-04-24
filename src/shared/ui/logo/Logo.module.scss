@@ -1,7 +1,9 @@
+@use '../../config/styles/_functions.scss' as *;
+
 .primary {
   position: relative;
-  width: 220px;
-  height: 86px;
+  width: vw-1440(220);
+  height: vw-1440(86);
   flex-shrink: 0;
   & > img {
     object-fit: contain;
@@ -15,8 +17,8 @@
 
 .secondary {
   position: relative;
-  width: 196px;
-  height: 87px;
+  width: vw-1440(196);
+  height: vw-1440(87);
   flex-shrink: 0;
   & > img {
     object-fit: contain;

@@ -10,7 +10,6 @@ import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import { clsx } from 'clsx';
 
 import { CheckedIcon } from '../../assets';
-import { Typography } from '../typography';
 
 import s from './Checkbox.module.scss';
 
@@ -43,22 +42,20 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
           </RadixCheckbox.Indicator>
         </RadixCheckbox.Root>
         {label && (
-          <Typography
-            as={'label'}
-            variant="body_4"
-            className={clsx(s.label, disabled && s.disabled)}
+          <label
+            className={clsx(
+              s.label,
+              disabled && s.disabled,
+              'body_4',
+              isRequired && 'required'
+            )}
             htmlFor={checkboxId}
-            isRequired={isRequired}
           >
             {label}
-          </Typography>
+          </label>
         )}
       </div>
-      {error && (
-        <Typography as={'span'} variant={'error'}>
-          {error}
-        </Typography>
-      )}
+      {error && <span className={'error'}>{error}</span>}
     </div>
   );
 });

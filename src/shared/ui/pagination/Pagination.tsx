@@ -3,8 +3,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getPaginationPages } from '@/shared/lib/utils/getPaginationPages';
 import cn from 'clsx';
-import { Button } from '../button';
-import { Typography } from '../typography';
 import { ArrowLeftIcon, ArrowRightIcon } from '../../assets';
 import s from './Pagination.module.scss';
 
@@ -48,14 +46,13 @@ export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
 
   return (
     <div className={s.container}>
-      <Button
-        variant={'icon_primary'}
+      <button
         className={s.button}
         onClick={handlePageChange(currentPageNumber - 1)}
         disabled={currentPageNumber === 1}
       >
         <ArrowLeftIcon />
-      </Button>
+      </button>
       <div className={s.pagination}>
         {paginationPages.map((page) => {
           const isActive = currentPageNumber == page;
@@ -63,24 +60,21 @@ export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
           return (
             <button
               key={page}
-              className={cn(isActive && s.active, s.paginationElem)}
+              className={cn(isActive && s.active, s.paginationElem, 'h4')}
               onClick={handlePageChange(page)}
             >
-              <Typography variant="h4" as="span">
-                {page}
-              </Typography>
+              {page}
             </button>
           );
         })}
       </div>
       {currentPageNumber !== totalPagesNumber && (
-        <Button
-          variant={'icon_primary'}
+        <button
           className={s.button}
           onClick={handlePageChange(currentPageNumber + 1)}
         >
           <ArrowRightIcon />
-        </Button>
+        </button>
       )}
     </div>
   );

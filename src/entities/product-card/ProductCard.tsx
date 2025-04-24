@@ -1,13 +1,13 @@
 import React from 'react';
 import s from './ProductCard.module.scss';
 import Image from 'next/image';
-import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { showToast } from '@/shared/ui/toast';
 import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 import { CloseIcon, ShoppingCartIcon } from '@/shared/assets';
+import clsx from 'clsx';
 
 const product = {
   name: 'Свеча Jo Malone',
@@ -39,21 +39,9 @@ export const ProductCard = ({
           />
         </Link>
         <div className={s.tagsContainer}>
-          {product.isNew && (
-            <Typography as="span" variant="tag">
-              бестселлер
-            </Typography>
-          )}
-          {product.isNew && (
-            <Typography as="span" variant="tag">
-              новинка
-            </Typography>
-          )}
-          {product.isNew && (
-            <Typography as="span" variant="tag">
-              акция
-            </Typography>
-          )}
+          {product.isNew && <span className="tag">бестселлер</span>}
+          {product.isNew && <span className="tag">новинка</span>}
+          {product.isNew && <span className="tag">акция</span>}
         </div>
         {productInCart && (
           <Button variant="icon_secondary" className={s.deleteButton}>
@@ -61,19 +49,13 @@ export const ProductCard = ({
           </Button>
         )}
       </div>
-      <Typography variant="h5" className={s.title}>
-        {product.name}
-      </Typography>
-      <Typography variant="body_5" className={s.discription}>
-        {product.description}
-      </Typography>
+      <h5 className={clsx(s.title, 'h5')}>{product.name}</h5>
+      <p className={clsx(s.discription, 'body_5')}>{product.description}</p>
 
       <div className={s.priceContainer}>
         <div className={s.price}>
-          <Typography variant="discount" as="span">
-            {product.price} BYN
-          </Typography>
-          <Typography variant="h4">{product.priceWithDiscount} BYN</Typography>
+          <span className="discount">{product.price} BYN</span>
+          <h4 className="h4">{product.priceWithDiscount} BYN</h4>
         </div>
         {!isMobile ? (
           <Button

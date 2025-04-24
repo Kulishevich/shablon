@@ -1,5 +1,4 @@
 'use client';
-import { Typography } from '@/shared/ui/typography';
 import React from 'react';
 import { RowProductCart } from '../../entities/row-product-cart';
 import s from './CartTable.module.scss';
@@ -47,10 +46,10 @@ export const CartTable = () => {
   return (
     <div className={s.container}>
       <div className={s.tableHeader}>
-        <Typography variant="h6">Наименование товара</Typography>
-        <Typography variant="h6">Количество</Typography>
-        <Typography variant="h6">Цена за шт.</Typography>
-        <Typography variant="h6">Сумма (BYN)</Typography>
+        <h6 className="h6">Наименование товара</h6>
+        <h6 className="h6">Количество</h6>
+        <h6 className="h6">Цена за шт.</h6>
+        <h6 className="h6">Сумма (BYN)</h6>
       </div>
       {products.map((product) =>
         !isMobile ? (

@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './CartSection.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import { ArrowRightUpIcon } from '@/shared/assets';
 import { CartTable } from '@/features/cart-table';
@@ -10,9 +9,7 @@ export const CartSection = () => {
   return (
     <div className={s.container}>
       <div className={s.title}>
-        <Typography variant="h1" as="h1">
-          Корзина
-        </Typography>
+        <h1 className="h1">Корзина</h1>
         <Button variant="link" as="button">
           Очистить корзину
           <ArrowRightUpIcon />

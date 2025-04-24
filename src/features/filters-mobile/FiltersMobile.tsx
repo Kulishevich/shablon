@@ -4,7 +4,6 @@ import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import s from './FiltersMobile.module.scss';
 import { Filters } from '../filters/Filters';
-import { Typography } from '@/shared/ui/typography';
 
 export const FiltersMobile = () => {
   return (
@@ -17,7 +16,7 @@ export const FiltersMobile = () => {
       <Dialog.Content className={s.content}>
         <div className={s.wrapper}>
           <Dialog.Title asChild>
-            <Typography variant="h2">Фильтр</Typography>
+            <h2 className="h2">Фильтр</h2>
           </Dialog.Title>
           <Filters />
           <Dialog.Close asChild>

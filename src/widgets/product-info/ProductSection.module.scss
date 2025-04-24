@@ -1,13 +1,22 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
-
+  width: vw-1440(1296);
   & > p {
-    margin-bottom: 16px;
+    margin-bottom: vw-1440(16);
+    @media (max-width: 768px) {
+      margin-bottom: 16px;
+    }
   }
 
   & > h1 {
-    margin-bottom: 24px;
+    margin-bottom: vw-1440(24);
+
+    @media (max-width: 768px) {
+      margin-bottom: 24px;
+    }
   }
   @media (max-width: 768px) {
     align-items: center;

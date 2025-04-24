@@ -1,20 +1,23 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
-  margin-bottom: 48px;
+  margin-bottom: vw-1440(48);
 
   @media (max-width: 768px) {
     flex-direction: column;
+    margin-bottom: 48px;
     gap: 16px;
   }
 }
 
 .characteristics {
-  width: 330px;
+  width: vw-1440(330);
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: vw-1440(13);
 
-  margin-right: 110px;
+  margin-right: vw-1440(110);
 
   & > div > ul {
     list-style: disc inside;
@@ -31,11 +34,12 @@
 .priceContainer {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: vw-1440(16);
+
   & > .totalPrice {
     display: flex;
     align-items: end;
-    gap: 10px;
+    gap: vw-1440(10);
 
     & > p {
       color: var(--color-accent-red);
@@ -43,10 +47,13 @@
     & > span {
       opacity: 0.3;
     }
+    @media (max-width: 768px) {
+      gap: 10px;
+    }
   }
 
   & > button {
-    width: 170px;
+    width: vw-1440(170);
   }
 
   @media (max-width: 768px) {
@@ -62,19 +69,30 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 26px;
+  gap: vw-1440(26);
+
   & > .details {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: vw-1440(12);
+    @media (max-width: 768px) {
+      gap: 12px;
+    }
 
     & > p {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: vw-1440(8);
+      @media (max-width: 768px) {
+        gap: 8px;
+      }
     }
     @media (max-width: 768px) {
       margin: 0 auto;
     }
+  }
+
+  @media (max-width: 768px) {
+    gap: 26px;
   }
 }

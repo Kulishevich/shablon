@@ -1,19 +1,23 @@
+@use '../../shared/config/styles/functions' as *;
+
 .content {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: vw-1440(36);
+
+  width: vw-1440(1296);
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: vw-1440(32);
 }
 
 .elem {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: vw-1440(12);
 
   & > div > ul {
     list-style: none;

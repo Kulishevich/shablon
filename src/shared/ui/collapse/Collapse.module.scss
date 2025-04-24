@@ -1,9 +1,15 @@
+@use '../../config/styles/functions' as *;
+
 .rootState {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: vw-1440(20);
   border-bottom: 1px solid #1114341a;
-  padding: 32px 16px;
+  padding: vw-1440(32) vw-1440(16);
+  @media (max-width: 768px) {
+    gap: 20px;
+    padding: 32px 16px;
+  }
 }
 
 .trigger {

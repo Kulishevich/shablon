@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import s from './OrderForm.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import { TextField } from '@/shared/ui/text-field';
 import { DeliveryCard } from '@/entities/delivery-card';
 import { Button } from '@/shared/ui/button';
@@ -77,10 +76,8 @@ export const OrderForm = () => {
     <div className={s.container}>
       <div className={s.elem}>
         <div className={s.title}>
-          <Typography variant="h6" as="span">
-            1
-          </Typography>
-          <Typography variant="h3">Укажите ваши контакты</Typography>
+          <span className="h6">1</span>
+          <p className="h3">Укажите ваши контакты</p>
         </div>
         <div className={s.contacts}>
           <TextField placeholder="Имя" label="Имя" isRequired />
@@ -98,10 +95,8 @@ export const OrderForm = () => {
       <div className={s.elem}>
         <div className={s.title}>
           <div>
-            <Typography variant="h6" as="span">
-              2
-            </Typography>
-            <Typography variant="h3">Выберите способ доставки</Typography>
+            <span className="h6">2</span>
+            <p className="h3">Выберите способ доставки</p>
           </div>
           <Button variant="link" as={Link} href={paths.payment_and_delivery}>
             О доставке <ArrowRightUpIcon />
@@ -121,10 +116,8 @@ export const OrderForm = () => {
 
       <div className={s.elem}>
         <div className={s.title}>
-          <Typography variant="h6" as="span">
-            3
-          </Typography>
-          <Typography variant="h3">Укажите адрес доставки</Typography>
+          <span className="h6">3</span>
+          <p className="h3">Укажите адрес доставки</p>
         </div>
         <div className={s.address}>
           <TextField
@@ -142,10 +135,8 @@ export const OrderForm = () => {
 
       <div className={s.elem}>
         <div className={s.title}>
-          <Typography variant="h6" as="span">
-            4
-          </Typography>
-          <Typography variant="h3">Способ оплаты</Typography>
+          <span className="h6">4</span>
+          <p className="h3">Способ оплаты</p>
         </div>
         <div className={s.paymentMethod}>
           {paymentMethod.map((item) => (

@@ -1,6 +1,8 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   width: 100vw;
-  height: 601px;
+  height: vw-1440(601);
 
   @media (max-width: 768px) {
     height: 577px;
@@ -10,7 +12,7 @@
 .slide {
   height: 100%;
   & > .content {
-    width: 1246px;
+    width: vw-1440(1296);
     height: 100%;
     margin: 0 auto;
 
@@ -18,13 +20,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    gap: 32px;
+    gap: vw-1440(32);
     & > div {
       display: flex;
       flex-direction: column;
-      width: 746px;
-      gap: 16px;
-      & > p {
+      width: vw-1440(746);
+      gap: vw-1440(16);
+      & > p,
+      h1 {
         color: var(--color-white);
         top: 0;
         left: 0;
@@ -36,7 +39,7 @@
     }
 
     & > button {
-      width: 220px;
+      width: vw-1440(220);
     }
 
     @media (max-width: 768px) {
@@ -44,6 +47,9 @@
       gap: 20px;
       justify-content: start;
       margin-top: 72px;
+      & > button {
+        width: 220px;
+      }
     }
   }
   & > img {
@@ -72,9 +78,9 @@
 
 .pagination {
   position: absolute;
-  bottom: 48px !important;
+  bottom: vw-1440(48) !important;
   left: 50% !important;
-  transform: translateX(-625px);
+  transform: translateX(vw-1440(-625));
   z-index: 1000;
 
   @media (max-width: 768px) {
@@ -84,7 +90,7 @@
 }
 
 .bullet {
-  width: 68px;
+  width: vw-1440(68);
   height: 3px;
   margin: 0 5px;
   background-color: var(--color-white);

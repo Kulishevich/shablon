@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import s from './ProductDescription.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import clsx from 'clsx';
 
 const description = [
@@ -25,21 +24,17 @@ export const ProductDescription = () => {
     <div className={s.container}>
       <div className={s.navigation}>
         {description.map((item, index) => (
-          <Typography
-            variant="h6"
-            as="button"
+          <button
             key={index}
             onClick={() => setActiveTag(index)}
-            className={clsx(activeTag === index && s.active)}
+            className={clsx(activeTag === index && s.active, 'h6')}
           >
             {item.title}
-          </Typography>
+          </button>
         ))}
       </div>
       <div className={s.content}>
-        <Typography variant="body_6">
-          {description[activeTag].content}
-        </Typography>
+        <p className="body_6">{description[activeTag].content}</p>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import s from './CatalogSection.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import clsx from 'clsx';
 import { ProductCard } from '@/entities/product-card';
 import { Button } from '@/shared/ui/button';
@@ -9,7 +8,6 @@ import { Select } from '@/shared/ui/select';
 import { Pagination } from '@/shared/ui/pagination';
 import { Filters } from '@/features/filters';
 import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
-import { FilterIcon } from '@/shared/assets';
 import { FiltersMobile } from '@/features/filters-mobile';
 
 const category = {
@@ -57,20 +55,19 @@ export const CatalogSection = () => {
 
   return (
     <div className={s.container}>
-      <Typography variant="h1" as="h1">
-        {category.title}
-      </Typography>
+      <h1 className="h1">{category.title}</h1>
       <div className={s.navigation}>
         {category.subcategories.map((subcategory, index) => (
-          <Typography
-            variant="h3"
-            as="button"
-            className={clsx(activeSubcategory === subcategory.id && s.active)}
+          <button
+            className={clsx(
+              activeSubcategory === subcategory.id && s.active,
+              'h3'
+            )}
             onClick={() => setActiveSubcategory(subcategory.id)}
             key={index}
           >
             {subcategory.name}
-          </Typography>
+          </button>
         ))}
       </div>
       <div className={s.catalog}>
@@ -96,7 +93,7 @@ export const CatalogSection = () => {
             ))}
           </div>
           <div className={s.pagination}>
-            <Typography variant="body_7">Найдено по фильтрам: 100</Typography>
+            <p className="body_7">Найдено по фильтрам: 100</p>
             <Pagination totalPages="10" />
           </div>
         </div>

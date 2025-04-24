@@ -1,9 +1,15 @@
+@use '../../config/styles/functions' as *;
+
 .rootState {
   display: flex;
   flex-direction: column;
   background-color: var(--color-grey);
-  padding: 16px;
+  padding: vw-1440(16);
   border-radius: 6px;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 }
 
 .trigger {
@@ -38,12 +44,20 @@
   .content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: vw-1440(12);
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      gap: 12px;
+    }
   }
 
   & > :first-child {
-    margin-top: 12px;
+    margin-top: vw-1440(12);
+
+    @media (max-width: 768px) {
+      margin-top: 12px;
+    }
   }
 
   &[data-state='open'] {

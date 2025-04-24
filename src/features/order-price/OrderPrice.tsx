@@ -1,6 +1,5 @@
 import { Button } from '@/shared/ui/button';
 import { TextField } from '@/shared/ui/text-field';
-import { Typography } from '@/shared/ui/typography';
 import React from 'react';
 import s from './OrderPrice.module.scss';
 import { Checkbox } from '@/shared/ui/checkbox';
@@ -14,21 +13,21 @@ export const OrderPrice = () => {
       </div>
       <div className={s.price}>
         <div className={s.elem}>
-          <Typography variant="body_7">Стоимость товаров без скидки</Typography>
-          <Typography variant="h5">480 BYN</Typography>
+          <p className="body_7">Стоимость товаров без скидки</p>
+          <h5 className="h5">480 BYN</h5>
         </div>
         <div className={s.elem}>
-          <Typography variant="body_7">Скидка</Typography>
-          <Typography variant="h5">40 BYN</Typography>
+          <p className="body_7">Скидка</p>
+          <h5 className="h5">40 BYN</h5>
         </div>
         <div className={s.elem}>
-          <Typography variant="body_7">Стоимость доставки</Typography>
-          <Typography variant="h5">30 BYN</Typography>
+          <p className="body_7">Стоимость доставки</p>
+          <h5 className="h5">30 BYN</h5>
         </div>
       </div>
       <div className={s.elem}>
-        <Typography variant="h5">Итого</Typography>
-        <Typography variant="h3">470 BYN</Typography>
+        <h5 className="h5">Итого</h5>
+        <h3 className="h3">470 BYN</h3>
       </div>
       <Checkbox label="Согласие на обработку персональных данных" />
       <Button className={s.button}>Оформить заказ</Button>

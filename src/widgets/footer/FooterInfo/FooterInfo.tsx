@@ -1,18 +1,17 @@
 'use client';
 import React from 'react';
-import s from './FooterInfo.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import Image from 'next/image';
 import { MasterCardIcon, VisaIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
+import s from './FooterInfo.module.scss';
 
 export const FooterInfo = () => {
   const { isMobile } = useBreakpoint();
 
   return (
     <div className={s.container}>
-      <Typography variant="body_7">ⓒ 2025 website.by</Typography>
+      <p className="body_7">ⓒ 2025 website.by</p>
       <div className={s.paymentMethod}>
         <MasterCardIcon
           width={!isMobile ? 35 : 26}
@@ -52,10 +51,10 @@ export const FooterInfo = () => {
         />
       </div>
       <div className={s.productBy}>
-        <Typography variant="body_7">Дизайн и разработка: </Typography>
-        <Typography as={Link} href={'https://web-space.by/'} variant="body_7">
+        <p className="body_7">Дизайн и разработка: </p>
+        <Link href={'https://web-space.by/'} className="body_7">
           Web-space.by
-        </Typography>
+        </Link>
       </div>
     </div>
   );

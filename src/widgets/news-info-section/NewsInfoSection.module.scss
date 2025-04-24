@@ -1,31 +1,52 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: 42px;
+  gap: vw-1440(42);
   align-items: center;
+
+  width: vw-1440(1296);
 }
 
 .titleContainer {
   display: flex;
-  gap: 48px;
+  gap: vw-1440(48);
   align-items: center;
 
   & > .title {
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 16px;
+    gap: vw-1440(16);
 
     & > span {
-      padding: 4px 8px;
+      padding: vw-1440(4) vw-1440(8);
       border-radius: 4px;
       color: var(--color-white);
       background-color: var(--color-accent-1);
+      @media (max-width: 768px) {
+        padding: 4px 8px;
+      }
     }
 
     @media (max-width: 768px) {
       text-align: center;
       align-items: center;
+      gap: 16px;
+    }
+  }
+
+  & > .imageContainer {
+    position: relative;
+    width: vw-1440(636);
+    height: vw-1440(457);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    @media (max-width: 768px) {
+      width: 335px;
+      height: 240px;
     }
   }
 
@@ -34,23 +55,10 @@
   }
 }
 
-.imageContainer {
-  position: relative;
-  width: 636px;
-  height: 457px;
-  border-radius: 6px;
-  overflow: hidden;
-  flex-shrink: 0;
-  @media (max-width: 768px) {
-    width: 335px;
-    height: 240px;
-  }
-}
-
 .content {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: vw-1440(48);
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
@@ -61,9 +69,9 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: vw-1440(32);
 
-  width: 856px;
+  width: vw-1440(856);
 
   @media (max-width: 768px) {
     width: 336px;
@@ -74,7 +82,7 @@
 .elem {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: vw-1440(20);
   & > p > ul {
     list-style-position: inside;
   }
@@ -86,14 +94,23 @@
 
 .infoCard {
   display: flex;
-  gap: 16px;
+  gap: vw-1440(16);
   align-items: center;
   background-color: var(--color-grey);
   border-radius: 6px;
-  padding: 16px;
+  padding: vw-1440(16);
 
-  & > img {
+  .imageContainer {
+    position: relative;
+    width: vw-1440(314);
+    height: vw-1440(204);
     border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    @media (max-width: 768px) {
+      width: 314px;
+      height: 204px;
+    }
   }
 
   & > div {
@@ -104,5 +121,7 @@
 
   @media (max-width: 768px) {
     flex-direction: column;
+    gap: 16px;
+    padding: 16px;
   }
 }

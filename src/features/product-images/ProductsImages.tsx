@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Typography } from '@/shared/ui/typography';
 import s from './ProductsImages.module.scss';
 
 const images = new Array(4).fill('/product.png');
@@ -24,8 +23,8 @@ export const ProductsImages = () => {
       <div className={s.imageContainer}>
         <Image src={activeImage} fill alt="product" />
         <div className={s.tagsContainer}>
-          <Typography variant="tag">бестселлер</Typography>
-          <Typography variant="tag">акция</Typography>
+          <span className="tag">бестселлер</span>
+          <span className="tag">акция</span>
         </div>
       </div>
     </div>

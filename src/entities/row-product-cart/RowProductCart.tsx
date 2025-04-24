@@ -2,7 +2,6 @@ import React from 'react';
 import s from './RowProductCart.module.scss';
 import { Button } from '@/shared/ui/button';
 import Image from 'next/image';
-import { Typography } from '@/shared/ui/typography';
 import { TextField } from '@/shared/ui/text-field';
 import clsx from 'clsx';
 import { CloseIcon } from '@/shared/assets';
@@ -21,31 +20,26 @@ export const RowProductCart = ({
         <CloseIcon />
       </Button>
       <div className={s.card}>
-        <Image src={image_path} width={92} height={92} alt="product" />
+        <div className={s.imageContainer}>
+          <Image src={image_path} fill alt="product" />
+        </div>
         <div>
-          <Typography variant="body_4">{name}</Typography>
-          <Typography variant="body_7" as="span">
-            Артикул: {articul}
-          </Typography>
+          <p className="body_4">{name}</p>
+          <span className="body_7">Артикул: {articul}</span>
         </div>
       </div>
       <div className={s.count}>
         <TextField className={s.input} />
       </div>
       <div className={s.price}>
-        <Typography variant="body_3">{price} BYN</Typography>
+        <p className="body_3">{price} BYN</p>
         {!!priceWithDiscount && (
-          <Typography variant="discount" as="span">
-            {priceWithDiscount} BYN
-          </Typography>
+          <span className="discount">{priceWithDiscount} BYN</span>
         )}
       </div>
-      <Typography
-        variant="h5"
-        className={clsx(!!priceWithDiscount && s.discount)}
-      >
+      <h5 className={clsx(!!priceWithDiscount && s.discount, 'h5')}>
         {!!priceWithDiscount ? priceWithDiscount : price} BYN
-      </Typography>
+      </h5>
     </div>
   );
 };

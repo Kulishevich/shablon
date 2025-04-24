@@ -1,9 +1,8 @@
 import React from 'react';
 import s from './SearchProductCard.module.scss';
 import Image from 'next/image';
-import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
-import { ShopIcon, ShoppingCartIcon } from '@/shared/assets';
+import { ShoppingCartIcon } from '@/shared/assets';
 
 export const SearchProductCard = ({
   name,
@@ -23,18 +22,16 @@ export const SearchProductCard = ({
           <Image src={image_path} fill alt="product" />
         </div>
         <div className={s.content}>
-          <Typography variant="body_4">{name}</Typography>
+          <p className="body_4">{name}</p>
           <div className={s.price}>
-            <Typography variant="h5">{price} BYN</Typography>
+            <h5 className="h5">{price} BYN</h5>
             {!!priceWithDiscount && (
-              <Typography variant="discount">
-                {priceWithDiscount} BYN
-              </Typography>
+              <p className="discount">{priceWithDiscount} BYN</p>
             )}
           </div>
         </div>
       </div>
-      <Button variant={'icon_outlined'}>
+      <Button variant={'icon_outlined'} className={s.button}>
         <ShoppingCartIcon />
       </Button>
     </div>

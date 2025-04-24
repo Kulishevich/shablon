@@ -1,7 +1,9 @@
+@use '../../shared/config/styles/functions' as *;
+
 .productLink {
   position: relative;
-  width: 196px;
-  height: 196px;
+  width: vw-1440(196);
+  height: vw-1440(196);
   border-radius: 6px;
   overflow: hidden;
   flex-shrink: 0;

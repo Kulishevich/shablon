@@ -6,11 +6,10 @@ import { MainSlider } from '@/widgets/main-slider';
 import { SliderWrapper } from '@/entities/slider-wrapper';
 import { NewsCard } from '@/entities/news-card';
 import { PopularProductsSection } from '@/widgets/popular-products-section';
-import s from './page.module.scss';
 
 export default function Home() {
   return (
-    <div className={s.page}>
+    <main>
       <MainSlider />
       <PopularProductsSection />
       <AboutUsSection />
@@ -21,6 +20,6 @@ export default function Home() {
         ))}
       </SliderWrapper>
       <FeedbackForm />
-    </div>
+    </main>
   );
 }

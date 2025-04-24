@@ -1,15 +1,26 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
 
   align-items: center;
   text-align: center;
-  padding: 32px 28px 0px;
-  gap: 16px;
-  width: 306px;
-  height: 210px;
+  padding: vw-1440(32) vw-1440(28) 0px;
+  gap: vw-1440(16);
+  width: vw-1440(306);
+  height: vw-1440(210);
   background-color: var(--color-grey);
   border-radius: 6px;
+
+  & > svg {
+    width: vw-1440(76);
+    height: vw-1440(76);
+    @media (max-width: 768px) {
+      width: 54px;
+      height: 54px;
+    }
+  }
 
   @media (max-width: 768px) {
     width: 160px;

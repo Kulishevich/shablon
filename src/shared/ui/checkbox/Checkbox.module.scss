@@ -1,8 +1,14 @@
+@use '../../config/styles/functions' as *;
+
 .container {
   display: flex;
-  gap: 8px;
+  gap: vw-1440(8);
   align-items: center;
   justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 }
 
 .root {
@@ -13,8 +19,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 32px;
-  height: 32px;
+  width: vw-1440(32);
+  height: vw-1440(32);
 
   background-color: var(--color-white);
   border: 1px solid #1114341a;
@@ -35,14 +41,19 @@
   }
 
   &[data-state='checked'] {
-    width: 32px;
-    height: 32px;
+    width: vw-1440(32);
+    height: vw-1440(32);
 
     background-color: var(--color-accent-1);
     border-radius: 2px;
 
     &:disabled {
       opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      width: 32px;
+      height: 32px;
     }
   }
 
@@ -52,6 +63,11 @@
     &:disabled {
       background-color: inherit;
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 32px;
+    height: 32px;
   }
 }
 

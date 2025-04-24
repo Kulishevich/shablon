@@ -1,18 +1,21 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: vw-1440(36);
 
-  width: 636px;
+  width: vw-1440(636);
 
   @media (max-width: 768px) {
     width: 336px;
+    gap: 36px;
   }
 }
 .elem {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: vw-1440(24);
   @media (max-width: 768px) {
     gap: 16px;
   }
@@ -21,7 +24,7 @@
 .title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: vw-1440(10);
 
   span {
     display: flex;
@@ -29,16 +32,25 @@
     align-items: center;
     background-color: var(--color-accent-1);
     color: var(--color-white);
-    width: 36px;
-    height: 36px;
+    width: vw-1440(36);
+    height: vw-1440(36);
     border-radius: 50%;
+
+    @media (max-width: 768px) {
+      width: 36px;
+      height: 36px;
+    }
   }
 
   & > div {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: vw-1440(10);
     margin-right: auto;
+
+    @media (max-width: 768px) {
+      gap: 10px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -51,8 +63,8 @@
 
 .contacts {
   display: grid;
-  grid-template-columns: repeat(2, 306px);
-  gap: 16px 24px;
+  grid-template-columns: repeat(2, vw-1440(306));
+  gap: vw-1440(16) vw-1440(24);
 
   @media (max-width: 768px) {
     display: flex;
@@ -63,7 +75,7 @@
 
 .delivery {
   display: flex;
-  gap: 24px;
+  gap: vw-1440(24);
 
   flex-wrap: wrap;
   @media (max-width: 768px) {
@@ -74,17 +86,24 @@
 .address {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: vw-1440(16);
 
   .textarea {
-    height: 124px;
+    height: vw-1440(124);
+    @media (max-width: 768px) {
+      height: 124px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: 16px;
   }
 }
 
 .paymentMethod {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: vw-1440(24);
 
   @media (max-width: 768px) {
     gap: 15px;

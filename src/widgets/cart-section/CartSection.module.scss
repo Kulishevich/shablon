@@ -1,7 +1,9 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: vw-1440(36);
 
   @media (max-width: 768px) {
     gap: 20px;
@@ -10,11 +12,11 @@
 
 .title {
   display: flex;
-  gap: 20px;
+  gap: vw-1440(20);
   align-items: end;
 
   & > button {
-    margin-bottom: 11px;
+    margin-bottom: vw-1440(11);
   }
   @media (max-width: 768px) {
     align-items: center;
@@ -28,8 +30,9 @@
 
 .content {
   display: flex;
-  gap: 48px;
+  gap: vw-1440(48);
   @media (max-width: 768px) {
     flex-direction: column;
+    gap: 48px;
   }
 }

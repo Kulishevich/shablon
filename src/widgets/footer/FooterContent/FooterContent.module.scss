@@ -1,21 +1,24 @@
+@use '../../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
-  gap: 48px;
+  gap: vw-1440(48);
 
-  padding: 47px 0 42px;
+  padding: vw-1440(47) 0 vw-1440(42);
 
   border-bottom: 1px solid #ffffff13;
 
   .elem {
     &:nth-child(1) {
-      width: 196px;
+      width: vw-1440(196);
       @media (max-width: 768px) {
+        width: 196px;
         align-items: center;
         text-align: center;
       }
     }
     &:nth-child(2) {
-      width: 224px;
+      width: vw-1440(224);
       @media (max-width: 768px) {
         width: 196px;
         align-items: center;
@@ -23,14 +26,15 @@
     }
 
     &:nth-child(3) {
-      width: 196px;
+      width: vw-1440(196);
       @media (max-width: 768px) {
+        width: 196px;
         align-items: center;
       }
     }
 
     &:nth-child(4) {
-      width: 196px;
+      width: vw-1440(196);
       @media (max-width: 768px) {
         text-align: center;
         width: 204px;
@@ -39,6 +43,8 @@
   }
 
   @media (max-width: 768px) {
+    gap: 48px;
+    padding: 47px 0 42px;
     flex-direction: column;
     align-items: center;
   }
@@ -47,25 +53,43 @@
 .elem {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: vw-1440(16);
 
-  & > p {
+  & > p,
+  h5 {
     color: var(--color-white);
+  }
+
+  @media (max-width: 768px) {
+    gap: 16px;
   }
 }
 
 .iconsContainer {
   display: flex;
-  gap: 8px;
+  gap: vw-1440(8);
+
+  & > svg {
+    width: vw-1440(32);
+    height: vw-1440(32);
+    @media (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 }
 
 .catalogContainer {
   display: flex;
-  gap: 16px;
+  gap: vw-1440(16);
 
   .elem {
     &:nth-child(1) {
-      width: 334px;
+      width: vw-1440(334);
       @media (max-width: 768px) {
         text-align: start;
         align-items: start;
@@ -73,19 +97,23 @@
       }
     }
     &:nth-child(2) {
-      width: 207px;
+      width: vw-1440(207);
       @media (max-width: 768px) {
         align-items: start;
         width: 160px;
       }
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
 }
 .catalog {
   display: grid;
   grid-auto-flow: column;
   grid-template-rows: repeat(5, auto);
-  gap: 16px 20px;
+  gap: vw-1440(16) vw-1440(20);
 
   & > a {
     color: var(--color-white);
@@ -105,7 +133,7 @@
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: vw-1440(12);
 
   & > a {
     color: var(--color-white);
@@ -114,5 +142,9 @@
     &:hover {
       color: var(--color-accent-1);
     }
+  }
+
+  @media (max-width: 768px) {
+    gap: 12px;
   }
 }

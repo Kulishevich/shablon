@@ -1,7 +1,9 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: vw-1440(36);
 
   @media (max-width: 768px) {
     gap: 20px;
@@ -10,7 +12,7 @@
 
 .content {
   display: flex;
-  gap: 24px;
+  gap: vw-1440(24);
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -21,7 +23,7 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: vw-1440(24);
   width: 100%;
 
   @media (max-width: 768px) {
@@ -32,7 +34,7 @@
 .elem {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: vw-1440(12);
 
   @media (max-width: 768px) {
     gap: 8px;
@@ -40,8 +42,8 @@
 }
 
 .map {
-  height: 498px;
-  width: 856px;
+  height: vw-1440(498);
+  width: vw-1440(856);
   @media (max-width: 768px) {
     width: 335px;
     height: 200px;

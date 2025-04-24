@@ -2,7 +2,6 @@ import { clsx } from 'clsx';
 import { ToastT, Toaster, toast } from 'sonner';
 
 import styles from './Toast.module.scss';
-import { Typography } from '../typography';
 import { ErrorIcon, SuccessIcon } from '@/shared/assets';
 
 const DEFAULT_DURATION = 5000;
@@ -35,15 +34,13 @@ const showToast = ({
   toast.custom(
     (t) => (
       <div className={clsx(styles.rootClass, typesClass, className)}>
-        <Typography className={styles.title} variant={'h5'}>
+        <p className={clsx(styles.title, 'h5')}>
           {variant === 'error' && <ErrorIcon />}
           {variant === 'success' && <SuccessIcon />}
           {title}
-        </Typography>
+        </p>
         {!!message && (
-          <Typography className={styles.message} variant={'body_7'}>
-            {message}
-          </Typography>
+          <p className={clsx(styles.message, 'body_7')}>{message}</p>
         )}
       </div>
     ),

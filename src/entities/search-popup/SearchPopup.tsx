@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './SearchPopup.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import { SearchProductCard } from '../search-product-card';
 
 const categories = ['Мебель', 'Фурнитура', 'Декор для дома'];
@@ -36,15 +35,15 @@ export const SearchPopup = () => {
   return (
     <div className={s.content}>
       <div className={s.categories}>
-        <Typography variant="h6">Поиск по категориям:</Typography>
+        <h6 className="h6">Поиск по категориям:</h6>
         {categories.map((category, index) => (
-          <Typography variant="body_4" key={index}>
+          <p className="body_4" key={index}>
             {category}
-          </Typography>
+          </p>
         ))}
       </div>
       <div className={s.products}>
-        <Typography variant="h6">Поиск по товарам:</Typography>
+        <h6 className="h6">Поиск по товарам:</h6>
         {products.map((product) => (
           <SearchProductCard {...product} key={product.id} />
         ))}

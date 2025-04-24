@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import s from './AdvantageCard.module.scss';
-import { Typography } from '@/shared/ui/typography';
 
 export const AdvantageCard = ({
   title,
@@ -12,7 +11,7 @@ export const AdvantageCard = ({
   return (
     <div className={s.container}>
       {icon}
-      <Typography variant="h5">{title}</Typography>
+      <h5 className="h5">{title}</h5>
     </div>
   );
 };

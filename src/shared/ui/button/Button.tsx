@@ -40,7 +40,8 @@ export const Button = forwardRef(
       styles.button,
       styles[variant],
       fullWidth && styles.fullWidth,
-      className
+      className,
+      'button'
     );
 
     return <Component className={cn} ref={ref} type={type} {...rest} />;

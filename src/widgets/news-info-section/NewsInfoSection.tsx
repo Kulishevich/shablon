@@ -1,23 +1,18 @@
 import React from 'react';
-import s from './NewsInfoSection.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { ArrowSmLeftIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import s from './NewsInfoSection.module.scss';
 
 export const NewsInfoSection = () => {
   return (
     <div className={s.container}>
       <div className={s.titleContainer}>
         <div className={s.title}>
-          <Typography variant="tag" as="span">
-            12.02.2025
-          </Typography>
-          <Typography variant="h1">
-            Фурнитура для мебели: как выбрать?
-          </Typography>
+          <span className="tag">12.02.2025</span>
+          <h1 className="h1">Фурнитура для мебели: как выбрать?</h1>
         </div>
         <div className={s.imageContainer}>
           <Image src={'/news.png'} fill alt="new" />
@@ -26,31 +21,27 @@ export const NewsInfoSection = () => {
       <div className={s.content}>
         <div className={s.info}>
           <div className={s.elem}>
-            <Typography variant="h5">
+            <h5 className="h5">
               Мебельная фурнитура — это те вспомогательные аксессуары
               и материалы, которые применяются при производстве мебели. Задача
               фурнитуры — обеспечить декоративный и вспомогательный эффект.
-            </Typography>
-            <Typography variant="body_2">
+            </h5>
+            <p className="body_2">
               Мебельная фурнитура — это комплектующие, предназначенные для
               сборки, украшения и обеспечения функциональности предметов мебели.
               Это уголки, петли, ручки, ножки и другие элементы. Эти детали
               изготавливаются из металла, пластмассы, дерева и других материалов
               и делятся условно на две большие категории:
               <ul>
-                <Typography variant="body_2" as="li">
-                  крепёжная фурнитура
-                </Typography>
-                <Typography variant="body_2" as="li">
-                  лицевая фурнитура
-                </Typography>
+                <li className="body_2">крепёжная фурнитура</li>
+                <li className="body_2">лицевая фурнитура</li>
               </ul>
-            </Typography>
+            </p>
           </div>
 
           <div className={s.elem}>
-            <Typography variant="h3">Виды крепёжной фурнитуры</Typography>
-            <Typography variant="body_2">
+            <h3 className="h3">Виды крепёжной фурнитуры</h3>
+            <p className="body_2">
               Составные детали любого предмета мебели скреплены между собой.
               Такое соединение обеспечивается с помощью крепёжной фурнитуры. Оно
               может быть жёстким для создания надёжного каркаса, или подвижным,
@@ -59,32 +50,29 @@ export const NewsInfoSection = () => {
               пола и таким образом минимизировать риск её падения. Правильно
               подобранный крепёж — едва ли не важнейшая составляющая надёжности
               вашей мебели.
-            </Typography>
+            </p>
           </div>
 
           <div className={s.infoCard}>
-            <Image
-              src={'/news-info-card.png'}
-              width={314}
-              height={204}
-              alt={'news-info'}
-            />
+            <div className={s.imageContainer}>
+              <Image src={'/news-info-card.png'} fill alt={'news-info'} />
+            </div>
             <div>
-              <Typography variant="h5"> Мебельные уголки</Typography>
-              <Typography variant="placeholder">
+              <h5 className="h5"> Мебельные уголки</h5>
+              <p className="placeholder">
                 Мебельный уголок — простой и универсальный элемент, который
                 может использоваться для жёсткого крепления частей мебели между
                 собой. Уголки применяются для сборки самых различных конструкций
                 — тумбочек, диванов, кресел, шкафов и т.д. Также очень часто
                 этот тип фурнитуры используют, чтобы повесить полку или
                 прикрепить шкаф к стене.
-              </Typography>
+              </p>
             </div>
           </div>
 
           <div className={s.elem}>
-            <Typography variant="h3">Конфирмат</Typography>
-            <Typography variant="body_2">
+            <h3 className="h3">Конфирмат</h3>
+            <p className="body_2">
               Конфирмат (еврошуруп, евровинт) — это специальный шуруп для
               плотной стяжки щитов корпусной мебели (шкафов, полок, тумбочек),
               которые расположены перпендикулярно друг относительно друга. Он
@@ -93,7 +81,7 @@ export const NewsInfoSection = () => {
               стыковать несколько собранных элементов мебели вплотную друг с
               другом. Конфирматное соединение надёжно и выдерживает высокие
               нагрузки.
-            </Typography>
+            </p>
           </div>
         </div>
         <Button variant="link" as={Link} href={paths.news}>

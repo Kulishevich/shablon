@@ -10,11 +10,7 @@ export const BurgerButton = () => {
 
   return (
     <div className={s.burgerMenu}>
-      <Button
-        variant="burger"
-        className={s.button}
-        onClick={() => setIsOpenNavigation(true)}
-      >
+      <Button variant="burger" onClick={() => setIsOpenNavigation(true)}>
         <BurgerIcon />
         Каталог
       </Button>

@@ -1,6 +1,5 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { ReactNode, useState } from 'react';
-import { Typography } from '../typography';
 import { ArrowDownIcon } from '@/shared/assets';
 import s from './CollapseFilter.module.scss';
 
@@ -20,7 +19,7 @@ export const CollapseFilter = ({
       className={s.rootState}
     >
       <Collapsible.Trigger className={s.trigger}>
-        <Typography variant="h5">{title}</Typography>
+        <p className="h5">{title}</p>
         <ArrowDownIcon />
       </Collapsible.Trigger>
       <Collapsible.Content className={s.wrapper}>

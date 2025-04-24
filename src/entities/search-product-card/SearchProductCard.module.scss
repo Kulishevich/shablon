@@ -1,3 +1,5 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -7,7 +9,7 @@
 .card {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: vw-1440(12);
 
   @media (max-width: 768px) {
     gap: 8px;
@@ -16,8 +18,8 @@
 
 .imageContainer {
   position: relative;
-  width: 92px;
-  height: 92px;
+  width: vw-1440(92);
+  height: vw-1440(92);
   background-color: var(--color-grey);
   border-radius: 6px;
   overflow: hidden;
@@ -32,11 +34,29 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: vw-1440(6);
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
 }
 
 .price {
   display: flex;
-  gap: 8px;
+  gap: vw-1440(8);
   align-items: end;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+}
+
+.button {
+  & > svg {
+    width: vw-1440(32);
+    height: vw-1440(32);
+    @media (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+    }
+  }
 }

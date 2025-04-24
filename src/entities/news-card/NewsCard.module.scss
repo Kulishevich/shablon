@@ -1,8 +1,11 @@
+@use '../../shared/config/styles/functions' as *;
+
 .cotnainer {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 12px;
+  gap: vw-1440(12);
+  width: vw-1440(306);
 
   &:hover {
     box-shadow: 1px 4px 8px 0px #0b0c1908;
@@ -10,8 +13,8 @@
 
   .imageContainer {
     position: relative;
-    width: 306px;
-    height: 220px;
+    width: vw-1440(306);
+    height: vw-1440(220);
     border-radius: 6px;
     overflow: hidden;
     @media (max-width: 768px) {
@@ -23,6 +26,7 @@
 
   @media (max-width: 768px) {
     gap: 8px;
+    width: 160px;
   }
 }
 
@@ -31,4 +35,15 @@
   padding: 2px 6px;
   border-radius: 4px;
   color: var(--color-white);
+}
+
+.button {
+  & > svg {
+    width: vw-1440(20);
+    height: vw-1440(20);
+    @media (max-width: 768px) {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }

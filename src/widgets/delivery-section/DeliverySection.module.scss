@@ -1,18 +1,26 @@
+@use '../../shared/config/styles/functions' as *;
+
 .wrapper {
   display: flex;
   flex-direction: column;
+
+  width: vw-1440(1296);
+
+  @media (max-width: 768px) {
+    width: 336px;
+  }
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: vw-1440(20);
 }
 
 .deliveryArea {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: vw-1440(12);
 }
 
 .list {
@@ -20,8 +28,8 @@
 }
 
 .map {
-  height: 320px;
-  width: 526px;
+  height: vw-1440(320);
+  width: vw-1440(526);
 
   @media (max-width: 768px) {
     width: 303px;

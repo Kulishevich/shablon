@@ -4,7 +4,6 @@ import s from './HeaderSearchPopup.module.scss';
 import { Button } from '@/shared/ui/button';
 import { SearchIcon } from '@/shared/assets';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { Typography } from '@/shared/ui/typography';
 import { SearchProductCard } from '@/entities/search-product-card';
 import { TextField } from '@/shared/ui/text-field';
 import Link from 'next/link';
@@ -55,15 +54,15 @@ export const HeaderSearchPopup = () => {
         <TextField variant="search" />
         <div className={s.content}>
           <div className={s.categories}>
-            <Typography variant="h6">Поиск по категориям:</Typography>
+            <h6 className="h6">Поиск по категориям:</h6>
             {categories.map((category, index) => (
-              <Typography variant="body_4" key={index} as={Link} href={'/'}>
+              <Link className="body_4" key={index} href={'/'}>
                 {category}
-              </Typography>
+              </Link>
             ))}
           </div>
           <div className={s.products}>
-            <Typography variant="h6">Поиск по товарам:</Typography>
+            <h6 className="h6">Поиск по товарам:</h6>
             {products.map((product) => (
               <SearchProductCard {...product} key={product.id} />
             ))}

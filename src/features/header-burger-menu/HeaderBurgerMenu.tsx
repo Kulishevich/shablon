@@ -4,7 +4,6 @@ import s from './HeaderBurgerMenu.module.scss';
 import { Button } from '@/shared/ui/button';
 import { BurgerMobileIcon, CloseIcon } from '@/shared/assets';
 import { navigation } from '@/shared/config/constants/navigation';
-import { Typography } from '@/shared/ui/typography';
 import Link from 'next/link';
 import { SocialMedia } from '@/entities/social-media';
 import { CompanyContacts } from '@/entities/company-contacts';
@@ -55,20 +54,20 @@ export const HeaderBurgerMenu = () => {
       </VisuallyHidden>
       <Dialog.Content className={s.content}>
         <div className={s.navigation}>
-          <Typography as={Link} variant="h2" href={navigation[0].path}>
+          <Link className="h2" href={navigation[0].path}>
             {navigation[0].title}
-          </Typography>
+          </Link>
           <CollapseHeader title={'Каталог'}>
             {categories.map((category, index) => (
-              <Typography variant="h3" key={index} as={Link} href={'/'}>
+              <Link className="h3" key={index} href={'/'}>
                 {category}
-              </Typography>
+              </Link>
             ))}
           </CollapseHeader>
           {navigation.slice(1).map((nav, index) => (
-            <Typography as={Link} variant="h2" href={nav.path} key={index}>
+            <Link className="h2" href={nav.path} key={index}>
               {nav.title}
-            </Typography>
+            </Link>
           ))}
         </div>
         <SocialMedia className={s.socialMedia} />

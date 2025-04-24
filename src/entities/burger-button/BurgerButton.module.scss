@@ -1,5 +1,12 @@
+@use '../../shared/config/styles/functions' as *;
+
 .burgerMenu {
   position: relative;
-  margin-left: 42px;
-  margin-right: 24px;
+  margin-left: vw-1440(42);
+  margin-right: vw-1440(24);
+
+  & > button > svg {
+    width: vw-1440(26);
+    height: vw-1440(16);
+  }
 }

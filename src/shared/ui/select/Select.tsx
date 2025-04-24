@@ -10,7 +10,6 @@ import { SelectGroup, SelectItem } from '@radix-ui/react-select';
 import { clsx } from 'clsx';
 
 import s from './Select.module.scss';
-import { Typography } from '../typography';
 import { ArrowDownIcon } from '@/shared/assets';
 
 export type OptionsValue = {
@@ -51,7 +50,7 @@ export const Select = forwardRef<
         <RadixSelect.ItemText asChild>
           <div className={s.option}>
             {item.icon}
-            <Typography variant="body_7">{item.option}</Typography>
+            <p className="body_7">{item.option}</p>
           </div>
         </RadixSelect.ItemText>
       </SelectItem>
@@ -65,11 +64,7 @@ export const Select = forwardRef<
         value={value}
         {...rest}
       >
-        {label && (
-          <Typography as={'label'} variant="body_7">
-            {label}
-          </Typography>
-        )}
+        {label && <label className="body_7">{label}</label>}
         <RadixSelect.Trigger className={clsx(s.trigger, className)} ref={ref}>
           <RadixSelect.Value placeholder={placeHolder} />
           <RadixSelect.Icon asChild>

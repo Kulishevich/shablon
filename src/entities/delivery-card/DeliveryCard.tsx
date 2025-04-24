@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './DeliveryCard.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import clsx from 'clsx';
 
 export const DeliveryCard = ({
@@ -19,12 +18,10 @@ export const DeliveryCard = ({
   return (
     <button className={clsx(s.container, active && s.active)} onClick={onClick}>
       <span className={s.content}>
-        <Typography variant="h5">{title}</Typography>
-        <Typography variant="body_6">{description}</Typography>
+        <p className="h5">{title}</p>
+        <p className="body_6">{description}</p>
       </span>
-      <Typography variant="h5">
-        {!!price ? `${price} BYN` : 'Бесплатно'}
-      </Typography>
+      <p className="h5">{!!price ? `${price} BYN` : 'Бесплатно'}</p>
     </button>
   );
 };

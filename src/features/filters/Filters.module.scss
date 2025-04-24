@@ -1,7 +1,14 @@
+@use '../../shared/config/styles/functions' as *;
+
 .filters {
-  width: 282px;
+  width: vw-1440(282);
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: vw-1440(12);
+
+  @media (max-width: 768px) {
+    width: 336px;
+    gap: 12px;
+  }
 }

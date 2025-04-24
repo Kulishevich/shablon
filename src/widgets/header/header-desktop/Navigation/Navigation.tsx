@@ -1,7 +1,5 @@
 import React from 'react';
-import s from './Navigation.module.scss';
 import Link from 'next/link';
-import { Typography } from '@/shared/ui/typography';
 import {
   ClockIcon,
   DiscountCircleIcon,
@@ -9,6 +7,7 @@ import {
   PhoneIcon,
 } from '@/shared/assets';
 import { navigation } from '@/shared/config/constants/navigation';
+import s from './Navigation.module.scss';
 
 export const Navigation = () => {
   return (
@@ -16,29 +15,27 @@ export const Navigation = () => {
       <div className={s.content}>
         <nav className={s.navigation}>
           {navigation.map((nav, index) => (
-            <Typography variant="body_3" as={Link} href={nav.path} key={index}>
+            <Link className="body_3" href={nav.path} key={index}>
               {nav.title === 'Акции' && <DiscountCircleIcon />}
               {nav.title}
-            </Typography>
+            </Link>
           ))}
         </nav>
         <div className={s.info}>
           <div>
             <LocationIcon />
-            <Typography variant="body_6">
-              г. Минск, пр-т Независимости, 11
-            </Typography>
+            <p className="body_6">г. Минск, пр-т Независимости, 11</p>
           </div>
           <div>
             <ClockIcon />
-            <Typography variant="body_6">с 09:00 до 22:00 ежедневно</Typography>
+            <p className="body_6">с 09:00 до 22:00 ежедневно</p>
           </div>
           <div>
             <PhoneIcon />
-            <Typography variant="body_6">
+            <p className="body_6">
               +375 (29) 999-99-99 (А1) <br />
               +375 (29) 999-99-99 (МТС)
-            </Typography>
+            </p>
           </div>
         </div>
       </div>

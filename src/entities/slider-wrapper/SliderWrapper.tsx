@@ -1,4 +1,3 @@
-import { Typography } from '@/shared/ui/typography';
 import React, { ReactNode } from 'react';
 import s from './SliderWrapper.module.scss';
 import { Slider } from '@/shared/ui/slider';
@@ -31,7 +30,7 @@ export const SliderWrapper = ({
 
   return (
     <div className={s.container}>
-      <Typography variant="h2">{title}</Typography>
+      <h2 className="h2">{title}</h2>
       <Slider itemWidth={itemWidth()}>{children}</Slider>
     </div>
   );

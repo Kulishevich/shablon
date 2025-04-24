@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import s from './NavigationPopup.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
@@ -147,23 +146,18 @@ export const NavigationPopup = ({
       <Dialog.Content className={s.content}>
         <div className={s.categoryList}>
           {mockNav.map((category, index) => (
-            <Typography
-              variant="h6"
-              as={Link}
-              href={`${paths.catalog}/1`}
-              key={index}
-            >
+            <Link className="h6" href={`${paths.catalog}/1`} key={index}>
               {category.title}
-            </Typography>
+            </Link>
           ))}
         </div>
         <div className={s.subcategoryList}>
-          <Typography variant="h3">{mockNav[0].title}</Typography>
+          <h3 className="h3">{mockNav[0].title}</h3>
           <div className={s.subcategories}>
             {mockNav[0].subcategories.map((subcategory, index) => (
-              <Typography variant="body_4" as={Link} href={'/'} key={index}>
+              <Link className="body_4" href={'/'} key={index}>
                 {subcategory}
-              </Typography>
+              </Link>
             ))}
           </div>
         </div>

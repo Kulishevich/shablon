@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './PaymentMethodCard.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import clsx from 'clsx';
 
 export const PaymentMethodCard = ({
@@ -21,7 +20,7 @@ export const PaymentMethodCard = ({
           <div key={index}>{icon}</div>
         ))}
       </div>
-      <Typography variant="h6">{title}</Typography>
+      <h6 className="h6">{title}</h6>
     </button>
   );
 };

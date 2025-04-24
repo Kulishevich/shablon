@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './FeedbackForm.module.scss';
 import Image from 'next/image';
-import { Typography } from '@/shared/ui/typography';
 import { TextField } from '@/shared/ui/text-field';
 import { TextArea } from '@/shared/ui/text-area';
 import { Checkbox } from '@/shared/ui/checkbox';
@@ -13,11 +12,11 @@ export const FeedbackForm = () => {
     <div className={s.container}>
       <div className={s.titleContainer}>
         <div className={s.textContent}>
-          <Typography variant="h2">Связаться с нами</Typography>
-          <Typography variant="body_2">
+          <h2 className="h2">Связаться с нами</h2>
+          <p className="body_2">
             Мы всегда готовы помочь вам с любыми вопросами. Свяжитесь с нами по
             телефону или заполните форму обратной связи.
-          </Typography>
+          </p>
         </div>
         <div className={s.imageContainer}>
           <Image src={'/feedback.png'} fill alt="feedback" />

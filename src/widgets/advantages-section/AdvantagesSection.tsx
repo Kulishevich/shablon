@@ -14,7 +14,6 @@ import {
   QualityStarIcon,
   ShopIcon,
 } from '@/shared/assets';
-import { Typography } from '@/shared/ui/typography';
 import { AdvantageCard } from '@/entities/advantage-card';
 
 const advantages = [
@@ -35,7 +34,7 @@ const advantages = [
 export const AdvantagesSection = () => {
   return (
     <div className={s.container}>
-      <Typography variant="h2">Наши преимущества</Typography>
+      <h2 className="h2">Наши преимущества</h2>
       <div className={s.advantagesContainer}>
         {advantages.map((elem, index) => (
           <AdvantageCard title={elem.title} icon={elem.icon} key={index} />

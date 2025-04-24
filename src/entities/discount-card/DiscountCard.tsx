@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './DiscountCard.module.scss';
 import Image from 'next/image';
-import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import { ArrowRightUpIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import clsx from 'clsx';
 
 const discount = {
   title: 'Скидка 10% на кухонные стулья! ',
@@ -20,13 +20,14 @@ export const DiscountCard = () => {
         <Image src={discount.image_path} fill alt="discount" />
       </div>
       <div className={s.content}>
-        <Typography variant="tag" className={s.tag}>
-          {discount.date}
-        </Typography>
-        <Typography variant="h5" className={s.title}>
-          {discount.title}
-        </Typography>
-        <Button variant="link" as={Link} href={`${paths.shares}/1`}>
+        <span className={clsx(s.tag, 'tag')}>{discount.date}</span>
+        <h5 className={clsx(s.title, 'h5')}>{discount.title}</h5>
+        <Button
+          variant="link"
+          as={Link}
+          href={`${paths.shares}/1`}
+          className={s.button}
+        >
           Подробнее
           <ArrowRightUpIcon />
         </Button>

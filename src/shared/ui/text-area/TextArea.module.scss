@@ -1,18 +1,19 @@
+@use '../../config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
 
-  gap: 8px;
+  gap: vw-1440(8);
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 }
 
 .textarea {
   width: 100%;
-  padding: 20px;
+  padding: vw-1440(20);
 
-  font-family: Onest;
-  font-weight: 400;
-  font-size: 17px;
-  line-height: --line-height-l;
   color: var(--color-text);
 
   background-color: var(--color-white);
@@ -77,6 +78,10 @@
     &::placeholder {
       color: var(var(--color-bg-overlay));
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px;
   }
 }
 

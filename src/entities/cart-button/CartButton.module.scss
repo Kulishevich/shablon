@@ -1,23 +1,30 @@
+@use '../../shared/config/styles/functions' as *;
+
 .buttonCart {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: vw-1440(8);
 
   flex-shrink: 0;
-  width: 192px;
-  margin-left: 52px;
+  width: vw-1440(192);
+  margin-left: vw-1440(52);
 
   background-color: transparent;
   border: none;
 
   text-decoration: none;
-  & > span {
-    padding: 11px;
+
+  .button {
+    padding: vw-1440(11);
+    & > svg {
+      width: vw-1440(32);
+      height: vw-1440(32);
+    }
   }
 
   &:hover {
     cursor: pointer;
-    & > span {
+    & > .button {
       background-color: var(--color-accent-1);
       color: var(--color-white);
     }

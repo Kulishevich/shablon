@@ -1,3 +1,5 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -9,9 +11,9 @@
   border-radius: 6px;
   background-color: transparent;
 
-  width: 196px;
-  height: 174px;
-  padding: 16px;
+  width: vw-1440(196);
+  height: vw-1440(174);
+  padding: vw-1440(16);
 
   &:hover {
     cursor: pointer;
@@ -25,6 +27,7 @@
   @media (max-width: 768px) {
     width: 160px;
     height: 150px;
+    padding: 16px;
   }
 }
 

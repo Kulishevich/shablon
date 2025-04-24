@@ -1,16 +1,18 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { ReactNode, useState } from 'react';
-import { Typography } from '../typography';
 import { Button } from '../button';
 import { ArrowRightIcon } from '@/shared/assets';
 import s from './Collapse.module.scss';
+import clsx from 'clsx';
 
 export const Collapse = ({
   title,
   children,
+  className,
 }: {
   title: string;
   children: ReactNode;
+  className?: string;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -18,10 +20,10 @@ export const Collapse = ({
     <Collapsible.Root
       open={open}
       onOpenChange={setOpen}
-      className={s.rootState}
+      className={clsx(s.rootState, className)}
     >
       <Collapsible.Trigger className={s.trigger}>
-        <Typography variant="h2">{title}</Typography>
+        <p className="h2">{title}</p>
         <Button variant="icon_secondary" as="span">
           <ArrowRightIcon />
         </Button>

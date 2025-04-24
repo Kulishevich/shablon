@@ -6,7 +6,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import s from './MainSlider.module.scss';
-import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
 
@@ -62,8 +61,8 @@ export const MainSlider = () => {
             <Image src={slide.image_path} alt="Slide 1" fill />
             <div className={s.content}>
               <div>
-                <Typography variant="h1">{slide.title}</Typography>
-                <Typography variant="body_1">{slide.content}</Typography>
+                <h1 className="h1">{slide.title}</h1>
+                <p className="body_1">{slide.content}</p>
               </div>
               <Button>Перейти в каталог</Button>
             </div>

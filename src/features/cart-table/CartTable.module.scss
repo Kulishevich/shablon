@@ -1,7 +1,9 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
   flex-direction: column;
-  width: 856px;
+  width: vw-1440(856);
 
   @media (max-width: 768px) {
     width: 336px;
@@ -14,20 +16,20 @@
 .tableHeader {
   display: flex;
   background-color: var(--color-grey);
-  height: 63px;
+  height: vw-1440(63);
   align-items: center;
-  border-radius: 12px;
+  border-radius: vw-1440(12);
 
-  padding: 0 37px 0 48px;
+  padding: 0 vw-1440(36) 0 vw-1440(48);
 
-  & > p:nth-child(1) {
-    margin-right: 93px;
+  & > h6:nth-child(1) {
+    margin-right: vw-1440(93);
   }
-  & > p:nth-child(2) {
-    margin-right: 82px;
+  & > h6:nth-child(2) {
+    margin-right: vw-1440(82);
   }
-  & > p:nth-child(3) {
-    margin-right: 79px;
+  & > h6:nth-child(3) {
+    margin-right: vw-1440(79);
   }
 
   @media (max-width: 768px) {

@@ -1,12 +1,17 @@
+@use '../../shared/config/styles/functions' as *;
+
 .container {
   width: 100%;
 
-  margin-top: 120px;
+  margin-top: vw-1440(120);
   background-color: var(--color-text);
+  @media (max-width: 768px) {
+    margin-top: 72px;
+  }
 }
 
 .wrapper {
-  width: 1296px;
+  width: vw-1440(1296);
   margin: 0 auto;
 
   @media (max-width: 768px) {

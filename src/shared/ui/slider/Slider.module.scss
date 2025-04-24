@@ -1,6 +1,8 @@
+@use '../../config/styles/functions' as *;
+
 .container {
   position: relative;
-  width: 1296px;
+  width: vw-1440(1296);
 
   @media (max-width: 768px) {
     width: 336px;
@@ -11,7 +13,7 @@
 .itemsContainer {
   width: 100%;
   display: flex;
-  gap: 24px;
+  gap: vw-1440(24);
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
@@ -26,13 +28,17 @@
 
 .iconLeft {
   position: absolute;
-  left: -90px;
+  left: vw-1440(-90);
   bottom: 50%;
   transform: translateY(50%);
 
   & > svg {
-    width: 30px;
-    height: 30px;
+    width: vw-1440(30);
+    height: vw-1440(30);
+    @media (max-width: 768px) {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -44,14 +50,18 @@
 
 .iconRight {
   position: absolute;
-  right: -90px;
+  right: vw-1440(-90);
 
   bottom: 50%;
   transform: translateY(50%);
 
   & > svg {
-    width: 30px;
-    height: 30px;
+    width: vw-1440(30);
+    height: vw-1440(30);
+    @media (max-width: 768px) {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   @media (max-width: 768px) {
