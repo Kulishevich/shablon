@@ -11,7 +11,7 @@ export const NewsInfoSection = () => {
     <div className={s.container}>
       <div className={s.titleContainer}>
         <div className={s.title}>
-          <span className="tag">12.02.2025</span>
+          <span className="h5">12.02.2025</span>
           <h1 className="h1">Фурнитура для мебели: как выбрать?</h1>
         </div>
         <div className={s.imageContainer}>

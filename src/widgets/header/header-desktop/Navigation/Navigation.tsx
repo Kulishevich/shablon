@@ -14,7 +14,7 @@ export const Navigation = () => {
     <div className={s.container}>
       <div className={s.content}>
         <nav className={s.navigation}>
-          {navigation.map((nav, index) => (
+          {navigation.slice(0, 5).map((nav, index) => (
             <Link className="body_3" href={nav.path} key={index}>
               {nav.title === 'Акции' && <DiscountCircleIcon />}
               {nav.title}
@@ -32,10 +32,14 @@ export const Navigation = () => {
           </div>
           <div>
             <PhoneIcon />
-            <p className="body_6">
-              +375 (29) 999-99-99 (А1) <br />
-              +375 (29) 999-99-99 (МТС)
-            </p>
+            <div className={s.phones}>
+              <Link href={'tel:+375299999999'} className="body_6">
+                +375 (29) 999-99-99 (А1) <br />
+              </Link>
+              <Link href={'tel:+375299999999'} className="body_6">
+                +375 (29) 999-99-99 (МТС)
+              </Link>
+            </div>
           </div>
         </div>
       </div>

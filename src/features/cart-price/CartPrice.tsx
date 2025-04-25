@@ -30,7 +30,11 @@ export const CartPrice = () => {
         <h5 className="h5">Итого</h5>
         <h3 className="h3">440 BYN</h3>
       </div>
-      <Button as={Link} href={paths.order} className={s.button}>
+      <Button
+        as={Link}
+        href={`${paths.cart}${paths.order}`}
+        className={s.button}
+      >
         К оформлению
       </Button>
     </div>

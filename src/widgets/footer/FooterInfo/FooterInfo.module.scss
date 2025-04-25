@@ -1,8 +1,10 @@
+@use '../../../shared/config/styles/functions' as *;
+
 .container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-
-  padding: 24px 0;
+  padding: vw-1440(24) 0;
   p {
     color: #ffffff;
 
@@ -12,23 +14,21 @@
     align-items: center;
     flex-direction: column;
     gap: 16px;
+
+    padding: 24px 0;
     & > p:first-child {
-      order: 2; // Двигаем © 2025 website.by вниз
+      order: 1;
     }
 
     .productBy {
-      order: 3;
-    }
-
-    .paymentMethod {
-      order: 1; // Поднимаем блок с платежными системами вверх
+      order: 2;
     }
   }
 }
 
 .paymentMethod {
   display: flex;
-  gap: 20px;
+  gap: vw-1440(20);
   align-items: center;
 
   @media (max-width: 768px) {

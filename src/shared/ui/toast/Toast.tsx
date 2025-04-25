@@ -33,7 +33,12 @@ const showToast = ({
 
   toast.custom(
     (t) => (
-      <div className={clsx(styles.rootClass, typesClass, className)}>
+      <div
+        onClick={() => toast.dismiss()}
+        className={clsx(styles.rootClass, typesClass, className)}
+        role="button"
+        tabIndex={0}
+      >
         <p className={clsx(styles.title, 'h5')}>
           {variant === 'error' && <ErrorIcon />}
           {variant === 'success' && <SuccessIcon />}

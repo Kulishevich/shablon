@@ -1,12 +1,16 @@
 'use client';
 import { FeedbackForm } from '@/entities/feedback-form';
+import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { NewsSection } from '@/widgets/news-section';
 
 export default function News() {
   return (
-    <main>
-      <NewsSection />
-      <FeedbackForm />
-    </main>
+    <>
+      <Breadcrumbs />
+      <main>
+        <NewsSection />
+        <FeedbackForm />
+      </main>
+    </>
   );
 }

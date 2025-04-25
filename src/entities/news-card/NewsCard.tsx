@@ -15,21 +15,16 @@ const news = {
 
 export const NewsCard = () => {
   return (
-    <div className={s.cotnainer}>
+    <Link href={`${paths.news}/1`} className={s.cotnainer}>
       <div className={s.imageContainer}>
         <Image src={news.image_path} fill alt="news" />
       </div>
       <span className={clsx(s.date, 'tag')}>{news.date}</span>
       <h5 className="h5">{news.title}</h5>
-      <Button
-        variant="link"
-        as={Link}
-        href={`${paths.news}/1`}
-        className={s.button}
-      >
+      <Button as={'p'} variant="link" className={s.button}>
         Подробнее
         <ArrowRightUpIcon />
       </Button>
-    </div>
+    </Link>
   );
 };

@@ -12,11 +12,8 @@
 
 .contactElem {
   display: flex;
-  gap: 6px;
+  gap: vw-1440(6);
 
-  & > p {
-    color: var(--color-white);
-  }
   & > svg {
     color: var(--color-accent-1);
     flex-shrink: 0;
@@ -27,4 +24,13 @@
       height: 24px;
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+}
+
+.phones {
+  display: flex;
+  flex-direction: column;
 }

@@ -26,17 +26,27 @@
   background-color: var(--color-grey);
   border-radius: 6px;
 
+  & > .deleteButton {
+    position: absolute;
+    top: vw-1440(8);
+    right: vw-1440(8);
+    background-color: #25338c1a;
+    color: var(--color-white);
+    @media (max-width: 768px) {
+      top: 8px;
+      right: 8px;
+      & > svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
   @media (max-width: 768px) {
     width: 160px;
     height: 160px;
     margin-bottom: 12px;
   }
-}
-
-.deleteButton {
-  position: absolute;
-  top: 8px;
-  right: 8px;
 }
 
 .tagsContainer {
@@ -47,10 +57,10 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 8px;
+  gap: vw-1440(8);
 
   & > span {
-    padding: 2px 6px;
+    padding: vw-1440(2) vw-1440(6);
     border-radius: 4px;
     &:nth-child(1) {
       color: var(--color-white);
@@ -64,11 +74,16 @@
       color: var(--color-white);
       background-color: var(--color-accent-red);
     }
+
+    @media (max-width: 768px) {
+      padding: 2px 6px;
+    }
   }
 
   @media (max-width: 768px) {
     top: 8px;
     left: 8px;
+    gap: 8px;
     & > span {
       padding: 1px 4px;
     }

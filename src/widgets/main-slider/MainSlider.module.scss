@@ -1,5 +1,9 @@
 @use '../../shared/config/styles/functions' as *;
 
+.wrapper {
+  position: relative;
+}
+
 .container {
   width: 100vw;
   height: vw-1440(601);
@@ -63,17 +67,23 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-720px, -50%);
-  z-index: 1000;
+  transform: translate(vw-1440(-720), -50%);
+  z-index: 100;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .iconRight {
   position: absolute;
   right: 50%;
   top: 50%;
-  transform: translate(720px, -50%);
+  transform: translate(vw-1440(720), -50%);
 
-  z-index: 1000;
+  z-index: 100;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .pagination {
@@ -81,7 +91,7 @@
   bottom: vw-1440(48) !important;
   left: 50% !important;
   transform: translateX(vw-1440(-625));
-  z-index: 1000;
+  z-index: 100;
 
   @media (max-width: 768px) {
     transform: translateX(-170px);

@@ -2,13 +2,17 @@
 import { FeedbackForm } from '@/entities/feedback-form';
 import { CatalogSection } from '@/widgets/catalog-section';
 import { PreviouslyViewed } from '@/features/previously-viewed';
+import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 
 export default function Catalog() {
   return (
-    <main>
-      <CatalogSection />
-      <PreviouslyViewed />
-      <FeedbackForm />
-    </main>
+    <>
+      <Breadcrumbs />
+      <main>
+        <CatalogSection />
+        <PreviouslyViewed />
+        <FeedbackForm />
+      </main>
+    </>
   );
 }

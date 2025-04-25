@@ -1,6 +1,7 @@
 import { ClockIcon, LocationIcon, PhoneIcon } from '@/shared/assets';
 import React from 'react';
 import s from './CompanyContacts.module.scss';
+import Link from 'next/link';
 
 export const CompanyContacts = () => {
   return (
@@ -15,10 +16,14 @@ export const CompanyContacts = () => {
       </div>
       <div className={s.contactElem}>
         <PhoneIcon />
-        <p className="body_6">
-          +375 (29) 999-99-99 (А1) <br />
-          +375 (29) 999-99-99 (МТС)
-        </p>
+        <div className={s.phones}>
+          <Link href={'tel: +375299999999'} className="body_6">
+            +375 (29) 999-99-99 (МТС)
+          </Link>
+          <Link href={'tel: +375299999999'} className="body_6">
+            +375 (29) 999-99-99 (А1) <br />
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,14 @@
 .container {
-  width: 335px;
-  margin: 16px auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 39px;
+  z-index: 101;
+  background-color: var(--color-white);
 }
 
 .buttonsContainer {

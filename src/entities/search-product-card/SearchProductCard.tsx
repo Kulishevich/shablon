@@ -3,6 +3,8 @@ import s from './SearchProductCard.module.scss';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { ShoppingCartIcon } from '@/shared/assets';
+import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 export const SearchProductCard = ({
   name,
@@ -16,7 +18,7 @@ export const SearchProductCard = ({
   priceWithDiscount: number | null;
 }) => {
   return (
-    <div className={s.container}>
+    <Link href={`${paths.product}/1`} className={s.container}>
       <div className={s.card}>
         <div className={s.imageContainer}>
           <Image src={image_path} fill alt="product" />
@@ -34,6 +36,6 @@ export const SearchProductCard = ({
       <Button variant={'icon_outlined'} className={s.button}>
         <ShoppingCartIcon />
       </Button>
-    </div>
+    </Link>
   );
 };

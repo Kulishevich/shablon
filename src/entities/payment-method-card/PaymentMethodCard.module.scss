@@ -31,7 +31,10 @@
 .icons {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: vw-1440(6);
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
 }
 
 .active {

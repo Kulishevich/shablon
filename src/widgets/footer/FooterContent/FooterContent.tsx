@@ -48,14 +48,11 @@ export const FooterContent = () => {
         <div className={s.elem}>
           <h5 className="h5">Покупателям</h5>
           <div className={s.navigation}>
-            {navigation.map((nav, index) => (
+            {navigation.slice(0, 6).map((nav, index) => (
               <Link className="body_6" href={nav.path} key={index}>
                 {nav.title}
               </Link>
             ))}
-            <Link className="body_6" href={paths.privacy_policy}>
-              Политика конфиденциальности
-            </Link>
           </div>
         </div>
       </div>

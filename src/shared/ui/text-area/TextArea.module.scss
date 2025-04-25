@@ -44,6 +44,10 @@
     opacity: 0.4;
   }
 
+  &:hover {
+    outline: 1px solid var(--color-accent-1);
+  }
+
   &:focus {
     color: var(--color-text);
     outline: 1px solid var(--color-accent-1);

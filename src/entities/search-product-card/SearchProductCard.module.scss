@@ -4,6 +4,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &:hover {
+    box-shadow: 1px 4px 8px 0px #0b0c1908;
+  }
 }
 
 .card {

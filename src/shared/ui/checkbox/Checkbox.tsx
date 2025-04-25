@@ -12,6 +12,8 @@ import { clsx } from 'clsx';
 import { CheckedIcon } from '../../assets';
 
 import s from './Checkbox.module.scss';
+import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 export type CheckboxProps = {
   error?: string;
@@ -42,17 +44,17 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
           </RadixCheckbox.Indicator>
         </RadixCheckbox.Root>
         {label && (
-          <label
+          <Link
+            href={paths.privacy_policy}
             className={clsx(
               s.label,
               disabled && s.disabled,
               'body_4',
               isRequired && 'required'
             )}
-            htmlFor={checkboxId}
           >
             {label}
-          </label>
+          </Link>
         )}
       </div>
       {error && <span className={'error'}>{error}</span>}

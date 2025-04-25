@@ -8,7 +8,12 @@
   width: vw-1440(306);
 
   &:hover {
-    box-shadow: 1px 4px 8px 0px #0b0c1908;
+    h5 {
+      color: var(--color-text);
+    }
+    .imageContainer {
+      box-shadow: 1px 4px 8px 0px #0b0c1908;
+    }
   }
 
   .imageContainer {

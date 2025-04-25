@@ -2,7 +2,7 @@
 
 .container {
   display: flex;
-  gap: vw-1440(48);
+  justify-content: space-between;
 
   padding: vw-1440(47) 0 vw-1440(42);
 
@@ -17,7 +17,8 @@
         text-align: center;
       }
     }
-    &:nth-child(2) {
+
+    &:nth-child(3) {
       width: vw-1440(224);
       @media (max-width: 768px) {
         width: 196px;
@@ -25,20 +26,16 @@
       }
     }
 
-    &:nth-child(3) {
-      width: vw-1440(196);
-      @media (max-width: 768px) {
-        width: 196px;
-        align-items: center;
-      }
-    }
-
     &:nth-child(4) {
-      width: vw-1440(196);
+      width: vw-1440(224);
       @media (max-width: 768px) {
         text-align: center;
         width: 204px;
       }
+    }
+
+    & > div {
+      color: var(--color-white);
     }
   }
 
@@ -85,7 +82,7 @@
 
 .catalogContainer {
   display: flex;
-  gap: vw-1440(16);
+  gap: vw-1440(48);
 
   .elem {
     &:nth-child(1) {
@@ -97,7 +94,7 @@
       }
     }
     &:nth-child(2) {
-      width: vw-1440(207);
+      width: vw-1440(155);
       @media (max-width: 768px) {
         align-items: start;
         width: 160px;

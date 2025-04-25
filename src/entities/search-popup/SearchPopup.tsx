@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './SearchPopup.module.scss';
 import { SearchProductCard } from '../search-product-card';
+import Link from 'next/link';
+import { paths } from '@/shared/config/constants/paths';
 
 const categories = ['Мебель', 'Фурнитура', 'Декор для дома'];
 
@@ -37,9 +39,9 @@ export const SearchPopup = () => {
       <div className={s.categories}>
         <h6 className="h6">Поиск по категориям:</h6>
         {categories.map((category, index) => (
-          <p className="body_4" key={index}>
+          <Link href={`${paths.catalog}`} className="body_4" key={index}>
             {category}
-          </p>
+          </Link>
         ))}
       </div>
       <div className={s.products}>

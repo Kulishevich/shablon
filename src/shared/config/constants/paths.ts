@@ -8,5 +8,5 @@ export const paths = {
   catalog: '/catalog',
   product: '/product',
   cart: '/cart',
-  order: '/cart/order',
+  order: '/order',
 };

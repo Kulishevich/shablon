@@ -32,6 +32,7 @@
 
   &:hover {
     background-color: var(--color-text);
+    color: var(--color-white);
   }
 
   &:active {
@@ -123,6 +124,11 @@
   padding: vw-1440(17);
   border-radius: 50%;
 
+  & > svg {
+    width: vw-1440(30);
+    height: vw-1440(30);
+  }
+
   &:hover {
     background-color: var(--color-accent-2);
   }
@@ -140,6 +146,8 @@
     background-color: var(--color-grey);
   }
   @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
     padding: 17px;
   }
 }
@@ -151,12 +159,14 @@
   padding: vw-1440(17);
   border-radius: 50%;
 
+  box-shadow: 1px 4px 8px 0px #0b0c1908;
+
   & > svg {
     width: vw-1440(30);
     height: vw-1440(30);
     @media (max-width: 768px) {
-      width: 30px;
-      height: 30px;
+      width: 22px;
+      height: 22px;
     }
   }
 
