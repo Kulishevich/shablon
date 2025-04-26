@@ -10,6 +10,7 @@
     flex-direction: column;
     gap: vw-1440(36);
     @media (max-width: 768px) {
+      align-items: center;
       gap: 20px;
     }
   }
