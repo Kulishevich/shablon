@@ -15,28 +15,18 @@ import {
   ShopIcon,
 } from '@/shared/assets';
 import { AdvantageCard } from '@/entities/advantage-card';
+import { AdvantageType } from '@/shared/api/advantages/types';
 
-const advantages = [
-  { icon: <DeliveryTruckIcon />, title: 'Быстрая доставка' },
-  { icon: <HoursIcon />, title: 'Поддержка 24/7' },
-  { icon: <PriceTagIcon />, title: 'Доступные цены' },
-  { icon: <QualityStarIcon />, title: 'Гарантия качества' },
-  { icon: <CatalogIcon />, title: 'Достоверный каталог' },
-  { icon: <DiscountProcentIcon />, title: 'Накопительная система скидок' },
-  { icon: <BusinessBagIcon />, title: '10 лет нарынке' },
-  { icon: <ShopIcon />, title: 'Магазин в центре города' },
-  { icon: <GiftIcon />, title: 'Каждому покупателю подарок' },
-  { icon: <CertificateIcon />, title: 'Только оригинальная продукция' },
-  { icon: <DiscountIcon />, title: 'Регулярные акционные предложения' },
-  { icon: <CityWorkerIcon />, title: 'Квалифицированные консультанты' },
-];
-
-export const AdvantagesSection = () => {
+export const AdvantagesSection = ({
+  advantages,
+}: {
+  advantages: AdvantageType[] | null;
+}) => {
   return (
     <div className={s.container}>
       <h2 className="h2">Наши преимущества</h2>
       <div className={s.advantagesContainer}>
-        {advantages.map((elem, index) => (
+        {advantages?.map((elem, index) => (
           <AdvantageCard title={elem.title} icon={elem.icon} key={index} />
         ))}
       </div>

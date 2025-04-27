@@ -6,7 +6,7 @@
 
   align-items: center;
   text-align: center;
-  padding: vw-1440(32) vw-1440(28) 0px;
+  padding: vw-1440(45) vw-1440(28) 0px;
   gap: vw-1440(16);
   width: vw-1440(306);
   height: vw-1440(210);
@@ -15,12 +15,11 @@
 
   box-shadow: 1px 4px 8px 0px #0b0c1908;
 
-  & > svg {
-    width: vw-1440(76);
-    height: vw-1440(76);
+  i {
+    font-size: vw-1440(54);
+    color: var(--color-accent-1);
     @media (max-width: 768px) {
-      width: 54px;
-      height: 54px;
+      font-size: 40px;
     }
   }
 
@@ -29,10 +28,5 @@
     height: 160px;
     gap: 8px;
     padding: 24px 15px 0px;
-
-    & > svg {
-      width: 54px;
-      height: 54px;
-    }
   }
 }

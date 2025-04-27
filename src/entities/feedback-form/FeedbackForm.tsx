@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import s from './FeedbackForm.module.scss';
 import Image from 'next/image';

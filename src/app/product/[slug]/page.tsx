@@ -1,15 +1,25 @@
-'use client';
 import { FeedbackForm } from '@/entities/feedback-form';
 import { ProductSection } from '@/widgets/product-info';
 import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
+import { getProductById } from '@/shared/api/product/getProductById';
 
-export default function Product() {
+export default async function Product({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const id = slug.split('_').findLast((elem) => elem) || '';
+
+  const product = await getProductById(id);
+
   return (
     <>
       <Breadcrumbs />
       <main>
-        <ProductSection />
+        <ProductSection product={product} />
         <PreviouslyViewed />
         <FeedbackForm />
       </main>

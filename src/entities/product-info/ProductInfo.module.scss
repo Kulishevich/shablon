@@ -41,9 +41,10 @@
     align-items: end;
     gap: vw-1440(10);
 
-    & > p {
+    .discount {
       color: var(--color-accent-red);
     }
+
     & > span {
       opacity: 0.3;
     }

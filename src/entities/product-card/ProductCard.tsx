@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './ProductCard.module.scss';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
@@ -8,40 +7,39 @@ import { showToast } from '@/shared/ui/toast';
 import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 import { CloseIcon, ShoppingCartIcon } from '@/shared/assets';
 import clsx from 'clsx';
-
-const product = {
-  name: 'Свеча Jo Malone',
-  description: 'Насыщенные ноты сока миррового дерева из Намибии',
-  price: 130,
-  priceWithDiscount: 110,
-  image_path: '/product.png',
-  isNew: true,
-  isPopular: true,
-  isDiscount: true,
-};
+import { ProductType } from '@/shared/api/product/types';
+import s from './ProductCard.module.scss';
 
 export const ProductCard = ({
+  product,
   productInCart = false,
 }: {
   productInCart?: boolean;
+  product: ProductType | null;
 }) => {
   const { isMobile } = useBreakpoint();
+
+  const totalPrice = !!product?.discount
+    ? Math.round(
+        (Number(product?.price) * (100 - Number(product?.discount))) / 100
+      )
+    : product?.price;
 
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
-        <Link href={`${paths.product}/1`}>
+        <Link href={`${paths.product}/${product?.slug}_${product?.id}`}>
           <Image
-            src={product.image_path}
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product?.main_image.image_path}`}
             fill
             alt="product"
             className={s.image}
           />
         </Link>
         <div className={s.tagsContainer}>
-          {product.isNew && <span className="tag">бестселлер</span>}
-          {product.isNew && <span className="tag">новинка</span>}
-          {product.isNew && <span className="tag">акция</span>}
+          {product?.is_popular && <span className="tag">бестселлер</span>}
+          {/* {product.isNew && <span className="tag">новинка</span>} */}
+          {!!product?.discount && <span className="tag">акция</span>}
         </div>
         {productInCart && (
           <Button variant="icon_secondary" className={s.deleteButton}>
@@ -49,13 +47,18 @@ export const ProductCard = ({
           </Button>
         )}
       </div>
-      <h5 className={clsx(s.title, 'h5')}>{product.name}</h5>
-      <p className={clsx(s.discription, 'body_5')}>{product.description}</p>
+      <h5 className={clsx(s.title, 'h5')}>{product?.name}</h5>
+      <div
+        className={clsx(s.description, 'body_5')}
+        dangerouslySetInnerHTML={{ __html: product?.description || '' }}
+      />
 
       <div className={s.priceContainer}>
         <div className={s.price}>
-          <span className="discount">{product.price} BYN</span>
-          <h4 className="h4">{product.priceWithDiscount} BYN</h4>
+          {!!product?.discount && (
+            <span className="discount">{product?.price} BYN</span>
+          )}
+          <h4 className="h4">{totalPrice} BYN</h4>
         </div>
         {!isMobile ? (
           <Button

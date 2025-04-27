@@ -1,3 +1,4 @@
+'use client';
 import React, { ReactNode, useRef } from 'react';
 import s from './Slider.module.scss';
 import { Button } from '../button';

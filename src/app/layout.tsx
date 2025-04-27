@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Onest } from 'next/font/google';
 import '@/shared/config/styles/index.scss';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Footer } from '@/widgets/footer';
 import { Toaster } from 'sonner';
 import { Header } from '@/widgets/header/Header';

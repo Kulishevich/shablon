@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import s from './ProductInfo.module.scss';
 import { Button } from '@/shared/ui/button';
 import { DocumentIcon, HoursIcon, QualityStarIcon } from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
+import { ProductType } from '@/shared/api/product/types';
+import clsx from 'clsx';
 
-export const ProductInfo = () => {
+export const ProductInfo = ({ product }: { product: ProductType | null }) => {
+  const isDiscount = !!product?.discount;
+
   return (
     <div className={s.container}>
-      <ProductsImages />
+      <ProductsImages product={product} />
 
       <div className={s.characteristics}>
         <h5 className="h5">Характеристики:</h5>
         <div>
-          <p className="body_3">
-            Удобный и стильный ковёр, который приятно освежат интерьер:
-          </p>
           <ul>
-            <li className="body_3">Описание товара</li>
-            <li className="body_3">Описание товара</li>
-            <li className="body_3">Описание товара</li>
-            <li className="body_3">Описание товара</li>
+            {product?.specifications?.map((elem) => (
+              <li className="body_3">
+                {elem?.name} : {elem?.pivot?.value}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -27,8 +29,8 @@ export const ProductInfo = () => {
       <div className={s.price}>
         <div className={s.priceContainer}>
           <div className={s.totalPrice}>
-            <h2 className="h2">110 BYN</h2>
-            <span className="discount">130 byn</span>
+            <p className={clsx('h2', isDiscount && s.discount)}>110 BYN</p>
+            {isDiscount && <span className="discount">130 byn</span>}
           </div>
           <Button>В корзину</Button>
         </div>

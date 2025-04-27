@@ -1,3 +1,4 @@
+'use client';
 import React, { ReactNode } from 'react';
 import s from './SliderWrapper.module.scss';
 import { Slider } from '@/shared/ui/slider';
