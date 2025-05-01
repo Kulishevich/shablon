@@ -5,17 +5,22 @@ import { ArrowSmLeftIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import s from './NewsInfoSection.module.scss';
+import { NewsT } from '@/shared/api/news/types';
 
-export const NewsInfoSection = () => {
+export const NewsInfoSection = ({ news }: { news: NewsT }) => {
   return (
     <div className={s.container}>
       <div className={s.titleContainer}>
         <div className={s.title}>
-          <span className="h5">12.02.2025</span>
-          <h1 className="h1">Фурнитура для мебели: как выбрать?</h1>
+          <span className="h5">{news.created_at}</span>
+          <h1 className="h1">{news.title}</h1>
         </div>
         <div className={s.imageContainer}>
-          <Image src={'/news.png'} fill alt="new" />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news.photo_path}`}
+            fill
+            alt="new"
+          />
         </div>
       </div>
       <div className={s.content}>

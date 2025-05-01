@@ -30,15 +30,14 @@
 
   &[data-state='open'] .icon {
     transform: rotate(180deg);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
 
   &[data-state='closed'] .icon {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
 
   &:hover {
-    color: red;
     border: 1px solid var(--color-accent-1);
   }
 
@@ -68,7 +67,7 @@
   background-color: var(--color-white);
   border-top: none;
 
-  animation: fade-in 0.5s ease;
+  animation: fade-in 0.6s ease;
 
   @media (max-width: 768px) {
     padding: 12px;
@@ -119,10 +118,10 @@
 
 @keyframes fade-in {
   from {
-    opacity: 0;
+    max-height: 0;
   }
 
   to {
-    opacity: 1;
+    max-height: var(--radix-select-content-available-height);
   }
 }

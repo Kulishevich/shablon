@@ -22,6 +22,10 @@
   border: none;
   resize: none;
 
+  transition:
+    color 0.3s ease,
+    outline 0.3s ease;
+
   &::-webkit-scrollbar {
     width: 6px;
     background: var(--color-grey);

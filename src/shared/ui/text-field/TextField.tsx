@@ -39,7 +39,6 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
       ...rest
     } = props;
 
-    const [showPassword, setShowPassword] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const id = useId();

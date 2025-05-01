@@ -9,6 +9,12 @@ import clsx from 'clsx';
 export const ProductInfo = ({ product }: { product: ProductType | null }) => {
   const isDiscount = !!product?.discount;
 
+  const totalPrice = !!product?.discount
+    ? Math.round(
+        (Number(product?.price) * (100 - Number(product?.discount))) / 100
+      )
+    : product?.price;
+
   return (
     <div className={s.container}>
       <ProductsImages product={product} />
@@ -29,8 +35,12 @@ export const ProductInfo = ({ product }: { product: ProductType | null }) => {
       <div className={s.price}>
         <div className={s.priceContainer}>
           <div className={s.totalPrice}>
-            <p className={clsx('h2', isDiscount && s.discount)}>110 BYN</p>
-            {isDiscount && <span className="discount">130 byn</span>}
+            <p className={clsx('h2', isDiscount && s.discount)}>
+              {totalPrice} BYN
+            </p>
+            {isDiscount && (
+              <span className="discount">{product?.price} byn</span>
+            )}
           </div>
           <Button>В корзину</Button>
         </div>

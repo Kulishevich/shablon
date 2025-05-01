@@ -94,7 +94,7 @@ export const CatalogSection = () => {
           </div>
           <div className={s.pagination}>
             <p className="body_7">Найдено по фильтрам: 100</p>
-            <Pagination totalPages="10" />
+            <Pagination totalPages={10} />
           </div>
         </div>
       </div>

@@ -1,14 +1,22 @@
-'use client';
 import { FeedbackForm } from '@/entities/feedback-form';
+import { getAllNews } from '@/shared/api/news/getAllNews';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { NewsSection } from '@/widgets/news-section';
 
-export default function News() {
+export default async function News({
+  searchParams,
+}: {
+  searchParams: Promise<{ page: string }>;
+}) {
+  const page = (await searchParams).page || '1';
+
+  const newsList = await getAllNews();
+
   return (
     <>
       <Breadcrumbs />
       <main>
-        <NewsSection />
+        <NewsSection newsList={newsList} page={page} />
         <FeedbackForm />
       </main>
     </>

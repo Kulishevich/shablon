@@ -25,6 +25,10 @@
     transition: transform 0.3s ease;
   }
 
+  & > p {
+    transition: color 0.3s ease;
+  }
+
   &:hover {
     cursor: pointer;
     & > p {

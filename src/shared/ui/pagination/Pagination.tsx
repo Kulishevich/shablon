@@ -7,7 +7,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '../../assets';
 import s from './Pagination.module.scss';
 
 interface Props {
-  totalPages: string;
+  totalPages: number;
   currentPage?: string;
 }
 

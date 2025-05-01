@@ -44,11 +44,10 @@
   box-sizing: border-box;
   width: 100%;
 
-  border: 1px solid #1114341a;
+  outline: 1px solid #1114341a;
   border-radius: 4px;
   background-color: var(--color-white);
-
-  transition: border-color 0.3s ease;
+  transition: outline 0.3s ease;
 
   &::placeholder {
     color: var(--color-text);

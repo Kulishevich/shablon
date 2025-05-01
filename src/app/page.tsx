@@ -7,10 +7,11 @@ import { NewsCard } from '@/entities/news-card';
 import { PopularProductsSection } from '@/widgets/popular-products-section';
 import { getPopularProducts } from '@/shared/api/product/getPopularProducts';
 import { getAdvantages } from '@/shared/api/advantages/getAdvantages';
+import { getAllNews } from '@/shared/api/news/getAllNews';
 
 export default async function Home() {
   const popularProducts = await getPopularProducts();
-
+  const newsList = await getAllNews();
   const advantages = await getAdvantages();
 
   return (
@@ -20,8 +21,8 @@ export default async function Home() {
       <AboutUsSection />
       <AdvantagesSection advantages={advantages} />
       <SliderWrapper title="Новости" variant="news">
-        {new Array(9).fill('').map((_, index) => (
-          <NewsCard key={index} />
+        {newsList?.data?.map((news, index) => (
+          <NewsCard key={index} news={news} />
         ))}
       </SliderWrapper>
       <FeedbackForm />
