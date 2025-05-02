@@ -7,17 +7,17 @@ import { paths } from '@/shared/config/constants/paths';
 import s from './NewsInfoSection.module.scss';
 import { NewsT } from '@/shared/api/news/types';
 
-export const NewsInfoSection = ({ news }: { news: NewsT }) => {
+export const NewsInfoSection = ({ news }: { news: NewsT | null }) => {
   return (
     <div className={s.container}>
       <div className={s.titleContainer}>
         <div className={s.title}>
-          <span className="h5">{news.created_at}</span>
-          <h1 className="h1">{news.title}</h1>
+          <span className="h5">{news?.created_at}</span>
+          <h1 className="h1">{news?.title}</h1>
         </div>
         <div className={s.imageContainer}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news.photo_path}`}
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
             fill
             alt="new"
           />

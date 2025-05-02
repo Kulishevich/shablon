@@ -7,8 +7,42 @@ import { TextArea } from '@/shared/ui/text-area';
 import { Checkbox } from '@/shared/ui/checkbox';
 import { Button } from '@/shared/ui/button';
 import { showToast } from '@/shared/ui/toast';
+import { useForm } from 'react-hook-form';
+import { ControlledTextField } from '@/shared/ui/controlled-text-field';
+import { ControlledTextArea } from '@/shared/ui/controlled-text-area/ControlledTextArea';
+import { postContact } from '@/shared/api/contacts/postContact';
 
 export const FeedbackForm = () => {
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      name: '',
+      phone: '',
+      message: '',
+    },
+  });
+
+  const formHandler = handleSubmit(async (data) => {
+    console.log(data);
+
+    try {
+      const res = await postContact(data);
+
+      console.log(res);
+      showToast({
+        variant: 'success',
+        title: 'Спасибо за вашу заявку!',
+        message:
+          'Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы',
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
   return (
     <div className={s.container}>
       <div className={s.titleContainer}>
@@ -24,39 +58,35 @@ export const FeedbackForm = () => {
         </div>
       </div>
 
-      <div className={s.formContainer}>
+      <form onSubmit={formHandler} className={s.formContainer}>
         <div className={s.form}>
-          <TextField
+          <ControlledTextField
+            control={control}
+            name="name"
             placeholder="Введите ваше имя"
             label="Ваше имя"
             isRequired
           />
-          <TextField
+          <ControlledTextField
+            control={control}
+            name="phone"
             placeholder="Введите ваш телефон"
             label="Ваш телефон"
             isRequired
           />
-          <TextArea
+          <ControlledTextArea
+            control={control}
+            name="message"
             placeholder="Комментарий"
             label="Комментарий"
             className={s.textarea}
           />
           <Checkbox label="Согласие на обработку персональных данных" />
         </div>
-        <Button
-          onClick={() =>
-            showToast({
-              variant: 'success',
-              title: 'Спасибо за вашу заявку!',
-              message:
-                'Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы',
-            })
-          }
-          className={s.submitButton}
-        >
+        <Button type="submit" className={s.submitButton}>
           Отправить
         </Button>
-      </div>
+      </form>
     </div>
   );
 };

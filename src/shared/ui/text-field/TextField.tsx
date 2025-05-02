@@ -8,7 +8,6 @@ import {
   useEffect,
   useId,
   useRef,
-  useState,
 } from 'react';
 import clsx from 'clsx';
 
