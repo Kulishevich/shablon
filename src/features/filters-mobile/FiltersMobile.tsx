@@ -8,7 +8,7 @@ import { Filters } from '../filters/Filters';
 export const FiltersMobile = () => {
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild>
+      <Dialog.Trigger asChild className={s.trigger}>
         <Button variant="icon_secondary">
           <FilterIcon />
         </Button>

@@ -27,6 +27,7 @@
     }
 
     &:nth-child(4) {
+      white-space: pre-line;
       width: vw-1440(224);
       @media (max-width: 768px) {
         text-align: center;

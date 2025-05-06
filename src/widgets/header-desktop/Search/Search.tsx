@@ -4,12 +4,13 @@ import { Logo } from '@/shared/ui/logo';
 import { BurgerButton } from '@/entities/burger-button';
 import { SearchInput } from '@/entities/search-input';
 import { CartButton } from '@/entities/cart-button';
+import { CategoryT } from '@/shared/api/category/types';
 
-export const Search = () => {
+export const Search = ({ categories }: { categories: CategoryT[] | null }) => {
   return (
     <div className={s.container}>
       <Logo variant="primary" />
-      <BurgerButton />
+      <BurgerButton categories={categories} />
       <SearchInput />
       <CartButton />
     </div>

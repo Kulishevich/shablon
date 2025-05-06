@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   gap: vw-1440(12);
-
+  white-space: pre-line;
   @media (max-width: 768px) {
     width: 336px;
     gap: 8px;

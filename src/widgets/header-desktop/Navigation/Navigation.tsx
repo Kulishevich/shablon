@@ -8,8 +8,9 @@ import {
 } from '@/shared/assets';
 import { navigation } from '@/shared/config/constants/navigation';
 import s from './Navigation.module.scss';
+import { ContactsT } from '@/shared/api/design/types';
 
-export const Navigation = () => {
+export const Navigation = ({ contacts }: { contacts: ContactsT | null }) => {
   return (
     <div className={s.container}>
       <div className={s.content}>
@@ -24,21 +25,20 @@ export const Navigation = () => {
         <div className={s.info}>
           <div>
             <LocationIcon />
-            <p className="body_6">г. Минск, пр-т Независимости, 11</p>
+            <p className="body_6">{contacts?.address}</p>
           </div>
           <div>
             <ClockIcon />
-            <p className="body_6">с 09:00 до 22:00 ежедневно</p>
+            <p className="body_6">{contacts?.working_hours}</p>
           </div>
           <div>
             <PhoneIcon />
             <div className={s.phones}>
-              <Link href={'tel:+375299999999'} className="body_6">
-                +375 (29) 999-99-99 (А1) <br />
-              </Link>
-              <Link href={'tel:+375299999999'} className="body_6">
-                +375 (29) 999-99-99 (МТС)
-              </Link>
+              {contacts?.phones.map((phone, index) => (
+                <Link href={`tel:${phone}`} className="body_6" key={index}>
+                  {phone}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

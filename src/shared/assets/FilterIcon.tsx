@@ -13,7 +13,7 @@ const FilterIcon = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clip-path="url(#clip0_138_9848)">
+    <g clipPath="url(#clip0_138_9848)">
       <path
         d="M4 5H16"
         stroke="currentColor"

@@ -4,18 +4,36 @@ import s from './SocialMedia.module.scss';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-export const SocialMedia = ({ className }: { className?: string }) => {
+export const SocialMedia = ({
+  className,
+  telegram,
+  whatsapp,
+  viber,
+}: {
+  className?: string;
+  telegram?: string | null;
+  whatsapp?: string | null;
+  viber?: string | null;
+}) => {
+  const formatPhoneNumber = (number: string) => number.replace(/\D/g, '');
+
   return (
     <div className={clsx(s.container, className)}>
-      <Link href={'/'}>
-        <ViberIcon />
-      </Link>
-      <Link href={'/'}>
-        <TelegramIcon />
-      </Link>
-      <Link href={'/'}>
-        <WhatsAppIcon />
-      </Link>
+      {viber && (
+        <Link href={`viber://chat?number=${formatPhoneNumber(viber)}`}>
+          <ViberIcon />
+        </Link>
+      )}
+      {telegram && (
+        <Link href={`https://t.me/${telegram}`}>
+          <TelegramIcon />
+        </Link>
+      )}
+      {whatsapp && (
+        <Link href={`https://wa.me/${formatPhoneNumber(whatsapp)}`}>
+          <WhatsAppIcon />
+        </Link>
+      )}
     </div>
   );
 };

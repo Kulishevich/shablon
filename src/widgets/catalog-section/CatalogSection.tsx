@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import s from './CatalogSection.module.scss';
 import clsx from 'clsx';
@@ -7,8 +8,8 @@ import { TextField } from '@/shared/ui/text-field';
 import { Select } from '@/shared/ui/select';
 import { Pagination } from '@/shared/ui/pagination';
 import { Filters } from '@/features/filters';
-import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 import { FiltersMobile } from '@/features/filters-mobile';
+import { ProductsResponseT, ProductT } from '@/shared/api/product/types';
 
 const category = {
   title: 'Мебель',
@@ -21,8 +22,6 @@ const category = {
     { name: 'Стулья', id: 6 },
   ],
 };
-
-const products = new Array(9).fill('');
 
 const options = [
   {
@@ -47,23 +46,20 @@ const options = [
   },
 ];
 
-export const CatalogSection = () => {
-  const [activeSubcategory, setActiveSubcategory] = useState<number>(
-    category.subcategories[0].id
-  );
-  const { isMobile } = useBreakpoint();
-
+export const CatalogSection = ({
+  products,
+  subcategoryId,
+}: {
+  products: ProductsResponseT | null;
+  subcategoryId?: number;
+}) => {
   return (
     <div className={s.container}>
       <h1 className="h1">{category.title}</h1>
       <div className={s.navigation}>
         {category.subcategories.map((subcategory, index) => (
           <button
-            className={clsx(
-              activeSubcategory === subcategory.id && s.active,
-              'h3'
-            )}
-            onClick={() => setActiveSubcategory(subcategory.id)}
+            className={clsx(subcategoryId === subcategory.id && s.active, 'h3')}
             key={index}
           >
             {subcategory.name}
@@ -71,7 +67,7 @@ export const CatalogSection = () => {
         ))}
       </div>
       <div className={s.catalog}>
-        {!isMobile && <Filters />}
+        <Filters />
         <div className={s.productsContainer}>
           <div className={s.search}>
             <div className={s.searchContainer}>
@@ -84,17 +80,19 @@ export const CatalogSection = () => {
             </div>
             <div className={s.selectContainer}>
               <Select options={options} defaultValue={options[0].value} />
-              {isMobile && <FiltersMobile />}
+              <FiltersMobile />
             </div>
           </div>
           <div className={s.productList}>
-            {products.map((_, index) => (
-              <ProductCard key={index} />
+            {products?.data?.map((product, index) => (
+              <ProductCard key={index} product={product} />
             ))}
           </div>
           <div className={s.pagination}>
-            <p className="body_7">Найдено по фильтрам: 100</p>
-            <Pagination totalPages={10} />
+            <p className="body_7">
+              Найдено по фильтрам: {products?.total || 1}
+            </p>
+            <Pagination totalPages={products?.last_page || 1} />
           </div>
         </div>
       </div>

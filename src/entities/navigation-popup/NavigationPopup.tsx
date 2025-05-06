@@ -2,6 +2,7 @@ import React from 'react';
 import s from './NavigationPopup.module.scss';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import { CategoryT } from '@/shared/api/category/types';
 
 const mockNav = [
   {
@@ -129,13 +130,21 @@ const mockNav = [
   },
 ];
 
-export const NavigationPopup = () => {
+export const NavigationPopup = ({
+  categories,
+}: {
+  categories: CategoryT[] | null;
+}) => {
   return (
     <div className={s.content}>
       <div className={s.categoryList}>
-        {mockNav.map((category, index) => (
-          <Link className="h6" href={`${paths.catalog}/1`} key={index}>
-            {category.title}
+        {categories?.map((category, index) => (
+          <Link
+            className="h6"
+            href={`${paths.catalog}/${category.slug}_${category.id}`}
+            key={index}
+          >
+            {category.name}
           </Link>
         ))}
       </div>

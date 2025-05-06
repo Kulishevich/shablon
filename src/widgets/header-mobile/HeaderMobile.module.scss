@@ -9,6 +9,9 @@
   gap: 39px;
   z-index: 101;
   background-color: var(--color-white);
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
 .buttonsContainer {

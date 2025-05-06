@@ -19,7 +19,7 @@ export const NewsCard = ({ news }: { news: NewsT }) => {
     <Link href={`${paths.news}/${news?.id}`} className={s.cotnainer}>
       <div className={s.imageContainer}>
         <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}${news?.photo_path}`}
+          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
           fill
           alt="news"
         />

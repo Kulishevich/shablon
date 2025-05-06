@@ -7,8 +7,13 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { HeaderBurgerMenu } from '@/features/header-burger-menu';
 import { HeaderSearchPopup } from '@/features/header-search-popup';
+import { CategoryT } from '@/shared/api/category/types';
 
-export const HeaderMobile = () => {
+export const HeaderMobile = ({
+  categories,
+}: {
+  categories: CategoryT[] | null;
+}) => {
   return (
     <div className={s.container}>
       <Logo variant="secondary" />
@@ -20,7 +25,7 @@ export const HeaderMobile = () => {
         <Button variant="icon_secondary" as={Link} href={paths.cart}>
           <ShoppingCartIcon />
         </Button>
-        <HeaderBurgerMenu />
+        <HeaderBurgerMenu categories={categories} />
       </div>
     </div>
   );

@@ -44,6 +44,11 @@
   }
 }
 
+.phones {
+  display: flex;
+  flex-direction: column;
+}
+
 .map {
   height: vw-1440(498);
   width: vw-1440(856);

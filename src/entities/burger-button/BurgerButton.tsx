@@ -4,8 +4,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import s from './BurgerButton.module.scss';
 import { NavigationPopup } from '../navigation-popup';
 import { BurgerIcon } from '@/shared/assets';
+import { CategoryT } from '@/shared/api/category/types';
 
-export const BurgerButton = () => {
+export const BurgerButton = ({
+  categories,
+}: {
+  categories: CategoryT[] | null;
+}) => {
   const [isOpenNavigation, setIsOpenNavigation] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -37,7 +42,7 @@ export const BurgerButton = () => {
         <BurgerIcon />
         Каталог
       </Button>
-      {isOpenNavigation && <NavigationPopup />}
+      {isOpenNavigation && <NavigationPopup categories={categories} />}
     </div>
   );
 };

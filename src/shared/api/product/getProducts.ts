@@ -1,6 +1,6 @@
-import { ProductType } from './types';
+import { ProductsResponseT, ProductT } from './types';
 
-export const getProducts = async (): Promise<ProductType[] | null> => {
+export const getProducts = async (): Promise<ProductsResponseT | null> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/products`);
 

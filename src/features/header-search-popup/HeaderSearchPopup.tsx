@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import s from './HeaderSearchPopup.module.scss';
 import { Button } from '@/shared/ui/button';

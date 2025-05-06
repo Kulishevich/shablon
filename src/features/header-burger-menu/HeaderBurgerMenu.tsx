@@ -1,5 +1,5 @@
+'use client';
 import React, { useEffect, useState } from 'react';
-import * as Dialog from '@radix-ui/react-dialog';
 import s from './HeaderBurgerMenu.module.scss';
 import { Button } from '@/shared/ui/button';
 import { BurgerMobileIcon, CloseIcon } from '@/shared/assets';
@@ -8,20 +8,14 @@ import Link from 'next/link';
 import { SocialMedia } from '@/entities/social-media';
 import { CompanyContacts } from '@/entities/company-contacts';
 import { CollapseHeader } from '@/entities/collapse-header';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { CategoryT } from '@/shared/api/category/types';
+import { paths } from '@/shared/config/constants/paths';
 
-const categories = [
-  'Мебель',
-  'Фурнитура',
-  'Декор для дома',
-  'Ароматы для дома',
-  'Мебель',
-  'Фурнитура',
-  'Декор для дома',
-  'Ароматы для дома',
-];
-
-export const HeaderBurgerMenu = () => {
+export const HeaderBurgerMenu = ({
+  categories,
+}: {
+  categories: CategoryT[] | null;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -57,14 +51,14 @@ export const HeaderBurgerMenu = () => {
               {navigation[0].title}
             </Link>
             <CollapseHeader title={'Каталог'}>
-              {categories.map((category, index) => (
+              {categories?.map((category, index) => (
                 <Link
                   className="h3"
                   key={index}
-                  href={'/'}
+                  href={`${paths.catalog}/${category.slug}_${category.id}`}
                   onClick={() => setIsOpen(false)}
                 >
-                  {category}
+                  {category.name}
                 </Link>
               ))}
             </CollapseHeader>

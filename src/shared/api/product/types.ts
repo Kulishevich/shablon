@@ -1,4 +1,21 @@
-export type ProductType = {
+import { CategoryT } from '../category/types';
+
+export type ProductsResponseT = {
+  current_page: number;
+  data: ProductT[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+};
+
+export type ProductT = {
   id: number;
   name: string;
   slug: string;
@@ -45,19 +62,6 @@ export type ImageT = {
   image_path: string;
   order: number;
   is_main: boolean;
-  created_at: string;
-  updated_at: string;
-};
-
-export type CategoryT = {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  photo_path: string | null;
-  parent_id: number | null;
-  order: number;
-  filters: null;
   created_at: string;
   updated_at: string;
 };
