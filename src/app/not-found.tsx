@@ -4,8 +4,8 @@ import { paths } from '@/shared/config/constants/paths';
 
 export default function NotFound() {
   return (
-    <div className={'error'}>
-      <p className="error_Page">404</p>
+    <div className={'error-page'}>
+      <p className="error-title">404</p>
       <div>
         <h2 className="h2">Что-то пошло не так...</h2>
         <p className="body_1">

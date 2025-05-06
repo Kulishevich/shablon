@@ -1,14 +1,16 @@
 'use client';
-import React from 'react';
 import s from './FeedbackForm.module.scss';
 import Image from 'next/image';
-import { Checkbox } from '@/shared/ui/checkbox';
 import { Button } from '@/shared/ui/button';
 import { showToast } from '@/shared/ui/toast';
 import { useForm } from 'react-hook-form';
 import { ControlledTextField } from '@/shared/ui/controlled-text-field';
 import { ControlledTextArea } from '@/shared/ui/controlled-text-area/ControlledTextArea';
 import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
+import { postFeedback } from '@/shared/api/feedback/postFeedback';
+import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
+import { FeedbackFormScheme } from '@/shared/validation/feedback-scheme-creator';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const FeedbackForm = () => {
   const {
@@ -19,17 +21,20 @@ export const FeedbackForm = () => {
     defaultValues: {
       name: '',
       phone: '',
-      message: '',
+      comment: '',
+      checked: false,
     },
+    mode: 'onChange',
+    reValidateMode: 'onBlur',
+    resolver: zodResolver(FeedbackFormScheme()),
   });
 
   const formHandler = handleSubmit(async (data) => {
-    console.log(data);
+    const { comment, name, phone } = data;
 
     try {
-      // const res = await postContact(data);
+      await postFeedback({ comment, name, phone });
 
-      // console.log(res);
       showToast({
         variant: 'success',
         title: 'Спасибо за вашу заявку!',
@@ -38,6 +43,12 @@ export const FeedbackForm = () => {
       });
     } catch (err) {
       console.error(err);
+      showToast({
+        variant: 'error',
+        title: 'Не получили вашу заявку...',
+        message:
+          'К сожалению, не получили вашу заявку. Повторите попытку снова.',
+      });
     }
   });
 
@@ -72,17 +83,22 @@ export const FeedbackForm = () => {
               placeholder="Введите ваш телефон"
               label="Ваш телефон"
               isRequired
+              type="tel"
             />
             <ControlledTextArea
               control={control}
-              name="message"
+              name="comment"
               placeholder="Комментарий"
               label="Комментарий"
               className={s.textarea}
             />
-            <Checkbox label="Согласие на обработку персональных данных" />
+            <ControlledCheckbox
+              control={control}
+              name="checked"
+              label="Согласие на обработку персональных данных"
+            />
           </div>
-          <Button type="submit" className={s.submitButton}>
+          <Button type="submit" className={s.submitButton} disabled={!isValid}>
             Отправить
           </Button>
         </form>

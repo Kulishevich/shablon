@@ -27,9 +27,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...rest}
         />
 
-        {showError && (
-          <span className={(s.error, 'body_1')}>{errorMessage}</span>
-        )}
+        {showError && <span className={'error'}>{errorMessage}</span>}
       </div>
     );
   }

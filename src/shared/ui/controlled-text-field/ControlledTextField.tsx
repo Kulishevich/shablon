@@ -1,10 +1,9 @@
-import React from 'react';
-import { TextField, TextFieldProps } from '../text-field';
 import {
   FieldValues,
-  useController,
   UseControllerProps,
+  useController,
 } from 'react-hook-form';
+import { TextField, TextFieldProps } from '../text-field';
 
 type ControlledTextFieldProps<T extends FieldValues> = Omit<
   TextFieldProps,
@@ -14,28 +13,47 @@ type ControlledTextFieldProps<T extends FieldValues> = Omit<
 
 export const ControlledTextField = <T extends FieldValues>({
   control,
-  name,
   defaultValue,
-  errorMessage,
   disabled,
+  errorMessage,
+  name,
   rules,
   shouldUnregister,
+  type,
   ...props
 }: ControlledTextFieldProps<T>) => {
-  const { field, fieldState } = useController({
+  const {
+    field: { onBlur, onChange, ref, value, ...field },
+    fieldState: { error },
+  } = useController({
     control,
-    name,
     defaultValue,
     disabled,
+    name,
     rules,
     shouldUnregister,
   });
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    if (type === 'tel') {
+      const cleaned = inputValue.replace(/[^\d\s()+-]/g, '');
+      onChange(cleaned);
+    } else {
+      onChange(inputValue);
+    }
+  };
+
   return (
     <TextField
-      errorMessage={errorMessage || fieldState.error?.message}
-      {...field}
       {...props}
+      errorMessage={errorMessage ?? error?.message}
+      onBlur={onBlur}
+      onChange={handleChange}
+      ref={ref}
+      value={value ?? ''}
+      {...field}
     />
   );
 };

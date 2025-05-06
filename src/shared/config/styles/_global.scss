@@ -52,7 +52,7 @@ main {
   }
 }
 
-.error {
+.error-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -326,6 +326,7 @@ main {
   font-weight: 400;
   font-size: vw-1440(15);
   line-height: 130%;
+  color: var(--color-accent-red);
   @media (max-width: 768px) {
     font-weight: 600;
     font-size: 11px;
@@ -347,7 +348,7 @@ main {
   }
 }
 
-.error_Page {
+.error-title {
   font-family: var(--font-onest);
   font-weight: 600;
   font-size: vw-1440(300);

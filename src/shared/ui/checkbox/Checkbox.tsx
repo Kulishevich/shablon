@@ -19,12 +19,21 @@ export type CheckboxProps = {
   error?: string;
   isRequired?: boolean;
   label?: ReactNode;
+  errorMessage?: string;
 } & ComponentPropsWithoutRef<typeof RadixCheckbox.Root>;
 
 type CheckboxRef = ElementRef<typeof RadixCheckbox.Root>;
 
 export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
-  const { className, disabled, error, isRequired, label, ...rest } = props;
+  const {
+    className,
+    disabled,
+    error,
+    isRequired,
+    label,
+    errorMessage,
+    ...rest
+  } = props;
   const checkboxId = useId();
 
   return (
@@ -57,7 +66,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
           </Link>
         )}
       </div>
-      {error && <span className={'error'}>{error}</span>}
+      {errorMessage && <span className={'error'}>{errorMessage}</span>}
     </div>
   );
 });
