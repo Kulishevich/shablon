@@ -3,26 +3,28 @@ import s from './AboutUsSection.module.scss';
 import Image from 'next/image';
 import { Logo } from '@/shared/ui/logo';
 
-export const AboutUsSection = () => {
+export const AboutUsSection = ({
+  text,
+  image,
+}: {
+  text: string;
+  image: string;
+}) => {
   return (
     <div className={s.container}>
       <div className={s.content}>
         <div>
           <h2 className="h2">О нас</h2>
-          <p className="body_2">
-            Компания, занимающаяся продажей мебели и товаров для дома, успешно
-            работает в Минске уже более 10 лет. За это время мы завоевали
-            доверие множества клиентов благодаря высокому качеству продукции и
-            отличному сервису. Наша большая база поставщиков позволяет нам
-            предлагать широкий ассортимент товаров, удовлетворяющих различные
-            вкусы и потребности. Наш опыт и профессионализм делают нас лидерами
-            на рынке.
-          </p>
+          <p className="body_2">{text}</p>
         </div>
         <Logo variant="primary" />
       </div>
       <div className={s.imageContainer}>
-        <Image src={'/about-us.png'} fill alt="about-us" />
+        <Image
+          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image}`}
+          fill
+          alt="about-us"
+        />
       </div>
     </div>
   );

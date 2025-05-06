@@ -1,9 +1,8 @@
-'use client';
-import { FeedbackForm } from '@/entities/feedback-form';
 import { ShareInfo } from '@/widgets/share-info';
 import { SliderWrapper } from '@/entities/slider-wrapper';
 import { DiscountCard } from '@/entities/discount-card';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
+import { Feedback } from '@/entities/feedback/Feedback';
 
 export default function Share() {
   return (
@@ -16,7 +15,7 @@ export default function Share() {
             <DiscountCard key={index} />
           ))}
         </SliderWrapper>
-        <FeedbackForm />
+        <Feedback />
       </main>
     </>
   );

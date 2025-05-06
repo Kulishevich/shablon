@@ -10,35 +10,9 @@ import s from './MainSlider.module.scss';
 import { Button } from '@/shared/ui/button';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
 import { Swiper as SwiperType } from 'swiper';
+import { BannerT } from '@/shared/api/banners/types';
 
-const slides = [
-  {
-    title: 'Скидки до 50% на товары для дома',
-    content:
-      'Покупайте товары со скидкой в каталоге, применив промокод “Февраль”',
-    image_path: '/slider-image.png',
-  },
-  {
-    title: 'Скидки до 50% на товары для дома',
-    content:
-      'Покупайте товары со скидкой в каталоге, применив промокод “Февраль”',
-    image_path: '/slider-image.png',
-  },
-  {
-    title: 'Скидки до 50% на товары для дома',
-    content:
-      'Покупайте товары со скидкой в каталоге, применив промокод “Февраль”',
-    image_path: '/slider-image.png',
-  },
-  {
-    title: 'Скидки до 50% на товары для дома',
-    content:
-      'Покупайте товары со скидкой в каталоге, применив промокод “Февраль”',
-    image_path: '/slider-image.png',
-  },
-];
-
-export const MainSlider = () => {
+export const MainSlider = ({ slides }: { slides: BannerT[] | null }) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handleNext = () => {
@@ -79,14 +53,18 @@ export const MainSlider = () => {
         }}
         autoplay={{ delay: 5000 }}
       >
-        {slides.map((slide, index) => (
+        {slides?.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className={s.slide}>
-              <Image src={slide.image_path} alt={`Slide ${index + 1}`} fill />
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${slide.image_path}`}
+                alt={`Slide ${index + 1}`}
+                fill
+              />
               <div className={s.content}>
                 <div>
                   <h1 className="h1">{slide.title}</h1>
-                  <p className="body_1">{slide.content}</p>
+                  <p className="body_1">{slide.subtitle}</p>
                 </div>
                 <Button>Перейти в каталог</Button>
               </div>

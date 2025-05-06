@@ -1,17 +1,19 @@
-'use client';
-import { FeedbackForm } from '@/entities/feedback-form';
 import { CatalogSection } from '@/widgets/catalog-section';
 import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
+import { Feedback } from '@/entities/feedback/Feedback';
+import { getProducts } from '@/shared/api/product/getProducts';
 
-export default function Catalog() {
+export default async function Catalog() {
+  const products = await getProducts();
+
   return (
     <>
       <Breadcrumbs />
       <main>
-        <CatalogSection />
+        <CatalogSection products={products} />
         <PreviouslyViewed />
-        <FeedbackForm />
+        <Feedback />
       </main>
     </>
   );

@@ -1,6 +1,5 @@
 'use client';
 import s from './FeedbackForm.module.scss';
-import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { showToast } from '@/shared/ui/toast';
 import { useForm } from 'react-hook-form';
@@ -54,55 +53,40 @@ export const FeedbackForm = () => {
 
   return (
     <SectionAnimationWrapper>
-      <div className={s.container}>
-        <div className={s.titleContainer}>
-          <div className={s.textContent}>
-            <h2 className="h2">Связаться с нами</h2>
-            <p className="body_2">
-              Мы всегда готовы помочь вам с любыми вопросами. Свяжитесь с нами
-              по телефону или заполните форму обратной связи.
-            </p>
-          </div>
-          <div className={s.imageContainer}>
-            <Image src={'/feedback.png'} fill alt="feedback" />
-          </div>
+      <form onSubmit={formHandler} className={s.formContainer}>
+        <div className={s.form}>
+          <ControlledTextField
+            control={control}
+            name="name"
+            placeholder="Введите ваше имя"
+            label="Ваше имя"
+            isRequired
+          />
+          <ControlledTextField
+            control={control}
+            name="phone"
+            placeholder="Введите ваш телефон"
+            label="Ваш телефон"
+            isRequired
+            type="tel"
+          />
+          <ControlledTextArea
+            control={control}
+            name="comment"
+            placeholder="Комментарий"
+            label="Комментарий"
+            className={s.textarea}
+          />
+          <ControlledCheckbox
+            control={control}
+            name="checked"
+            label="Согласие на обработку персональных данных"
+          />
         </div>
-
-        <form onSubmit={formHandler} className={s.formContainer}>
-          <div className={s.form}>
-            <ControlledTextField
-              control={control}
-              name="name"
-              placeholder="Введите ваше имя"
-              label="Ваше имя"
-              isRequired
-            />
-            <ControlledTextField
-              control={control}
-              name="phone"
-              placeholder="Введите ваш телефон"
-              label="Ваш телефон"
-              isRequired
-              type="tel"
-            />
-            <ControlledTextArea
-              control={control}
-              name="comment"
-              placeholder="Комментарий"
-              label="Комментарий"
-              className={s.textarea}
-            />
-            <ControlledCheckbox
-              control={control}
-              name="checked"
-              label="Согласие на обработку персональных данных"
-            />
-          </div>
-          <Button type="submit" className={s.submitButton} disabled={!isValid}>
-            Отправить
-          </Button>
-        </form>
-      </div>
+        <Button type="submit" className={s.submitButton} disabled={!isValid}>
+          Отправить
+        </Button>
+      </form>
     </SectionAnimationWrapper>
   );
 };

@@ -1,24 +1,22 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { showToast } from '@/shared/ui/toast';
-import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 import { CloseIcon, ShoppingCartIcon } from '@/shared/assets';
 import clsx from 'clsx';
-import { ProductType } from '@/shared/api/product/types';
 import s from './ProductCard.module.scss';
+import { ProductT } from '@/shared/api/product/types';
 
 export const ProductCard = ({
   product,
   productInCart = false,
 }: {
   productInCart?: boolean;
-  product: ProductType | null;
+  product: ProductT | null;
 }) => {
-  const { isMobile } = useBreakpoint();
-
   const totalPrice = !!product?.discount
     ? Math.round(
         (Number(product?.price) * (100 - Number(product?.discount))) / 100
@@ -60,20 +58,18 @@ export const ProductCard = ({
           )}
           <h4 className="h4">{totalPrice} BYN</h4>
         </div>
-        {!isMobile ? (
-          <Button
-            fullWidth
-            onClick={() =>
-              showToast({ title: 'Добавлено в корзину', variant: 'success' })
-            }
-          >
-            В корзину
-          </Button>
-        ) : (
-          <Button variant={'icon_outlined'}>
-            <ShoppingCartIcon />
-          </Button>
-        )}
+        <Button
+          fullWidth
+          onClick={() =>
+            showToast({ title: 'Добавлено в корзину', variant: 'success' })
+          }
+          className={'desktop-only'}
+        >
+          В корзину
+        </Button>
+        <Button variant={'icon_outlined'} className={'mobile-only'}>
+          <ShoppingCartIcon />
+        </Button>
       </div>
     </div>
   );

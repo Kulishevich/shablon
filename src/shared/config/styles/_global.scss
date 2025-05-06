@@ -52,6 +52,18 @@ main {
   }
 }
 
+.desktop-only {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
 .error-page {
   display: flex;
   flex-direction: column;

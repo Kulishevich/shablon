@@ -1,3 +1,4 @@
+'use client';
 import { YandexMap } from '@/shared/ui/yandex-map/YandexMap';
 import { Collapse } from '@/shared/ui/collapse';
 import s from './DeliverySection.module.scss';

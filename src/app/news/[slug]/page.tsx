@@ -1,10 +1,10 @@
-import { FeedbackForm } from '@/entities/feedback-form';
 import { NewsInfoSection } from '@/widgets/news-info-section';
 import { SliderWrapper } from '@/entities/slider-wrapper';
 import { NewsCard } from '@/entities/news-card';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getNews } from '@/shared/api/news/getNews';
+import { Feedback } from '@/entities/feedback/Feedback';
 
 export default async function New({
   params,
@@ -27,7 +27,7 @@ export default async function New({
             <NewsCard key={index} news={news} />
           ))}
         </SliderWrapper>
-        <FeedbackForm />
+        <Feedback />
       </main>
     </>
   );

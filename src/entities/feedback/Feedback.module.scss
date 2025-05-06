@@ -1,0 +1,49 @@
+@use '../../shared/config/styles/functions' as *;
+
+.container {
+  display: flex;
+  gap: vw-1440(48);
+  width: vw-1440(1296);
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 336px;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(24);
+
+  width: vw-1440(612);
+
+  .textContent {
+    display: flex;
+    flex-direction: column;
+    gap: vw-1440(16);
+    @media (max-width: 768px) {
+      gap: 12px;
+    }
+  }
+
+  .imageContainer {
+    position: relative;
+    width: vw-1440(612);
+    height: vw-1440(355);
+    border-radius: 6px;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 336px;
+      height: 195px;
+    }
+  }
+  @media (max-width: 768px) {
+    width: 336px;
+    text-align: center;
+    gap: 16px;
+  }
+}

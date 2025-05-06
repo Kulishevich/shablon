@@ -3,15 +3,18 @@ import React, { ReactNode } from 'react';
 import s from './SliderWrapper.module.scss';
 import { Slider } from '@/shared/ui/slider';
 import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
+import clsx from 'clsx';
 
 export const SliderWrapper = ({
   title,
   children,
   variant,
+  className,
 }: {
   title: string;
   children: ReactNode;
   variant?: 'news' | 'product' | 'discount' | 'mini_product';
+  className?: string;
 }) => {
   const { isMobile } = useBreakpoint();
 
@@ -30,7 +33,7 @@ export const SliderWrapper = ({
   };
 
   return (
-    <div className={s.container}>
+    <div className={clsx(s.container, className)}>
       <h2 className="h2">{title}</h2>
       <Slider itemWidth={itemWidth()}>{children}</Slider>
     </div>

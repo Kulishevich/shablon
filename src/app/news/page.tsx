@@ -1,4 +1,4 @@
-import { FeedbackForm } from '@/entities/feedback-form';
+import { Feedback } from '@/entities/feedback/Feedback';
 import { getAllNews } from '@/shared/api/news/getAllNews';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { NewsSection } from '@/widgets/news-section';
@@ -17,7 +17,7 @@ export default async function News({
       <Breadcrumbs />
       <main>
         <NewsSection newsList={newsList} page={page} />
-        <FeedbackForm />
+        <Feedback />
       </main>
     </>
   );

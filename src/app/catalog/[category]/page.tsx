@@ -1,8 +1,8 @@
-import { FeedbackForm } from '@/entities/feedback-form';
 import { CatalogSection } from '@/widgets/catalog-section';
 import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
+import { Feedback } from '@/entities/feedback/Feedback';
 
 export default async function Catalog() {
   const products = await getProducts();
@@ -13,7 +13,7 @@ export default async function Catalog() {
       <main>
         <CatalogSection products={products} />
         <PreviouslyViewed />
-        <FeedbackForm />
+        <Feedback />
       </main>
     </>
   );

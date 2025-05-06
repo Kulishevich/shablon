@@ -1,12 +1,11 @@
-'use client';
-import { FeedbackForm } from '@/entities/feedback-form';
+import { Feedback } from '@/entities/feedback/Feedback';
 import { DeliverySection } from '@/widgets/delivery-section';
 
 export default function PaymentAndDelivery() {
   return (
     <main>
       <DeliverySection />
-      <FeedbackForm />
+      <Feedback />
     </main>
   );
 }
