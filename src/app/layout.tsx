@@ -43,7 +43,7 @@ export default async function RootLayout({
 }>) {
   const categories = await getCategories();
   const contacts = await getContacts();
-  const products = await getProducts();
+  const products = await getProducts({});
   return (
     <html lang="en">
       <body className={`${onest.variable}`}>

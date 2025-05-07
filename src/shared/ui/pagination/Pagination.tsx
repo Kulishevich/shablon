@@ -27,7 +27,7 @@ export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
       params.set('page', page.toString());
 
       const url = `${pathname}?${params.toString()}`;
-      router.push(url);
+      router.push(url, { scroll: false });
     };
   }
 
@@ -46,13 +46,15 @@ export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
 
   return (
     <div className={s.container}>
-      <button
-        className={s.button}
-        onClick={handlePageChange(currentPageNumber - 1)}
-        disabled={currentPageNumber === 1}
-      >
-        <ArrowLeftIcon />
-      </button>
+      {currentPageNumber !== 1 && (
+        <button
+          className={s.button}
+          onClick={handlePageChange(currentPageNumber - 1)}
+          disabled={currentPageNumber === 1}
+        >
+          <ArrowLeftIcon />
+        </button>
+      )}
       <div className={s.pagination}>
         {paginationPages.map((page) => {
           const isActive = currentPageNumber == page;

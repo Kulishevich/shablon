@@ -24,6 +24,7 @@ export type ProductT = {
   price: string;
   discount: string;
   is_popular: boolean;
+  is_new: boolean;
   sku: string;
   specifications: SpecificationT[] | null;
   is_active: boolean;

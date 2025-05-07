@@ -23,6 +23,8 @@ export const ProductCard = ({
       )
     : product?.price;
 
+  const is_discount = !!Number(product?.discount);
+
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
@@ -35,9 +37,15 @@ export const ProductCard = ({
           />
         </Link>
         <div className={s.tagsContainer}>
-          {product?.is_popular && <span className="tag">бестселлер</span>}
-          {/* {product.isNew && <span className="tag">новинка</span>} */}
-          {!!product?.discount && <span className="tag">акция</span>}
+          {product?.is_popular && (
+            <span className={clsx('tag', s.popular)}>бестселлер</span>
+          )}
+          {product?.is_new && (
+            <span className={clsx('tag', s.new)}>новинка</span>
+          )}
+          {is_discount && (
+            <span className={clsx('tag', s.discount)}>акция</span>
+          )}
         </div>
         {productInCart && (
           <Button variant="icon_secondary" className={s.deleteButton}>
@@ -53,7 +61,7 @@ export const ProductCard = ({
 
       <div className={s.priceContainer}>
         <div className={s.price}>
-          {!!product?.discount && (
+          {is_discount && (
             <span className="discount">{product?.price} BYN</span>
           )}
           <h4 className="h4">{totalPrice} BYN</h4>

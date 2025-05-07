@@ -62,15 +62,15 @@
   & > span {
     padding: vw-1440(2) vw-1440(6);
     border-radius: 4px;
-    &:nth-child(1) {
+    &.popular {
       color: var(--color-white);
       background-color: var(--color-accent-orange);
     }
-    &:nth-child(2) {
+    &.new {
       color: var(--color-white);
       background-color: var(--color-accent-green);
     }
-    &:nth-child(3) {
+    &.discount {
       color: var(--color-white);
       background-color: var(--color-accent-red);
     }
@@ -128,6 +128,7 @@
 .price {
   display: flex;
   flex-direction: column;
+  justify-content: end;
   width: vw-1440(91);
   flex-shrink: 0;
 

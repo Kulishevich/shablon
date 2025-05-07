@@ -5,7 +5,7 @@ import { Feedback } from '@/entities/feedback/Feedback';
 import { getProducts } from '@/shared/api/product/getProducts';
 
 export default async function Catalog() {
-  const products = await getProducts();
+  const products = await getProducts({});
 
   return (
     <>
