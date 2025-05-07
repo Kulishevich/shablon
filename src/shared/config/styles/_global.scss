@@ -325,6 +325,7 @@ main {
   line-height: 140%;
   text-transform: uppercase;
   text-decoration: line-through;
+  opacity: 0.3;
 
   @media (max-width: 768px) {
     font-weight: 500;

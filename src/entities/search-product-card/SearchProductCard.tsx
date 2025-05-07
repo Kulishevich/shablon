@@ -5,31 +5,26 @@ import { Button } from '@/shared/ui/button';
 import { ShoppingCartIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import { ProductT } from '@/shared/api/product/types';
 
-export const SearchProductCard = ({
-  name,
-  image_path,
-  price,
-  priceWithDiscount,
-}: {
-  name: string;
-  image_path: string;
-  price: number;
-  priceWithDiscount: number | null;
-}) => {
+export const SearchProductCard = ({ ...props }: ProductT) => {
+  const { photo_path, name, price, slug, id } = props;
+
   return (
-    <Link href={`${paths.product}/1`} className={s.container}>
+    <Link href={`${paths.product}/${slug}_${id}`} className={s.container}>
       <div className={s.card}>
         <div className={s.imageContainer}>
-          <Image src={image_path} fill alt="product" />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+            fill
+            alt="product"
+          />
         </div>
         <div className={s.content}>
           <p className="body_4">{name}</p>
           <div className={s.price}>
             <h5 className="h5">{price} BYN</h5>
-            {!!priceWithDiscount && (
-              <p className="discount">{priceWithDiscount} BYN</p>
-            )}
+            {!!price && <p className="discount">{price} BYN</p>}
           </div>
         </div>
       </div>

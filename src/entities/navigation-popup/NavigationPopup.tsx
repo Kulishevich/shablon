@@ -1,140 +1,17 @@
-import React from 'react';
-import s from './NavigationPopup.module.scss';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { CategoryT } from '@/shared/api/category/types';
-
-const mockNav = [
-  {
-    title: 'Мебель',
-    subcategories: [
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-    ],
-  },
-  {
-    title: 'Фурнитура',
-    subcategories: [
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-    ],
-  },
-  {
-    title: 'Декор для дома',
-    subcategories: [
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-    ],
-  },
-  {
-    title: 'Посуда',
-    subcategories: [
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-    ],
-  },
-  {
-    title: 'Фурнитура',
-    subcategories: [
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-    ],
-  },
-  {
-    title: 'Декор для дома',
-    subcategories: [
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-    ],
-  },
-  {
-    title: 'Посуда',
-    subcategories: [
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-      'Стулья',
-      'Столы',
-    ],
-  },
-];
+import s from './NavigationPopup.module.scss';
 
 export const NavigationPopup = ({
   categories,
 }: {
   categories: CategoryT[] | null;
 }) => {
+  const [activeCategory, setActiveCategory] = useState(categories?.[0]?.id);
+  const activeContent = categories?.find((elem) => elem.id === activeCategory);
+
   return (
     <div className={s.content}>
       <div className={s.categoryList}>
@@ -143,17 +20,22 @@ export const NavigationPopup = ({
             className="h6"
             href={`${paths.catalog}/${category.slug}_${category.id}`}
             key={index}
+            onMouseEnter={() => setActiveCategory(category?.id)}
           >
             {category.name}
           </Link>
         ))}
       </div>
       <div className={s.subcategoryList}>
-        <h3 className="h3">{mockNav[0].title}</h3>
+        <h3 className="h3">{activeContent?.name}</h3>
         <div className={s.subcategories}>
-          {mockNav[0].subcategories.map((subcategory, index) => (
-            <Link className="body_4" href={'/'} key={index}>
-              {subcategory}
+          {activeContent?.subcategories?.map((subcategory, index) => (
+            <Link
+              className="body_4"
+              href={`${paths.catalog}/${activeContent.slug}_${activeContent.id}/${subcategory.slug}_${subcategory.id}`}
+              key={index}
+            >
+              {subcategory.name}
             </Link>
           ))}
         </div>

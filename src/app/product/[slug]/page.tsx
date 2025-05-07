@@ -3,6 +3,7 @@ import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProductById } from '@/shared/api/product/getProductById';
 import { Feedback } from '@/entities/feedback/Feedback';
+import { paths } from '@/shared/config/constants/paths';
 
 export default async function Product({
   params,
@@ -17,7 +18,12 @@ export default async function Product({
 
   return (
     <>
-      <Breadcrumbs />
+      <Breadcrumbs
+        dynamicPath={{
+          title: product?.name || '',
+          path: `${paths.product}/${product?.slug}_${product?.id}`,
+        }}
+      />
       <main>
         <ProductSection product={product} />
         <PreviouslyViewed />

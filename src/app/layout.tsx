@@ -10,6 +10,7 @@ import { HeaderDesktop } from '@/widgets/header-desktop';
 import { HeaderMobile } from '@/widgets/header-mobile';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
+import { getProducts } from '@/shared/api/product/getProducts';
 
 const onest = Onest({
   variable: '--font-onest',
@@ -42,11 +43,15 @@ export default async function RootLayout({
 }>) {
   const categories = await getCategories();
   const contacts = await getContacts();
-
+  const products = await getProducts();
   return (
     <html lang="en">
       <body className={`${onest.variable}`}>
-        <HeaderDesktop categories={categories} contacts={contacts} />
+        <HeaderDesktop
+          categories={categories}
+          contacts={contacts}
+          products={products?.data || []}
+        />
         <HeaderMobile categories={categories} />
         {children}
         <Footer categories={categories} contacts={contacts} />

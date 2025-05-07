@@ -10,4 +10,5 @@ export type CategoryT = {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  subcategories: Omit<CategoryT, 'subcategories'>[];
 };

@@ -3,44 +3,27 @@ import s from './SearchPopup.module.scss';
 import { SearchProductCard } from '../search-product-card';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import { CategoryT } from '@/shared/api/category/types';
+import { ProductT } from '@/shared/api/product/types';
 
-const categories = ['Мебель', 'Фурнитура', 'Декор для дома'];
-
-const products = [
-  {
-    id: 1,
-    name: 'Ковёр "Valencia"',
-    articul: '12345',
-    image_path: '/product.png',
-    price: 130,
-    priceWithDiscount: null,
-  },
-  {
-    id: 2,
-    name: 'Ковёр "Valencia"',
-    articul: '12345',
-    image_path: '/product.png',
-    price: 130,
-    priceWithDiscount: 110,
-  },
-  {
-    id: 3,
-    name: 'Ковёр "Valencia"',
-    articul: '12345',
-    image_path: '/product.png',
-    price: 130,
-    priceWithDiscount: null,
-  },
-];
-
-export const SearchPopup = () => {
+export const SearchPopup = ({
+  categories,
+  products,
+}: {
+  categories: CategoryT[];
+  products: ProductT[];
+}) => {
   return (
     <div className={s.content}>
       <div className={s.categories}>
         <h6 className="h6">Поиск по категориям:</h6>
         {categories.map((category, index) => (
-          <Link href={`${paths.catalog}`} className="body_4" key={index}>
-            {category}
+          <Link
+            href={`${paths.catalog}/${category.slug}_${category.id}`}
+            className="body_4"
+            key={index}
+          >
+            {category.name}
           </Link>
         ))}
       </div>
