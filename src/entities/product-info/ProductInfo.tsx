@@ -3,10 +3,10 @@ import s from './ProductInfo.module.scss';
 import { Button } from '@/shared/ui/button';
 import { DocumentIcon, HoursIcon, QualityStarIcon } from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
-import { ProductType } from '@/shared/api/product/types';
+import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
 
-export const ProductInfo = ({ product }: { product: ProductType | null }) => {
+export const ProductInfo = ({ product }: { product: ProductT | null }) => {
   const isDiscount = !!product?.discount;
 
   const totalPrice = !!product?.discount

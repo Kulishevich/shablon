@@ -3,91 +3,31 @@ import { YandexMap } from '@/shared/ui/yandex-map/YandexMap';
 import { Collapse } from '@/shared/ui/collapse';
 import s from './DeliverySection.module.scss';
 
-export const DeliverySection = () => {
+export const DeliverySection = ({
+  content,
+}: {
+  content:
+    | {
+        delivery_text: string | null;
+        payment_text: string | null;
+      }
+    | undefined;
+}) => {
   return (
     <div className={s.wrapper}>
       <h1 className="h1">Доставка и оплата</h1>
       <Collapse title="Доставка">
         <div className={s.container}>
-          <p className="body_2">
-            Если сумма вашего заказа превышает 150 рублей (с НДС), мы бесплатно
-            доставим его на рабочее место в Минске и любом другом городе
-            Беларуси. Если сумма меньше, доставка обойдется вам в 20 рублей.
-            <br /> В рабочие дни доставка осуществляется с 9 до 18 часов.
-          </p>
+          <p className="body_2">{content?.delivery_text}</p>
           <div className={s.deliveryArea}>
             <p className="h5">Область доставки</p>
             <YandexMap type="area" className={s.map} />
-          </div>
-          <div className={s.info}>
-            <p className="body_2">
-              Доставка Товара осуществляется Продавцом за свой счет и своими
-              силами (может осуществляться с привлечением третьих лиц, но за
-              счет Продавца).
-            </p>
-            <p className="body_2">
-              Минимальная сумма заказа для бесплатной доставки:
-            </p>
-            <p className="body_2">
-              в период с 06 часов 00 минут до 00 часов 30 минут не менее:
-            </p>
-            <ul className={s.list}>
-              <li className="body_2">
-                69 (шестидесяти девяти) рублей для зон обслуживания Минск (зона
-                А, А1); в период с 08 часов 00 минут до 00 часов 00 минут не
-                менее:
-              </li>
-              <li className="body_2">
-                69 (шестидесяти девяти) рублей для зон обслуживания Минская
-                область (зона Б); в период с 10 часов 00 минут до 22 часов 00
-                минут не менее:
-              </li>
-              <li className="body_2">
-                79 (семидесяти девяти) рублей для всех иных зон обслуживания.
-              </li>
-            </ul>
           </div>
         </div>
       </Collapse>
       <Collapse title="Оплата">
         <div className={s.container}>
-          <p className="body_2">
-            Если сумма вашего заказа превышает 150 рублей (с НДС), мы бесплатно
-            доставим его на рабочее место в Минске и любом другом городе
-            Беларуси. Если сумма меньше, доставка обойдется вам в 20 рублей. В
-            рабочие дни доставка осуществляется с 9 до 18 часов.
-          </p>
-          <div className={s.deliveryArea}>
-            <p className="h5">Область доставки</p>
-          </div>
-          <div className={s.info}>
-            <p className="body_2">
-              Доставка Товара осуществляется Продавцом за свой счет и своими
-              силами (может осуществляться с привлечением третьих лиц, но за
-              счет Продавца).
-            </p>
-            <p className="body_2">
-              Минимальная сумма заказа для бесплатной доставки:
-            </p>
-            <p className="body_2">
-              в период с 06 часов 00 минут до 00 часов 30 минут не менее:
-            </p>
-            <ul className={s.list}>
-              <li className="body_2">
-                69 (шестидесяти девяти) рублей для зон обслуживания Минск (зона
-                А, А1); в период с 08 часов 00 минут до 00 часов 00 минут не
-                менее:
-              </li>
-              <li className="body_2">
-                69 (шестидесяти девяти) рублей для зон обслуживания Минская
-                область (зона Б); в период с 10 часов 00 минут до 22 часов 00
-                минут не менее:
-              </li>
-              <li className="body_2">
-                79 (семидесяти девяти) рублей для всех иных зон обслуживания.
-              </li>
-            </ul>
-          </div>
+          <p className="body_2">{content?.payment_text}</p>
         </div>
       </Collapse>
     </div>

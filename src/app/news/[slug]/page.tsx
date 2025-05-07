@@ -5,6 +5,7 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getNews } from '@/shared/api/news/getNews';
 import { Feedback } from '@/entities/feedback/Feedback';
+import { paths } from '@/shared/config/constants/paths';
 
 export default async function New({
   params,
@@ -19,7 +20,12 @@ export default async function New({
 
   return (
     <>
-      <Breadcrumbs />
+      <Breadcrumbs
+        dynamicPath={{
+          title: news?.title || '',
+          path: `${paths.news}/${news?.id}`,
+        }}
+      />
       <main>
         <NewsInfoSection news={news} />
         <SliderWrapper title="Другие новости" variant="news">

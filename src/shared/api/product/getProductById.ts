@@ -1,8 +1,6 @@
-import { ProductType } from './types';
+import { ProductT } from './types';
 
-export const getProductById = async (
-  id: string
-): Promise<ProductType | null> => {
+export const getProductById = async (id: string): Promise<ProductT | null> => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/products/${id}`

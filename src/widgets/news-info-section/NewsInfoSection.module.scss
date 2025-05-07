@@ -7,6 +7,10 @@
   align-items: center;
 
   width: vw-1440(1296);
+
+  @media (max-width: 768px) {
+    gap: 32px;
+  }
 }
 
 .titleContainer {
@@ -59,69 +63,24 @@
   display: flex;
   flex-direction: column;
   gap: vw-1440(48);
+  width: vw-1440(856);
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
     gap: 24px;
-  }
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: vw-1440(32);
-
-  width: vw-1440(856);
-
-  @media (max-width: 768px) {
     width: 336px;
-    gap: 12px;
   }
 }
 
-.elem {
-  display: flex;
-  flex-direction: column;
-  gap: vw-1440(20);
-  & > p > ul {
-    list-style-position: inside;
-  }
+// .info {
+//   display: flex;
+//   flex-direction: column;
+//   gap: vw-1440(32);
 
-  @media (max-width: 768px) {
-    gap: 12px;
-  }
-}
+//   width: vw-1440(856);
 
-.infoCard {
-  display: flex;
-  gap: vw-1440(16);
-  align-items: center;
-  background-color: var(--color-grey);
-  border-radius: 6px;
-  padding: vw-1440(16);
-
-  .imageContainer {
-    position: relative;
-    width: vw-1440(314);
-    height: vw-1440(204);
-    border-radius: 6px;
-    overflow: hidden;
-    flex-shrink: 0;
-    @media (max-width: 768px) {
-      width: 314px;
-      height: 204px;
-    }
-  }
-
-  & > div {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px;
-  }
-}
+//   @media (max-width: 768px) {
+//     width: 336px;
+//     gap: 12px;
+//   }
+// }

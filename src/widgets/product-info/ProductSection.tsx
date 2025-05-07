@@ -2,13 +2,9 @@ import React from 'react';
 import { ProductDescription } from '@/entities/product-description';
 import { ProductInfo } from '@/entities/product-info';
 import s from './ProductSection.module.scss';
-import { ProductType } from '@/shared/api/product/types';
+import { ProductT } from '@/shared/api/product/types';
 
-export const ProductSection = ({
-  product,
-}: {
-  product: ProductType | null;
-}) => {
+export const ProductSection = ({ product }: { product: ProductT | null }) => {
   return (
     <div className={s.container}>
       <span className="body_7">Артикул: {product?.sku}</span>

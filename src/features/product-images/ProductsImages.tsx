@@ -2,15 +2,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import s from './ProductsImages.module.scss';
-import { ProductType } from '@/shared/api/product/types';
+import { ProductT } from '@/shared/api/product/types';
 
 const images = new Array(4).fill('/product.png');
 
-export const ProductsImages = ({
-  product,
-}: {
-  product: ProductType | null;
-}) => {
+export const ProductsImages = ({ product }: { product: ProductT | null }) => {
   const [activeImage, setActiveImage] = useState(
     product?.main_image.image_path
   );

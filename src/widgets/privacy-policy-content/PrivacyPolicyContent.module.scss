@@ -1,6 +1,6 @@
 @use '../../shared/config/styles/functions' as *;
 
-.content {
+.container {
   display: flex;
   flex-direction: column;
   gap: vw-1440(36);
@@ -12,14 +12,6 @@
   display: flex;
   flex-direction: column;
   gap: vw-1440(32);
-}
 
-.elem {
-  display: flex;
-  flex-direction: column;
-  gap: vw-1440(12);
-
-  & > div > ul {
-    list-style: none;
-  }
+  white-space: pre-line;
 }

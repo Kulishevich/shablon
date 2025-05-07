@@ -1,10 +1,13 @@
 import { Feedback } from '@/entities/feedback/Feedback';
+import { getSetting } from '@/shared/api/design/getSetting';
 import { DeliverySection } from '@/widgets/delivery-section';
 
-export default function PaymentAndDelivery() {
+export default async function PaymentAndDelivery() {
+  const setting = await getSetting();
+
   return (
     <main>
-      <DeliverySection />
+      <DeliverySection content={setting?.delivery_payment} />
       <Feedback />
     </main>
   );
