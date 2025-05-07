@@ -11,7 +11,7 @@ export const HeaderDesktop = ({
   contacts,
   products,
 }: {
-  categories: CategoryT[] | null;
+  categories: CategoryT[];
   contacts: ContactsT | null;
   products: ProductT[];
 }) => {

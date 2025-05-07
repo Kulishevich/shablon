@@ -16,7 +16,7 @@ export const PopularProductsSection = ({
           <ProductCard key={index} product={product} />
         ))}
       </SliderWrapper>
-      <PopularProductsMobile />
+      <PopularProductsMobile products={products || []} />
     </>
   );
 };

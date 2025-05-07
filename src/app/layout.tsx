@@ -48,11 +48,15 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${onest.variable}`}>
         <HeaderDesktop
+          categories={categories || []}
+          contacts={contacts}
+          products={products?.data || []}
+        />
+        <HeaderMobile
           categories={categories}
           contacts={contacts}
           products={products?.data || []}
         />
-        <HeaderMobile categories={categories} />
         {children}
         <Footer categories={categories} contacts={contacts} />
         <Toaster />

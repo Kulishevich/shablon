@@ -20,7 +20,7 @@ export default async function Home() {
 
   return (
     <main>
-      <MainSlider slides={banners} />
+      <MainSlider slides={banners || []} />
       <PopularProductsSection products={popularProducts} />
       <AboutUsSection
         text={setting?.about?.text || ''}

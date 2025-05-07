@@ -2,6 +2,7 @@ import { DiscountCard } from '@/entities/discount-card';
 import { Pagination } from '@/shared/ui/pagination';
 import React, { Suspense } from 'react';
 import s from './SharesSection.module.scss';
+import { number } from 'framer-motion';
 
 export const SharesSection = () => {
   return (
@@ -15,7 +16,7 @@ export const SharesSection = () => {
         </div>
       </div>
       <Suspense fallback={<p className="h4">Загрузка...</p>}>
-        <Pagination totalPages="10" />
+        <Pagination totalPages={10} />
       </Suspense>
     </div>
   );

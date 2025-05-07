@@ -8,11 +8,17 @@ import { paths } from '@/shared/config/constants/paths';
 import { HeaderBurgerMenu } from '@/features/header-burger-menu';
 import { HeaderSearchPopup } from '@/features/header-search-popup';
 import { CategoryT } from '@/shared/api/category/types';
+import { ContactsT } from '@/shared/api/design/types';
+import { ProductT } from '@/shared/api/product/types';
 
 export const HeaderMobile = ({
   categories,
+  contacts,
+  products,
 }: {
   categories: CategoryT[] | null;
+  contacts: ContactsT | null;
+  products: ProductT[];
 }) => {
   return (
     <div className={s.container}>
@@ -21,11 +27,11 @@ export const HeaderMobile = ({
         <Button variant="icon_secondary">
           <PhoneOutlinedIcon />
         </Button>
-        <HeaderSearchPopup />
+        <HeaderSearchPopup categories={categories} products={products} />
         <Button variant="icon_secondary" as={Link} href={paths.cart}>
           <ShoppingCartIcon />
         </Button>
-        <HeaderBurgerMenu categories={categories} />
+        <HeaderBurgerMenu categories={categories} contacts={contacts} />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ import { Swiper as SwiperType } from 'swiper';
 import { BannerT } from '@/shared/api/banners/types';
 import Link from 'next/link';
 
-export const MainSlider = ({ slides }: { slides: BannerT[] | null }) => {
+export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handleNext = () => {

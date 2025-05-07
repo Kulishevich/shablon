@@ -6,37 +6,16 @@ import { SearchIcon } from '@/shared/assets';
 import { SearchProductCard } from '@/entities/search-product-card';
 import { TextField } from '@/shared/ui/text-field';
 import Link from 'next/link';
+import { CategoryT } from '@/shared/api/category/types';
+import { ProductT } from '@/shared/api/product/types';
 
-const categories = ['Мебель', 'Фурнитура', 'Декор для дома'];
-
-const products = [
-  {
-    id: 1,
-    name: 'Ковёр "Valencia"',
-    articul: '12345',
-    image_path: '/product.png',
-    price: 130,
-    priceWithDiscount: null,
-  },
-  {
-    id: 2,
-    name: 'Ковёр "Valencia"',
-    articul: '12345',
-    image_path: '/product.png',
-    price: 130,
-    priceWithDiscount: 110,
-  },
-  {
-    id: 3,
-    name: 'Ковёр "Valencia"',
-    articul: '12345',
-    image_path: '/product.png',
-    price: 130,
-    priceWithDiscount: null,
-  },
-];
-
-export const HeaderSearchPopup = () => {
+export const HeaderSearchPopup = ({
+  categories,
+  products,
+}: {
+  categories: CategoryT[] | null;
+  products: ProductT[];
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -68,9 +47,9 @@ export const HeaderSearchPopup = () => {
           <div className={s.content}>
             <div className={s.categories}>
               <h6 className="h6">Поиск по категориям:</h6>
-              {categories.map((category, index) => (
+              {categories?.map((category, index) => (
                 <Link className="body_4" key={index} href={'/'}>
-                  {category}
+                  {category.name}
                 </Link>
               ))}
             </div>

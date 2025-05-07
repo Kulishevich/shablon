@@ -1,14 +1,19 @@
 import React from 'react';
 import s from './PopularProductsMobile.module.scss';
 import { ProductCard } from '@/entities/product-card';
+import { ProductT } from '@/shared/api/product/types';
 
-export const PopularProductsMobile = () => {
+export const PopularProductsMobile = ({
+  products,
+}: {
+  products: ProductT[];
+}) => {
   return (
     <div className={s.container}>
       <h2 className="h2">Популярные товары</h2>
       <div className={s.productsContainer}>
-        {new Array(4).fill('').map((_, index) => (
-          <ProductCard key={index} />
+        {products?.map((product, index) => (
+          <ProductCard product={product} key={index} />
         ))}
       </div>
     </div>

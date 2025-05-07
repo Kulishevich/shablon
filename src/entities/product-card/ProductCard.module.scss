@@ -26,6 +26,10 @@
   background-color: var(--color-grey);
   border-radius: 6px;
 
+  img {
+    object-fit: cover;
+  }
+
   & > .deleteButton {
     position: absolute;
     top: vw-1440(8);

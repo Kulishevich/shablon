@@ -10,11 +10,14 @@ import { CompanyContacts } from '@/entities/company-contacts';
 import { CollapseHeader } from '@/entities/collapse-header';
 import { CategoryT } from '@/shared/api/category/types';
 import { paths } from '@/shared/config/constants/paths';
+import { ContactsT } from '@/shared/api/design/types';
 
 export const HeaderBurgerMenu = ({
   categories,
+  contacts,
 }: {
   categories: CategoryT[] | null;
+  contacts: ContactsT | null;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -74,7 +77,7 @@ export const HeaderBurgerMenu = ({
             ))}
           </div>
           <SocialMedia className={s.socialMedia} />
-          <CompanyContacts />
+          <CompanyContacts contacts={contacts} />
         </div>
       )}
     </div>
