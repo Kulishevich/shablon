@@ -75,10 +75,13 @@
     width: fit-content;
     opacity: 0.8;
 
-    &:nth-child(1) {
+    &.popular {
       background-color: var(--color-accent-orange);
     }
-    &:nth-child(2) {
+    &.new {
+      background-color: var(--color-accent-green);
+    }
+    &.discount {
       background-color: var(--color-accent-red);
     }
 

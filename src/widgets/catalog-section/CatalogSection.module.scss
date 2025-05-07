@@ -73,16 +73,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .searchContainer {
-    display: flex;
-    gap: vw-1440(24);
-    width: vw-1440(635);
-    flex-shrink: 0;
-    & > button {
-      width: vw-1440(150);
-      flex-shrink: 0;
-    }
-  }
 
   .selectContainer {
     display: flex;
@@ -99,21 +89,6 @@
   @media (max-width: 768px) {
     flex-direction: column-reverse;
     gap: 16px;
-
-    .searchContainer {
-      gap: 16px;
-      width: 336px;
-      flex-shrink: 0;
-
-      .input {
-        height: 46px;
-      }
-      & > button {
-        width: 100px;
-        height: 46px;
-        flex-shrink: 0;
-      }
-    }
   }
 }
 

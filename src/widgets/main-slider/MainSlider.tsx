@@ -11,6 +11,7 @@ import { Button } from '@/shared/ui/button';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
 import { Swiper as SwiperType } from 'swiper';
 import { BannerT } from '@/shared/api/banners/types';
+import Link from 'next/link';
 
 export const MainSlider = ({ slides }: { slides: BannerT[] | null }) => {
   const swiperRef = useRef<SwiperType>(null);
@@ -57,7 +58,7 @@ export const MainSlider = ({ slides }: { slides: BannerT[] | null }) => {
           <SwiperSlide key={index}>
             <div className={s.slide}>
               <Image
-                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${slide.image_path}`}
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${slide.photo_path}`}
                 alt={`Slide ${index + 1}`}
                 fill
               />
@@ -66,7 +67,9 @@ export const MainSlider = ({ slides }: { slides: BannerT[] | null }) => {
                   <h1 className="h1">{slide.title}</h1>
                   <p className="body_1">{slide.subtitle}</p>
                 </div>
-                <Button>Перейти в каталог</Button>
+                <Button as={Link} href={slide.button_link}>
+                  Перейти в каталог
+                </Button>
               </div>
             </div>
           </SwiperSlide>

@@ -13,6 +13,7 @@ import { CategoryT } from '@/shared/api/category/types';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { SortSelect } from '@/features/sort-select';
+import { CatalogSearch } from '@/features/catalog-search';
 
 export const CatalogSection = ({
   products,
@@ -43,14 +44,7 @@ export const CatalogSection = ({
         <Filters />
         <div className={s.productsContainer}>
           <div className={s.search}>
-            <div className={s.searchContainer}>
-              <TextField
-                variant="search"
-                placeholder="Поиск по категориям"
-                className={s.input}
-              />
-              <Button>Искать</Button>
-            </div>
+            <CatalogSearch />
             <div className={s.selectContainer}>
               <SortSelect />
               <FiltersMobile />

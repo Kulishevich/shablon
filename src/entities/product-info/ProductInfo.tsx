@@ -7,7 +7,7 @@ import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
 
 export const ProductInfo = ({ product }: { product: ProductT | null }) => {
-  const isDiscount = !!product?.discount;
+  const isDiscount = !!Number(product?.discount);
 
   const totalPrice = !!product?.discount
     ? Math.round(

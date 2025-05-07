@@ -62,6 +62,7 @@
   & > span {
     padding: vw-1440(2) vw-1440(6);
     border-radius: 4px;
+    opacity: 0.8;
     &.popular {
       color: var(--color-white);
       background-color: var(--color-accent-orange);
@@ -117,11 +118,11 @@
 
 .priceContainer {
   display: flex;
-  gap: vw-1440(45);
-
-  @media (max-width: 768px) {
-    gap: 0;
-    justify-content: space-between;
+  justify-content: space-between;
+  @media (min-width: 768px) {
+    & > button {
+      width: vw-1440(170);
+    }
   }
 }
 
@@ -129,7 +130,6 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
-  width: vw-1440(91);
   flex-shrink: 0;
 
   & > span {

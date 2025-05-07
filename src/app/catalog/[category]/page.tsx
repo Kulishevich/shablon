@@ -15,17 +15,19 @@ export default async function Catalog({
     page?: string;
     sort_direction?: string;
     sort_by?: string;
+    search?: string;
   }>;
 }) {
   const { category: categorySlug } = await params;
   const categoryId = categorySlug.split('_').findLast((elem) => elem) || '';
 
-  const { page, sort_by, sort_direction } = await searchParams;
+  const { page, sort_by, sort_direction, search } = await searchParams;
   const products = await getProducts({
     category_id: categoryId,
     page,
     sort_by,
     sort_direction,
+    search,
   });
   const category = await getCategoryById(categoryId);
 

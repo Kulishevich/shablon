@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import s from './ProductsImages.module.scss';
 import { ProductT } from '@/shared/api/product/types';
-
-const images = new Array(4).fill('/product.png');
+import clsx from 'clsx';
 
 export const ProductsImages = ({ product }: { product: ProductT | null }) => {
   const [activeImage, setActiveImage] = useState(
     product?.main_image.image_path
   );
+
+  const isDiscount = !!Number(product?.discount);
 
   return (
     <div className={s.images}>
@@ -35,9 +36,13 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
           alt="product"
         />
         <div className={s.tagsContainer}>
-          {product?.is_popular && <span className="tag">бестселлер</span>}
-          {product?.discount && <span className="tag">акция</span>}
-          {/* {product?.is_new && <span className="tag">Новинка</span>} */}
+          {product?.is_popular && (
+            <span className={clsx('tag', s.popular)}>бестселлер</span>
+          )}
+          {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
+          {product?.is_new && (
+            <span className={clsx('tag', s.new)}>новинка</span>
+          )}
         </div>
       </div>
     </div>
