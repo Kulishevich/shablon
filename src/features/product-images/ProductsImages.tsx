@@ -40,7 +40,7 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
             <span className={clsx('tag', s.popular)}>бестселлер</span>
           )}
           {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
-          {product?.is_new && (
+          {product?.is_novelty && (
             <span className={clsx('tag', s.new)}>новинка</span>
           )}
         </div>

@@ -1,5 +1,18 @@
 import { ProductsResponseT } from './types';
 
+type GetProductsProps = {
+  search?: string;
+  category_id?: string;
+  popular?: string;
+  novelty?: string;
+  price_from?: string;
+  price_to?: string;
+  sort_by?: string;
+  sort_direction?: string;
+  page?: string;
+  per_page?: string;
+};
+
 export const getProducts = async ({
   search,
   category_id,
@@ -11,18 +24,7 @@ export const getProducts = async ({
   sort_direction,
   page = '1',
   per_page = '9',
-}: {
-  search?: string;
-  category_id?: string;
-  popular?: string;
-  novelty?: string;
-  price_from?: string;
-  price_to?: string;
-  sort_by?: string;
-  sort_direction?: string;
-  page?: string;
-  per_page?: string;
-}): Promise<ProductsResponseT | null> => {
+}: GetProductsProps): Promise<ProductsResponseT | null> => {
   const params = new URLSearchParams();
 
   if (search) params.append('search', search);

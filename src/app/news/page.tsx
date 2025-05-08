@@ -10,7 +10,7 @@ export default async function News({
 }) {
   const page = (await searchParams).page || '1';
 
-  const newsList = await getAllNews();
+  const newsList = await getAllNews({ page });
 
   return (
     <>

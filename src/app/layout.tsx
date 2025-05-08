@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: data?.og_description ?? data?.description,
     },
     icons: {
-      icon: `${process.env.STORE_URL}/${settings?.favicon}`,
+      icon: `${process.env.NEXT_PUBLIC_STORE_URL}/${settings?.favicon}`,
     },
   };
 }

@@ -40,7 +40,7 @@ export const ProductCard = ({
           {product?.is_popular && (
             <span className={clsx('tag', s.popular)}>бестселлер</span>
           )}
-          {product?.is_new && (
+          {product?.is_novelty && (
             <span className={clsx('tag', s.new)}>новинка</span>
           )}
           {is_discount && (

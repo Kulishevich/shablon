@@ -1,8 +1,29 @@
 import { NewsListT } from './types';
 
-export const getAllNews = async (): Promise<NewsListT | null> => {
+type GetAllNewsProps = {
+  search?: string;
+  tag?: string;
+  page?: string;
+  per_page?: string;
+};
+
+export const getAllNews = async ({
+  search,
+  tag,
+  page,
+  per_page = '12',
+}: GetAllNewsProps): Promise<NewsListT | null> => {
+  const params = new URLSearchParams();
+
+  if (search) params.append('search', search);
+  if (tag) params.append('tag', tag);
+  if (page) params.append('page', page);
+  if (per_page) params.append('per_page', per_page);
+
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/news?${params.toString()}`;
+
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/news`);
+    const res = await fetch(url);
 
     const { data } = await res.json();
 

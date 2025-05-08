@@ -15,7 +15,7 @@ export default async function New({
   const id = (await params).slug;
   const news = await getNews(id);
 
-  const newsList = await getAllNews();
+  const newsList = await getAllNews({});
   const otherNews = newsList?.data?.filter((elem) => String(elem.id) !== id);
 
   return (

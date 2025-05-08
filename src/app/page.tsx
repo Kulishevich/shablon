@@ -13,7 +13,7 @@ import { Feedback } from '@/entities/feedback/Feedback';
 
 export default async function Home() {
   const popularProducts = await getPopularProducts();
-  const newsList = await getAllNews();
+  const newsList = await getAllNews({});
   const advantages = await getAdvantages();
   const banners = await getBanners();
   const setting = await getSetting();
