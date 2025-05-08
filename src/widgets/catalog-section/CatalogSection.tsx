@@ -1,10 +1,7 @@
-'use client';
 import React from 'react';
 import s from './CatalogSection.module.scss';
 import clsx from 'clsx';
 import { ProductCard } from '@/entities/product-card';
-import { Button } from '@/shared/ui/button';
-import { TextField } from '@/shared/ui/text-field';
 import { Pagination } from '@/shared/ui/pagination';
 import { Filters } from '@/features/filters';
 import { FiltersMobile } from '@/features/filters-mobile';
@@ -14,17 +11,20 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { SortSelect } from '@/features/sort-select';
 import { CatalogSearch } from '@/features/catalog-search';
+import { BrandT } from '@/shared/api/brands/types';
 
 export const CatalogSection = ({
   products,
   subcategoryId,
   category,
   page,
+  brands,
 }: {
   products: ProductsResponseT | null;
   subcategoryId?: number;
   category: CategoryT | null;
   page: string;
+  brands: BrandT[];
 }) => {
   return (
     <div className={s.container}>
@@ -41,7 +41,7 @@ export const CatalogSection = ({
         ))}
       </div>
       <div className={s.catalog}>
-        <Filters />
+        <Filters brands={brands} />
         <div className={s.productsContainer}>
           <div className={s.search}>
             <CatalogSearch />
@@ -51,18 +51,11 @@ export const CatalogSection = ({
             </div>
           </div>
           <div className={s.productList}>
-            {products?.data?.map((product, index) => (
-              <ProductCard key={index} product={product} />
-            ))}
+            {products?.data?.map((product, index) => <ProductCard key={index} product={product} />)}
           </div>
           <div className={s.pagination}>
-            <p className="body_7">
-              Найдено по фильтрам: {products?.total || 0}
-            </p>
-            <Pagination
-              totalPages={products?.last_page || 1}
-              currentPage={page}
-            />
+            <p className="body_7">Найдено по фильтрам: {products?.total || 0}</p>
+            <Pagination totalPages={products?.last_page || 1} currentPage={page} />
           </div>
         </div>
       </div>

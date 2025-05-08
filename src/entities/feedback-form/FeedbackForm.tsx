@@ -37,16 +37,14 @@ export const FeedbackForm = () => {
       showToast({
         variant: 'success',
         title: 'Спасибо за вашу заявку!',
-        message:
-          'Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы',
+        message: 'Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы',
       });
     } catch (err) {
       console.error(err);
       showToast({
         variant: 'error',
         title: 'Не получили вашу заявку...',
-        message:
-          'К сожалению, не получили вашу заявку. Повторите попытку снова.',
+        message: 'К сожалению, не получили вашу заявку. Повторите попытку снова.',
       });
     }
   });
@@ -81,6 +79,7 @@ export const FeedbackForm = () => {
             control={control}
             name="checked"
             label="Согласие на обработку персональных данных"
+            privacyPolicy
           />
         </div>
         <Button type="submit" className={s.submitButton} disabled={!isValid}>

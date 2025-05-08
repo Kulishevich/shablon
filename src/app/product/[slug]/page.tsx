@@ -5,11 +5,7 @@ import { getProductById } from '@/shared/api/product/getProductById';
 import { Feedback } from '@/entities/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 
-export default async function Product({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function Product({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
   const id = slug.split('_').findLast((elem) => elem) || '';
@@ -19,10 +15,12 @@ export default async function Product({
   return (
     <>
       <Breadcrumbs
-        dynamicPath={{
-          title: product?.name || '',
-          path: `${paths.product}/${product?.slug}_${product?.id}`,
-        }}
+        dynamicPath={[
+          {
+            title: product?.name || '',
+            path: `${paths.product}/${product?.slug}_${product?.id}`,
+          },
+        ]}
       />
       <main>
         <ProductSection product={product} />

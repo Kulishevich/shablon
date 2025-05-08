@@ -7,11 +7,7 @@ import { getNews } from '@/shared/api/news/getNews';
 import { Feedback } from '@/entities/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 
-export default async function New({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function New({ params }: { params: Promise<{ slug: string }> }) {
   const id = (await params).slug;
   const news = await getNews(id);
 
@@ -21,17 +17,17 @@ export default async function New({
   return (
     <>
       <Breadcrumbs
-        dynamicPath={{
-          title: news?.title || '',
-          path: `${paths.news}/${news?.id}`,
-        }}
+        dynamicPath={[
+          {
+            title: news?.title || '',
+            path: `${paths.news}/${news?.id}`,
+          },
+        ]}
       />
       <main>
         <NewsInfoSection news={news} />
         <SliderWrapper title="Другие новости" variant="news">
-          {otherNews?.map((news, index) => (
-            <NewsCard key={index} news={news} />
-          ))}
+          {otherNews?.map((news, index) => <NewsCard key={index} news={news} />)}
         </SliderWrapper>
         <Feedback />
       </main>

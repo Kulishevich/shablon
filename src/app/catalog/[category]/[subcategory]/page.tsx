@@ -5,13 +5,12 @@ import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/entities/feedback/Feedback';
 import { getCategoryById } from '@/shared/api/category/getCategoryById';
 import { paths } from '@/shared/config/constants/paths';
-import { getBrands } from '@/shared/api/brands/getBrands';
 
 export default async function Catalog({
   params,
   searchParams,
 }: {
-  params: Promise<{ category: string }>;
+  params: Promise<{ category: string; subcategory: string }>;
   searchParams: Promise<{
     page?: string;
     sort_direction?: string;
@@ -19,19 +18,21 @@ export default async function Catalog({
     search?: string;
   }>;
 }) {
-  const { category: categorySlug } = await params;
+  const { category: categorySlug, subcategory: subcategorySlug } = await params;
   const categoryId = categorySlug.split('_').findLast((elem) => elem) || '';
+  const subcategoryId = subcategorySlug.split('_').findLast((elem) => elem) || '';
 
   const { page, sort_by, sort_direction, search } = await searchParams;
   const products = await getProducts({
-    category_id: categoryId,
+    category_id: subcategoryId,
     page,
     sort_by,
     sort_direction,
     search,
   });
+
   const category = await getCategoryById(categoryId);
-  const brands = await getBrands();
+  const subcategory = await getCategoryById(subcategoryId);
 
   return (
     <>
@@ -39,7 +40,11 @@ export default async function Catalog({
         dynamicPath={[
           {
             title: category?.name || '',
-            path: `${paths.catalog}/${category?.slug}_${category?.id}`,
+            path: `/${category?.slug}_${category?.id}`,
+          },
+          {
+            title: subcategory?.name || '',
+            path: `/${subcategory?.slug}_${subcategory?.id}`,
           },
         ]}
       />
@@ -47,8 +52,8 @@ export default async function Catalog({
         <CatalogSection
           products={products}
           category={category}
+          subcategoryId={subcategory?.id}
           page={page || '1'}
-          brands={brands || []}
         />
         <PreviouslyViewed />
         <Feedback />

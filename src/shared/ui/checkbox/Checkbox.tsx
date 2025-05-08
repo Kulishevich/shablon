@@ -1,10 +1,4 @@
-import {
-  ComponentPropsWithoutRef,
-  ElementRef,
-  ReactNode,
-  forwardRef,
-  useId,
-} from 'react';
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useId } from 'react';
 
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import { clsx } from 'clsx';
@@ -20,6 +14,7 @@ export type CheckboxProps = {
   isRequired?: boolean;
   label?: ReactNode;
   errorMessage?: string;
+  privacyPolicy?: boolean;
 } & ComponentPropsWithoutRef<typeof RadixCheckbox.Root>;
 
 type CheckboxRef = ElementRef<typeof RadixCheckbox.Root>;
@@ -32,6 +27,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
     isRequired,
     label,
     errorMessage,
+    privacyPolicy = false,
     ...rest
   } = props;
   const checkboxId = useId();
@@ -46,25 +42,25 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
           ref={ref}
           {...rest}
         >
-          <RadixCheckbox.Indicator
-            className={clsx(s.indicator, disabled && s.disabled)}
-          >
+          <RadixCheckbox.Indicator className={clsx(s.indicator, disabled && s.disabled)}>
             <CheckedIcon className={clsx(s.icon, disabled && s.disabledIcon)} />
           </RadixCheckbox.Indicator>
         </RadixCheckbox.Root>
-        {label && (
-          <Link
-            href={paths.privacy_policy}
-            className={clsx(
-              s.label,
-              disabled && s.disabled,
-              'body_4',
-              isRequired && 'required'
-            )}
-          >
-            {label}
-          </Link>
-        )}
+        {label &&
+          (privacyPolicy ? (
+            <Link
+              href={paths.privacy_policy}
+              className={clsx(s.label, disabled && s.disabled, 'body_4', isRequired && 'required')}
+            >
+              {label}
+            </Link>
+          ) : (
+            <label
+              className={clsx(s.label, disabled && s.disabled, 'body_4', isRequired && 'required')}
+            >
+              {label}
+            </label>
+          ))}
       </div>
       {errorMessage && <span className={'error'}>{errorMessage}</span>}
     </div>

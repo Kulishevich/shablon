@@ -8,7 +8,7 @@ import { navigation } from '@/shared/config/constants/navigation';
 
 interface Props {
   className?: string;
-  dynamicPath?: { title: string; path: string };
+  dynamicPath?: { title: string; path: string }[];
 }
 
 export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
@@ -21,7 +21,7 @@ export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
 
   const pathArr = [
     ...pathNames.map((elem) => handlePathName(elem)),
-    !!dynamicPath && dynamicPath,
+    ...(dynamicPath ? [...dynamicPath] : []),
   ].filter((elem) => !!elem);
 
   return (
@@ -38,8 +38,8 @@ export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
             href={href || '/'}
             className={cn(
               s.elem,
-              lastItem && s.lastItem,
               lastItem ? 'body_6_bold' : 'body_6'
+              // lastItem && s.lastItem
             )}
             key={idx}
           >
