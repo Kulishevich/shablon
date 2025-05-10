@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import debounce from 'lodash.debounce';
 
@@ -9,16 +9,34 @@ import { CollapseFilter } from '@/shared/ui/collapse-filter';
 import clsx from 'clsx';
 import s from './Filters.module.scss';
 import { BrandT } from '@/shared/api/brands/types';
+import { PriceSlider } from '@/shared/ui/price-slider';
+import { TextField } from '@/shared/ui/text-field';
 
-export const Filters = ({ brands }: { brands: BrandT[] }) => {
-  const router = useRouter();
+export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; max: number }) => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const [minPrice, setMinPrice] = useState<number>(Number(searchParams.get('price_from')) || min);
+  const [maxPrice, setMaxPrice] = useState<number>(Number(searchParams.get('price_to')) || max);
   const [checkedBrands, setCheckedBrands] = useState<string[]>([]);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const initialBrands = searchParams.getAll('brands');
     setCheckedBrands(initialBrands);
   }, []);
+
+  const updatePriceUrl = useMemo(
+    () =>
+      debounce((min: number, max: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('price_from', min.toString());
+        params.set('price_to', max.toString());
+        params.set('page', '1');
+
+        router.push(`?${params.toString()}`);
+      }, 500),
+    [searchParams]
+  );
 
   const updateUrl = useMemo(
     () =>
@@ -28,16 +46,50 @@ export const Filters = ({ brands }: { brands: BrandT[] }) => {
         values.forEach((v) => params.append('brands', v));
         params.set('page', '1');
         router.push(`?${params.toString()}`);
-      }, 300),
+      }, 500),
     [searchParams]
   );
 
-  const handleChange = (value: string, checked: boolean) => {
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    updatePriceUrl(minPrice, maxPrice);
+  }, [minPrice, maxPrice]);
+
+  useEffect(() => {
+    return () => {
+      updatePriceUrl.cancel();
+      updateUrl.cancel();
+    };
+  }, [updatePriceUrl, updateUrl]);
+
+  const handleChangeBrands = (value: string, checked: boolean) => {
     const lower = value.toLowerCase();
     const updated = checked ? [...checkedBrands, lower] : checkedBrands.filter((v) => v !== lower);
 
     setCheckedBrands(updated);
     updateUrl(updated);
+  };
+
+  const handleChangePrice = (value: string, type: 'max' | 'min') => {
+    const numeric = Number(value);
+    if (!isNaN(numeric)) {
+      if (type === 'max') {
+        setMaxPrice(numeric);
+      } else {
+        setMinPrice(numeric);
+      }
+    }
+  };
+
+  const resetFilters = () => {
+    setCheckedBrands([]);
+    setMinPrice(min);
+    setMaxPrice(max);
+    router.push('?');
   };
 
   return (
@@ -47,22 +99,36 @@ export const Filters = ({ brands }: { brands: BrandT[] }) => {
           <Checkbox
             label={brand.name}
             checked={checkedBrands.includes(brand.name.toLowerCase())}
-            onCheckedChange={(checked) => handleChange(brand.name, !!checked)}
+            onCheckedChange={(checked) => handleChangeBrands(brand.name, !!checked)}
             key={index}
           />
         ))}
       </CollapseFilter>
 
-      <CollapseFilter title="Цена">cena</CollapseFilter>
+      <CollapseFilter title="Цена">
+        <div className={s.inputsContainer}>
+          <TextField
+            className={s.input}
+            value={minPrice}
+            onChange={(e) => handleChangePrice(e.target.value, 'min')}
+          />
+          <TextField
+            className={s.input}
+            value={maxPrice}
+            onChange={(e) => handleChangePrice(e.target.value, 'max')}
+          />
+        </div>
+        <PriceSlider
+          min={min}
+          max={max}
+          minPrice={minPrice}
+          setMinPrice={setMinPrice}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+        />
+      </CollapseFilter>
 
-      <Button
-        variant="secondary"
-        fullWidth
-        onClick={() => {
-          setCheckedBrands([]);
-          router.push('?');
-        }}
-      >
+      <Button variant="secondary" fullWidth onClick={resetFilters}>
         Сбросить фильтр
       </Button>
     </div>

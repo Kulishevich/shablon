@@ -44,10 +44,10 @@
   box-sizing: border-box;
   width: 100%;
 
-  outline: 1px solid #1114341a;
+  border: 1px solid #1114341a;
   border-radius: 4px;
   background-color: var(--color-white);
-  transition: outline 0.3s ease;
+  transition: border 0.3s ease;
 
   &::placeholder {
     color: var(--color-text);
@@ -58,11 +58,11 @@
     padding: vw-1440(20);
 
     &:focus {
-      outline: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-accent-1);
     }
 
     &:hover {
-      outline: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-accent-1);
     }
 
     &:disabled {
@@ -79,11 +79,11 @@
     padding-left: vw-1440(50);
 
     &:focus {
-      outline: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-accent-1);
     }
 
     &:hover {
-      outline: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-accent-1);
     }
 
     &:disabled {
@@ -127,7 +127,7 @@
 
 .error {
   color: var(--color-accent-red);
-  outline-color: var(--color-accent-red);
+  border-color: var(--color-accent-red);
 }
 
 .disabled {

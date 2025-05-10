@@ -19,12 +19,16 @@ export const CatalogSection = ({
   category,
   page,
   brands,
+  minPrice,
+  maxPrice,
 }: {
   products: ProductsResponseT | null;
   subcategoryId?: number;
   category: CategoryT | null;
   page: string;
   brands: BrandT[];
+  minPrice: number;
+  maxPrice: number;
 }) => {
   return (
     <div className={s.container}>
@@ -41,7 +45,7 @@ export const CatalogSection = ({
         ))}
       </div>
       <div className={s.catalog}>
-        <Filters brands={brands} />
+        <Filters brands={brands} min={minPrice} max={maxPrice} />
         <div className={s.productsContainer}>
           <div className={s.search}>
             <CatalogSearch />
