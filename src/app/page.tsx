@@ -22,15 +22,10 @@ export default async function Home() {
     <main>
       <MainSlider slides={banners || []} />
       <PopularProductsSection products={popularProducts} />
-      <AboutUsSection
-        text={setting?.about?.text || ''}
-        image={setting?.about?.image || ''}
-      />
+      <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
       <AdvantagesSection advantages={advantages} />
       <SliderWrapper title="Новости" variant="news">
-        {newsList?.data?.map((news, index) => (
-          <NewsCard key={index} news={news} />
-        ))}
+        {newsList?.data?.map((news, index) => <NewsCard key={index} news={news} />)}
       </SliderWrapper>
       <Feedback />
     </main>

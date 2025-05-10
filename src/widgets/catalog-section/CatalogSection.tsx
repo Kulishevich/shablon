@@ -51,7 +51,7 @@ export const CatalogSection = ({
             <CatalogSearch />
             <div className={s.selectContainer}>
               <SortSelect />
-              <FiltersMobile />
+              <FiltersMobile brands={brands} min={minPrice} max={maxPrice} />
             </div>
           </div>
           <div className={s.productList}>

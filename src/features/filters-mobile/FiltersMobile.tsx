@@ -5,8 +5,17 @@ import * as Dialog from '@radix-ui/react-dialog';
 import s from './FiltersMobile.module.scss';
 import { Filters } from '../filters/Filters';
 import clsx from 'clsx';
+import { BrandT } from '@/shared/api/brands/types';
 
-export const FiltersMobile = () => {
+export const FiltersMobile = ({
+  brands,
+  min,
+  max,
+}: {
+  brands: BrandT[];
+  min: number;
+  max: number;
+}) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild className={clsx(s.trigger, 'mobile-only')}>
@@ -19,7 +28,7 @@ export const FiltersMobile = () => {
           <Dialog.Title asChild>
             <h2 className="h2">Фильтр</h2>
           </Dialog.Title>
-          <Filters />
+          <Filters brands={brands} min={min} max={max} />
           <Dialog.Close asChild>
             <Button variant="icon_secondary" className={s.closeButton}>
               <CloseIcon />
