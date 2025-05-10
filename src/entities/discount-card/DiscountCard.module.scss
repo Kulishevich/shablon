@@ -6,6 +6,8 @@
   align-items: start;
   gap: vw-1440(16);
 
+  width: vw-1440(416);
+
   background-color: var(--color-grey);
   border-radius: 6px;
 
@@ -17,18 +19,18 @@
     box-shadow: 1px 4px 8px 0px #0b0c1908;
   }
   @media (max-width: 768px) {
+    width: 336px;
     gap: 16px;
   }
 }
 
 .imageContainer {
   position: relative;
-  width: vw-1440(416);
+  width: 100%;
   height: vw-1440(240);
   border-radius: 6px;
   overflow: hidden;
   @media (max-width: 768px) {
-    width: 336px;
     height: 180px;
   }
 }

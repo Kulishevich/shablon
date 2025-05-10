@@ -3,20 +3,25 @@ import { SliderWrapper } from '@/entities/slider-wrapper';
 import { DiscountCard } from '@/entities/discount-card';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { Feedback } from '@/entities/feedback/Feedback';
+import { getPromotion } from '@/shared/api/promotions/getPromotion';
+import { getPromotions } from '@/shared/api/promotions/getPromotions';
 
-export default function Share() {
+export default async function Share({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const id = slug.split('_').findLast((elem) => elem) || '1';
+  const promotion = await getPromotion(id);
+  const allPromotions = await getPromotions({});
+  const otherPromotions = allPromotions?.data.filter((elem) => elem.id !== +id);
+
   return (
-    <>
-      <Breadcrumbs />
-      <main>
-        <ShareInfo />
+    <main>
+      {!!promotion && <ShareInfo {...promotion} />}
+      {!!otherPromotions?.length && (
         <SliderWrapper title="Другие акции" variant="discount">
-          {new Array(12).fill('').map((_, index) => (
-            <DiscountCard key={index} />
-          ))}
+          {otherPromotions?.map((promotion, index) => <DiscountCard {...promotion} key={index} />)}
         </SliderWrapper>
-        <Feedback />
-      </main>
-    </>
+      )}
+      <Feedback />
+    </main>
   );
 }

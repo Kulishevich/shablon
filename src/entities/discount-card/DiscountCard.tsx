@@ -6,26 +6,24 @@ import { ArrowRightUpIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import clsx from 'clsx';
+import { PromotionT } from '@/shared/api/promotions/types';
 
-const discount = {
-  title: 'Скидка 10% на кухонные стулья! ',
-  image_path: '/discount.png',
-  date: 'с 01.02.2025 по 28.02.2025',
-};
-
-export const DiscountCard = () => {
+export const DiscountCard = ({ title, photo_path, start_date, end_date, slug, id }: PromotionT) => {
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
-        <Image src={discount.image_path} fill alt="discount" />
+        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt="discount" />
       </div>
       <div className={s.content}>
-        <span className={clsx(s.tag, 'tag')}>{discount.date}</span>
-        <h5 className={clsx(s.title, 'h5')}>{discount.title}</h5>
+        <span className={clsx(s.tag, 'tag')}>
+          С {new Date(start_date || '').toLocaleDateString('ru-RU')} по{' '}
+          {new Date(end_date || '').toLocaleDateString('ru-RU')}
+        </span>
+        <h5 className={clsx(s.title, 'h5')}>{title}</h5>
         <Button
           variant="link"
           as={Link}
-          href={`${paths.shares}/1`}
+          href={`${paths.shares}/${slug}_${id}`}
           className={s.button}
         >
           Подробнее

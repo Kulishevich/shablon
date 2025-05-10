@@ -25,6 +25,19 @@
       color: var(--color-accent-1);
     }
 
+    .breadcrumbs {
+      margin: 0;
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: vw-1440(12);
+      @media (max-width: 768px) {
+        gap: 10px;
+      }
+    }
+
     @media (max-width: 768px) {
       width: 335px;
       padding: 32px;

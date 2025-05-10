@@ -4,7 +4,6 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/entities/feedback/Feedback';
 import { getCategoryById } from '@/shared/api/category/getCategoryById';
-import { paths } from '@/shared/config/constants/paths';
 import { getBrands } from '@/shared/api/brands/getBrands';
 import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
 
