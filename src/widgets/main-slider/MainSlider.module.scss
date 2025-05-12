@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .wrapper {
   position: relative;
@@ -54,6 +54,10 @@
       & > button {
         width: 220px;
       }
+
+      & > a {
+        width: 220px;
+      }
     }
   }
   & > img {
@@ -67,7 +71,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(vw-1440(-720), -50%);
+  transform: translate(vw-1440(-754), -50%);
   z-index: 100;
   @media (max-width: 768px) {
     display: none;
@@ -78,7 +82,7 @@
   position: absolute;
   right: 50%;
   top: 50%;
-  transform: translate(vw-1440(720), -50%);
+  transform: translate(vw-1440(754), -50%);
 
   z-index: 100;
   @media (max-width: 768px) {

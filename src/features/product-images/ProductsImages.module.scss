@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .images {
   display: flex;
@@ -25,11 +25,15 @@
     border-radius: 6px;
     overflow: hidden;
     background-color: var(--color-grey);
-    border: none;
+    border: 1px solid transparent;
     flex-shrink: 0;
     &:hover {
       cursor: pointer;
       opacity: 0.8;
+    }
+
+    &.active {
+      border: 1px solid var(--color-accent-1);
     }
 
     @media (max-width: 768px) {

@@ -1,3 +1,10 @@
+.container {
+  .button {
+    color: var(--color-white);
+    background-color: var(--color-accent-1);
+  }
+}
+
 .content {
   position: absolute;
   top: 73px;

@@ -22,6 +22,7 @@ export const ProductCard = ({
   const dispatch = useDispatch();
   const totalPrice = !!product?.discount
     ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
     : product?.price;
 
   const is_discount = !!Number(product?.discount);
@@ -43,6 +44,9 @@ export const ProductCard = ({
           />
         </Link>
         <div className={s.tagsContainer}>
+          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
+          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
+          {is_discount && <span className={clsx('tag', s.discount)}>акция</span>}
           {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
           {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
           {is_discount && <span className={clsx('tag', s.discount)}>акция</span>}

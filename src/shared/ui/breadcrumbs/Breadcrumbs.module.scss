@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .container {
   width: vw-1440(1296);
@@ -11,7 +11,9 @@
   @media (max-width: 768px) {
     justify-content: center;
     gap: 6px;
-    width: 336px;
+    max-width: 336px;
+    width: 100%;
+    flex-wrap: wrap;
     margin: 24px auto 16px;
   }
 }

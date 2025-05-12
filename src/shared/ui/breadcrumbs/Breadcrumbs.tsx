@@ -33,18 +33,18 @@ export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
           .map((elem) => elem.path)
           .join('');
 
+        if (lastItem) {
+          return (
+            <p className={cn(s.elem, 'body_6_bold')} key={idx}>
+              {path?.title}
+            </p>
+          );
+        }
+
         return (
-          <Link
-            href={href || '/'}
-            className={cn(
-              s.elem,
-              lastItem ? 'body_6_bold' : 'body_6'
-              // lastItem && s.lastItem
-            )}
-            key={idx}
-          >
-            {!!idx && <ArrowRightIcon className={s.icon} />}
+          <Link href={href || '/'} className={cn(s.elem, 'body_6')} key={idx}>
             {path?.title}
+            <ArrowRightIcon className={s.icon} />
           </Link>
         );
       })}

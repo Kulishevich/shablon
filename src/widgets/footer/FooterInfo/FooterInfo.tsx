@@ -13,10 +13,7 @@ export const FooterInfo = () => {
     <div className={s.container}>
       <p className="body_7">ⓒ 2025 website.by</p>
       <div className={s.paymentMethod}>
-        <MasterCardIcon
-          width={!isMobile ? 35 : 26}
-          height={!isMobile ? 21 : 16}
-        />
+        <MasterCardIcon width={!isMobile ? 35 : 26} height={!isMobile ? 21 : 16} />
         <Image
           src={'/belcard-password.png'}
           width={!isMobile ? 56 : 41}
@@ -52,7 +49,7 @@ export const FooterInfo = () => {
       </div>
       <div className={s.productBy}>
         <p className="body_7">Дизайн и разработка: </p>
-        <Link href={'https://web-space.by/'} className="body_7">
+        <Link href={'https://web-space.by/'} className="body_7" target="_blank">
           Web-space.by
         </Link>
       </div>

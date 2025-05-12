@@ -18,14 +18,14 @@ export const NewsCard = ({ news }: { news: NewsT }) => {
   return (
     <Link href={`${paths.news}/${news?.id}`} className={s.cotnainer}>
       <div className={s.imageContainer}>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
-          fill
-          alt="news"
-        />
+        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`} fill alt="news" />
       </div>
       <span className={clsx(s.date, 'tag')}>
-        {new Date(news?.created_at || '').toLocaleString()}
+        {new Date(news?.created_at || '').toLocaleString('ru-RU', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        })}
       </span>
       <h5 className="h5">{news?.title}</h5>
       <Button as={'p'} variant="link" className={s.button}>

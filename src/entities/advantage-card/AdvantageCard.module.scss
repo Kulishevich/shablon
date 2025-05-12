@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -13,7 +13,12 @@
   background-color: var(--color-grey);
   border-radius: 6px;
 
-  box-shadow: 1px 4px 8px 0px #0b0c1908;
+  box-shadow:
+    1px 4px 8px 0 rgba(11, 12, 25, 0.03),
+    4px 14px 15px 0 rgba(11, 12, 25, 0.02),
+    8px 32px 20px 0 rgba(11, 12, 25, 0.01),
+    14px 57px 24px 0 rgba(11, 12, 25, 0.01),
+    22px 89px 26px 0 rgba(11, 12, 25, 0);
 
   i {
     font-size: vw-1440(54);

@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -15,11 +15,35 @@
     margin-bottom: vw-1440(24);
 
     @media (max-width: 768px) {
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
   }
+
+  .sku {
+    margin-bottom: vw-1440(16);
+    margin-top: vw-1440(4);
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  .sku_mobile {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     align-items: center;
     width: 336px;
+
+    .sku {
+      display: none;
+
+      &.sku_mobile {
+        margin-top: 0;
+        display: block;
+        margin-bottom: 24px;
+      }
+    }
   }
 }

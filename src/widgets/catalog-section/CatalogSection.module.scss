@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -79,6 +79,7 @@
     justify-content: space-between;
 
     @media (max-width: 768px) {
+      flex-direction: row;
       width: 100%;
       & > button:nth-child(1) {
         width: 176px;

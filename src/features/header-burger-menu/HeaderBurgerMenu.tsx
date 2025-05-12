@@ -40,17 +40,14 @@ export const HeaderBurgerMenu = ({
       <Button
         variant="icon_secondary"
         onClick={() => setIsOpen((prev) => !prev)}
+        className={s.button}
       >
         {isOpen ? <CloseIcon /> : <BurgerMobileIcon />}
       </Button>
       {isOpen && (
         <div className={s.content}>
           <div className={s.navigation}>
-            <Link
-              className="h2"
-              href={navigation[0].path}
-              onClick={() => setIsOpen(false)}
-            >
+            <Link className="h2" href={navigation[0].path} onClick={() => setIsOpen(false)}>
               {navigation[0].title}
             </Link>
             <CollapseHeader title={'Каталог'}>
@@ -66,17 +63,17 @@ export const HeaderBurgerMenu = ({
               ))}
             </CollapseHeader>
             {navigation.slice(1, 5).map((nav, index) => (
-              <Link
-                className="h2"
-                href={nav.path}
-                key={index}
-                onClick={() => setIsOpen(false)}
-              >
+              <Link className="h2" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
                 {nav.title}
               </Link>
             ))}
           </div>
-          <SocialMedia className={s.socialMedia} />
+          <SocialMedia
+            className={s.socialMedia}
+            telegram={contacts?.social_links?.telegram}
+            whatsapp={contacts?.social_links?.whatsapp}
+            viber={contacts?.social_links?.viber}
+          />
           <CompanyContacts contacts={contacts} />
         </div>
       )}

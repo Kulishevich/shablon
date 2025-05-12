@@ -14,7 +14,8 @@ export const SearchPopup = ({
   products: ProductT[];
 }) => {
   return (
-    <div className={s.content}>
+    <div className={s.wrapper}>
+      <div className={s.content}>
       <div className={s.categories}>
         <h6 className="h6">Поиск по категориям:</h6>
         {categories.map((category, index) => (
@@ -33,6 +34,7 @@ export const SearchPopup = ({
           <SearchProductCard {...product} key={product.id} />
         ))}
       </div>
+    </div>
     </div>
   );
 };

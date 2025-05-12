@@ -6,9 +6,7 @@ import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
 
 export const ProductsImages = ({ product }: { product: ProductT | null }) => {
-  const [activeImage, setActiveImage] = useState(
-    product?.main_image.image_path
-  );
+  const [activeImage, setActiveImage] = useState(product?.main_image.image_path);
 
   const isDiscount = !!Number(product?.discount);
 
@@ -19,7 +17,9 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
           <button
             onClick={() => setActiveImage(image.image_path)}
             key={index}
-            className={s.smallImage}
+            className={clsx(s.smallImage, {
+              [s.active]: activeImage === image.image_path,
+            })}
           >
             <Image
               src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image.image_path}`}
@@ -30,19 +30,11 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
         ))}
       </div>
       <div className={s.imageContainer}>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${activeImage}`}
-          fill
-          alt="product"
-        />
+        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${activeImage}`} fill alt="product" />
         <div className={s.tagsContainer}>
-          {product?.is_popular && (
-            <span className={clsx('tag', s.popular)}>бестселлер</span>
-          )}
+          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
           {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
-          {product?.is_novelty && (
-            <span className={clsx('tag', s.new)}>новинка</span>
-          )}
+          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
         </div>
       </div>
     </div>

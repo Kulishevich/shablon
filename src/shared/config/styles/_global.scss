@@ -1,4 +1,4 @@
-@use './functions' as *;
+@use "./functions" as *;
 
 * {
   box-sizing: border-box;
@@ -70,7 +70,9 @@ main {
   align-items: center;
   width: vw-1440(766);
   margin: 0 auto;
-  & > p {
+
+  & > p,
+  & > h1 {
     color: var(--color-accent-1);
   }
 
@@ -376,7 +378,7 @@ main {
 
 .required {
   &::after {
-    content: '*';
+    content: "*";
     color: var(--color-accent-red);
   }
 }

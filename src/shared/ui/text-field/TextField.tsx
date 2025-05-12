@@ -12,7 +12,7 @@ import {
 import clsx from 'clsx';
 
 import s from './TextField.module.scss';
-import { SearchIcon } from '../../assets';
+import { CloseIcon, SearchIcon } from '../../assets';
 
 export type TextFieldProps = {
   errorMessage?: ReactNode | string;
@@ -86,6 +86,12 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           value={value}
           {...rest}
         />
+        {isSearch && (
+          <CloseIcon
+            className={s.clearIcon}
+            onClick={() => onChange?.({ target: { value: '' } } as ChangeEvent<HTMLInputElement>)}
+          />
+        )}
       </div>
       {errorMessage && <span className={'error'}>{errorMessage}</span>}
     </div>

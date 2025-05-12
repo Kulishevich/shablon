@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -35,6 +35,18 @@
     left: 12px;
     width: 26px;
     height: 26px;
+  }
+}
+
+.clearIcon {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
@@ -93,6 +105,7 @@
     @media (max-width: 768px) {
       padding: 15px;
       padding-left: 50px;
+      padding-right: 43px;
     }
   }
 }
