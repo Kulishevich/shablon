@@ -9,21 +9,27 @@ import { CloseIcon, ShoppingCartIcon } from '@/shared/assets';
 import clsx from 'clsx';
 import s from './ProductCard.module.scss';
 import { ProductT } from '@/shared/api/product/types';
+import { useDispatch } from 'react-redux';
+import { addInCart } from '@/shared/lib/redux/slices/cartSlice';
 
 export const ProductCard = ({
   product,
   productInCart = false,
 }: {
   productInCart?: boolean;
-  product: ProductT | null;
+  product: ProductT;
 }) => {
+  const dispatch = useDispatch();
   const totalPrice = !!product?.discount
-    ? Math.round(
-        (Number(product?.price) * (100 - Number(product?.discount))) / 100
-      )
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
     : product?.price;
 
   const is_discount = !!Number(product?.discount);
+
+  const handleAddInCard = () => {
+    dispatch(addInCart({ ...product, quantity: 1 }));
+    showToast({ title: 'Добавлено в корзину', variant: 'success' });
+  };
 
   return (
     <div className={s.container}>
@@ -37,15 +43,9 @@ export const ProductCard = ({
           />
         </Link>
         <div className={s.tagsContainer}>
-          {product?.is_popular && (
-            <span className={clsx('tag', s.popular)}>бестселлер</span>
-          )}
-          {product?.is_novelty && (
-            <span className={clsx('tag', s.new)}>новинка</span>
-          )}
-          {is_discount && (
-            <span className={clsx('tag', s.discount)}>акция</span>
-          )}
+          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
+          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
+          {is_discount && <span className={clsx('tag', s.discount)}>акция</span>}
         </div>
         {productInCart && (
           <Button variant="icon_secondary" className={s.deleteButton}>
@@ -61,21 +61,13 @@ export const ProductCard = ({
 
       <div className={s.priceContainer}>
         <div className={s.price}>
-          {is_discount && (
-            <span className="discount">{product?.price} BYN</span>
-          )}
+          {is_discount && <span className="discount">{product?.price} BYN</span>}
           <h4 className="h4">{totalPrice} BYN</h4>
         </div>
-        <Button
-          fullWidth
-          onClick={() =>
-            showToast({ title: 'Добавлено в корзину', variant: 'success' })
-          }
-          className={'desktop-only'}
-        >
+        <Button fullWidth onClick={handleAddInCard} className={'desktop-only'}>
           В корзину
         </Button>
-        <Button variant={'icon_outlined'} className={'mobile-only'}>
+        <Button variant={'icon_outlined'} className={'mobile-only'} onClick={handleAddInCard}>
           <ShoppingCartIcon />
         </Button>
       </div>

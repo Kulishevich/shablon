@@ -1,9 +1,4 @@
-import React, {
-  ComponentPropsWithoutRef,
-  ElementType,
-  ForwardedRef,
-  forwardRef,
-} from 'react';
+import React, { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef } from 'react';
 
 import clsx from 'clsx';
 

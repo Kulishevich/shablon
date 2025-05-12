@@ -1,12 +1,15 @@
 'use client';
 import React from 'react';
-// import { RowProductCart } from '../../entities/row-product-cart';
+import { RowProductCart } from '../../entities/row-product-cart';
 import s from './CartTable.module.scss';
 import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
-// import { ProductCard } from '@/entities/product-card';
+import { ProductCard } from '@/entities/product-card';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/shared/lib/redux/store';
 
 export const CartTable = () => {
-  // const { isMobile } = useBreakpoint();
+  const productsCard = useSelector((state: RootState) => state.cart.items);
+  const { isMobile } = useBreakpoint();
 
   return (
     <div className={s.container}>
@@ -16,13 +19,13 @@ export const CartTable = () => {
         <h6 className="h6">Цена за шт.</h6>
         <h6 className="h6">Сумма (BYN)</h6>
       </div>
-      {/* {products.map((product) =>
+      {productsCard.map((product, index) =>
         !isMobile ? (
           <RowProductCart {...product} key={product.id} />
         ) : (
-          <ProductCard productInCart product={product} />
+          <ProductCard productInCart product={product} key={product.id} />
         )
-      )} */}
+      )}
     </div>
   );
 };

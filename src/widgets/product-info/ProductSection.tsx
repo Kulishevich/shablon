@@ -4,7 +4,7 @@ import { ProductInfo } from '@/entities/product-info';
 import s from './ProductSection.module.scss';
 import { ProductT } from '@/shared/api/product/types';
 
-export const ProductSection = ({ product }: { product: ProductT | null }) => {
+export const ProductSection = ({ product }: { product: ProductT }) => {
   return (
     <div className={s.container}>
       <span className="body_7">Артикул: {product?.sku}</span>

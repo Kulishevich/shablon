@@ -4,6 +4,7 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProductById } from '@/shared/api/product/getProductById';
 import { Feedback } from '@/entities/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
+import { notFound } from 'next/navigation';
 
 export default async function Product({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -11,6 +12,10 @@ export default async function Product({ params }: { params: Promise<{ slug: stri
   const id = slug.split('_').findLast((elem) => elem) || '';
 
   const product = await getProductById(id);
+
+  if (!product) {
+    notFound();
+  }
 
   return (
     <>

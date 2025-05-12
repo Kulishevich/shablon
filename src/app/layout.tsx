@@ -4,6 +4,7 @@ import '@/shared/config/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Footer } from '@/widgets/footer';
 import { Toaster } from 'sonner';
+
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { HeaderDesktop } from '@/widgets/header-desktop';
@@ -11,6 +12,7 @@ import { HeaderMobile } from '@/widgets/header-mobile';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
 import { getProducts } from '@/shared/api/product/getProducts';
+import { ReduxProvider } from '@/shared/lib/redux/ReduxProvider';
 
 const onest = Onest({
   variable: '--font-onest',
@@ -46,21 +48,23 @@ export default async function RootLayout({
   const products = await getProducts({});
   return (
     <html lang="en">
-      <body className={`${onest.variable}`}>
-        <HeaderDesktop
-          categories={categories || []}
-          contacts={contacts}
-          products={products?.data || []}
-        />
-        <HeaderMobile
-          categories={categories}
-          contacts={contacts}
-          products={products?.data || []}
-        />
-        {children}
-        <Footer categories={categories} contacts={contacts} />
-        <Toaster />
-      </body>
+      <ReduxProvider>
+        <body className={`${onest.variable}`}>
+          <HeaderDesktop
+            categories={categories || []}
+            contacts={contacts}
+            products={products?.data || []}
+          />
+          <HeaderMobile
+            categories={categories}
+            contacts={contacts}
+            products={products?.data || []}
+          />
+          {children}
+          <Footer categories={categories} contacts={contacts} />
+          <Toaster />
+        </body>
+      </ReduxProvider>
     </html>
   );
 }

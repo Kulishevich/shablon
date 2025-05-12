@@ -1,18 +1,16 @@
 import React from 'react';
 import s from './ProductInfo.module.scss';
-import { Button } from '@/shared/ui/button';
 import { DocumentIcon, HoursIcon, QualityStarIcon } from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
+import { ProductButton } from '@/features/product-button';
 
-export const ProductInfo = ({ product }: { product: ProductT | null }) => {
+export const ProductInfo = ({ product }: { product: ProductT }) => {
   const isDiscount = !!Number(product?.discount);
 
   const totalPrice = !!product?.discount
-    ? Math.round(
-        (Number(product?.price) * (100 - Number(product?.discount))) / 100
-      )
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
     : product?.price;
 
   return (
@@ -35,14 +33,10 @@ export const ProductInfo = ({ product }: { product: ProductT | null }) => {
       <div className={s.price}>
         <div className={s.priceContainer}>
           <div className={s.totalPrice}>
-            <p className={clsx('h2', isDiscount && s.discount)}>
-              {totalPrice} BYN
-            </p>
-            {isDiscount && (
-              <span className="discount">{product?.price} byn</span>
-            )}
+            <p className={clsx('h2', isDiscount && s.discount)}>{totalPrice} BYN</p>
+            {isDiscount && <span className="discount">{product?.price} byn</span>}
           </div>
-          <Button>В корзину</Button>
+          <ProductButton product={product} />
         </div>
 
         <div className={s.details}>

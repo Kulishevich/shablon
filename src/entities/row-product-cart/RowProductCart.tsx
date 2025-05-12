@@ -5,41 +5,46 @@ import Image from 'next/image';
 import { TextField } from '@/shared/ui/text-field';
 import clsx from 'clsx';
 import { CloseIcon } from '@/shared/assets';
+import { useDispatch } from 'react-redux';
+import { CartProduct, deleteFromCart } from '@/shared/lib/redux/slices/cartSlice';
 
 export const RowProductCart = ({
-  id,
   name,
-  articul,
-  image_path,
+  photo_path,
   price,
-  priceWithDiscount,
-}: any) => {
+  sku,
+  discount,
+  id,
+  quantity = 1,
+}: CartProduct) => {
+  const dispatch = useDispatch();
+  const isDiscount = !!Number(discount);
+  const totalPrice = isDiscount
+    ? Math.round((Number(price) * (100 - Number(discount))) / 100)
+    : +price;
+
   return (
     <div className={s.container}>
-      <Button variant="icon">
+      <Button variant="icon" onClick={() => dispatch(deleteFromCart(id))}>
         <CloseIcon />
       </Button>
       <div className={s.card}>
         <div className={s.imageContainer}>
-          <Image src={image_path} fill alt="product" />
+          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt="product" />
         </div>
         <div>
           <p className="body_4">{name}</p>
-          <span className="body_7">Артикул: {articul}</span>
+          <span className="body_7">Артикул: {sku}</span>
         </div>
       </div>
       <div className={s.count}>
-        <TextField className={s.input} />
+        <TextField className={s.input} defaultValue={quantity} />
       </div>
       <div className={s.price}>
-        <p className="body_3">{price} BYN</p>
-        {!!priceWithDiscount && (
-          <span className="discount">{priceWithDiscount} BYN</span>
-        )}
+        <p className="body_3">{totalPrice} BYN</p>
+        {isDiscount && <span className="discount">{+price} BYN</span>}
       </div>
-      <h5 className={clsx(!!priceWithDiscount && s.discount, 'h5')}>
-        {!!priceWithDiscount ? priceWithDiscount : price} BYN
-      </h5>
+      <h5 className={clsx(!!isDiscount && s.discount, 'h5')}>{totalPrice * quantity} BYN</h5>
     </div>
   );
 };
