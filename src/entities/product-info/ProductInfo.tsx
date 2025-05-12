@@ -11,7 +11,6 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
 
   const totalPrice = !!product?.discount
     ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
-    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
     : product?.price;
 
   return (
