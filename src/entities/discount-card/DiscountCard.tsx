@@ -16,8 +16,18 @@ export const DiscountCard = ({ title, photo_path, start_date, end_date, slug, id
       </div>
       <div className={s.content}>
         <span className={clsx(s.tag, 'tag')}>
-          С {new Date(start_date || '').toLocaleDateString('ru-RU')} по{' '}
-          {new Date(end_date || '').toLocaleDateString('ru-RU')}
+          С{' '}
+          {new Date(start_date || '').toLocaleDateString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          })}{' '}
+          по{' '}
+          {new Date(end_date || '').toLocaleDateString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          })}
         </span>
         <h5 className={clsx(s.title, 'h5')}>{title}</h5>
         <Button

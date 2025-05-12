@@ -12,7 +12,7 @@ import {
 import clsx from 'clsx';
 
 import s from './TextField.module.scss';
-import { SearchIcon } from '../../assets';
+import { CloseIcon, SearchIcon } from '../../assets';
 
 export type TextFieldProps = {
   errorMessage?: ReactNode | string;
@@ -23,83 +23,74 @@ export type TextFieldProps = {
 
 type TextFieldRef = ElementRef<'input'>;
 
-export const TextField = forwardRef<TextFieldRef, TextFieldProps>(
-  (props, ref) => {
-    const {
-      className,
-      disabled,
-      errorMessage,
-      isRequired = false,
-      label,
-      onChange,
-      placeholder,
-      value,
-      variant = 'text',
-      ...rest
-    } = props;
+export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) => {
+  const {
+    className,
+    disabled,
+    errorMessage,
+    isRequired = false,
+    label,
+    onChange,
+    placeholder,
+    value,
+    variant = 'text',
+    ...rest
+  } = props;
 
-    const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-    const id = useId();
+  const id = useId();
 
-    const isSearch = variant === 'search';
+  const isSearch = variant === 'search';
 
-    const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      onChange?.(e);
-      if (inputRef.current) {
-        inputRef.current.value = e.target.value;
+  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e);
+    if (inputRef.current) {
+      inputRef.current.value = e.target.value;
+    }
+  };
+
+  useEffect(() => {
+    if (inputRef) {
+      if (typeof value === 'string' && inputRef.current) {
+        inputRef.current.value = value;
       }
-    };
+    }
+  }, [value]);
 
-    useEffect(() => {
-      if (inputRef) {
-        if (typeof value === 'string' && inputRef.current) {
-          inputRef.current.value = value;
-        }
-      }
-    }, [value]);
-
-    return (
-      <div className={s.container}>
-        {label && (
-          <label
-            className={clsx(
-              disabled && s.disabled,
-              'h6',
-              isRequired && 'required'
-            )}
-            htmlFor={id}
-          >
-            {label}
-          </label>
-        )}
-        <div className={clsx(s.inputContainer, 'placeholder')}>
-          {isSearch && (
-            <SearchIcon
-              className={clsx(s.iconSearch, disabled && s.disabled)}
-            />
+  return (
+    <div className={s.container}>
+      {label && (
+        <label
+          className={clsx(disabled && s.disabled, 'h6', isRequired && 'required')}
+          htmlFor={id}
+        >
+          {label}
+        </label>
+      )}
+      <div className={clsx(s.inputContainer, 'placeholder')}>
+        {isSearch && <SearchIcon className={clsx(s.iconSearch, disabled && s.disabled)} />}
+        <input
+          className={clsx(
+            s.input,
+            s[variant],
+            errorMessage && s.error,
+            disabled && s.disabled,
+            className
           )}
-          <input
-            className={clsx(
-              s.input,
-              s[variant],
-              errorMessage && s.error,
-              disabled && s.disabled,
-              className
-            )}
-            disabled={disabled}
-            id={id}
-            onChange={inputChangeHandler}
-            placeholder={placeholder}
-            ref={ref}
-            value={value}
-            {...rest}
-          />
-        </div>
-        {errorMessage && <span className={'error'}>{errorMessage}</span>}
+          disabled={disabled}
+          id={id}
+          onChange={inputChangeHandler}
+          placeholder={placeholder}
+          ref={ref}
+          value={value}
+          {...rest}
+        />
+        {isSearch && <CloseIcon className={s.clearIcon} />}
       </div>
-    );
-  }
-);
+      {errorMessage && <span className={'error'}>{errorMessage}</span>}
+    </div>
+  );
+});
 
 TextField.displayName = 'TextField';

@@ -8,16 +8,21 @@
 }
 
 .trigger {
-  width: 100%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   gap: 8px;
   align-items: center;
+  position: relative;
 
   border: none;
   background-color: var(--color-white);
 
   & > svg {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%) translateX(100%) rotate(90deg);
     transition: transform 0.3s ease;
     background-color: transparent;
     border: none;
@@ -32,19 +37,19 @@
       color: var(--color-accent-1);
     }
   }
-  &[data-state='open'] {
+  &[data-state="open"] {
     & > svg {
-      transform: rotate(90deg);
+      transform: translateY(-50%) translateX(100%) rotate(270deg);
     }
   }
 }
 
 .content {
   overflow: hidden;
-  &[data-state='open'] {
+  &[data-state="open"] {
     animation: slideDown 300ms ease-out;
   }
-  &[data-state='closed'] {
+  &[data-state="closed"] {
     animation: slideUp 300ms ease-out;
   }
 }

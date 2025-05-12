@@ -13,16 +13,16 @@ export const NewsInfoSection = ({ news }: { news: NewsT | null }) => {
       <div className={s.titleContainer}>
         <div className={s.title}>
           <span className="h5">
-            {new Date(news?.created_at || '').toLocaleDateString('ru-RU')}
+            {new Date(news?.created_at || '').toLocaleDateString('ru-RU', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })}
           </span>
           <h1 className="h1">{news?.title}</h1>
         </div>
         <div className={s.imageContainer}>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
-            fill
-            alt="new"
-          />
+          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`} fill alt="new" />
         </div>
       </div>
       <div className={s.content}>

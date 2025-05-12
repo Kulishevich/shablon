@@ -1,4 +1,4 @@
-@use '../../../shared/config/styles/functions' as *;
+@use "../../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -37,10 +37,14 @@
 }
 
 .productBy {
-  display: flex;
-
+  & > p {
+    display: inline;
+  }
   & > a {
+    display: inline;
     color: var(--color-white);
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
     &:hover {
       color: var(--color-accent-1);
     }

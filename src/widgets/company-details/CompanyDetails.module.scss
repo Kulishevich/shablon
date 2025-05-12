@@ -1,11 +1,11 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
   flex-direction: column;
   gap: vw-1440(24);
 
-  width: vw-1440(966);
+  width: vw-1440(1296);
 
   @media (max-width: 768px) {
     width: 336px;
@@ -16,7 +16,7 @@
 
 .content {
   display: flex;
-  justify-content: space-between;
+  gap: vw-1440(134);
 
   @media (max-width: 768px) {
     flex-direction: column;

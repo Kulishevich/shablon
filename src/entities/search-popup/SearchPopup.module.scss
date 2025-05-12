@@ -1,11 +1,18 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
-.content {
+.wrapper {
   position: absolute;
   top: vw-1440(68);
   left: 0;
   z-index: 1000;
+  overflow: hidden;
 
+  width: 100%;
+  height: vw-1440(520);
+  border-radius: 6px;
+}
+
+.content {
   width: 100%;
   height: vw-1440(520);
   padding: vw-1440(24);
@@ -17,7 +24,7 @@
 
   background-color: var(--color-white);
   border-radius: 6px;
-  overflow: hidden;
+  overflow-y: auto;
 
   animation: fadeIn 0.3s ease-out;
 }

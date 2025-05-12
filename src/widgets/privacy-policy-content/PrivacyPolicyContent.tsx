@@ -8,7 +8,7 @@ export const PrivacyPolicyContent = ({
 }) => {
   return (
     <div className={s.container}>
-      <h1 className="h1">Политика конфиденциальности</h1>
+      <h1 className="h1" lang="ru">Политика конфиденциальности</h1>
       <div className={s.content}>
         <p className="body_2">{content}</p>
       </div>

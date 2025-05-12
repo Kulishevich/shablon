@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -6,6 +6,12 @@
   gap: vw-1440(36);
 
   width: vw-1440(1296);
+
+  h1 {
+    hyphens: auto;
+    width: 335px;
+    text-align: center;
+  }
 }
 
 .content {

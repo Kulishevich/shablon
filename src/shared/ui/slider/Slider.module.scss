@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .container {
   position: relative;
@@ -28,7 +28,7 @@
 
 .iconLeft {
   position: absolute;
-  left: vw-1440(-90);
+  left: vw-1440(-106);
   bottom: 50%;
   transform: translateY(50%);
 
@@ -50,7 +50,7 @@
 
 .iconRight {
   position: absolute;
-  right: vw-1440(-90);
+  right: vw-1440(-106);
 
   bottom: 50%;
   transform: translateY(50%);

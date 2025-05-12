@@ -10,9 +10,7 @@ export const ProductInfo = ({ product }: { product: ProductT | null }) => {
   const isDiscount = !!Number(product?.discount);
 
   const totalPrice = !!product?.discount
-    ? Math.round(
-        (Number(product?.price) * (100 - Number(product?.discount))) / 100
-      )
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
     : product?.price;
 
   return (
@@ -35,12 +33,8 @@ export const ProductInfo = ({ product }: { product: ProductT | null }) => {
       <div className={s.price}>
         <div className={s.priceContainer}>
           <div className={s.totalPrice}>
-            <p className={clsx('h2', isDiscount && s.discount)}>
-              {totalPrice} BYN
-            </p>
-            {isDiscount && (
-              <span className="discount">{product?.price} byn</span>
-            )}
+            <p className={clsx('h2', isDiscount && s.discount)}>{totalPrice} BYN</p>
+            {isDiscount && <span className="discount">{Number(product?.price)} byn</span>}
           </div>
           <Button>В корзину</Button>
         </div>
