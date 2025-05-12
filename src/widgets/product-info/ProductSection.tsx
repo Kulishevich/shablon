@@ -4,7 +4,7 @@ import { ProductInfo } from '@/entities/product-info';
 import s from './ProductSection.module.scss';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
-export const ProductSection = ({ product }: { product: ProductT | null }) => {
+export const ProductSection = ({ product }: { product: ProductT }) => {
   return (
     <div className={s.container}>
       <div className={clsx(s.sku, 'body_7')}>
