@@ -18,9 +18,7 @@ export const ProductCard = ({
   product: ProductT | null;
 }) => {
   const totalPrice = !!product?.discount
-    ? Math.round(
-        (Number(product?.price) * (100 - Number(product?.discount))) / 100
-      )
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
     : product?.price;
 
   const is_discount = !!Number(product?.discount);
@@ -37,15 +35,9 @@ export const ProductCard = ({
           />
         </Link>
         <div className={s.tagsContainer}>
-          {product?.is_popular && (
-            <span className={clsx('tag', s.popular)}>бестселлер</span>
-          )}
-          {product?.is_novelty && (
-            <span className={clsx('tag', s.new)}>новинка</span>
-          )}
-          {is_discount && (
-            <span className={clsx('tag', s.discount)}>акция</span>
-          )}
+          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
+          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
+          {is_discount && <span className={clsx('tag', s.discount)}>акция</span>}
         </div>
         {productInCart && (
           <Button variant="icon_secondary" className={s.deleteButton}>
@@ -61,16 +53,12 @@ export const ProductCard = ({
 
       <div className={s.priceContainer}>
         <div className={s.price}>
-          {is_discount && (
-            <span className="discount">{product?.price} BYN</span>
-          )}
+          {is_discount && <span className="discount">{Number(product?.price)} BYN</span>}
           <h4 className="h4">{totalPrice} BYN</h4>
         </div>
         <Button
           fullWidth
-          onClick={() =>
-            showToast({ title: 'Добавлено в корзину', variant: 'success' })
-          }
+          onClick={() => showToast({ title: 'Добавлено в корзину', variant: 'success' })}
           className={'desktop-only'}
         >
           В корзину

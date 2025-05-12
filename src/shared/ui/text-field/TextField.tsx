@@ -86,7 +86,12 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           value={value}
           {...rest}
         />
-        {isSearch && <CloseIcon className={s.clearIcon} />}
+        {isSearch && (
+          <CloseIcon
+            className={s.clearIcon}
+            onClick={() => onChange?.({ target: { value: '' } } as ChangeEvent<HTMLInputElement>)}
+          />
+        )}
       </div>
       {errorMessage && <span className={'error'}>{errorMessage}</span>}
     </div>

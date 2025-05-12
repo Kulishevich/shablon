@@ -18,13 +18,20 @@ export const HeaderSearchPopup = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [searchValue, setSearchValue] = useState('');
+
+  const searchResult = {
+    categories: categories?.filter((category) =>
+      category.name.toLowerCase().includes(searchValue.toLowerCase())
+    ),
+    products: products?.filter((product) =>
+      product.name.toLowerCase().includes(searchValue.toLowerCase())
+    ),
+  };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(e.target as Node)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -43,21 +50,27 @@ export const HeaderSearchPopup = ({
       </Button>
       {isOpen && (
         <div className={s.container}>
-          <TextField variant="search" />
+          <TextField
+            variant="search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
           <div className={s.content}>
             <div className={s.categories}>
               <h6 className="h6">Поиск по категориям:</h6>
-              {categories?.map((category, index) => (
-                <Link className="body_4" key={index} href={'/'}>
-                  {category.name}
-                </Link>
-              ))}
+              {searchValue.length > 0 &&
+                searchResult.categories?.map((category, index) => (
+                  <Link className="body_4" key={index} href={'/'}>
+                    {category.name}
+                  </Link>
+                ))}
             </div>
             <div className={s.products}>
               <h6 className="h6">Поиск по товарам:</h6>
-              {products.map((product) => (
-                <SearchProductCard {...product} key={product.id} />
-              ))}
+              {searchValue.length > 0 &&
+                searchResult.products?.map((product) => (
+                  <SearchProductCard {...product} key={product.id} />
+                ))}
             </div>
           </div>
         </div>
