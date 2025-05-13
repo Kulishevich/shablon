@@ -16,7 +16,7 @@ export const CartSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 11500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
