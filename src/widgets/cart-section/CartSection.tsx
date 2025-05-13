@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './CartSection.module.scss';
 import { Button } from '@/shared/ui/button';
 import { ArrowRightUpIcon } from '@/shared/assets';
@@ -7,9 +7,23 @@ import { CartTable } from '@/features/cart-table';
 import { CartPrice } from '@/features/cart-price';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '@/shared/lib/redux/slices/cartSlice';
+import { Loader } from '@/shared/ui/loader';
 
 export const CartSection = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 11500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className={s.container}>
