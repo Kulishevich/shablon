@@ -46,9 +46,6 @@ export const ProductCard = ({
           {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
           {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
           {is_discount && <span className={clsx('tag', s.discount)}>акция</span>}
-          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
-          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
-          {is_discount && <span className={clsx('tag', s.discount)}>акция</span>}
         </div>
         {productInCart && (
           <Button variant="icon_secondary" className={s.deleteButton}>
