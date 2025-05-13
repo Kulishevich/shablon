@@ -46,8 +46,20 @@ export default async function RootLayout({
   const categories = await getCategories();
   const contacts = await getContacts();
   const products = await getProducts({});
+  const settings = await getSetting();
+
   return (
     <html lang="en">
+      <head>
+        <style>
+          {`:root {
+            --color-accent-1: ${settings?.colors.primary};
+            --color-accent-2: ${settings?.colors.accent};
+            --color-accent-red: ${settings?.colors.secondary};
+            --color-accent-green: ${settings?.colors.button_secondary};
+          }`}
+        </style>
+      </head>
       <ReduxProvider>
         <body className={`${onest.variable}`}>
           <HeaderDesktop
