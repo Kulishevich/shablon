@@ -64,7 +64,11 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
               />
               <div className={s.content}>
                 <div>
-                  <h1 className="h1">{slide.title}</h1>
+                  {index === 0 ? (
+                    <h1 className="h1">{slide.title}</h1>
+                  ) : (
+                    <h2 className="h1">{slide.title}</h2>
+                  )}
                   <p className="body_1">{slide.subtitle}</p>
                 </div>
                 <Button as={Link} href={slide.button_link}>
@@ -76,18 +80,10 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
         ))}
       </Swiper>
 
-      <Button
-        variant="icon_primary"
-        onClick={handlePrev}
-        className={s.iconLeft}
-      >
+      <Button variant="icon_primary" onClick={handlePrev} className={s.iconLeft}>
         <ArrowLeftIcon />
       </Button>
-      <Button
-        variant="icon_primary"
-        onClick={handleNext}
-        className={s.iconRight}
-      >
+      <Button variant="icon_primary" onClick={handleNext} className={s.iconRight}>
         <ArrowRightIcon />
       </Button>
       <div className={`custom-pagination ${s.pagination}`} />
