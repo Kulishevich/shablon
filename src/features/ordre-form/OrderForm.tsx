@@ -1,75 +1,25 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import s from './OrderForm.module.scss';
-import { TextField } from '@/shared/ui/text-field';
 import { DeliveryCard } from '@/entities/delivery-card';
 import { Button } from '@/shared/ui/button';
-import {
-  ArrowRightUpIcon,
-  CashIcon,
-  CreditCardIcon,
-  EripIcon,
-  MasterCardIcon,
-  VisaIcon,
-} from '@/shared/assets';
+import { ArrowRightUpIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
-import { TextArea } from '@/shared/ui/text-area';
 import { PaymentMethodCard } from '@/entities/payment-method-card';
-import Image from 'next/image';
 import { useFormContext } from 'react-hook-form';
 import { ControlledTextField } from '@/shared/ui/controlled-text-field';
 import { ControlledTextArea } from '@/shared/ui/controlled-text-area/ControlledTextArea';
+import { PaymentT } from '@/shared/api/payment-methods/types';
+import { DeliveryT } from '@/shared/api/delivery-methods/types';
 
-const deliveryTypes = [
-  {
-    id: 1,
-    title: 'Самовывоз',
-    description: 'В рабочее время пункта выдачи',
-    price: 0,
-  },
-  {
-    id: 2,
-    title: 'Экспресс-доставка',
-    description: 'В рабочее время пункта выдачи',
-    price: 40,
-  },
-  {
-    id: 3,
-    title: 'Обычная доставка',
-    description: 'В течение 3 дней',
-    price: 20,
-  },
-];
-
-const paymentMethod = [
-  {
-    id: 1,
-    title: 'Оплата картой онлайн',
-    icons: [
-      <MasterCardIcon />,
-      <VisaIcon />,
-      <Image src="/belcard.png" width={30} height={33} alt="belcard" />,
-    ],
-  },
-  {
-    id: 2,
-    title: 'Оплата через ЕРИП',
-    icons: [<EripIcon />],
-  },
-  {
-    id: 3,
-    title: 'Оплата картой в пункте выдачи',
-    icons: [<CreditCardIcon />],
-  },
-  {
-    id: 4,
-    title: 'Оплата наличными в пункте выдачи',
-    icons: [<CashIcon />],
-  },
-];
-
-export const OrderForm = () => {
+export const OrderForm = ({
+  paymentMethods,
+  deliveryMethods,
+}: {
+  paymentMethods: PaymentT[] | null;
+  deliveryMethods: DeliveryT[] | null;
+}) => {
   const { control, watch, setValue } = useFormContext();
 
   const deliveryMethodId = watch('delivery_method_id');
@@ -132,12 +82,15 @@ export const OrderForm = () => {
           </Button>
         </div>
         <div className={s.delivery}>
-          {deliveryTypes.map((item) => (
+          {deliveryMethods?.map((item) => (
             <DeliveryCard
               {...item}
               key={item.id}
               active={deliveryMethodId === item.id}
-              onClick={() => setValue('delivery_method_id', item.id)}
+              onClick={() => {
+                setValue('delivery_cost', +item.cost);
+                setValue('delivery_method_id', item.id);
+              }}
             />
           ))}
         </div>
@@ -172,7 +125,7 @@ export const OrderForm = () => {
           <p className="h3">Способ оплаты</p>
         </div>
         <div className={s.paymentMethod}>
-          {paymentMethod.map((item) => (
+          {paymentMethods?.map((item) => (
             <PaymentMethodCard
               {...item}
               key={item.id}

@@ -7,37 +7,40 @@ import { CartTable } from '@/features/cart-table';
 import { CartPrice } from '@/features/cart-price';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '@/shared/lib/redux/slices/cartSlice';
-import { Loader } from '@/shared/ui/loader';
+// import { Loader } from '@/shared/ui/loader';
+import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
 
 export const CartSection = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 500);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
-    <div className={s.container}>
-      <div className={s.title}>
-        <h1 className="h1">Корзина</h1>
-        <Button variant="link" as="button" onClick={() => dispatch(clearCart())}>
-          Очистить корзину
-          <ArrowRightUpIcon />
-        </Button>
+    <SectionAnimationWrapper>
+      <div className={s.container}>
+        <div className={s.title}>
+          <h1 className="h1">Корзина</h1>
+          <Button variant="link" as="button" onClick={() => dispatch(clearCart())}>
+            Очистить корзину
+            <ArrowRightUpIcon />
+          </Button>
+        </div>
+        <div className={s.content}>
+          <CartTable />
+          <CartPrice />
+        </div>
       </div>
-      <div className={s.content}>
-        <CartTable />
-        <CartPrice />
-      </div>
-    </div>
+    </SectionAnimationWrapper>
   );
 };

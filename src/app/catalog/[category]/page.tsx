@@ -20,12 +20,13 @@ export default async function Catalog({
     search?: string;
     price_from?: string;
     price_to?: string;
+    brand?: string;
   }>;
 }) {
   const { category: categorySlug } = await params;
   const category_id = categorySlug.split('_').findLast((elem) => elem) || '';
 
-  const { page, sort_by, sort_direction, search, price_from, price_to } = await searchParams;
+  const { page, sort_by, sort_direction, search, price_from, price_to, brand } = await searchParams;
   const products = await getProducts({
     category_id,
     page,
@@ -34,9 +35,10 @@ export default async function Catalog({
     search,
     price_from,
     price_to,
+    brand,
   });
   const category = await getCategoryById(category_id);
-  const brands = await getBrands();
+  const allBrands = await getBrands();
   const allProducts = await getProductsWithoutPagination({ category_id, search });
 
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
@@ -59,7 +61,7 @@ export default async function Catalog({
           products={products}
           category={category}
           page={page || '1'}
-          brands={brands || []}
+          brands={allBrands || []}
           minPrice={minPrice}
           maxPrice={maxPrice}
         />

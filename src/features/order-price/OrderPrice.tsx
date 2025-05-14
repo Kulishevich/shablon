@@ -11,10 +11,12 @@ import {
 } from '@/shared/lib/redux/selectors/CartSelectors';
 
 export const OrderPrice = () => {
-  const { control } = useFormContext();
+  const { control, watch } = useFormContext();
 
   const priceWithOutDiscount = useSelector(selectCartPriceWithOutDiscount);
   const priceWithDiscount = useSelector(selectCartPriceWithDiscount);
+
+  const deliveryCost = watch('delivery_cost');
 
   return (
     <div className={s.container}>
@@ -33,12 +35,12 @@ export const OrderPrice = () => {
         </div>
         <div className={s.elem}>
           <p className="body_7">Стоимость доставки</p>
-          <h5 className="h5">30 BYN</h5>
+          <h5 className="h5">{deliveryCost} BYN</h5>
         </div>
       </div>
       <div className={s.elem}>
         <h5 className="h5">Итого</h5>
-        <h3 className="h3">{priceWithDiscount} BYN</h3>
+        <h3 className="h3">{priceWithDiscount + deliveryCost} BYN</h3>
       </div>
       <ControlledCheckbox
         control={control}

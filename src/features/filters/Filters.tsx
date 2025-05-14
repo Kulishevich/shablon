@@ -21,7 +21,8 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    const initialBrands = searchParams.getAll('brands');
+    const brandParam = searchParams.get('brand');
+    const initialBrands = brandParam ? brandParam.split(',') : [];
     setCheckedBrands(initialBrands);
   }, []);
 
@@ -42,8 +43,7 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
     () =>
       debounce((values: string[]) => {
         const params = new URLSearchParams(searchParams.toString());
-        params.delete('brands');
-        values.forEach((v) => params.append('brands', v));
+        params.set('brand', values.join(','));
         params.set('page', '1');
         router.push(`?${params.toString()}`);
       }, 500),

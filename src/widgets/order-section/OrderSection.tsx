@@ -9,8 +9,10 @@ import { DeliveryT } from '@/shared/api/delivery-methods/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { orderFormSchema } from '@/shared/validation/order-scheme-creator';
 import { postOrder } from '@/shared/api/order/postOrder';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/redux/store';
+import { clearCart } from '@/shared/lib/redux/slices/cartSlice';
+import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
 
 export const OrderSection = ({
   paymentMethods,
@@ -20,6 +22,7 @@ export const OrderSection = ({
   deliveryMethods: DeliveryT[] | null;
 }) => {
   const productsCart = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useDispatch();
 
   const form = useForm({
     defaultValues: {
@@ -28,10 +31,11 @@ export const OrderSection = ({
       patronymic: '',
       phone: '',
       email: '',
-      delivery_method_id: 1,
+      delivery_method_id: deliveryMethods?.[0]?.id,
+      delivery_cost: Number(deliveryMethods?.[0]?.cost) || 0,
       address: '',
       comment: '',
-      payment_method_id: 1,
+      payment_method_id: paymentMethods?.[0]?.id,
       checked: false,
     },
     mode: 'onChange',
@@ -40,32 +44,36 @@ export const OrderSection = ({
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    const { checked, name, surname, patronymic, ...otherData } = data;
+    const { checked, name, surname, patronymic, delivery_cost, ...otherData } = data;
     const items = productsCart.map((product) => ({
       product_id: product.id,
       quantity: product.quantity,
     }));
 
     try {
-      const res = await postOrder({
+      await postOrder({
         ...otherData,
         customer_name: `${name} ${surname} ${patronymic}`,
         items,
       });
+
+      dispatch(clearCart());
     } catch (err) {
       console.log(err);
     }
   });
 
   return (
-    <FormProvider {...form}>
-      <div className={s.container}>
-        <h1 className="h1">Оформление заказа</h1>
-        <form onSubmit={onSubmit} className={s.content}>
-          <OrderForm />
-          <OrderPrice />
-        </form>
-      </div>
-    </FormProvider>
+    <SectionAnimationWrapper>
+      <FormProvider {...form}>
+        <div className={s.container}>
+          <h1 className="h1">Оформление заказа</h1>
+          <form onSubmit={onSubmit} className={s.content}>
+            <OrderForm paymentMethods={paymentMethods} deliveryMethods={deliveryMethods} />
+            <OrderPrice />
+          </form>
+        </div>
+      </FormProvider>
+    </SectionAnimationWrapper>
   );
 };

@@ -9,6 +9,7 @@ type GetProductsProps = {
   price_to?: string;
   sort_by?: string;
   sort_direction?: string;
+  brand?: string;
   page?: string;
   per_page?: string;
 };
@@ -22,6 +23,7 @@ export const getProducts = async ({
   price_to,
   sort_by,
   sort_direction,
+  brand,
   page = '1',
   per_page = '9',
 }: GetProductsProps): Promise<ProductsResponseT | null> => {
@@ -35,6 +37,7 @@ export const getProducts = async ({
   if (price_to) params.append('price_to', price_to);
   if (sort_by) params.append('sort_by', sort_by);
   if (sort_direction) params.append('sort_direction', sort_direction);
+  if (brand) params.append('brand', brand);
   if (page) params.append('page', page);
   if (per_page) params.append('per_page', per_page);
 

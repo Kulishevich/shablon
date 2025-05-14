@@ -7,6 +7,7 @@ import {
   phoneScheme,
 } from '@/shared/validation/validation';
 import { z } from 'zod';
+import { validation } from './validation.errors';
 
 export const orderFormSchema = z.object({
   name: nameScheme(),
@@ -21,8 +22,9 @@ export const orderFormSchema = z.object({
     })
     .int()
     .min(1, 'Выберите способ доставки'),
+  delivery_cost: z.number(),
   address: addressScheme(),
-  comment: commentScheme(),
+  comment: z.string().max(300, validation.maxLength),
   payment_method_id: z
     .number({
       required_error: 'Выберите способ оплаты',
