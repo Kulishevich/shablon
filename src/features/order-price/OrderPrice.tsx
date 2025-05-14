@@ -2,9 +2,20 @@ import { Button } from '@/shared/ui/button';
 import { TextField } from '@/shared/ui/text-field';
 import React from 'react';
 import s from './OrderPrice.module.scss';
-import { Checkbox } from '@/shared/ui/checkbox';
+import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
+import { useFormContext } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import {
+  selectCartPriceWithDiscount,
+  selectCartPriceWithOutDiscount,
+} from '@/shared/lib/redux/selectors/CartSelectors';
 
 export const OrderPrice = () => {
+  const { control } = useFormContext();
+
+  const priceWithOutDiscount = useSelector(selectCartPriceWithOutDiscount);
+  const priceWithDiscount = useSelector(selectCartPriceWithDiscount);
+
   return (
     <div className={s.container}>
       <div className={s.promocode}>
@@ -14,11 +25,11 @@ export const OrderPrice = () => {
       <div className={s.price}>
         <div className={s.elem}>
           <p className="body_7">Стоимость товаров без скидки</p>
-          <h5 className="h5">480 BYN</h5>
+          <h5 className="h5">{priceWithOutDiscount} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Скидка</p>
-          <h5 className="h5">40 BYN</h5>
+          <h5 className="h5">{priceWithOutDiscount - priceWithDiscount} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Стоимость доставки</p>
@@ -27,10 +38,16 @@ export const OrderPrice = () => {
       </div>
       <div className={s.elem}>
         <h5 className="h5">Итого</h5>
-        <h3 className="h3">470 BYN</h3>
+        <h3 className="h3">{priceWithDiscount} BYN</h3>
       </div>
-      <Checkbox label="Согласие на обработку персональных данных" />
-      <Button className={s.button}>Оформить заказ</Button>
+      <ControlledCheckbox
+        control={control}
+        name="checked"
+        label="Согласие на обработку персональных данных"
+      />
+      <Button type="submit" className={s.button}>
+        Оформить заказ
+      </Button>
     </div>
   );
 };

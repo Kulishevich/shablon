@@ -3,4 +3,5 @@ export const validation = {
   phone: 'Неверный формат номера телефона',
   requiredField: 'Обязательное поле',
   maxLength: 'Максимальное количество символов 300',
+  email: 'Email должен соответствовать формату example@example.com',
 };

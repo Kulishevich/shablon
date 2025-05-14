@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import { validation } from './validation.errors';
 
-export const nameScheme = () =>
-  z.string().trim().min(1, { message: validation.requiredField });
+export const nameScheme = () => z.string().trim().min(1, { message: validation.requiredField });
+
+export const addressScheme = () => z.string().trim().min(1, { message: validation.requiredField });
 
 export const commentScheme = () =>
   z
@@ -25,6 +26,13 @@ export const phoneScheme = () =>
     .trim()
     .min(1, { message: validation.requiredField })
     .regex(/^[0-9+\-\s()]*$/, {
-      message:
-        'Номер может содержать только цифры, пробелы, скобки, тире и знак +',
+      message: 'Номер может содержать только цифры, пробелы, скобки, тире и знак +',
     });
+
+export const emailScheme = () =>
+  z
+    .string()
+    .email({
+      message: validation.email,
+    })
+    .toLowerCase();

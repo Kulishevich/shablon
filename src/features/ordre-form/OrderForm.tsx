@@ -17,6 +17,9 @@ import { paths } from '@/shared/config/constants/paths';
 import { TextArea } from '@/shared/ui/text-area';
 import { PaymentMethodCard } from '@/entities/payment-method-card';
 import Image from 'next/image';
+import { useFormContext } from 'react-hook-form';
+import { ControlledTextField } from '@/shared/ui/controlled-text-field';
+import { ControlledTextArea } from '@/shared/ui/controlled-text-area/ControlledTextArea';
 
 const deliveryTypes = [
   {
@@ -67,10 +70,10 @@ const paymentMethod = [
 ];
 
 export const OrderForm = () => {
-  const [activeDelivery, setActiveDelivery] = useState(deliveryTypes[0].id);
-  const [activePaymentMethod, setActivePaymentMethod] = useState(
-    paymentMethod[0].id
-  );
+  const { control, watch, setValue } = useFormContext();
+
+  const deliveryMethodId = watch('delivery_method_id');
+  const paymentMethodId = watch('payment_method_id');
 
   return (
     <div className={s.container}>
@@ -80,11 +83,37 @@ export const OrderForm = () => {
           <p className="h3">Укажите ваши контакты</p>
         </div>
         <div className={s.contacts}>
-          <TextField placeholder="Имя" label="Имя" isRequired />
-          <TextField placeholder="Телефон" label="Телефон" isRequired />
-          <TextField placeholder="Фамилия" label="Фамилия" isRequired />
-          <TextField placeholder="Email" label="Email" isRequired />
-          <TextField
+          <ControlledTextField
+            control={control}
+            name="name"
+            placeholder="Имя"
+            label="Имя"
+            isRequired
+          />
+          <ControlledTextField
+            control={control}
+            name="phone"
+            placeholder="Телефон"
+            label="Телефон"
+            isRequired
+          />
+          <ControlledTextField
+            control={control}
+            name="surname"
+            placeholder="Фамилия"
+            label="Фамилия"
+            isRequired
+          />
+          <ControlledTextField
+            control={control}
+            name="email"
+            placeholder="Email"
+            label="Email"
+            isRequired
+          />
+          <ControlledTextField
+            control={control}
+            name="patronymic"
             placeholder="Отчество"
             label="Отчество(если есть)"
             isRequired
@@ -107,8 +136,8 @@ export const OrderForm = () => {
             <DeliveryCard
               {...item}
               key={item.id}
-              active={activeDelivery === item.id}
-              onClick={() => setActiveDelivery(item.id)}
+              active={deliveryMethodId === item.id}
+              onClick={() => setValue('delivery_method_id', item.id)}
             />
           ))}
         </div>
@@ -120,12 +149,16 @@ export const OrderForm = () => {
           <p className="h3">Укажите адрес доставки</p>
         </div>
         <div className={s.address}>
-          <TextField
+          <ControlledTextField
+            control={control}
+            name="address"
             label="Адрес доставки"
             placeholder="Введите адрес доставки"
             isRequired
           />
-          <TextArea
+          <ControlledTextArea
+            control={control}
+            name="comment"
             label="Комментарий"
             placeholder="Комментарий"
             className={s.textarea}
@@ -143,8 +176,8 @@ export const OrderForm = () => {
             <PaymentMethodCard
               {...item}
               key={item.id}
-              active={activePaymentMethod === item.id}
-              onClick={() => setActivePaymentMethod(item.id)}
+              active={paymentMethodId === item.id}
+              onClick={() => setValue('payment_method_id', item.id)}
             />
           ))}
         </div>

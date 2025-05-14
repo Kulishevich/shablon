@@ -16,7 +16,7 @@ export const DeliveryCard = ({
   onClick: () => void;
 }) => {
   return (
-    <button className={clsx(s.container, active && s.active)} onClick={onClick}>
+    <button type="button" className={clsx(s.container, active && s.active)} onClick={onClick}>
       <span className={s.content}>
         <p className="h5">{title}</p>
         <p className="body_6">{description}</p>

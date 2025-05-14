@@ -14,7 +14,7 @@ export const PaymentMethodCard = ({
   onClick: () => void;
 }) => {
   return (
-    <button className={clsx(s.container, active && s.active)} onClick={onClick}>
+    <button type="button" className={clsx(s.container, active && s.active)} onClick={onClick}>
       <div className={s.icons}>
         {icons.map((icon, index) => (
           <div key={index}>{icon}</div>
