@@ -6,10 +6,15 @@ import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getNews } from '@/shared/api/news/getNews';
 import { Feedback } from '@/entities/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
+import { notFound } from 'next/navigation';
 
 export default async function New({ params }: { params: Promise<{ slug: string }> }) {
   const id = (await params).slug;
   const news = await getNews(id);
+
+  if (!news) {
+    notFound();
+  }
 
   const newsList = await getAllNews({});
   const otherNews = newsList?.data?.filter((elem) => String(elem.id) !== id);

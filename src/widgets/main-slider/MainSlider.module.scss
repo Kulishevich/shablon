@@ -31,7 +31,8 @@
       width: vw-1440(746);
       gap: vw-1440(16);
       & > p,
-      h1 {
+      h1,
+      h2 {
         color: var(--color-white);
         top: 0;
         left: 0;
