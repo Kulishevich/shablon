@@ -1,20 +1,30 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './ProductDescription.module.scss';
 import clsx from 'clsx';
+import { ProductT } from '@/shared/api/product/types';
 
-export const ProductDescription = ({
-  description,
-}: {
-  description: string;
-}) => {
+export const ProductDescription = ({ product }: { product: ProductT }) => {
   const [activeTag, setActiveTag] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      addViewedProduct(product);
+    }
+  }, [product.id]);
+
+  const addViewedProduct = (product: ProductT) => {
+    const existing = JSON.parse(localStorage.getItem('viewed_products_shablon') || '[]');
+    const filtered = existing.filter((item: ProductT) => item.id !== product.id);
+    const updated = [product, ...filtered].slice(0, 20);
+    localStorage.setItem('viewed_products_shablon', JSON.stringify(updated));
+  };
 
   const info = [
     {
       id: 1,
       title: 'Описание товара',
-      content: description,
+      content: product.description,
     },
     {
       id: 2,

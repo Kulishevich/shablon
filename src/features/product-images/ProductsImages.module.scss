@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .images {
   display: flex;
@@ -27,6 +27,11 @@
     background-color: var(--color-grey);
     border: 1px solid transparent;
     flex-shrink: 0;
+
+    & > img {
+      object-fit: cover;
+    }
+
     &:hover {
       cursor: pointer;
       opacity: 0.8;
@@ -54,9 +59,15 @@
   position: relative;
   background-color: var(--color-grey);
   border-radius: 6px;
+  overflow: hidden;
   height: fit-content;
   height: vw-1440(392);
   width: vw-1440(392);
+
+  & > img {
+    object-fit: cover;
+  }
+
   @media (max-width: 768px) {
     width: 335px;
     height: 335px;

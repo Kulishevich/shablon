@@ -15,7 +15,7 @@ export const ProductSection = ({ product }: { product: ProductT }) => {
         Артикул: <span>{product?.sku}</span>
       </div>
       <ProductInfo product={product} />
-      <ProductDescription description={product?.description || ''} />
+      <ProductDescription product={product} />
     </div>
   );
 };

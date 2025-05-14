@@ -8,6 +8,10 @@
   overflow: hidden;
   flex-shrink: 0;
 
+  & > img {
+    object-fit: cover;
+  }
+
   @media (max-width: 768px) {
     width: 101px;
     height: 101px;
