@@ -50,42 +50,40 @@ export const FeedbackForm = () => {
   });
 
   return (
-    <SectionAnimationWrapper>
-      <form onSubmit={formHandler} className={s.formContainer}>
-        <div className={s.form}>
-          <ControlledTextField
-            control={control}
-            name="name"
-            placeholder="Введите ваше имя"
-            label="Ваше имя"
-            isRequired
-          />
-          <ControlledTextField
-            control={control}
-            name="phone"
-            placeholder="Введите ваш телефон"
-            label="Ваш телефон"
-            isRequired
-            type="tel"
-          />
-          <ControlledTextArea
-            control={control}
-            name="comment"
-            placeholder="Комментарий"
-            label="Комментарий"
-            className={s.textarea}
-          />
-          <ControlledCheckbox
-            control={control}
-            name="checked"
-            label="Согласие на обработку персональных данных"
-            privacyPolicy
-          />
-        </div>
-        <Button type="submit" className={s.submitButton} disabled={!isValid}>
-          Отправить
-        </Button>
-      </form>
-    </SectionAnimationWrapper>
+    <form onSubmit={formHandler} className={s.formContainer}>
+      <div className={s.form}>
+        <ControlledTextField
+          control={control}
+          name="name"
+          placeholder="Введите ваше имя"
+          label="Ваше имя"
+          isRequired
+        />
+        <ControlledTextField
+          control={control}
+          name="phone"
+          placeholder="Введите ваш телефон"
+          label="Ваш телефон"
+          isRequired
+          type="tel"
+        />
+        <ControlledTextArea
+          control={control}
+          name="comment"
+          placeholder="Комментарий"
+          label="Комментарий"
+          className={s.textarea}
+        />
+        <ControlledCheckbox
+          control={control}
+          name="checked"
+          label="Согласие на обработку персональных данных"
+          privacyPolicy
+        />
+      </div>
+      <Button type="submit" className={s.submitButton} disabled={!isValid}>
+        Отправить
+      </Button>
+    </form>
   );
 };

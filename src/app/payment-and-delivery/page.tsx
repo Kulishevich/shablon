@@ -1,4 +1,4 @@
-import { Feedback } from '@/entities/feedback/Feedback';
+import { Feedback } from '@/widgets/feedback/Feedback';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { DeliverySection } from '@/widgets/delivery-section';
 

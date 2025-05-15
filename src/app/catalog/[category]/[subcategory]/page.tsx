@@ -2,7 +2,7 @@ import { CatalogSection } from '@/widgets/catalog-section';
 import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
-import { Feedback } from '@/entities/feedback/Feedback';
+import { Feedback } from '@/widgets/feedback/Feedback';
 import { getCategoryById } from '@/shared/api/category/getCategoryById';
 import { getBrands } from '@/shared/api/brands/getBrands';
 import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';

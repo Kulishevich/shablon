@@ -2,7 +2,7 @@ import { ProductSection } from '@/widgets/product-info';
 import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProductById } from '@/shared/api/product/getProductById';
-import { Feedback } from '@/entities/feedback/Feedback';
+import { Feedback } from '@/widgets/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 import { notFound } from 'next/navigation';
 

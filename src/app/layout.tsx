@@ -13,6 +13,8 @@ import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import PhoneAnimationClient from '@/shared/ui/phone-animation/PhoneAnimationClient';
+import PhoneAnimation from '@/shared/ui/phone-animation/PhoneAnimation';
 
 const onest = Onest({
   variable: '--font-onest',
@@ -75,6 +77,7 @@ export default async function RootLayout({
           {children}
           <Footer categories={categories} contacts={contacts} />
           <Toaster />
+          <PhoneAnimation image={settings?.feedback_image || ''} />
         </body>
       </ReduxProvider>
     </html>

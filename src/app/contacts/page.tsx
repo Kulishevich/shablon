@@ -1,7 +1,7 @@
 import { ContactsSection } from '@/widgets/contacts-section';
 import { CompanyDetails } from '@/widgets/company-details';
 import { getContacts } from '@/shared/api/design/getContacts';
-import { Feedback } from '@/entities/feedback/Feedback';
+import { Feedback } from '@/widgets/feedback/Feedback';
 
 export default async function Contacts() {
   const contacts = await getContacts();

@@ -6,7 +6,8 @@
   gap: vw-1440(20);
   align-items: start;
 
-  width: vw-1440(636);
+  // width: vw-1440(636);
+  width: 100%;
 
   @media (max-width: 768px) {
     width: 336px;

@@ -9,7 +9,7 @@ import { getAdvantages } from '@/shared/api/advantages/getAdvantages';
 import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getBanners } from '@/shared/api/banners/getBanners';
 import { getSetting } from '@/shared/api/design/getSetting';
-import { Feedback } from '@/entities/feedback/Feedback';
+import { Feedback } from '@/widgets/feedback/Feedback';
 import { CatalogProducts } from '@/widgets/catalog-products';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { getBrands } from '@/shared/api/brands/getBrands';

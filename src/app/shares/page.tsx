@@ -1,4 +1,4 @@
-import { Feedback } from '@/entities/feedback/Feedback';
+import { Feedback } from '@/widgets/feedback/Feedback';
 import { getPromotions } from '@/shared/api/promotions/getPromotions';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { SharesSection } from '@/widgets/shares-section';

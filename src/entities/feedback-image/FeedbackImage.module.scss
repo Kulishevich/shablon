@@ -1,24 +1,11 @@
 @use '../../shared/config/styles/functions' as *;
 
-.container {
-  display: flex;
-  gap: vw-1440(48);
-  width: vw-1440(1296);
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    width: 336px;
-    flex-direction: column;
-    gap: 24px;
-  }
-}
-
 .titleContainer {
   display: flex;
   flex-direction: column;
   gap: vw-1440(24);
 
-  width: vw-1440(612);
+  width: 100%;
 
   .textContent {
     display: flex;
@@ -31,7 +18,7 @@
 
   .imageContainer {
     position: relative;
-    width: vw-1440(612);
+    width: 100%;
     height: vw-1440(355);
     border-radius: 6px;
     overflow: hidden;
