@@ -10,6 +10,8 @@ import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getBanners } from '@/shared/api/banners/getBanners';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { Feedback } from '@/entities/feedback/Feedback';
+import { CatalogProducts } from '@/widgets/catalog-products';
+import { getCategories } from '@/shared/api/category/getCategories';
 
 export default async function Home() {
   const popularProducts = await getPopularProducts();
@@ -17,10 +19,12 @@ export default async function Home() {
   const advantages = await getAdvantages();
   const banners = await getBanners();
   const setting = await getSetting();
+  const categories = await getCategories();
 
   return (
     <main>
       <MainSlider slides={banners || []} />
+      <CatalogProducts categories={categories} />
       <PopularProductsSection products={popularProducts} />
       <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
       <AdvantagesSection advantages={advantages} />

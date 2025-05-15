@@ -1,0 +1,22 @@
+@use '../../shared/config/styles/functions' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(32);
+
+  @media (max-width: 768px) {
+    gap: 24px;
+  }
+}
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: vw-1440(24);
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
