@@ -47,7 +47,7 @@ export const FooterContent = ({
         <div className={s.elem}>
           <h5 className="h5">Покупателям</h5>
           <div className={s.navigation}>
-            {navigation.slice(0, 6).map((nav, index) => (
+            {navigation.slice(0, 7).map((nav, index) => (
               <Link className="body_6" href={nav.path} key={index}>
                 {nav.title}
               </Link>

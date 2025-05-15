@@ -62,7 +62,7 @@ export const HeaderBurgerMenu = ({
                 </Link>
               ))}
             </CollapseHeader>
-            {navigation.slice(1, 5).map((nav, index) => (
+            {navigation.slice(1, 6).map((nav, index) => (
               <Link className="h2" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
                 {nav.title}
               </Link>

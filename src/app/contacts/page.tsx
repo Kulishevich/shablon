@@ -2,7 +2,7 @@ import { ContactsSection } from '@/widgets/contacts-section';
 import { CompanyDetails } from '@/widgets/company-details';
 import { getContacts } from '@/shared/api/design/getContacts';
 import { Feedback } from '@/entities/feedback/Feedback';
-
+import { SeoBlock } from '@/entities/seo-block';
 export default async function Contacts() {
   const contacts = await getContacts();
 
@@ -10,6 +10,7 @@ export default async function Contacts() {
     <main>
       <ContactsSection contacts={contacts} />
       <CompanyDetails contacts={contacts} />
+      <SeoBlock page="contacts" />
       <Feedback />
     </main>
   );
