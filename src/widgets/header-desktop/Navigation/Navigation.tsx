@@ -1,11 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  ClockIcon,
-  DiscountCircleIcon,
-  LocationIcon,
-  PhoneIcon,
-} from '@/shared/assets';
+import { ClockIcon, DiscountCircleIcon, LocationIcon, PhoneIcon } from '@/shared/assets';
 import { navigation } from '@/shared/config/constants/navigation';
 import s from './Navigation.module.scss';
 import { ContactsT } from '@/shared/api/design/types';
@@ -15,7 +10,7 @@ export const Navigation = ({ contacts }: { contacts: ContactsT | null }) => {
     <div className={s.container}>
       <div className={s.content}>
         <nav className={s.navigation}>
-          {navigation.slice(0, 5).map((nav, index) => (
+          {navigation.slice(0, 6).map((nav, index) => (
             <Link className="body_3" href={nav.path} key={index}>
               {nav.title === 'Акции' && <DiscountCircleIcon />}
               {nav.title}

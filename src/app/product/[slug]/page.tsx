@@ -5,6 +5,7 @@ import { getProductById } from '@/shared/api/product/getProductById';
 import { Feedback } from '@/widgets/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 import { notFound } from 'next/navigation';
+import { SeoBlock } from '@/entities/seo-block';
 
 export default async function Product({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -30,6 +31,7 @@ export default async function Product({ params }: { params: Promise<{ slug: stri
       <main>
         <ProductSection product={product} />
         <PreviouslyViewed />
+        <SeoBlock page={`product`} />
         <Feedback />
       </main>
     </>

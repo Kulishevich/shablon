@@ -1,40 +1,76 @@
+'use client';
+import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
-import s from './YandexMap.module.scss';
+import styles from './YandexMap.module.scss';
+import { VectorCustomizationItem } from '@yandex/ymaps3-types';
+import mapStyles from '@/shared/config/constants/maps-styles.json';
 
-type YandexMapProps = {
-  className?: string;
-  type: 'default' | 'area';
+declare global {
+  interface Window {
+    ymaps3: typeof import('@yandex/ymaps3-types');
+  }
+}
+
+const Marker = () => {
+  const container = document.createElement('div');
+  container.className = styles.container;
+  const image = document.createElement('img');
+  image.id = 'marker-image';
+  image.className = styles.image;
+  image.src =
+    'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQ3LjA4NTQgMTQuMTQ0QzM4Ljc1NDggNS45NDkzOCAyNS4yNDgxIDUuOTQ5MzggMTYuOTE3NCAxNC4xNDRDOC41ODY3NyAyMi4zNDE0IDguNTg2NzcgMzUuNjI5NCAxNi45MTc0IDQzLjgyNEwzMi4wMDAxIDU4LjY2NEw0Ny4wODU0IDQzLjgyNEM1NS40MTYxIDM1LjYyOTQgNTUuNDE2MSAyMi4zNDE0IDQ3LjA4NTQgMTQuMTQ0Wk0zMi4wMDAxIDM1Ljk5NzRDMzAuMjE4OCAzNS45OTc0IDI4LjU0NjggMzUuMzA0IDI3LjI4NTQgMzQuMDQ1NEMyNC42ODU0IDMxLjQ0NTQgMjQuNjg1NCAyNy4yMTYgMjcuMjg1NCAyNC42MTZDMjguNTQ0MSAyMy4zNTc0IDMwLjIxODggMjIuNjY0IDMyLjAwMDEgMjIuNjY0QzMzLjc4MTQgMjIuNjY0IDM1LjQ1NjEgMjMuMzU3NCAzNi43MTQ4IDI0LjYxNkMzOS4zMTQ4IDI3LjIxNiAzOS4zMTQ4IDMxLjQ0OCAzNi43MTQ4IDM0LjA0NTRDMzUuNDU2MSAzNS4zMDQgMzMuNzgxNCAzNS45OTc0IDMyLjAwMDEgMzUuOTk3NFoiIGZpbGw9IiMyNTMzOEMiLz4KPC9zdmc+Cg==';
+  container.appendChild(image);
+
+  return container;
 };
 
-export const YandexMap = ({ className, type = 'default' }: YandexMapProps) => {
-  return type === 'area' ? (
-    <iframe
-      src="https://yandex.ru/map-widget/v1/?um=constructor%3A1b05bb4aaa2d91b5058ee3f3b66d98e0ca4d2f5025c525288a69c012bf42cd55&amp;source=constructor"
-      className={clsx(s.map, className)}
-      width="100%"
-    />
-  ) : (
-    <div className={clsx(s.mapContainer, className)}>
-      <a
-        href="https://yandex.by/maps/10262/yerevan/?utm_medium=mapframe&utm_source=maps"
-        className={s.mapLink}
-        style={{ top: '0px' }}
-      >
-        Ереван
-      </a>
-      <a
-        href="https://yandex.by/maps/10262/yerevan/house/YE0YcwNjS0MOQFpqfX14cH9lZA==/?ll=44.543269%2C40.191360&utm_medium=mapframe&utm_source=maps&z=16.61"
-        className={s.mapLink}
-        style={{ top: '14px' }}
-      >
-        Улица Серо Ханзадяна, 19/4 — Яндекс Карты
-      </a>
-      <iframe
-        src="https://yandex.by/map-widget/v1/?ll=44.543269%2C40.191360&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgo0OTY0NTE1ODM2EkrVgNWh1bXVodW91b_VodW2LCDUtdaA1ofVodW2LCDVjdWl1oDVuCDUvdWh1bbVptWh1aTVtdWh1bYg1oPVuNWy1bjWgSwgMTkvNCIKDU4sMkIV9MMgQg%2C%2C&z=16.61"
-        frameBorder="1"
-        allowFullScreen={true}
-        className={s.mapIframe}
-      ></iframe>
-    </div>
+export function YandexMap({ className, address }: { className?: string; address?: string }) {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    async function initMap() {
+      if (mapRef.current && address) {
+        await ymaps3.ready;
+
+        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = ymaps3;
+
+        const searchResponse = await ymaps3.search({ text: address });
+
+        const coordinates = searchResponse[0]?.geometry?.coordinates;
+
+        const map = new YMap(
+          mapRef.current,
+          {
+            location: { center: coordinates, zoom: 16 },
+            mode: 'vector',
+          },
+          [
+            new YMapDefaultSchemeLayer({
+              customization: mapStyles as VectorCustomizationItem[],
+            }),
+            new YMapDefaultFeaturesLayer({}),
+          ]
+        );
+
+        map.addChild(
+          new YMapMarker(
+            {
+              coordinates: coordinates || [0, 0],
+              draggable: false,
+              mapFollowsOnDrag: true,
+            },
+            Marker()
+          )
+        );
+      }
+    }
+
+    initMap();
+  }, [mapRef, address]);
+
+  return (
+    <>
+      <section ref={mapRef} className={clsx(styles.map, className)} />
+    </>
   );
-};
+}

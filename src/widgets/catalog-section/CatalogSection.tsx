@@ -12,7 +12,7 @@ import { paths } from '@/shared/config/constants/paths';
 import { SortSelect } from '@/features/sort-select';
 import { CatalogSearch } from '@/features/catalog-search';
 import { BrandT } from '@/shared/api/brands/types';
-
+import { SeoBlock } from '@/entities/seo-block';
 export const CatalogSection = ({
   products,
   subcategoryId,
@@ -61,6 +61,7 @@ export const CatalogSection = ({
             <p className="body_7">Найдено по фильтрам: {products?.total || 0}</p>
             <Pagination totalPages={products?.last_page || 1} currentPage={page} />
           </div>
+          <SeoBlock page={`catalog`} align="left" />
         </div>
       </div>
     </div>

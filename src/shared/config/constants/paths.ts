@@ -9,4 +9,5 @@ export const paths = {
   product: '/product',
   cart: '/cart',
   order: '/order',
+  about_us: '/about-us',
 };

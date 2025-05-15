@@ -12,14 +12,14 @@
 .content {
   width: vw-1440(1296);
   display: flex;
-  gap: vw-1440(90);
+  gap: vw-1440(47);
 }
 
 .navigation {
   height: 100%;
 
   display: flex;
-  gap: vw-1440(36);
+  gap: vw-1440(28);
   align-items: center;
   & > a {
     display: flex;

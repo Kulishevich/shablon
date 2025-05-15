@@ -13,8 +13,7 @@ import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
-import PhoneAnimationClient from '@/shared/ui/phone-animation/PhoneAnimationClient';
-import PhoneAnimation from '@/shared/ui/phone-animation/PhoneAnimation';
+import Script from 'next/script';
 
 const onest = Onest({
   variable: '--font-onest',
@@ -61,6 +60,10 @@ export default async function RootLayout({
             --color-accent-green: ${settings?.colors.button_secondary};
           }`}
         </style>
+        <Script
+          src="https://api-maps.yandex.ru/v3/?apikey=e1f9579b-8502-438f-8273-6dff1fc98656&lang=ru_RU"
+          strategy="beforeInteractive"
+        />
       </head>
       <ReduxProvider>
         <body className={`${onest.variable}`}>

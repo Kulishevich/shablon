@@ -9,3 +9,13 @@ export type SeoT = {
   title: string;
   updated_at: string;
 };
+
+export type SeoPageT = {
+  success: boolean;
+  data: {
+    id: number;
+    page: string;
+    tag: string;
+    content: string;
+  };
+};
