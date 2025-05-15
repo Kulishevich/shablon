@@ -13,6 +13,10 @@ import { Feedback } from '@/entities/feedback/Feedback';
 import { SeoBlock } from '@/entities/seo-block';
 import { ContactsSection } from '@/widgets/contacts-section';
 import { getContacts } from '@/shared/api/design/getContacts';
+import { CatalogProducts } from '@/widgets/catalog-products';
+import { getCategories } from '@/shared/api/category/getCategories';
+import { getBrands } from '@/shared/api/brands/getBrands';
+import { BrandCard } from '@/entities/brand-card';
 
 export default async function Home() {
   const popularProducts = await getPopularProducts();
@@ -21,11 +25,17 @@ export default async function Home() {
   const banners = await getBanners();
   const setting = await getSetting();
   const contacts = await getContacts();
+  const categories = await getCategories();
+  const brands = await getBrands();
 
   return (
     <main>
       <MainSlider slides={banners || []} />
+      <CatalogProducts categories={categories} />
       <PopularProductsSection products={popularProducts} />
+      <SliderWrapper title="Бренды, с которыми мы сотрудничаем" variant="discount">
+        {brands?.map((brand) => <BrandCard {...brand} key={brand.id} />)}
+      </SliderWrapper>
       <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
       <AdvantagesSection advantages={advantages} />
       <SliderWrapper title="Новости" variant="news">
