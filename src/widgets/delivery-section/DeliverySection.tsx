@@ -21,7 +21,7 @@ export const DeliverySection = ({
           <p className="body_2">{content?.delivery_text}</p>
           <div className={s.deliveryArea}>
             <p className="h5">Область доставки</p>
-            <YandexMap type="area" className={s.map} />
+            <YandexMap className={s.map} />
           </div>
         </div>
       </Collapse>
