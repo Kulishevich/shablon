@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -6,8 +6,16 @@
   gap: vw-1440(32);
   align-items: center;
 
+  h1 {
+    width: 100%;
+  }
+
   @media (max-width: 768px) {
     gap: 24px;
+
+    h1 {
+      text-align: center;
+    }
   }
 }
 .cardsContainer {

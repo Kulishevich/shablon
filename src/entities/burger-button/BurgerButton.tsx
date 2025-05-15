@@ -5,12 +5,9 @@ import s from './BurgerButton.module.scss';
 import { NavigationPopup } from '../navigation-popup';
 import { BurgerIcon } from '@/shared/assets';
 import { CategoryT } from '@/shared/api/category/types';
+import { paths } from '@/shared/config/constants/paths';
 
-export const BurgerButton = ({
-  categories,
-}: {
-  categories: CategoryT[] | null;
-}) => {
+export const BurgerButton = ({ categories }: { categories: CategoryT[] | null }) => {
   const [isOpenNavigation, setIsOpenNavigation] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,7 +35,7 @@ export const BurgerButton = ({
 
   return (
     <div className={s.burgerMenu} ref={containerRef}>
-      <Button variant="burger" onClick={() => setIsOpenNavigation(true)}>
+      <Button variant="burger" as="a" href={paths.catalog}>
         <BurgerIcon />
         Каталог
       </Button>
