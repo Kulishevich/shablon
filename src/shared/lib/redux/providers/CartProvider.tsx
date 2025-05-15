@@ -1,8 +1,8 @@
 'use client';
 import { ReactNode, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './store';
-import { hydrateCart } from './slices/cartSlice';
+import { hydrateCart } from '../slices/cartSlice';
+import { RootState } from '../store';
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const cart = useSelector((state: RootState) => state.cart.items);

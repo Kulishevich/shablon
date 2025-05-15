@@ -12,7 +12,7 @@ import { HeaderMobile } from '@/widgets/header-mobile';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
 import { getProducts } from '@/shared/api/product/getProducts';
-import { ReduxProvider } from '@/shared/lib/redux/ReduxProvider';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 
 const onest = Onest({
   variable: '--font-onest',

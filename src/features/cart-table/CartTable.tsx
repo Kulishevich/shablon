@@ -19,7 +19,7 @@ export const CartTable = () => {
         <h6 className="h6">Цена за шт.</h6>
         <h6 className="h6">Сумма (BYN)</h6>
       </div>
-      {productsCard.map((product, index) =>
+      {productsCard.map((product) =>
         !isMobile ? (
           <RowProductCart {...product} key={product.id} />
         ) : (

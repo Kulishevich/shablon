@@ -25,7 +25,7 @@ export const cartSlice = createSlice({
       if (!!productInCart) {
         const newArr = [
           ...state.items.slice(0, productIndex),
-          { ...productInCart, quantity: productInCart.quantity + 1 },
+          { ...productInCart, quantity: productInCart.quantity + action.payload.quantity },
           ...state.items.slice(productIndex + 1),
         ];
         state.items = newArr;
@@ -42,9 +42,20 @@ export const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
     },
+    changeProductCount: (state, action: PayloadAction<{ id: number; count: number }>) => {
+      const productIndex = state.items.findIndex((elem) => elem.id === action.payload.id);
+
+      const newArr = [
+        ...state.items.slice(0, productIndex),
+        { ...state.items[productIndex], quantity: action.payload.count },
+        ...state.items.slice(productIndex + 1),
+      ];
+      state.items = newArr;
+    },
   },
 });
 
-export const { addInCart, deleteFromCart, clearCart, hydrateCart } = cartSlice.actions;
+export const { addInCart, deleteFromCart, clearCart, hydrateCart, changeProductCount } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

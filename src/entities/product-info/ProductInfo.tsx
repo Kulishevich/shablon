@@ -1,17 +1,51 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import s from './ProductInfo.module.scss';
-import { DocumentIcon, HoursIcon, QualityStarIcon } from '@/shared/assets';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  DocumentIcon,
+  HoursIcon,
+  QualityStarIcon,
+} from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
-import { ProductButton } from '@/features/product-button';
+import { TextField } from '@/shared/ui/text-field';
+import { Button } from '@/shared/ui/button';
+import { useDispatch } from 'react-redux';
+import { addInCart } from '@/shared/lib/redux/slices/cartSlice';
+import { showToast } from '@/shared/ui/toast';
 
 export const ProductInfo = ({ product }: { product: ProductT }) => {
+  const [count, setCount] = useState(1);
   const isDiscount = !!Number(product?.discount);
+  const dispatch = useDispatch();
 
   const totalPrice = !!product?.discount
     ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
     : product?.price;
+
+  const changeCountValue = (value: string) => {
+    const numericValue = value.replace(/\D/g, '');
+    const number = Number(numericValue);
+    if (number >= 1 || numericValue === '') {
+      setCount(number || 1);
+    }
+  };
+
+  const handleAddInCard = () => {
+    dispatch(addInCart({ ...product, quantity: count }));
+    showToast({ title: 'Добавлено в корзину', variant: 'success' });
+  };
+
+  const increment = () => {
+    setCount((prev) => ++prev);
+  };
+
+  const decrement = () => {
+    setCount((prev) => Math.max(--prev, 1));
+  };
 
   return (
     <div className={s.container}>
@@ -36,7 +70,22 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
             <p className={clsx('h2', isDiscount && s.discount)}>{totalPrice} BYN</p>
             {isDiscount && <span className="discount">{product?.price} byn</span>}
           </div>
-          <ProductButton product={product} />
+          <div className={s.countContainer}>
+            <Button variant="icon" onClick={decrement}>
+              <ArrowLeftIcon />
+            </Button>
+            <TextField
+              className={s.input}
+              value={count}
+              onChange={(e) => changeCountValue(e.target.value)}
+            />
+            <Button variant="icon" onClick={increment}>
+              <ArrowRightIcon />
+            </Button>
+          </div>
+          <Button onClick={handleAddInCard} fullWidth>
+            В корзину
+          </Button>
         </div>
 
         <div className={s.details}>

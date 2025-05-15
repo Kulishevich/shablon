@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .container {
   display: flex;
@@ -54,8 +54,17 @@
     }
   }
 
-  & > button {
-    width: vw-1440(170);
+  & > .countContainer {
+    display: grid;
+    grid-template-columns: repeat(3, vw-1440(54));
+    gap: vw-1440(12);
+
+    height: vw-1440(54);
+    .input {
+      height: vw-1440(54);
+      padding: 0;
+      text-align: center;
+    }
   }
 
   @media (max-width: 768px) {
