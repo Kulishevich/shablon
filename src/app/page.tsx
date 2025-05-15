@@ -9,7 +9,6 @@ import { getAdvantages } from '@/shared/api/advantages/getAdvantages';
 import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getBanners } from '@/shared/api/banners/getBanners';
 import { getSetting } from '@/shared/api/design/getSetting';
-import { Feedback } from '@/entities/feedback/Feedback';
 import { SeoBlock } from '@/entities/seo-block';
 import { ContactsSection } from '@/widgets/contacts-section';
 import { getContacts } from '@/shared/api/design/getContacts';
@@ -18,6 +17,7 @@ import { getCategories } from '@/shared/api/category/getCategories';
 import { getBrands } from '@/shared/api/brands/getBrands';
 import { BrandCard } from '@/entities/brand-card';
 import { ReviewCard } from '@/entities/review-card';
+import { Feedback } from '@/widgets/feedback/Feedback';
 
 export default async function Home() {
   const popularProducts = await getPopularProducts();

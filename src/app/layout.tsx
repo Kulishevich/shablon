@@ -14,6 +14,7 @@ import { getContacts } from '@/shared/api/design/getContacts';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 import Script from 'next/script';
+import PhoneAnimation from '@/shared/ui/phone-animation/PhoneAnimation';
 
 const onest = Onest({
   variable: '--font-onest',

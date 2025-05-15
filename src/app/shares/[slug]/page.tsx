@@ -1,7 +1,6 @@
 import { ShareInfo } from '@/widgets/share-info';
 import { SliderWrapper } from '@/entities/slider-wrapper';
 import { DiscountCard } from '@/entities/discount-card';
-import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { Feedback } from '@/widgets/feedback/Feedback';
 import { getPromotion } from '@/shared/api/promotions/getPromotion';
 import { getPromotions } from '@/shared/api/promotions/getPromotions';
