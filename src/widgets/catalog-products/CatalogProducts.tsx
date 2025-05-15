@@ -6,7 +6,7 @@ import { CategoryCard } from '@/entities/category-card/CategoryCard';
 export const CatalogProducts = ({ categories }: { categories: CategoryT[] | null }) => {
   return (
     <div className={s.container}>
-      <h2>Категории товаров</h2>
+      <h2 className="h2">Категории товаров</h2>
       <div className={s.cardsContainer}>
         {categories?.map((category) => <CategoryCard {...category} key={category.id} />)}
       </div>
