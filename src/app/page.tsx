@@ -17,6 +17,7 @@ import { CatalogProducts } from '@/widgets/catalog-products';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { getBrands } from '@/shared/api/brands/getBrands';
 import { BrandCard } from '@/entities/brand-card';
+import { ReviewCard } from '@/entities/review-card';
 
 export default async function Home() {
   const popularProducts = await getPopularProducts();
@@ -38,6 +39,11 @@ export default async function Home() {
       </SliderWrapper>
       <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
       <AdvantagesSection advantages={advantages} />
+      <SliderWrapper title="Отзывы" variant="news">
+        {new Array(6).fill('').map((brand) => (
+          <ReviewCard key={brand.id} />
+        ))}
+      </SliderWrapper>
       <SliderWrapper title="Новости" variant="news">
         {newsList?.data?.map((news, index) => <NewsCard key={index} news={news} />)}
       </SliderWrapper>
