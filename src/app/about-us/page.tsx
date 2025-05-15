@@ -1,5 +1,7 @@
 import { Feedback } from '@/entities/feedback/Feedback';
+import { ReviewCard } from '@/entities/review-card';
 import { SeoBlock } from '@/entities/seo-block';
+import { SliderWrapper } from '@/entities/slider-wrapper';
 import { getAdvantages } from '@/shared/api/advantages/getAdvantages';
 import { getBrands } from '@/shared/api/brands/getBrands';
 import { AboutSection } from '@/widgets/about-section';
@@ -15,6 +17,11 @@ export default async function AboutUs() {
       <AboutSection />
       <MissionSection />
       <AdvantagesSection advantages={advantages} />
+      <SliderWrapper title="Отзывы" variant="news">
+        {new Array(6).fill('').map((brand) => (
+          <ReviewCard key={brand.id} />
+        ))}
+      </SliderWrapper>
       {brands && (
         <GallerySection
           items={
