@@ -15,9 +15,11 @@ import { getContacts } from '@/shared/api/design/getContacts';
 import { CatalogProducts } from '@/widgets/catalog-products';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { getBrands } from '@/shared/api/brands/getBrands';
-import { BrandCard } from '@/entities/brand-card';
-import { ReviewCard } from '@/entities/review-card';
 import { Feedback } from '@/widgets/feedback/Feedback';
+import { getReviews } from '@/shared/api/reviews/getReviews';
+import { ReviewsSection } from '@/widgets/reviews-section';
+import { BrandsSection } from '@/widgets/brands-section';
+import { NewsSliderSection } from '@/widgets/news-slider-section';
 
 export default async function Home() {
   const popularProducts = await getPopularProducts();
@@ -28,25 +30,18 @@ export default async function Home() {
   const contacts = await getContacts();
   const categories = await getCategories();
   const brands = await getBrands();
+  const reviews = await getReviews();
 
   return (
     <main>
       <MainSlider slides={banners || []} />
       <CatalogProducts categories={categories} />
       <PopularProductsSection products={popularProducts} />
-      <SliderWrapper title="Бренды, с которыми мы сотрудничаем" variant="discount">
-        {brands?.map((brand) => <BrandCard {...brand} key={brand.id} />)}
-      </SliderWrapper>
+      {!!brands?.length && <BrandsSection brands={brands} />}
       <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
       <AdvantagesSection advantages={advantages} />
-      <SliderWrapper title="Отзывы" variant="news">
-        {new Array(6).fill('').map((_, index) => (
-          <ReviewCard key={index} />
-        ))}
-      </SliderWrapper>
-      <SliderWrapper title="Новости" variant="news">
-        {newsList?.data?.map((news, index) => <NewsCard key={index} news={news} />)}
-      </SliderWrapper>
+      <ReviewsSection reviews={reviews} />
+      {!!newsList?.data?.length && <NewsSliderSection newsList={newsList?.data} />}
       <ContactsSection contacts={contacts} isMain />
 
       <SeoBlock page="main" />

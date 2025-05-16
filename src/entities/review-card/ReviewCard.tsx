@@ -4,32 +4,37 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { ArrowRightUpIcon, StarIcon } from '@/shared/assets';
 import { Button } from '@/shared/ui/button';
+import { ReviewT } from '@/shared/api/reviews/types';
 
-export const ReviewCard = () => {
+export const ReviewCard = ({
+  author_name,
+  author_photo,
+  rating,
+  created_at,
+  title,
+  review_text,
+}: ReviewT) => {
   return (
     <div className={s.container}>
       <div className={s.head}>
         <div className={s.imageContainer}>
-          <Image src={'/profile.png'} fill alt="profile" />
+          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${author_photo}`} fill alt="profile" />
         </div>
         <div className={s.nameContainer}>
-          <p className="body_3">Анна</p>
-          <span className={clsx(s.date, 'tag')}>12.02.2025</span>
+          <p className="body_3">{author_name}</p>
+          <span className={clsx(s.date, 'tag')}>{new Date(created_at).toLocaleDateString()}</span>
         </div>
       </div>
 
       <div className={s.startRating}>
-        {new Array(5).fill('').map((_, index) => (
+        {new Array(rating).fill('').map((_, index) => (
           <StarIcon key={index} />
         ))}
       </div>
 
       <div className={s.textContainer}>
-        <h5 className="h5">Отличная мебель!</h5>
-        <p className="body_4">
-          Уже давно пользуюсь услугами Вашего магазина и буду по-прежнему им пользоваться. Очень
-          большой ассортимент мебели для дома и квартиры, простое и понятное оформление сайта...
-        </p>
+        <h5 className="h5">{title}</h5>
+        <p className="body_4">{review_text}</p>
       </div>
 
       <Button variant="link">
