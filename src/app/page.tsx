@@ -40,8 +40,8 @@ export default async function Home() {
       <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
       <AdvantagesSection advantages={advantages} />
       <SliderWrapper title="Отзывы" variant="news">
-        {new Array(6).fill('').map((brand) => (
-          <ReviewCard key={brand.id} />
+        {new Array(6).fill('').map((_, index) => (
+          <ReviewCard key={index} />
         ))}
       </SliderWrapper>
       <SliderWrapper title="Новости" variant="news">

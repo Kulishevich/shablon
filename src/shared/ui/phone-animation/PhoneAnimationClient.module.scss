@@ -3,8 +3,8 @@
 .container {
   z-index: 1000;
   position: fixed;
-  right: vw-1440(10);
-  bottom: vw-1440(10);
+  right: vw-1440(63);
+  bottom: vw-1440(63);
 
   display: flex;
   justify-content: center;
@@ -16,10 +16,10 @@
   z-index: 1000;
 
   @media (max-width: 768px) {
-    right: 10px;
-    bottom: 10px;
-    width: 100px;
-    height: 100px;
+    right: 16px;
+    bottom: 16px;
+    width: 63px;
+    height: 63px;
   }
 }
 

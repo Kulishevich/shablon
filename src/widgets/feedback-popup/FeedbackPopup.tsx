@@ -6,6 +6,7 @@ import s from './FeedbackPopup.module.scss';
 import { CloseIcon } from '@/shared/assets';
 import { FeedbackForm } from '@/entities/feedback-form';
 import { FeedbackImage } from '@/entities/feedback-image';
+import { Button } from '@/shared/ui/button';
 
 export const FeedbackPopup = ({ children, image }: { children: ReactNode; image: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,8 +22,10 @@ export const FeedbackPopup = ({ children, image }: { children: ReactNode; image:
           <Dialog.Content className={s.content}>
             <FeedbackImage image={image} />
             <FeedbackForm />
-            <Dialog.DialogClose className={s.closeButton}>
-              <CloseIcon />
+            <Dialog.DialogClose asChild>
+              <Button className={s.closeButton}>
+                <CloseIcon />
+              </Button>
             </Dialog.DialogClose>
           </Dialog.Content>
         </Dialog.Overlay>
