@@ -1,5 +1,9 @@
 @use '../../shared/config/styles/functions' as *;
 
+.trigger {
+  margin-top: vw-1440(22);
+}
+
 .overlay {
   position: fixed;
   width: 100vw;
@@ -18,9 +22,10 @@
   transform: translate(-50%, -50%);
 
   display: flex;
-  gap: vw-1440(24);
-  padding: vw-1440(36);
-  width: vw-1440(1145);
+  flex-direction: column;
+  padding: vw-1440(24);
+  width: vw-1440(636);
+
   background-color: var(--color-white);
   box-shadow: 0px 48px 48px 0px #252b330d;
   border-radius: 6px;
@@ -54,12 +59,7 @@
 
   @media (max-width: 768px) {
     width: 335px;
-    padding: 24px;
-
-    flex-direction: column;
-    & > img {
-      display: none;
-    }
+    padding: 20px;
   }
 }
 
