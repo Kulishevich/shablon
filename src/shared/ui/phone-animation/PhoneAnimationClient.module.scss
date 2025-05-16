@@ -30,7 +30,7 @@
   pointer-events: none;
 
   & > svg > g > g:first-child > g > path {
-    color: red !important;
+    fill: var(--color-accent-1);
   }
 
   @media (max-width: 768px) {
