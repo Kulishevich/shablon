@@ -10,23 +10,28 @@ import { HeaderSearchPopup } from '@/features/header-search-popup';
 import { CategoryT } from '@/shared/api/category/types';
 import { ContactsT } from '@/shared/api/design/types';
 import { ProductT } from '@/shared/api/product/types';
+import { FeedbackPopup } from '../feedback-popup/FeedbackPopup';
 
 export const HeaderMobile = ({
   categories,
   contacts,
   products,
+  feedbackImage,
 }: {
   categories: CategoryT[] | null;
   contacts: ContactsT | null;
   products: ProductT[];
+  feedbackImage: string;
 }) => {
   return (
     <div className={s.container}>
       <Logo variant="secondary" />
       <div className={s.buttonsContainer}>
-        <Button variant="icon_secondary">
-          <PhoneOutlinedIcon />
-        </Button>
+        <FeedbackPopup image={feedbackImage}>
+          <Button variant="icon_secondary">
+            <PhoneOutlinedIcon />
+          </Button>
+        </FeedbackPopup>
         <HeaderSearchPopup categories={categories} products={products} />
         <Button variant="icon_secondary" as={Link} href={paths.cart}>
           <ShoppingCartIcon />

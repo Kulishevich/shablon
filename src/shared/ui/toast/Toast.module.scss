@@ -1,6 +1,8 @@
+@use '../../../shared/config/styles/functions' as *;
+
 .rootClass {
   position: relative;
-  padding: 16px 24px;
+  padding: vw-1440(16) vw-1440(24);
   border-radius: 6px;
 
   display: flex;
@@ -8,7 +10,8 @@
   text-align: center;
   gap: 8px;
 
-  width: 334px;
+  width: vw-1440(334);
+  margin: 0 auto;
 
   &.success {
     background-color: #13b926;

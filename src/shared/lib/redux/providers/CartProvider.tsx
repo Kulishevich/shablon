@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { hydrateCart } from '../slices/cartSlice';
 import { RootState } from '../store';
@@ -7,17 +7,21 @@ import { RootState } from '../store';
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const cart = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     const cartData = localStorage.getItem('cart_shablon');
     if (cartData) {
       dispatch(hydrateCart(JSON.parse(cartData)));
     }
+    setIsHydrated(true);
   }, [dispatch]);
 
   useEffect(() => {
-    localStorage.setItem('cart_shablon', JSON.stringify(cart));
-  }, [cart]);
+    if (isHydrated) {
+      localStorage.setItem('cart_shablon', JSON.stringify(cart));
+    }
+  }, [cart, isHydrated]);
 
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
@@ -32,6 +36,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       window.removeEventListener('storage', handleStorage);
     };
   }, [dispatch]);
+
+  if (!isHydrated) return null; // или спиннер
 
   return children;
 };

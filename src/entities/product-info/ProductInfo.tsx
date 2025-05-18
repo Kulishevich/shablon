@@ -56,7 +56,7 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
         <div>
           <ul>
             {product?.specifications?.map((elem) => (
-              <li className="body_3">
+              <li className="body_3" key={elem.id}>
                 {elem?.name} : {elem?.pivot?.value}
               </li>
             ))}
@@ -70,22 +70,24 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
             <p className={clsx('h2', isDiscount && s.discount)}>{totalPrice} BYN</p>
             {isDiscount && <span className="discount">{product?.price} byn</span>}
           </div>
-          <div className={s.countContainer}>
-            <Button variant="icon" onClick={decrement}>
-              <ArrowLeftIcon />
-            </Button>
-            <TextField
-              className={s.input}
-              value={count}
-              onChange={(e) => changeCountValue(e.target.value)}
-            />
-            <Button variant="icon" onClick={increment}>
-              <ArrowRightIcon />
+          <div className={s.addInCartContainer}>
+            <div className={s.countContainer}>
+              <Button variant="icon" onClick={decrement}>
+                <ArrowLeftIcon />
+              </Button>
+              <TextField
+                className={s.input}
+                value={count}
+                onChange={(e) => changeCountValue(e.target.value)}
+              />
+              <Button variant="icon" onClick={increment}>
+                <ArrowRightIcon />
+              </Button>
+            </div>
+            <Button onClick={handleAddInCard} fullWidth>
+              В корзину
             </Button>
           </div>
-          <Button onClick={handleAddInCard} fullWidth>
-            В корзину
-          </Button>
         </div>
 
         <div className={s.details}>

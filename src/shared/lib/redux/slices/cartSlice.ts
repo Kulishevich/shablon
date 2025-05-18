@@ -19,19 +19,15 @@ export const cartSlice = createSlice({
       state.items = action.payload;
     },
     addInCart: (state, action: PayloadAction<CartProduct>) => {
-      const productInCart = state.items.find((elem) => elem.id === action.payload.id);
       const productIndex = state.items.findIndex((elem) => elem.id === action.payload.id);
+      const product = action.payload;
 
-      if (!!productInCart) {
-        const newArr = [
-          ...state.items.slice(0, productIndex),
-          { ...productInCart, quantity: productInCart.quantity + action.payload.quantity },
-          ...state.items.slice(productIndex + 1),
-        ];
-        state.items = newArr;
+      if (!product?.id || !product.name || !product.quantity) return;
+
+      if (productIndex !== -1) {
+        state.items[productIndex].quantity += product.quantity;
       } else {
-        const newArr = [...state.items, action.payload];
-        state.items = newArr;
+        state.items.push(product);
       }
     },
     deleteFromCart: (state, action: PayloadAction<number>) => {
@@ -43,14 +39,11 @@ export const cartSlice = createSlice({
       state.items = [];
     },
     changeProductCount: (state, action: PayloadAction<{ id: number; count: number }>) => {
-      const productIndex = state.items.findIndex((elem) => elem.id === action.payload.id);
-
-      const newArr = [
-        ...state.items.slice(0, productIndex),
-        { ...state.items[productIndex], quantity: action.payload.count },
-        ...state.items.slice(productIndex + 1),
-      ];
-      state.items = newArr;
+      const { id, count } = action.payload;
+      const item = state.items.find((elem) => elem.id === id);
+      if (item) {
+        item.quantity = count;
+      }
     },
   },
 });

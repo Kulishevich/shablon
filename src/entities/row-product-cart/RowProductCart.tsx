@@ -33,6 +33,11 @@ export const RowProductCart = ({
     : +price;
 
   useEffect(() => {
+    setCount(quantity);
+    console.log(quantity);
+  }, [quantity]);
+
+  useEffect(() => {
     debouncedDispatch(count);
   }, [count]);
 

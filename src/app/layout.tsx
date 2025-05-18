@@ -59,6 +59,8 @@ export default async function RootLayout({
             --color-accent-2: ${settings?.colors.accent};
             --color-accent-red: ${settings?.colors.secondary};
             --color-accent-green: ${settings?.colors.button_secondary};
+            --color-accent-orange: #ef8a24;
+            --color-text: #111434;
           }`}
         </style>
         <Script
@@ -77,6 +79,7 @@ export default async function RootLayout({
             categories={categories}
             contacts={contacts}
             products={products?.data || []}
+            feedbackImage={settings?.feedback_image || ''}
           />
           {children}
           <Footer categories={categories} contacts={contacts} />

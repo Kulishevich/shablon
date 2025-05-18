@@ -44,9 +44,7 @@ const showToast = ({
           {variant === 'success' && <SuccessIcon />}
           {title}
         </p>
-        {!!message && (
-          <p className={clsx(styles.message, 'body_7')}>{message}</p>
-        )}
+        {!!message && <p className={clsx(styles.message, 'body_7')}>{message}</p>}
       </div>
     ),
     {
