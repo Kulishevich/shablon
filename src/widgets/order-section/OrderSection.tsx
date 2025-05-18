@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/redux/store';
 import { clearCart } from '@/shared/lib/redux/slices/cartSlice';
 import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
+import { showToast } from '@/shared/ui/toast';
+import { useRouter } from 'next/navigation';
 
 export const OrderSection = ({
   paymentMethods,
@@ -21,6 +23,7 @@ export const OrderSection = ({
   paymentMethods: PaymentT[] | null;
   deliveryMethods: DeliveryT[] | null;
 }) => {
+  const router = useRouter();
   const productsCart = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
@@ -51,15 +54,29 @@ export const OrderSection = ({
     }));
 
     try {
-      await postOrder({
+      const res = await postOrder({
         ...otherData,
         customer_name: `${name} ${surname} ${patronymic}`,
         items,
       });
 
       dispatch(clearCart());
+      form.reset();
+      showToast({
+        description: `Номер заказа: ${res.order_number}`,
+        variant: 'success',
+        title: 'Спасибо за ваш заказ!',
+        message: 'Скоро с вами свяжется наш менеджер и уточнит детали',
+        duration: 10000,
+      });
+      router.push('/');
     } catch (err) {
       console.log(err);
+      showToast({
+        message: 'Пожалуйста, повторите попытку ещё раз',
+        variant: 'success',
+        title: 'Упс! Кажется, произошла ошибка',
+      });
     }
   });
 

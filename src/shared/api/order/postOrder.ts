@@ -1,6 +1,6 @@
-import { OrderPostT } from './types';
+import { OrderPostT, OrderResponse } from './types';
 
-export const postOrder = async (reqData: OrderPostT) => {
+export const postOrder = async (reqData: OrderPostT): Promise<OrderResponse> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/orders`, {
     method: 'POST',
     body: JSON.stringify(reqData),
@@ -13,7 +13,7 @@ export const postOrder = async (reqData: OrderPostT) => {
     throw new Error('Ошибка при отправке формы обратной связи');
   }
 
-  const data = await res.json();
+  const { data } = await res.json();
 
   return data;
 };

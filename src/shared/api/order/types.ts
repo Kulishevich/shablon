@@ -9,6 +9,14 @@ export type OrderPostT = {
   items: ItemT[];
 };
 
+export type OrderResponse = {
+  created_at: string;
+  customer_name: string;
+  id: number;
+  order_number: string;
+  total_amount: string;
+};
+
 type ItemT = {
   product_id: number;
   quantity: number;
