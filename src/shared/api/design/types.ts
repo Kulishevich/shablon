@@ -20,6 +20,8 @@ export type SettingsT = {
     accent: string | null;
     secondary: string | null;
     button_secondary: string | null;
+    background: string | null;
+    text: string | null;
   };
   logo: string | null;
   favicon: string | null;

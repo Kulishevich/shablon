@@ -59,8 +59,8 @@ export default async function RootLayout({
             --color-accent-2: ${settings?.colors.accent};
             --color-accent-red: ${settings?.colors.secondary};
             --color-accent-green: ${settings?.colors.button_secondary};
-            --color-accent-orange: #ef8a24;
-            --color-text: #111434;
+            --color-accent-orange: ${settings?.colors.background};
+            --color-text: ${settings?.colors.text};
           }`}
         </style>
         <Script
