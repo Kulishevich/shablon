@@ -51,8 +51,10 @@ export const CartSection = () => {
 
     if (!!promocode) {
       handleCheckPromocode();
+    } else {
+      setProductsState(productsCart);
     }
-  }, []);
+  }, [promocode, productsCart]);
 
   return (
     <SectionAnimationWrapper>

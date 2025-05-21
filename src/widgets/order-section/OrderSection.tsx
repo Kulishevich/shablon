@@ -64,8 +64,10 @@ export const OrderSection = ({
 
     if (!!promocode) {
       handleCheckPromocode();
+    } else {
+      setProductsState(productsCart);
     }
-  }, []);
+  }, [promocode, productsCart]);
 
   const form = useForm({
     defaultValues: {
