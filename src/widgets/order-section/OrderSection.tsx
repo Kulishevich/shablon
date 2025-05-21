@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { OrderForm } from '@/features/ordre-form';
 import { OrderPrice } from '@/features/order-price';
 import s from './OrderSection.module.scss';
@@ -11,10 +11,13 @@ import { orderFormSchema } from '@/shared/validation/order-scheme-creator';
 import { postOrder } from '@/shared/api/order/postOrder';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/redux/store';
-import { clearCart } from '@/shared/lib/redux/slices/cartSlice';
+import { clearCart, clearPromocode } from '@/shared/lib/redux/slices/cartSlice';
 import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
 import { showToast } from '@/shared/ui/toast';
 import { useRouter } from 'next/navigation';
+import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDiscount';
+import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
+import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
 
 export const OrderSection = ({
   paymentMethods,
@@ -25,7 +28,44 @@ export const OrderSection = ({
 }) => {
   const router = useRouter();
   const productsCart = useSelector((state: RootState) => state.cart.items);
+  const promocode = useSelector((state: RootState) => state.cart.promocode);
+  const [productsState, setProductsState] = useState(productsCart);
+  const priceWithOutDiscount = getPriceWithoutDiscount(productsState);
+  const [promocodeDiscount, setPromocodeDiscount] = useState(0);
+  const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleCheckPromocode = async () => {
+      try {
+        const res = await checkCartPriceWitchPromocode({
+          code: promocode,
+          products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+        });
+        if (Number(res.min_order_amount) <= priceWithOutDiscount) {
+          if (res.type === 'percentage') {
+            setProductsState(
+              productsCart.map((product) => ({
+                ...product,
+                discount:
+                  res.products.find((elem) => elem.id === product.id)?.best_discount_percent || '',
+              }))
+            );
+          } else {
+            setPromocodeDiscount(+res.value);
+          }
+        } else {
+          dispatch(clearPromocode());
+        }
+      } catch (err) {
+        dispatch(clearPromocode());
+      }
+    };
+
+    if (!!promocode) {
+      handleCheckPromocode();
+    }
+  }, []);
 
   const form = useForm({
     defaultValues: {
@@ -40,6 +80,7 @@ export const OrderSection = ({
       comment: '',
       payment_method_id: paymentMethods?.[0]?.id,
       checked: false,
+      promo_code: promocode,
     },
     mode: 'onChange',
     reValidateMode: 'onBlur',
@@ -87,7 +128,11 @@ export const OrderSection = ({
           <h1 className="h1">Оформление заказа</h1>
           <form onSubmit={onSubmit} className={s.content}>
             <OrderForm paymentMethods={paymentMethods} deliveryMethods={deliveryMethods} />
-            <OrderPrice />
+            <OrderPrice
+              priceWithOutDiscount={priceWithOutDiscount}
+              priceWithDiscount={priceWithDiscount}
+              productsCart={productsCart}
+            />
           </form>
         </div>
       </FormProvider>

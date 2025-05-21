@@ -1,5 +1,4 @@
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
-import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 
 export const generateMetadata = async () => {
   const seo = await getSeoTag('/catalog');
@@ -20,10 +19,5 @@ export default async function CatalogLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <Breadcrumbs />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

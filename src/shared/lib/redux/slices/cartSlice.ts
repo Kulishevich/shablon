@@ -5,10 +5,12 @@ export type CartProduct = ProductT & { quantity: number };
 
 export type CartStateT = {
   items: CartProduct[];
+  promocode: string;
 };
 
 export const initialState: CartStateT = {
   items: [],
+  promocode: '',
 };
 
 export const cartSlice = createSlice({
@@ -45,10 +47,23 @@ export const cartSlice = createSlice({
         item.quantity = count;
       }
     },
+    setPromocode: (state, action: PayloadAction<string>) => {
+      state.promocode = action.payload;
+    },
+    clearPromocode: (state) => {
+      state.promocode = '';
+    },
   },
 });
 
-export const { addInCart, deleteFromCart, clearCart, hydrateCart, changeProductCount } =
-  cartSlice.actions;
+export const {
+  addInCart,
+  deleteFromCart,
+  clearCart,
+  hydrateCart,
+  changeProductCount,
+  setPromocode,
+  clearPromocode,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

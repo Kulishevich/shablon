@@ -49,7 +49,7 @@ export default async function RootLayout({
   const contacts = await getContacts();
   const products = await getProducts({});
   const settings = await getSetting();
-
+  console.log(settings?.colors);
   return (
     <html lang="en">
       <head>

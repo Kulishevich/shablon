@@ -34,7 +34,6 @@ export const RowProductCart = ({
 
   useEffect(() => {
     setCount(quantity);
-    console.log(quantity);
   }, [quantity]);
 
   useEffect(() => {

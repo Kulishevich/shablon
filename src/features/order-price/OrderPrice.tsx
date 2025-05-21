@@ -1,28 +1,61 @@
 import { Button } from '@/shared/ui/button';
-import { TextField } from '@/shared/ui/text-field';
 import React from 'react';
 import s from './OrderPrice.module.scss';
 import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
 import { useFormContext } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import {
-  selectCartPriceWithDiscount,
-  selectCartPriceWithOutDiscount,
-} from '@/shared/lib/redux/selectors/CartSelectors';
+import { ControlledTextField } from '@/shared/ui/controlled-text-field';
+import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
+import { CartProduct, clearPromocode, setPromocode } from '@/shared/lib/redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
+import { showToast } from '@/shared/ui/toast';
 
-export const OrderPrice = () => {
+export const OrderPrice = ({
+  priceWithOutDiscount,
+  priceWithDiscount,
+  productsCart,
+}: {
+  priceWithOutDiscount: number;
+  priceWithDiscount: number;
+  productsCart: CartProduct[];
+}) => {
+  const dispatch = useDispatch();
   const { control, watch } = useFormContext();
 
-  const priceWithOutDiscount = useSelector(selectCartPriceWithOutDiscount);
-  const priceWithDiscount = useSelector(selectCartPriceWithDiscount);
-
   const deliveryCost = watch('delivery_cost');
+  const promocode = watch('promo_code');
+
+  const handleCheckPromocode = async () => {
+    try {
+      const res = await checkCartPriceWitchPromocode({
+        code: promocode,
+        products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+      });
+      if (Number(res.min_order_amount) <= priceWithOutDiscount) {
+        showToast({ variant: 'success', title: 'Промокод активирован' });
+        dispatch(setPromocode(promocode));
+      } else {
+        showToast({ variant: 'error', title: 'Сумма в вашей корзине меньше нужной' });
+        dispatch(clearPromocode());
+      }
+    } catch (err) {
+      showToast({ variant: 'error', title: 'Промокод не действителен' });
+      dispatch(clearPromocode());
+      console.log(err);
+    }
+  };
 
   return (
     <div className={s.container}>
       <div className={s.promocode}>
-        <TextField className={s.input} placeholder="Промокод" />
-        <Button variant="secondary">Применить</Button>
+        <ControlledTextField
+          control={control}
+          name="promo_code"
+          className={s.input}
+          placeholder="Промокод"
+        />
+        <Button variant="secondary" onClick={handleCheckPromocode}>
+          Применить
+        </Button>
       </div>
       <div className={s.price}>
         <div className={s.elem}>

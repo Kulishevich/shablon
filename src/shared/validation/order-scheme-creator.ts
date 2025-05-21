@@ -25,6 +25,7 @@ export const orderFormSchema = z.object({
   delivery_cost: z.number(),
   address: addressScheme(),
   comment: z.string().max(300, validation.maxLength),
+  promo_code: z.string().max(300, validation.maxLength),
   payment_method_id: z
     .number({
       required_error: 'Выберите способ оплаты',

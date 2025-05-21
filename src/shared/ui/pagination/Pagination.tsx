@@ -71,10 +71,7 @@ export const Pagination = ({ totalPages, currentPage = '1' }: Props) => {
         })}
       </div>
       {currentPageNumber !== totalPagesNumber && (
-        <button
-          className={s.button}
-          onClick={handlePageChange(currentPageNumber + 1)}
-        >
+        <button className={s.button} onClick={handlePageChange(currentPageNumber + 1)}>
           <ArrowRightIcon />
         </button>
       )}

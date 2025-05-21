@@ -5,26 +5,54 @@ import { Button } from '@/shared/ui/button';
 import { ArrowRightUpIcon } from '@/shared/assets';
 import { CartTable } from '@/features/cart-table';
 import { CartPrice } from '@/features/cart-price';
-import { useDispatch } from 'react-redux';
-import { clearCart } from '@/shared/lib/redux/slices/cartSlice';
-// import { Loader } from '@/shared/ui/loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCart, clearPromocode } from '@/shared/lib/redux/slices/cartSlice';
 import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
+import { RootState } from '@/shared/lib/redux/store';
+import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
+import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDiscount';
+import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
 
 export const CartSection = () => {
+  const productsCart = useSelector((state: RootState) => state.cart.items);
+  const promocode = useSelector((state: RootState) => state.cart.promocode);
+  const [productsState, setProductsState] = useState(productsCart);
+  const priceWithOutDiscount = getPriceWithoutDiscount(productsState);
+  const [promocodeDiscount, setPromocodeDiscount] = useState(0);
+  const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
-  // const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 500);
+  useEffect(() => {
+    const handleCheckPromocode = async () => {
+      try {
+        const res = await checkCartPriceWitchPromocode({
+          code: promocode,
+          products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+        });
+        if (Number(res.min_order_amount) <= priceWithOutDiscount) {
+          if (res.type === 'percentage') {
+            setProductsState(
+              productsCart.map((product) => ({
+                ...product,
+                discount:
+                  res.products.find((elem) => elem.id === product.id)?.best_discount_percent || '',
+              }))
+            );
+          } else {
+            setPromocodeDiscount(+res.value);
+          }
+        } else {
+          dispatch(clearPromocode());
+        }
+      } catch (err) {
+        dispatch(clearPromocode());
+      }
+    };
 
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // if (loading) {
-  //   return <Loader />;
-  // }
+    if (!!promocode) {
+      handleCheckPromocode();
+    }
+  }, []);
 
   return (
     <SectionAnimationWrapper>
@@ -37,8 +65,15 @@ export const CartSection = () => {
           </Button>
         </div>
         <div className={s.content}>
-          <CartTable />
-          <CartPrice />
+          <CartTable productsState={productsState} />
+          <CartPrice
+            priceWithOutDiscount={priceWithOutDiscount}
+            priceWithDiscount={priceWithDiscount}
+            productsCart={productsCart}
+            promocode={promocode}
+            setProductsState={setProductsState}
+            setPromocodeDiscount={setPromocodeDiscount}
+          />
         </div>
       </div>
     </SectionAnimationWrapper>
