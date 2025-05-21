@@ -24,6 +24,8 @@ export const CartSection = () => {
 
   useEffect(() => {
     const handleCheckPromocode = async () => {
+      setProductsState(productsCart);
+      setPromocodeDiscount(0);
       try {
         const res = await checkCartPriceWitchPromocode({
           code: promocode,
@@ -53,6 +55,7 @@ export const CartSection = () => {
       handleCheckPromocode();
     } else {
       setProductsState(productsCart);
+      setPromocodeDiscount(0);
     }
   }, [promocode, productsCart]);
 
