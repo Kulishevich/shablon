@@ -25,8 +25,17 @@
   .block {
     display: flex;
     gap: vw-1440(48);
+    flex-direction: row-reverse;
+
+    &.reverse {
+      flex-direction: row;
+    }
 
     @media (max-width: 768px) {
+      &.reverse {
+        flex-direction: column;
+      }
+
       flex-direction: column;
       gap: 20px;
     }
