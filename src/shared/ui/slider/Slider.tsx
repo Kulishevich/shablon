@@ -26,22 +26,14 @@ export const Slider = ({ children, itemWidth }: SliderProps) => {
 
   return (
     <div className={s.container}>
-      <Button
-        variant="icon_secondary"
-        className={s.iconLeft}
-        onClick={() => scroll('left')}
-      >
+      <Button variant="icon_secondary" className={s.iconLeft} onClick={() => scroll('left')}>
         <ArrowLeftIcon />
       </Button>
 
       <div className={s.itemsContainer} ref={scrollRef}>
         {children}
       </div>
-      <Button
-        variant="icon_secondary"
-        className={s.iconRight}
-        onClick={() => scroll('right')}
-      >
+      <Button variant="icon_secondary" className={s.iconRight} onClick={() => scroll('right')}>
         <ArrowRightIcon />
       </Button>
     </div>

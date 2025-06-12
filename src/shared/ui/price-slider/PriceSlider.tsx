@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as Slider from '@radix-ui/react-slider';
 import s from './PriceSlider.module.scss';
 

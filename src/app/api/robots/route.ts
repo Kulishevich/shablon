@@ -1,12 +1,10 @@
 export async function GET() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/seo/robots.txt`
-  );
-  const xml = await res.text();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/seo/robots.txt`);
+  const text = await res.text();
 
-  return new Response(xml, {
+  return new Response(text, {
     headers: {
-      'Content-Type': 'application/xml',
+      'Content-Type': 'text/plain',
     },
   });
 }
