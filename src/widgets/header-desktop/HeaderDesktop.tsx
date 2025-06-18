@@ -5,6 +5,8 @@ import s from './HeaderDesktop.module.scss';
 import { CategoryT } from '@/shared/api/category/types';
 import { ContactsT } from '@/shared/api/design/types';
 import { ProductT } from '@/shared/api/product/types';
+import clsx from 'clsx';
+import { HeaderFixed } from './HeaderFixed';
 
 export const HeaderDesktop = ({
   categories,
@@ -16,9 +18,12 @@ export const HeaderDesktop = ({
   products: ProductT[];
 }) => {
   return (
-    <div className={s.container}>
-      <Navigation contacts={contacts} />
-      <Search categories={categories} products={products} />
-    </div>
+    <>
+      <div className={s.container}>
+        <Navigation contacts={contacts} />
+        <Search categories={categories} products={products} />
+      </div>
+      <HeaderFixed categories={categories} contacts={contacts} products={products} />
+    </>
   );
 };

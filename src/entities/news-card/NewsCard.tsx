@@ -16,22 +16,37 @@ const news = {
 
 export const NewsCard = ({ news }: { news: NewsT }) => {
   return (
-    <Link href={`${paths.news}/${news?.id}`} className={s.cotnainer}>
+    <Link
+      href={`${paths.news}/${news?.slug}`}
+      className={s.cotnainer}
+      itemScope
+      itemType="http://schema.org/BlogPosting"
+      itemProp="blogPost"
+    >
       <div className={s.imageContainer}>
-        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`} fill alt="news" />
+        <Image
+          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
+          fill
+          alt="news"
+          itemProp="image"
+        />
       </div>
-      <span className={clsx(s.date, 'tag')}>
+      <span className={clsx(s.date, 'tag')} itemProp="datePublished">
         {new Date(news?.created_at || '').toLocaleString('ru-RU', {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric',
         })}
       </span>
-      <h5 className="h5">{news?.title}</h5>
-      <Button as={'p'} variant="link" className={s.button}>
-        Подробнее
-        <ArrowRightUpIcon />
-      </Button>
+      <div className={s.content}>
+        <div className="h5" itemProp="name">
+          {news?.title}
+        </div>
+        <Button as={'p'} variant="link" className={s.button} itemProp="mainEntityOfPage">
+          Подробнее
+          <ArrowRightUpIcon />
+        </Button>
+      </div>
     </Link>
   );
 };

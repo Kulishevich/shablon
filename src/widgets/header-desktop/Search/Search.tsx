@@ -6,6 +6,7 @@ import { SearchInput } from '@/entities/search-input';
 import { CartButton } from '@/entities/cart-button';
 import { CategoryT } from '@/shared/api/category/types';
 import { ProductT } from '@/shared/api/product/types';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 
 export const Search = ({
   categories,
@@ -19,7 +20,9 @@ export const Search = ({
       <Logo variant="primary" />
       <BurgerButton categories={categories} />
       <SearchInput categories={categories} products={products} />
-      <CartButton />
+      <ReduxProvider>
+        <CartButton />
+      </ReduxProvider>
     </div>
   );
 };

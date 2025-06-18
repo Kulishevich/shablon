@@ -2,10 +2,10 @@
   position: absolute;
   top: 73px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% - 1px));
   z-index: 1001;
 
-  width: 335px;
+  width: 336px;
   height: 541px;
 
   display: flex;

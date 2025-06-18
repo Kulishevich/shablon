@@ -25,7 +25,11 @@ export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
   ].filter((elem) => !!elem);
 
   return (
-    <div className={clsx(s.container, className)}>
+    <div
+      className={clsx(s.container, className)}
+      itemScope
+      itemType="http://schema.org/BreadcrumbList"
+    >
       {pathArr?.map((path, idx) => {
         const lastItem = idx === pathArr.length - 1;
         const href = pathArr
@@ -35,15 +39,20 @@ export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
 
         if (lastItem) {
           return (
-            <p className={cn(s.elem, 'body_6_bold')} key={idx}>
-              {path?.title}
-            </p>
+            <a className={cn(s.elem, 'body_6_bold')} key={idx} itemProp="itemListElement">
+              <span itemProp="name">{path?.title}</span>
+            </a>
           );
         }
 
         return (
-          <Link href={href || '/'} className={cn(s.elem, 'body_6')} key={idx}>
-            {path?.title}
+          <Link
+            href={href || '/'}
+            className={cn(s.elem, 'body_6')}
+            key={idx}
+            itemProp="itemListElement"
+          >
+            <span itemProp="name">{path?.title}</span>
             <ArrowRightIcon className={s.icon} />
           </Link>
         );

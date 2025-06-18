@@ -1,51 +1,109 @@
-import { AboutUsSection } from '@/widgets/about-us-section';
-import { AdvantagesSection } from '@/widgets/advantages-section';
-import { MainSlider } from '@/widgets/main-slider';
-import { SliderWrapper } from '@/entities/slider-wrapper';
-import { NewsCard } from '@/entities/news-card';
-import { PopularProductsSection } from '@/widgets/popular-products-section';
+import dynamic from 'next/dynamic';
 import { getPopularProducts } from '@/shared/api/product/getPopularProducts';
 import { getAdvantages } from '@/shared/api/advantages/getAdvantages';
 import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getBanners } from '@/shared/api/banners/getBanners';
 import { getSetting } from '@/shared/api/design/getSetting';
-import { SeoBlock } from '@/entities/seo-block';
-import { ContactsSection } from '@/widgets/contacts-section';
 import { getContacts } from '@/shared/api/design/getContacts';
-import { CatalogProducts } from '@/widgets/catalog-products';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { getBrands } from '@/shared/api/brands/getBrands';
-import { Feedback } from '@/widgets/feedback/Feedback';
 import { getReviews } from '@/shared/api/reviews/getReviews';
-import { ReviewsSection } from '@/widgets/reviews-section';
-import { BrandsSection } from '@/widgets/brands-section';
-import { NewsSliderSection } from '@/widgets/news-slider-section';
+import { Suspense } from 'react';
+import { MainShortcuts } from '@/widgets/main-shortcuts';
+import { CatalogProducts } from '@/widgets/catalog-products';
+import { PopularProductsSection } from '@/widgets/popular-products-section';
+import { AboutUsSection } from '@/widgets/about-us-section';
+import { AdvantagesSection } from '@/widgets/advantages-section';
+
+// Критические компоненты для FCP
+const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
+  loading: () => <div style={{ height: '400px', background: '#f5f5f5' }} />,
+});
+
+const SeoBlock = dynamic(() => import('@/entities/seo-block').then((mod) => mod.SeoBlock));
+const ContactsSection = dynamic(() =>
+  import('@/widgets/contacts-section').then((mod) => mod.ContactsSection)
+);
+
+const Feedback = dynamic(() => import('@/widgets/feedback/Feedback').then((mod) => mod.Feedback));
+const ReviewsSection = dynamic(() =>
+  import('@/widgets/reviews-section').then((mod) => mod.ReviewsSection)
+);
+const BrandsSection = dynamic(() =>
+  import('@/widgets/brands-section').then((mod) => mod.BrandsSection)
+);
+const NewsSliderSection = dynamic(() =>
+  import('@/widgets/news-slider-section').then((mod) => mod.NewsSliderSection)
+);
+const MainBanner = dynamic(() => import('@/widgets/main-banner').then((mod) => mod.MainBanner));
 
 export default async function Home() {
-  const popularProducts = await getPopularProducts();
-  const newsList = await getAllNews({});
-  const advantages = await getAdvantages();
-  const banners = await getBanners();
-  const setting = await getSetting();
-  const contacts = await getContacts();
-  const categories = await getCategories();
-  const brands = await getBrands();
-  const reviews = await getReviews();
+  const [
+    popularProducts,
+    newsList,
+    advantages,
+    banners,
+    setting,
+    contacts,
+    categories,
+    brands,
+    reviews,
+  ] = await Promise.all([
+    getPopularProducts(),
+    getAllNews({}),
+    getAdvantages(),
+    getBanners(),
+    getSetting(),
+    getContacts(),
+    getCategories(),
+    getBrands(),
+    getReviews(),
+  ]);
 
   return (
     <main>
-      <MainSlider slides={banners || []} />
-      <CatalogProducts categories={categories} />
-      <PopularProductsSection products={popularProducts} />
-      {!!brands?.length && <BrandsSection brands={brands} />}
-      <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
-      <AdvantagesSection advantages={advantages} />
-      <ReviewsSection reviews={reviews} />
-      {!!newsList?.data?.length && <NewsSliderSection newsList={newsList?.data} />}
-      <ContactsSection contacts={contacts} isMain />
+      <Suspense fallback={<div style={{ height: '400px', background: '#f5f5f5' }} />}>
+        <MainSlider slides={banners || []} />
+      </Suspense>
 
-      <SeoBlock page="main" />
-      <Feedback />
+      <MainShortcuts categories={categories} />
+      <CatalogProducts categories={categories} />
+
+      <PopularProductsSection products={popularProducts} />
+
+      <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
+
+      <AdvantagesSection advantages={advantages} />
+
+      {!!brands?.length && (
+        <Suspense>
+          <BrandsSection brands={brands} />
+        </Suspense>
+      )}
+
+      <MainBanner />
+
+      <Suspense>
+        <ReviewsSection reviews={reviews} />
+      </Suspense>
+
+      {!!newsList?.data?.length && (
+        <Suspense>
+          <NewsSliderSection newsList={newsList?.data} />
+        </Suspense>
+      )}
+
+      <Suspense>
+        <ContactsSection contacts={contacts} isMain />
+      </Suspense>
+
+      <Suspense>
+        <SeoBlock page="main" />
+      </Suspense>
+
+      <Suspense>
+        <Feedback />
+      </Suspense>
     </main>
   );
 }

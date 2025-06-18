@@ -17,20 +17,14 @@ export const Collapse = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <Collapsible.Root
-      open={open}
-      onOpenChange={setOpen}
-      className={clsx(s.rootState, className)}
-    >
+    <Collapsible.Root open={open} onOpenChange={setOpen} className={clsx(s.rootState, className)}>
       <Collapsible.Trigger className={s.trigger}>
-        <p className="h2">{title}</p>
+        <h2 className="h2">{title}</h2>
         <Button variant="icon_secondary" as="span">
           <ArrowRightIcon />
         </Button>
       </Collapsible.Trigger>
-      <Collapsible.Content className={s.content}>
-        {children}
-      </Collapsible.Content>
+      <Collapsible.Content className={s.content}>{children}</Collapsible.Content>
     </Collapsible.Root>
   );
 };

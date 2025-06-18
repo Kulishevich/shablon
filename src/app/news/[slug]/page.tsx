@@ -9,15 +9,15 @@ import { paths } from '@/shared/config/constants/paths';
 import { notFound } from 'next/navigation';
 
 export default async function New({ params }: { params: Promise<{ slug: string }> }) {
-  const id = (await params).slug;
-  const news = await getNews(id);
+  const { slug } = await params;
+  const news = await getNews(slug);
 
   if (!news) {
     notFound();
   }
 
   const newsList = await getAllNews({});
-  const otherNews = newsList?.data?.filter((elem) => String(elem.id) !== id);
+  const otherNews = newsList?.data?.filter((elem) => elem.id !== news.id);
 
   return (
     <>
@@ -25,7 +25,7 @@ export default async function New({ params }: { params: Promise<{ slug: string }
         dynamicPath={[
           {
             title: news?.title || '',
-            path: `${paths.news}/${news?.id}`,
+            path: `${paths.news}/${news?.slug}`,
           },
         ]}
       />

@@ -27,13 +27,14 @@ export const FooterContent = ({
 
       <div className={s.catalogContainer}>
         <div className={s.elem}>
-          <h5 className="h5">Каталог</h5>
-          <div className={s.catalog}>
+          <div className="h5">Каталог</div>
+          <div className={s.catalog} itemScope itemType="http://schema.org/SiteNavigationElement">
             {categories?.map((category, index) => (
               <Link
                 className="body_3"
-                href={`${paths.catalog}/${category.slug}_${category.id}`}
+                href={`${paths.catalog}/${category.slug}`}
                 key={index}
+                itemProp="url"
               >
                 {category.name}
               </Link>
@@ -42,10 +43,14 @@ export const FooterContent = ({
         </div>
 
         <div className={s.elem}>
-          <h5 className="h5">Покупателям</h5>
-          <div className={s.navigation}>
+          <div className="h5">Покупателям</div>
+          <div
+            className={s.navigation}
+            itemScope
+            itemType="http://schema.org/SiteNavigationElement"
+          >
             {navigation.slice(0, 7).map((nav, index) => (
-              <Link className="body_6" href={nav.path} key={index}>
+              <Link className="body_6" href={nav.path} key={index} itemProp="url">
                 {nav.title}
               </Link>
             ))}
@@ -54,7 +59,7 @@ export const FooterContent = ({
       </div>
 
       <div className={s.elem}>
-        <h5 className="h5">Контакты</h5>
+        <div className="h5">Контакты</div>
         <CompanyContacts contacts={contacts} />
       </div>
 

@@ -3,11 +3,12 @@ import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/widgets/feedback/Feedback';
-import { getCategoryById } from '@/shared/api/category/getCategoryById';
+import { getCategoryBySlug } from '@/shared/api/category/getCategoryBySlug';
 import { paths } from '@/shared/config/constants/paths';
 import { getBrands } from '@/shared/api/brands/getBrands';
 import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
-
+import { CanonicalLink } from '@/shared/ui/canonical-link';
+import { notFound } from 'next/navigation';
 export default async function Catalog({
   params,
   searchParams,
@@ -37,7 +38,7 @@ export default async function Catalog({
     price_to,
     brand,
   });
-  const category = await getCategoryById(category_id);
+  const category = await getCategoryBySlug(categorySlug);
   const allBrands = await getBrands();
   const allProducts = await getProductsWithoutPagination({ category_id, search });
 
@@ -46,13 +47,18 @@ export default async function Catalog({
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
 
+  if (category?.parent_id) {
+    notFound();
+  }
+
   return (
     <>
+      <CanonicalLink href={`/catalog/${categorySlug}`} />
       <Breadcrumbs
         dynamicPath={[
           {
             title: category?.name || '',
-            path: `${paths.catalog}/${category?.slug}_${category?.id}`,
+            path: `${paths.catalog}/${category?.slug}`,
           },
         ]}
       />
@@ -62,7 +68,7 @@ export default async function Catalog({
           category={category}
           page={page || '1'}
           brands={allBrands || []}
-          minPrice={minPrice}
+          minPrice={0}
           maxPrice={maxPrice}
         />
         <PreviouslyViewed />

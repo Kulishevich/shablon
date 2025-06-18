@@ -9,24 +9,33 @@ import { NewsT } from '@/shared/api/news/types';
 
 export const NewsInfoSection = ({ news }: { news: NewsT | null }) => {
   return (
-    <div className={s.container}>
+    <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.titleContainer}>
         <div className={s.title}>
-          <span className="h5">
+          <span className="h5" itemProp="datePublished">
             {new Date(news?.created_at || '').toLocaleDateString('ru-RU', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',
             })}
           </span>
-          <h1 className="h1">{news?.title}</h1>
+          <h1 className="h1" itemProp="name">
+            {news?.title}
+          </h1>
         </div>
         <div className={s.imageContainer}>
-          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`} fill alt="new" />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
+            fill
+            alt="new"
+            itemProp="image"
+          />
         </div>
       </div>
       <div className={s.content}>
-        <p className="body_2">{news?.content}</p>
+        <p className="body_2" itemProp="articleBody">
+          {news?.content}
+        </p>
 
         <Button variant="link" as={Link} href={paths.news}>
           <ArrowSmLeftIcon /> Назад к новостям

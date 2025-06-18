@@ -1,4 +1,4 @@
-@use '../../../shared/config/styles/functions' as *;
+@use "../../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -54,7 +54,8 @@
   gap: vw-1440(16);
 
   & > p,
-  h5 {
+  h5,
+  & > div {
     color: var(--color-white);
   }
 

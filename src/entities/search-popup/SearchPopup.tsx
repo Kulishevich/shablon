@@ -16,25 +16,30 @@ export const SearchPopup = ({
   return (
     <div className={s.wrapper}>
       <div className={s.content}>
-      <div className={s.categories}>
-        <h6 className="h6">Поиск по категориям:</h6>
-        {categories.map((category, index) => (
-          <Link
-            href={`${paths.catalog}/${category.slug}_${category.id}`}
-            className="body_4"
-            key={index}
-          >
-            {category.name}
-          </Link>
-        ))}
+        {categories.length > 0 && (
+          <div className={s.categories}>
+            <h6 className="h6">Поиск по категориям:</h6>
+            {categories.map((category, index) => (
+              <Link href={`${paths.catalog}/${category.slug}`} className="body_4" key={index}>
+                {category.name}
+              </Link>
+            ))}
+          </div>
+        )}
+        {products.length > 0 && (
+          <div className={s.products}>
+            <h6 className="h6">Поиск по товарам:</h6>
+            {products.map((product) => (
+              <SearchProductCard {...product} key={product.id} />
+            ))}
+          </div>
+        )}
+        {categories.length === 0 && products.length === 0 && (
+          <div className={s.noResults}>
+            <p className="body_4">По вашему запросу ничего не найдено</p>
+          </div>
+        )}
       </div>
-      <div className={s.products}>
-        <h6 className="h6">Поиск по товарам:</h6>
-        {products.map((product) => (
-          <SearchProductCard {...product} key={product.id} />
-        ))}
-      </div>
-    </div>
     </div>
   );
 };

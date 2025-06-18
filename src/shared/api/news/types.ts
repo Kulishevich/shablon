@@ -14,6 +14,7 @@ export type NewsListT = {
 
 export type NewsT = {
   id: number;
+  slug: string;
   title: string | null;
   subtitle: string | null;
   content: string | null;

@@ -13,6 +13,7 @@ import { SortSelect } from '@/features/sort-select';
 import { CatalogSearch } from '@/features/catalog-search';
 import { BrandT } from '@/shared/api/brands/types';
 import { SeoBlock } from '@/entities/seo-block';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 export const CatalogSection = ({
   products,
   subcategoryId,
@@ -38,7 +39,7 @@ export const CatalogSection = ({
           <Link
             className={clsx(subcategoryId === subcategory.id && s.active, 'h3')}
             key={index}
-            href={`${paths.catalog}/${category.slug}_${category.id}/${subcategory.slug}_${subcategory.id}`}
+            href={`${paths.catalog}/${category.slug}/${subcategory.slug}`}
           >
             {subcategory.name}
           </Link>
@@ -54,11 +55,15 @@ export const CatalogSection = ({
               <FiltersMobile brands={brands} min={minPrice} max={maxPrice} />
             </div>
           </div>
-          <div className={s.productList}>
-            {products?.data?.map((product, index) => <ProductCard key={index} product={product} />)}
+          <div className={s.productList} itemScope itemType="http://schema.org/ItemList">
+            <ReduxProvider>
+              {products?.data?.map((product, index) => (
+                <ProductCard key={index} product={product} />
+              ))}
+            </ReduxProvider>
           </div>
           <div className={s.pagination}>
-            <p className="body_7">Найдено по фильтрам: {products?.total || 0}</p>
+            <p className="body_7">Всего продуктов: {products?.total || 0}</p>
             <Pagination totalPages={products?.last_page || 1} currentPage={page} />
           </div>
           <SeoBlock page={`catalog`} align="left" />

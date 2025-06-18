@@ -11,20 +11,30 @@ import clsx from 'clsx';
 
 export const ShareInfo = ({ title, published_at, content, photo_path, slug, id }: PromotionT) => {
   return (
-    <div className={s.container}>
+    <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.imageContainer}>
-        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt={'discount'} />
+        <Image
+          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+          fill
+          alt={'discount'}
+          itemProp="image"
+        />
       </div>
       <div className={s.content}>
         <Breadcrumbs
-          dynamicPath={[{ title: title || '', path: `/${slug}_${id}` }]}
+          dynamicPath={[{ title: title || '', path: `/${slug}` }]}
           className={s.breadcrumbs}
         />
-        <p className="h1_discount">{title} </p>
-        <span className="body_5">{new Date(published_at || '').toLocaleDateString('RU-ru')}</span>
+        <h1 className="h1_discount" itemProp="name">
+          {title}
+        </h1>
+        <span className="body_5" itemProp="datePublished">
+          {new Date(published_at || '').toLocaleDateString('RU-ru')}
+        </span>
         <div
           className={clsx('body_2', s.text)}
           dangerouslySetInnerHTML={{ __html: content || '' }}
+          itemProp="articleBody"
         />
         <Button variant="link" as={Link} href={paths.shares}>
           <ArrowSmLeftIcon /> Назад к акциям

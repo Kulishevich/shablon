@@ -1,9 +1,4 @@
-import {
-  ComponentPropsWithoutRef,
-  ElementRef,
-  ReactNode,
-  forwardRef,
-} from 'react';
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react';
 
 import * as RadixSelect from '@radix-ui/react-select';
 import { SelectGroup, SelectItem } from '@radix-ui/react-select';
@@ -23,10 +18,7 @@ export type SelectProps = {
   options?: OptionsValue[];
   placeHolder?: string;
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>;
-export const Select = forwardRef<
-  ElementRef<typeof RadixSelect.Trigger>,
-  SelectProps
->(
+export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectProps>(
   (
     {
       className,
@@ -42,11 +34,7 @@ export const Select = forwardRef<
     ref
   ) => {
     const mappedOptions = options?.map((item, index) => (
-      <SelectItem
-        className={s.selectItem}
-        key={item.value + index}
-        value={item.value}
-      >
+      <SelectItem className={s.selectItem} key={item.value + index} value={item.value}>
         <RadixSelect.ItemText asChild>
           <div className={s.option}>
             {item.icon}

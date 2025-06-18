@@ -9,7 +9,7 @@ export const NewsSection = ({ newsList, page }: { newsList: NewsListT | null; pa
     <div className={s.container}>
       <div className={s.content}>
         <h1 className="h1">Новости</h1>
-        <div className={s.newsList}>
+        <div className={s.newsList} itemScope itemType="http://schema.org/Blog">
           {newsList?.data?.map((news, index) => <NewsCard key={index} news={news} />)}
         </div>
       </div>

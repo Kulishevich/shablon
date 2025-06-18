@@ -10,12 +10,17 @@ import { PromotionT } from '@/shared/api/promotions/types';
 
 export const DiscountCard = ({ title, photo_path, start_date, end_date, slug, id }: PromotionT) => {
   return (
-    <div className={s.container}>
+    <div className={s.container} itemScope itemType="http://schema.org/BlogPosting">
       <div className={s.imageContainer}>
-        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt="discount" />
+        <Image
+          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+          fill
+          alt="discount"
+          itemProp="image"
+        />
       </div>
       <div className={s.content}>
-        <span className={clsx(s.tag, 'tag')}>
+        <span className={clsx(s.tag, 'tag')} itemProp="datePublished">
           С{' '}
           {new Date(start_date || '').toLocaleDateString('ru-RU', {
             day: '2-digit',
@@ -29,12 +34,15 @@ export const DiscountCard = ({ title, photo_path, start_date, end_date, slug, id
             year: 'numeric',
           })}
         </span>
-        <h5 className={clsx(s.title, 'h5')}>{title}</h5>
+        <div className={clsx(s.title, 'h5')} itemProp="name">
+          {title}
+        </div>
         <Button
           variant="link"
           as={Link}
-          href={`${paths.shares}/${slug}_${id}`}
+          href={`${paths.shares}/${slug}`}
           className={s.button}
+          itemProp="mainEntityOfPage"
         >
           Подробнее
           <ArrowRightUpIcon />

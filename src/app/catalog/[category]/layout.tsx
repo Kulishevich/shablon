@@ -1,17 +1,11 @@
-import { getCategoryById } from '@/shared/api/category/getCategoryById';
+import { getCategoryBySlug } from '@/shared/api/category/getCategoryBySlug';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: Promise<{ category: string }>;
-}) => {
+export const generateMetadata = async ({ params }: { params: Promise<{ category: string }> }) => {
   const categorySlug = (await params).category;
   const seo = await getSeoTag(`/catalog/${categorySlug}`);
 
-  const category = await getCategoryById(
-    categorySlug.split('_').findLast((elem) => elem) || ''
-  );
+  const category = await getCategoryBySlug(categorySlug);
 
   return {
     title: seo?.title ?? category?.name,

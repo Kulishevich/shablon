@@ -10,6 +10,7 @@ import { postFeedback } from '@/shared/api/feedback/postFeedback';
 import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
 import { FeedbackFormScheme } from '@/shared/validation/feedback-scheme-creator';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
 
 export const FeedbackForm = () => {
   const {
@@ -32,7 +33,7 @@ export const FeedbackForm = () => {
     const { comment, name, phone } = data;
 
     try {
-      await postFeedback({ comment, name, phone });
+      await postFeedback({ comment: comment ?? '', name, phone });
 
       showToast({
         variant: 'success',
@@ -59,13 +60,13 @@ export const FeedbackForm = () => {
           label="Ваше имя"
           isRequired
         />
-        <ControlledTextField
+        <ControlledPhoneField
           control={control}
           name="phone"
           placeholder="Введите ваш телефон"
           label="Ваш телефон"
           isRequired
-          type="tel"
+          mask="+375 (99) 999-99-99"
         />
         <ControlledTextArea
           control={control}

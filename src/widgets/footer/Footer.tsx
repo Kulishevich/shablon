@@ -13,11 +13,11 @@ export const Footer = ({
   contacts: ContactsT | null;
 }) => {
   return (
-    <div className={s.container}>
+    <footer className={s.container}>
       <div className={s.wrapper}>
         <FooterContent categories={categories} contacts={contacts} />
         <FooterInfo />
       </div>
-    </div>
+    </footer>
   );
 };

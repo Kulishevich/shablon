@@ -9,9 +9,9 @@ export const Navigation = ({ contacts }: { contacts: ContactsT | null }) => {
   return (
     <div className={s.container}>
       <div className={s.content}>
-        <nav className={s.navigation}>
+        <nav className={s.navigation} itemScope itemType="http://schema.org/SiteNavigationElement">
           {navigation.slice(0, 6).map((nav, index) => (
-            <Link className="body_3" href={nav.path} key={index}>
+            <Link className="body_3" href={nav.path} key={index} itemProp="url">
               {nav.title === 'Акции' && <DiscountCircleIcon />}
               {nav.title}
             </Link>

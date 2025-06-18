@@ -12,7 +12,7 @@ import { ControlledTextField } from '@/shared/ui/controlled-text-field';
 import { ControlledTextArea } from '@/shared/ui/controlled-text-area/ControlledTextArea';
 import { PaymentT } from '@/shared/api/payment-methods/types';
 import { DeliveryT } from '@/shared/api/delivery-methods/types';
-
+import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
 export const OrderForm = ({
   paymentMethods,
   deliveryMethods,
@@ -40,12 +40,13 @@ export const OrderForm = ({
             label="Имя"
             isRequired
           />
-          <ControlledTextField
+          <ControlledPhoneField
             control={control}
             name="phone"
             placeholder="Телефон"
             label="Телефон"
             isRequired
+            mask="+375 (99) 999-99-99"
           />
           <ControlledTextField
             control={control}

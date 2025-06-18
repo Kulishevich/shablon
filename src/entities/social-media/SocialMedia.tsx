@@ -20,17 +20,29 @@ export const SocialMedia = ({
   return (
     <div className={clsx(s.container, className)}>
       {viber && (
-        <Link href={`viber://chat?number=${formatPhoneNumber(viber)}`} target="_blank">
+        <Link
+          href={`viber://chat?number=${formatPhoneNumber(viber)}`}
+          target="_blank"
+          aria-label="Связаться с нами в Viber"
+        >
           <ViberIcon />
         </Link>
       )}
       {telegram && (
-        <Link href={`https://t.me/${telegram}`} target="_blank">
+        <Link
+          href={`https://t.me/${telegram}`}
+          target="_blank"
+          aria-label="Связаться с нами в Telegram"
+        >
           <TelegramIcon />
         </Link>
       )}
       {whatsapp && (
-        <Link href={`https://wa.me/${formatPhoneNumber(whatsapp)}`} target="_blank">
+        <Link
+          href={`https://wa.me/${formatPhoneNumber(whatsapp)}`}
+          target="_blank"
+          aria-label="Связаться с нами в WhatsApp"
+        >
           <WhatsAppIcon />
         </Link>
       )}

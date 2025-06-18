@@ -1,8 +1,8 @@
 import { PromotionsResponse, PromotionT } from './types';
 
-export const getPromotion = async (id: string): Promise<PromotionT | null> => {
+export const getPromotion = async (slug: string): Promise<PromotionT | null> => {
   try {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/promotions/${id}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/promotions/slug/${slug}`;
 
     const res = await fetch(url);
 

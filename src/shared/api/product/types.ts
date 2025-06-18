@@ -19,6 +19,7 @@ export type ProductT = {
   id: number;
   name: string;
   slug: string;
+
   description: string;
   photo_path: string;
   price: string;

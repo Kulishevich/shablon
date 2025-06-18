@@ -30,6 +30,7 @@ export const Slider = ({ children, itemWidth }: SliderProps) => {
         variant="icon_secondary"
         className={s.iconLeft}
         onClick={() => scroll('left')}
+        aria-label="Слайд влево"
       >
         <ArrowLeftIcon />
       </Button>
@@ -41,6 +42,7 @@ export const Slider = ({ children, itemWidth }: SliderProps) => {
         variant="icon_secondary"
         className={s.iconRight}
         onClick={() => scroll('right')}
+        aria-label="Слайд вправо"
       >
         <ArrowRightIcon />
       </Button>

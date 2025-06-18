@@ -3,8 +3,17 @@ import React, { useEffect, useState } from 'react';
 import s from './ProductDescription.module.scss';
 import clsx from 'clsx';
 import { ProductT } from '@/shared/api/product/types';
+import { ReviewsSection } from '@/widgets/reviews-section';
+import { ReviewT } from '@/shared/api/reviews/types';
+import { ProductReviews } from '@/widgets/product-reviews';
 
-export const ProductDescription = ({ product }: { product: ProductT }) => {
+export const ProductDescription = ({
+  product,
+  reviews,
+}: {
+  product: ProductT;
+  reviews: ReviewT[] | null;
+}) => {
   const [activeTag, setActiveTag] = useState(0);
 
   useEffect(() => {
@@ -32,6 +41,11 @@ export const ProductDescription = ({ product }: { product: ProductT }) => {
       content:
         'Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка',
     },
+    {
+      id: 3,
+      title: 'Отзывы',
+      content: <ProductReviews reviews={reviews} />,
+    },
   ];
 
   return (
@@ -47,10 +61,16 @@ export const ProductDescription = ({ product }: { product: ProductT }) => {
           </button>
         ))}
       </div>
-      <div
-        className={s.content}
-        dangerouslySetInnerHTML={{ __html: info[activeTag].content || '' }}
-      />
+      {activeTag === 2 ? (
+        <div className={s.content}>
+          <ProductReviews reviews={reviews} />
+        </div>
+      ) : (
+        <div
+          className={s.content}
+          dangerouslySetInnerHTML={{ __html: info[activeTag].content || '' }}
+        />
+      )}
     </div>
   );
 };

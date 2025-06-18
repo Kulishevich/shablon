@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MasterCardIcon, VisaIcon } from '@/shared/assets';
 import Link from 'next/link';
@@ -8,10 +8,17 @@ import s from './FooterInfo.module.scss';
 
 export const FooterInfo = () => {
   const { isMobile } = useBreakpoint();
+  const [url, setUrl] = useState('');
+
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, []);
 
   return (
     <div className={s.container}>
-      <p className="body_7">ⓒ 2025 website.by</p>
+      <p className="body_7">
+        ⓒ {new Date().getFullYear()} {url.split('/')[2]}
+      </p>
       <div className={s.paymentMethod}>
         <MasterCardIcon width={!isMobile ? 35 : 26} height={!isMobile ? 21 : 16} />
         <Image

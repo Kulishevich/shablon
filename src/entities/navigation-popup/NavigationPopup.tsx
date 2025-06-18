@@ -4,11 +4,7 @@ import { paths } from '@/shared/config/constants/paths';
 import { CategoryT } from '@/shared/api/category/types';
 import s from './NavigationPopup.module.scss';
 
-export const NavigationPopup = ({
-  categories,
-}: {
-  categories: CategoryT[] | null;
-}) => {
+export const NavigationPopup = ({ categories }: { categories: CategoryT[] | null }) => {
   const [activeCategory, setActiveCategory] = useState(categories?.[0]?.id);
   const activeContent = categories?.find((elem) => elem.id === activeCategory);
 
@@ -18,7 +14,7 @@ export const NavigationPopup = ({
         {categories?.map((category, index) => (
           <Link
             className="h6"
-            href={`${paths.catalog}/${category.slug}_${category.id}`}
+            href={`${paths.catalog}/${category.slug}`}
             key={index}
             onMouseEnter={() => setActiveCategory(category?.id)}
           >
@@ -32,7 +28,7 @@ export const NavigationPopup = ({
           {activeContent?.subcategories?.map((subcategory, index) => (
             <Link
               className="body_4"
-              href={`${paths.catalog}/${activeContent.slug}_${activeContent.id}/${subcategory.slug}_${subcategory.id}`}
+              href={`${paths.catalog}/${activeContent.slug}/${subcategory.slug}`}
               key={index}
             >
               {subcategory.name}

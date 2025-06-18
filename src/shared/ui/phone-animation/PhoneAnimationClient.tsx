@@ -9,7 +9,14 @@ import { FeedbackPopup } from '../../../widgets/feedback-popup/FeedbackPopup';
 const PhoneAnimationClient = ({ image }: { image: string }) => {
   return (
     <FeedbackPopup image={image}>
-      <div className={s.container}>
+      <div
+        className={s.container}
+        role="button"
+        tabIndex={0}
+        aria-label="Связаться с нами"
+        aria-haspopup="dialog"
+        aria-expanded={false}
+      >
         <Lottie animationData={animationData} loop={true} className={s.phone} />
       </div>
     </FeedbackPopup>

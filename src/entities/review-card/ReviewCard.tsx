@@ -6,7 +6,7 @@ import { ReviewContent } from '../review-content';
 
 export const ReviewCard = (props: ReviewT) => {
   return (
-    <div className={s.container}>
+    <div className={s.container} itemScope itemType="http://schema.org/Review">
       <ReviewContent {...props} is_card />
       <ReviewPopup {...props} />
     </div>

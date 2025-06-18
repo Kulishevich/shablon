@@ -11,14 +11,10 @@ export const SearchProductCard = ({ ...props }: ProductT) => {
   const { photo_path, name, price, slug, id } = props;
 
   return (
-    <Link href={`${paths.product}/${slug}_${id}`} className={s.container}>
+    <Link href={`${paths.product}/${slug}`} className={s.container}>
       <div className={s.card}>
         <div className={s.imageContainer}>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
-            fill
-            alt="product"
-          />
+          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt="product" />
         </div>
         <div className={s.content}>
           <p className="body_4">{name}</p>

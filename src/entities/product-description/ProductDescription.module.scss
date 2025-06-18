@@ -42,6 +42,7 @@
   @media (max-width: 768px) {
     gap: 16px;
     justify-content: center;
+    flex-wrap: wrap;
 
     &::after {
       display: none;

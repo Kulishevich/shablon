@@ -6,7 +6,20 @@ import s from './BrandCard.module.scss';
 export const BrandCard = ({ image_path, name }: BrandT) => {
   return (
     <div className={s.container}>
-      <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image_path}`} fill alt={name} />
+      <Image
+        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image_path}`}
+        width={306}
+        height={240}
+        alt={name}
+        className={s.image}
+      />
+      <Image
+        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image_path}`}
+        width={306}
+        height={160}
+        alt={name}
+        className={s.logo}
+      />
     </div>
   );
 };

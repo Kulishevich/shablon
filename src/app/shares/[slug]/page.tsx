@@ -8,15 +8,14 @@ import { notFound } from 'next/navigation';
 
 export default async function Share({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const id = slug.split('_').findLast((elem) => elem) || '1';
-  const promotion = await getPromotion(id);
+  const promotion = await getPromotion(slug);
 
   if (!promotion) {
     notFound();
   }
 
   const allPromotions = await getPromotions({});
-  const otherPromotions = allPromotions?.data.filter((elem) => elem.id !== +id);
+  const otherPromotions = allPromotions?.data.filter((elem) => elem.id !== promotion.id);
 
   return (
     <main>

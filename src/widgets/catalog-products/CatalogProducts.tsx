@@ -2,7 +2,6 @@ import React from 'react';
 import s from './CatalogProducts.module.scss';
 import { CategoryT } from '@/shared/api/category/types';
 import { CategoryCard } from '@/entities/category-card/CategoryCard';
-import clsx from 'clsx';
 
 export const CatalogProducts = ({
   categories,

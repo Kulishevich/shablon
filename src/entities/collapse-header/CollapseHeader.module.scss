@@ -5,59 +5,72 @@
   align-items: center;
   text-align: center;
   gap: 12px;
+
+  &.subcategory {
+    .wrapper {
+      padding: 0;
+    }
+
+    .trigger {
+      padding: 0;
+    }
+  }
 }
 
 .trigger {
-  width: fit-content;
   display: flex;
-  justify-content: center;
-  gap: 8px;
   align-items: center;
-  position: relative;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 0;
 
-  border: none;
-  background-color: var(--color-white);
+  & > div {
+    position: relative;
 
-  & > svg {
-    position: absolute;
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%) translateX(100%) rotate(90deg);
-    transition: transform 0.3s ease;
-    background-color: transparent;
-    border: none;
-  }
+    & > a {
+      color: inherit;
+      text-decoration: none;
 
-  &:hover {
-    cursor: pointer;
-    & > p {
-      color: var(--color-accent-1);
+      &:hover {
+        color: var(--color-accent-1);
+      }
     }
+
     & > svg {
-      color: var(--color-accent-1);
-    }
-  }
-  &[data-state="open"] {
-    & > svg {
-      transform: translateY(-50%) translateX(100%) rotate(270deg);
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translate(100%, -50%);
+      z-index: 5;
+      transition: transform 0.2s ease-out;
+
+      &.rotated {
+        transform: rotate(90deg) translate(-50%, -100%);
+      }
     }
   }
 }
 
 .content {
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: visible;
+  width: 100%;
+
   &[data-state="open"] {
-    animation: slideDown 300ms ease-out;
+    animation: slideDown 0.2s ease-out;
   }
+
   &[data-state="closed"] {
-    animation: slideUp 300ms ease-out;
+    animation: slideUp 0.2s ease-out;
   }
 }
 
 .wrapper {
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 @keyframes slideDown {

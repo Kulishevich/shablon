@@ -2,9 +2,10 @@
 import { YandexMap } from '@/shared/ui/yandex-map/YandexMap';
 import { Collapse } from '@/shared/ui/collapse';
 import s from './DeliverySection.module.scss';
-
+import { ContactsT } from '@/shared/api/design/types';
 export const DeliverySection = ({
   content,
+  contacts,
 }: {
   content:
     | {
@@ -12,6 +13,7 @@ export const DeliverySection = ({
         payment_text: string | null;
       }
     | undefined;
+  contacts: ContactsT | null;
 }) => {
   return (
     <div className={s.wrapper}>
@@ -21,7 +23,7 @@ export const DeliverySection = ({
           <p className="body_2">{content?.delivery_text}</p>
           <div className={s.deliveryArea}>
             <p className="h5">Область доставки</p>
-            <YandexMap className={s.map} />
+            {contacts?.address && <YandexMap address={contacts?.address} className={s.map} />}
           </div>
         </div>
       </Collapse>

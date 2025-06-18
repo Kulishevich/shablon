@@ -63,17 +63,26 @@ export const RowProductCart = ({
   }, [debouncedDispatch]);
 
   return (
-    <div className={s.container}>
+    <div className={s.container} itemScope itemType="http://schema.org/ListItem">
       <Button variant="icon" onClick={() => dispatch(deleteFromCart(id))}>
         <CloseIcon />
       </Button>
       <div className={s.card}>
-        <Link className={s.imageContainer} href={`${paths.product}/${slug}_${id}`}>
-          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt="product" />
+        <Link className={s.imageContainer} href={`${paths.product}/${slug}`} itemProp="url">
+          <Image
+            itemProp="image"
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+            fill
+            alt="product"
+          />
         </Link>
         <div>
-          <p className="body_4">{name}</p>
-          <span className="body_7">Артикул: {sku}</span>
+          <p className="body_4" itemProp="name">
+            {name}
+          </p>
+          <span className="body_7" itemProp="sku">
+            Артикул: {sku}
+          </span>
         </div>
       </div>
       <div className={s.count}>
@@ -83,9 +92,15 @@ export const RowProductCart = ({
           onChange={(e) => changeCountValue(e.target.value)}
         />
       </div>
-      <div className={s.price}>
-        <p className="body_3">{totalPrice} BYN</p>
-        {isDiscount && <span className="discount">{+price} BYN</span>}
+      <div className={s.price} itemScope itemType="http://schema.org/Offer">
+        <p className="body_3" itemProp="price">
+          {totalPrice} BYN
+        </p>
+        {isDiscount && (
+          <span className="discount" itemProp="price">
+            {+price} BYN
+          </span>
+        )}
       </div>
       <h5 className={clsx(!!isDiscount && s.discount, 'h5')}>{totalPrice * quantity} BYN</h5>
     </div>

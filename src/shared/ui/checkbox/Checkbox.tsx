@@ -39,6 +39,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
           className={clsx(s.root, error && s.error, className)}
           disabled={disabled}
           id={checkboxId}
+          aria-label={'Чекбокс'}
           ref={ref}
           {...rest}
         >

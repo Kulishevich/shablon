@@ -1,4 +1,4 @@
-import { getCategoryById } from '@/shared/api/category/getCategoryById';
+import { getCategoryBySlug } from '@/shared/api/category/getCategoryBySlug';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 
 export const generateMetadata = async ({
@@ -9,9 +9,7 @@ export const generateMetadata = async ({
   const categorySlug = (await params).category;
   const subcategorySlug = (await params).subcategory;
 
-  const subcategory = await getCategoryById(
-    subcategorySlug.split('_').findLast((elem) => elem) || ''
-  );
+  const subcategory = await getCategoryBySlug(subcategorySlug);
 
   const seo = await getSeoTag(`/catalog/${categorySlug}/${subcategorySlug}`);
 

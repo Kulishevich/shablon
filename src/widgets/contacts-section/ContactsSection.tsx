@@ -14,47 +14,65 @@ export const ContactsSection = ({
   isMain?: boolean;
 }) => {
   return (
-    <div className={s.container}>
-      {!isMain && <h1 className="h1">Контакты</h1>}
+    <div className={clsx(s.container, !isMain && s.standalone)}>
+      {isMain ? <h2 className="h2">Контакты компании</h2> : <h1 className="h1">Контакты</h1>}
       <div className={s.content}>
-        <div className={s.info}>
-          {isMain && <h2 className="h2">Контакты компании</h2>}
-          <div className={s.elem}>
-            <h3 className="h3">Адрес</h3>
-            <p className="body_2">{contacts?.address}</p>
-          </div>
-
-          <div className={s.elem}>
-            <h3 className="h3">Телефон для связи</h3>
-            <div className={s.phones}>
-              {contacts?.phones.map((phone, index) => (
-                <Link href={`tel:${phone}`} key={index} className="body_2">
-                  {phone}
-                </Link>
-              ))}
+        <div className={s.inner}>
+          <div className={s.info} itemScope itemType="http://schema.org/Organization">
+            <div className={s.elem}>
+              <div className="h3">Адрес</div>
+              <p
+                className="body_2"
+                itemProp="address"
+                itemScope
+                itemType="http://schema.org/PostalAddress"
+              >
+                <span itemProp="addressLocality streetAddress">{contacts?.address}</span>
+              </p>
             </div>
-          </div>
-          {!isMain && (
+
+            <div className={s.elem}>
+              <div className="h3">Телефон для связи</div>
+              <div className={s.phones}>
+                {contacts?.phones.map((phone, index) => (
+                  <Link href={`tel:${phone}`} key={index} className="body_2" itemProp="telephone">
+                    {phone}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <>
               <div className={s.elem}>
-                <h3 className="h3">Email</h3>
-                <Link href={`mailto:${contacts?.email}`} className="body_2">
+                <div className="h3">Email</div>
+                <Link href={`mailto:${contacts?.email}`} className="body_2" itemProp="email">
                   {contacts?.email}
                 </Link>
               </div>
               <div className={s.elem}>
-                <h3 className="h3">Режим работы</h3>
+                <div className="h3">Режим работы</div>
                 <p className="body_2">{contacts?.working_hours}</p>
               </div>
               <div className={s.elem}>
-                <h3 className="h3">Мессенджеры</h3>
+                <div className="h3">Мессенджеры</div>
                 <SocialMedia {...contacts?.social_links} />
               </div>
             </>
-          )}
+          </div>
         </div>
+
         {contacts?.address && (
-          <YandexMap address={contacts?.address} className={clsx(s.map, { [s.main]: isMain })} />
+          <>
+            <YandexMap
+              coordinatesOffset={[-0.006, 0]}
+              address={contacts?.address}
+              className={clsx(s.map, s.map_desktop, { [s.main]: isMain })}
+            />
+            <YandexMap
+              address={contacts?.address}
+              className={clsx(s.map, s.map_mobile, { [s.main]: isMain })}
+            />
+          </>
         )}
       </div>
     </div>

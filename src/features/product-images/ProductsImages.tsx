@@ -11,7 +11,7 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
   const isDiscount = !!Number(product?.discount);
 
   return (
-    <div className={s.images}>
+    <div className={s.images} itemScope itemType="http://schema.org/ImageGallery">
       <div className={s.miniImages}>
         {product?.images.map((image, index) => (
           <button
@@ -22,6 +22,7 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
             })}
           >
             <Image
+              itemProp="image"
               src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image.image_path}`}
               fill
               alt="product"
@@ -30,7 +31,12 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
         ))}
       </div>
       <div className={s.imageContainer}>
-        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${activeImage}`} fill alt="product" />
+        <Image
+          itemProp="image"
+          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${activeImage}`}
+          fill
+          alt="product"
+        />
         <div className={s.tagsContainer}>
           {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
           {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}

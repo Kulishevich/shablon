@@ -12,19 +12,35 @@ import { HeaderMobile } from '@/widgets/header-mobile';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
 import { getProducts } from '@/shared/api/product/getProducts';
-import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 import Script from 'next/script';
-import PhoneAnimation from '@/shared/ui/phone-animation/PhoneAnimation';
+import dynamic from 'next/dynamic';
+import { ToTop } from '@/shared/ui/to-top';
+const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
 const onest = Onest({
   variable: '--font-onest',
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '600'],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const data = await getSeoTag('home');
+export async function generateViewport() {
   const settings = await getSetting();
+
+  return {
+    themeColor: settings?.colors.primary,
+    width: 'device-width',
+    initialScale: 1,
+    minimumScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [data, settings] = await Promise.all([getSeoTag('home'), getSetting()]);
 
   return {
     title: data?.title ?? 'Шаблон',
@@ -45,22 +61,27 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const categories = await getCategories();
-  const contacts = await getContacts();
-  const products = await getProducts({});
-  const settings = await getSetting();
-  console.log(settings?.colors);
+  const [categories, contacts, products, settings] = await Promise.all([
+    getCategories(),
+    getContacts(),
+    getProducts({}),
+    getSetting(),
+  ]);
+
   return (
-    <html lang="en">
+    <html lang="ru">
       <head>
+        <link rel="preconnect" href="https://api-maps.yandex.ru" />
+        <link rel="dns-prefetch" href="https://api-maps.yandex.ru" />
+        <link rel="preconnect" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
+        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
         <style>
           {`:root {
+            --color-text: ${settings?.colors.text};
             --color-accent-1: ${settings?.colors.primary};
             --color-accent-2: ${settings?.colors.accent};
             --color-accent-red: ${settings?.colors.secondary};
             --color-accent-green: ${settings?.colors.button_secondary};
-            --color-accent-orange: ${settings?.colors.background};
-            --color-text: ${settings?.colors.text};
           }`}
         </style>
         <Script
@@ -68,25 +89,25 @@ export default async function RootLayout({
           strategy="beforeInteractive"
         />
       </head>
-      <ReduxProvider>
-        <body className={`${onest.variable}`}>
-          <HeaderDesktop
-            categories={categories || []}
-            contacts={contacts}
-            products={products?.data || []}
-          />
-          <HeaderMobile
-            categories={categories}
-            contacts={contacts}
-            products={products?.data || []}
-            feedbackImage={settings?.feedback_image || ''}
-          />
-          {children}
-          <Footer categories={categories} contacts={contacts} />
-          <Toaster />
-          <PhoneAnimation image={settings?.feedback_image || ''} />
-        </body>
-      </ReduxProvider>
+
+      <body className={`${onest.variable}`}>
+        <HeaderDesktop
+          categories={categories || []}
+          contacts={contacts}
+          products={products?.data || []}
+        />
+        <HeaderMobile
+          categories={categories}
+          contacts={contacts}
+          products={products?.data || []}
+          feedbackImage={settings?.feedback_image || ''}
+        />
+        {children}
+        <Footer categories={categories} contacts={contacts} />
+        <Toaster />
+        <PhoneAnimation image={settings?.feedback_image || ''} />
+        <ToTop />
+      </body>
     </html>
   );
 }

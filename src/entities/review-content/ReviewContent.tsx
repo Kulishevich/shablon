@@ -23,20 +23,28 @@ export const ReviewContent = ({
           <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${author_photo}`} fill alt="profile" />
         </div>
         <div className={s.nameContainer}>
-          <p className="body_3">{author_name}</p>
-          <span className={clsx(s.date, 'tag')}>{new Date(created_at).toLocaleDateString()}</span>
+          <p className="body_3" itemProp="author">
+            {author_name}
+          </p>
+          <span className={clsx(s.date, 'tag')} itemProp="datePublished">
+            {new Date(created_at).toLocaleDateString()}
+          </span>
         </div>
       </div>
 
-      <div className={s.startRating}>
+      <div className={s.startRating} itemProp="reviewRating">
         {new Array(rating).fill('').map((_, index) => (
           <StarIcon key={index} />
         ))}
       </div>
 
       <div className={s.textContainer}>
-        <h5 className="h5">{title}</h5>
-        <p className={clsx('body_4', is_card && s.textClamp)}>{review_text}</p>
+        <h3 className="h5" itemProp="name">
+          {title}
+        </h3>
+        <p className={clsx('body_4', is_card && s.textClamp)} itemProp="reviewBody">
+          {review_text}
+        </p>
       </div>
     </>
   );

@@ -7,22 +7,19 @@ import s from './TextArea.module.scss';
 export type TextAreaProps = {
   errorMessage?: string;
   label?: string;
+  isRequired?: boolean;
 } & ComponentPropsWithoutRef<'textarea'>;
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, errorMessage, label, ...rest }, ref) => {
+  ({ className, errorMessage, label, isRequired, ...rest }, ref) => {
     const showError = !!errorMessage;
 
     return (
       <div className={s.container}>
-        {label && <label className={(s.label, 'h6')}>{label}</label>}
+        {label && <label className={clsx(s.label, 'h6', isRequired && 'required')}>{label}</label>}
         <textarea
-          className={clsx(
-            s.textarea,
-            showError && s.error,
-            className,
-            'placeholder'
-          )}
+          required={isRequired}
+          className={clsx(s.textarea, showError && s.error, className, 'placeholder')}
           ref={ref}
           {...rest}
         />

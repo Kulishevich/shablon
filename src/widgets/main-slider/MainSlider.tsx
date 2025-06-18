@@ -53,6 +53,9 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
           },
         }}
         autoplay={{ delay: 5000 }}
+        watchSlidesProgress={true}
+        observer={true}
+        observeParents={true}
       >
         {slides?.map((slide, index) => (
           <SwiperSlide key={index}>
@@ -61,6 +64,12 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
                 src={`${process.env.NEXT_PUBLIC_STORE_URL}/${slide.photo_path}`}
                 alt={`Slide ${index + 1}`}
                 fill
+                priority={index === 0}
+                quality={75}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LS0yMi4qLjgyPj4+ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               />
               <div className={s.content}>
                 <div>
@@ -80,10 +89,20 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
         ))}
       </Swiper>
 
-      <Button variant="icon_primary" onClick={handlePrev} className={s.iconLeft}>
+      <Button
+        variant="icon_primary"
+        onClick={handlePrev}
+        className={s.iconLeft}
+        aria-label="Слайд влево"
+      >
         <ArrowLeftIcon />
       </Button>
-      <Button variant="icon_primary" onClick={handleNext} className={s.iconRight}>
+      <Button
+        variant="icon_primary"
+        onClick={handleNext}
+        className={s.iconRight}
+        aria-label="Слайд вправо"
+      >
         <ArrowRightIcon />
       </Button>
       <div className={`custom-pagination ${s.pagination}`} />

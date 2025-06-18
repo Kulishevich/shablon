@@ -5,7 +5,7 @@ import React from 'react';
 
 export const BrandsSection = ({ brands }: { brands: BrandT[] | null }) => {
   return (
-    <SliderWrapper title="Бренды, с которыми мы сотрудничаем" variant="discount">
+    <SliderWrapper title="Бренды, с которыми мы сотрудничаем" variant="news">
       {brands?.map((brand) => <BrandCard {...brand} key={brand.id} />)}
     </SliderWrapper>
   );

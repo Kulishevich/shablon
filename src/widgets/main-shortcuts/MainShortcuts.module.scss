@@ -1,0 +1,17 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: vw-1440(64);
+  align-items: center;
+  width: 100%;
+  max-width: vw-1440(1296);
+  margin-top: vw-1440(-56);
+
+  @media (max-width: 768px) {
+    gap: 24px;
+    max-width: 335px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -28,12 +28,12 @@ export const HeaderMobile = ({
       <Logo variant="secondary" />
       <div className={s.buttonsContainer}>
         <FeedbackPopup image={feedbackImage}>
-          <Button variant="icon_secondary">
+          <Button variant="icon_secondary" aria-label="Связаться с нами">
             <PhoneOutlinedIcon />
           </Button>
         </FeedbackPopup>
         <HeaderSearchPopup categories={categories} products={products} />
-        <Button variant="icon_secondary" as={Link} href={paths.cart}>
+        <Button variant="icon_secondary" as={Link} href={paths.cart} aria-label="Корзина">
           <ShoppingCartIcon />
         </Button>
         <HeaderBurgerMenu categories={categories} contacts={contacts} />

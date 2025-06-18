@@ -3,6 +3,8 @@ import { getPromotions } from '@/shared/api/promotions/getPromotions';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { SharesSection } from '@/widgets/shares-section';
 import { SeoBlock } from '@/entities/seo-block';
+import { CanonicalLink } from '@/shared/ui/canonical-link';
+
 export default async function Shares({
   searchParams,
 }: {
@@ -14,9 +16,11 @@ export default async function Shares({
 
   return (
     <>
+      <CanonicalLink href={'/shares'} />
+
       <Breadcrumbs />
       <main>
-        <SharesSection promotions={promotions} page={page} />
+        <SharesSection promotions={promotions} page={page} standalone={true} />
         <SeoBlock page="shares" />
         <Feedback />
       </main>

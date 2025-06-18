@@ -5,7 +5,7 @@ import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { showToast } from '@/shared/ui/toast';
-import { CloseIcon, ShoppingCartIcon } from '@/shared/assets';
+import { CloseIcon, ShoppingCartIcon, StarIcon } from '@/shared/assets';
 import clsx from 'clsx';
 import s from './ProductCard.module.scss';
 import { ProductT } from '@/shared/api/product/types';
@@ -32,6 +32,7 @@ export const ProductCard = ({
     slug,
     main_image,
     quantity,
+    sku,
   } = product;
   const [count, setCount] = useState<number>(quantity || 1);
   const dispatch = useDispatch();
@@ -73,10 +74,16 @@ export const ProductCard = ({
   }, [debouncedDispatch]);
 
   return (
-    <div className={s.container}>
+    <div
+      className={s.container}
+      itemProp="itemListElement"
+      itemScope
+      itemType="http://schema.org/Product"
+    >
       <div className={s.imageContainer}>
-        <Link href={`${paths.product}/${slug}_${id}`}>
+        <Link href={`${paths.product}/${slug}`} itemProp="url">
           <Image
+            itemProp="image"
             src={`${process.env.NEXT_PUBLIC_STORE_URL}/${main_image?.image_path}`}
             fill
             alt="product"
@@ -98,17 +105,42 @@ export const ProductCard = ({
           </Button>
         )}
       </div>
-      <h5 className={clsx(s.title, 'h5')}>{name}</h5>
+      <div className={s.info}>
+        <div className={s.rating} itemProp="aggregateRating">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <StarIcon key={index} className={clsx(s.star, { [s.active]: index < 4 })} />
+          ))}
+        </div>
+        <div className={s.availability}>
+          <span className={clsx(s.availabilityText, 'body_6')} itemProp="availability">
+            в наличии
+          </span>
+        </div>
+      </div>
+      <div className={clsx(s.title, 'h5')} itemProp="name">
+        {name}
+      </div>
       <div
         className={clsx(s.description, 'body_5')}
+        itemProp="description"
         dangerouslySetInnerHTML={{ __html: description || '' }}
       />
 
+      <div className={clsx(s.sku, 'body_7')}>
+        Артикул: <span>{sku}</span>
+      </div>
+
       <div className={s.footerCard}>
         <div className={s.priceContainer}>
-          <div className={s.price}>
-            {is_discount && <span className="discount">{product?.price} BYN</span>}
-            <h4 className="h4">{totalPrice} BYN</h4>
+          <div className={s.price} itemScope itemType="http://schema.org/Offer">
+            {is_discount && (
+              <span className="discount" itemProp="price">
+                {product?.price} BYN
+              </span>
+            )}
+            <div className="h4" itemProp="price">
+              {totalPrice} BYN
+            </div>
           </div>
           {productInCart && (
             <TextField
@@ -121,7 +153,12 @@ export const ProductCard = ({
         <Button fullWidth onClick={handleAddInCard} className={'desktop-only'}>
           В корзину
         </Button>
-        <Button variant={'icon_outlined'} className={'mobile-only'} onClick={handleAddInCard}>
+        <Button
+          variant={'icon_outlined'}
+          className={'mobile-only'}
+          onClick={handleAddInCard}
+          aria-label="В корзину"
+        >
           <ShoppingCartIcon />
         </Button>
       </div>

@@ -8,13 +8,15 @@
   overflow: hidden;
 
   width: 100%;
-  height: vw-1440(520);
+  height: fit-content;
+  max-height: vw-1440(520);
   border-radius: 6px;
 }
 
 .content {
   width: 100%;
-  height: vw-1440(520);
+  height: fit-content;
+  max-height: vw-1440(520);
   padding: vw-1440(24);
 
   border: 1px solid #25338c1a;

@@ -4,18 +4,22 @@ import { ProductInfo } from '@/entities/product-info';
 import s from './ProductSection.module.scss';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
-export const ProductSection = ({ product }: { product: ProductT }) => {
+import { ReviewT } from '@/shared/api/reviews/types';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+
+export const ProductSection = ({
+  product,
+  reviews,
+}: {
+  product: ProductT;
+  reviews: ReviewT[] | null;
+}) => {
   return (
-    <div className={s.container}>
-      <div className={clsx(s.sku, 'body_7')}>
-        Артикул: <span>{product?.sku}</span>
-      </div>
-      <h1 className="h1">{product?.name}</h1>
-      <div className={clsx(s.sku, s.sku_mobile, 'body_7')}>
-        Артикул: <span>{product?.sku}</span>
-      </div>
-      <ProductInfo product={product} />
-      <ProductDescription product={product} />
+    <div className={s.container} itemScope itemType="http://schema.org/Product">
+      <ReduxProvider>
+        <ProductInfo product={product} />
+        <ProductDescription product={product} reviews={reviews} />
+      </ReduxProvider>
     </div>
   );
 };

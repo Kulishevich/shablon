@@ -28,11 +28,7 @@ export const PreviouslyViewed = () => {
       {!!viewedProducts.length && (
         <SliderWrapper title={'Вы смотрели ранее'} variant="mini_product">
           {viewedProducts.map((product, index) => (
-            <Link
-              href={`/product/${product.slug}_${product.id}`}
-              className={s.productLink}
-              key={index}
-            >
+            <Link href={`/product/${product.slug}`} className={s.productLink} key={index}>
               <Image
                 src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product.main_image.image_path}`}
                 fill

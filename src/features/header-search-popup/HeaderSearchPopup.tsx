@@ -45,7 +45,7 @@ export const HeaderSearchPopup = ({
 
   return (
     <div ref={containerRef}>
-      <Button variant="icon_secondary" onClick={() => setIsOpen(true)}>
+      <Button variant="icon_secondary" onClick={() => setIsOpen(!isOpen)} aria-label="Поиск">
         <SearchIcon />
       </Button>
       {isOpen && (
@@ -56,22 +56,37 @@ export const HeaderSearchPopup = ({
             onChange={(e) => setSearchValue(e.target.value)}
           />
           <div className={s.content}>
-            <div className={s.categories}>
-              <h6 className="h6">Поиск по категориям:</h6>
-              {searchValue.length > 0 &&
-                searchResult.categories?.map((category, index) => (
-                  <Link className="body_4" key={index} href={'/'}>
-                    {category.name}
-                  </Link>
-                ))}
-            </div>
-            <div className={s.products}>
-              <h6 className="h6">Поиск по товарам:</h6>
-              {searchValue.length > 0 &&
-                searchResult.products?.map((product) => (
-                  <SearchProductCard {...product} key={product.id} />
-                ))}
-            </div>
+            {searchResult.categories &&
+              searchResult.categories.length > 0 &&
+              searchValue.length > 0 && (
+                <div className={s.categories}>
+                  <h6 className="h6">Поиск по категориям:</h6>
+                  {searchResult.categories?.map((category, index) => (
+                    <Link className="body_4" key={index} href={'/'}>
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            {searchResult.products &&
+              searchResult.products.length > 0 &&
+              searchValue.length > 0 && (
+                <div className={s.products}>
+                  <h6 className="h6">Поиск по товарам:</h6>
+                  {searchResult.products?.map((product) => (
+                    <SearchProductCard {...product} key={product.id} />
+                  ))}
+                </div>
+              )}
+            {(searchValue.length === 0 ||
+              (searchResult.categories &&
+                searchResult.categories.length === 0 &&
+                searchResult.products &&
+                searchResult.products.length === 0)) && (
+              <div className={s.noResults}>
+                <p className="body_4">По вашему запросу ничего не найдено</p>
+              </div>
+            )}
           </div>
         </div>
       )}
