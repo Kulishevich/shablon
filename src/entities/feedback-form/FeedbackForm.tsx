@@ -5,7 +5,6 @@ import { showToast } from '@/shared/ui/toast';
 import { useForm } from 'react-hook-form';
 import { ControlledTextField } from '@/shared/ui/controlled-text-field';
 import { ControlledTextArea } from '@/shared/ui/controlled-text-area/ControlledTextArea';
-import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
 import { postFeedback } from '@/shared/api/feedback/postFeedback';
 import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
 import { FeedbackFormScheme } from '@/shared/validation/feedback-scheme-creator';
