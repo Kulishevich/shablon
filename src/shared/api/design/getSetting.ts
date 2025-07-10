@@ -3,7 +3,11 @@ import { SettingsT } from './types';
 export const getSetting = async (): Promise<SettingsT | null> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/design/settings`
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/design/settings`, {
+      next: {
+        revalidate: 60,
+      }
+    }
     );
 
     const { data } = await res.json();

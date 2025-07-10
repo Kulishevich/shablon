@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -14,7 +14,7 @@
 .title {
   display: flex;
   gap: vw-1440(20);
-  align-items: end;
+  align-items: flex-end;
 
   & > button {
     margin-bottom: vw-1440(11);

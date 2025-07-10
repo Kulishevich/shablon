@@ -43,7 +43,7 @@
 
   & > .totalPrice {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     gap: vw-1440(10);
 
     .discount {
@@ -97,7 +97,7 @@
 .price {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: vw-1440(20);
 
   & > .details {

@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -47,7 +47,7 @@
 .price {
   display: flex;
   gap: vw-1440(8);
-  align-items: end;
+  align-items: flex-end;
 
   @media (max-width: 768px) {
     gap: 8px;

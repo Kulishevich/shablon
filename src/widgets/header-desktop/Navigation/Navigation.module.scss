@@ -56,6 +56,7 @@
   & > div {
     display: flex;
     gap: vw-1440(6);
+    flex: 1;
 
     & > svg {
       color: var(--color-accent-1);
@@ -70,6 +71,7 @@
 
     &:nth-child(2) {
       width: vw-1440(153);
+      flex: 1;
     }
 
     &:nth-child(3) {

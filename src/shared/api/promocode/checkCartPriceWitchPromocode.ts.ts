@@ -12,6 +12,9 @@ export const checkCartPriceWitchPromocode = async (
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
+      next: {
+        revalidate: 60,
+      }
     }
   );
   if (!res.ok) {

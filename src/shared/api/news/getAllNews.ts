@@ -23,7 +23,11 @@ export const getAllNews = async ({
   const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/news?${params.toString()}`;
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      next: {
+        revalidate: 60,
+      }
+    });
 
     const { data } = await res.json();
 

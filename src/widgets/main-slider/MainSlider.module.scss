@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     gap: vw-1440(32);
     & > div {
       display: flex;
@@ -50,7 +50,7 @@
     @media (max-width: 768px) {
       width: 336px;
       gap: 20px;
-      justify-content: start;
+      justify-content: flex-start;
       margin-top: 72px;
       & > button {
         width: 220px;

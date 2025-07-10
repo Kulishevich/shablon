@@ -16,12 +16,15 @@ export type ContactsT = {
 
 export type SettingsT = {
   colors: {
-    primary: string | null;
-    accent: string | null;
-    secondary: string | null;
-    button_secondary: string | null;
-    background: string | null;
-    text: string | null;
+    accent_1: string | null;
+    accent_2: string | null;
+    red: string | null;
+    green: string | null;
+    gold: string | null;
+    text_color: string | null;
+    background_color: string | null;
+    gray: string | null;
+    card_bg: string | null;
   };
   logo: string | null;
   favicon: string | null;

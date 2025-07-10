@@ -91,14 +91,14 @@
       width: vw-1440(334);
       @media (max-width: 768px) {
         text-align: start;
-        align-items: start;
+        align-items: flex-start;
         width: 160px;
       }
     }
     &:nth-child(2) {
       width: vw-1440(155);
       @media (max-width: 768px) {
-        align-items: start;
+        align-items: flex-start;
         width: 160px;
       }
     }

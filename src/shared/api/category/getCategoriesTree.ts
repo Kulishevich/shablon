@@ -2,7 +2,11 @@ import { CategoryT } from './types';
 
 export const getCategoriesTree = async (): Promise<CategoryT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/categories/tree`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/categories/tree`, {
+      next: {
+        revalidate: 60,
+      }
+    });
 
     const { data } = await res.json();
 

@@ -58,9 +58,7 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
           {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
           {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
         </div>
-        <h1 className="h1_discount" itemProp="name">
-          {product?.name}
-        </h1>
+
         <div className={clsx(s.sku, s.sku_mobile, 'body_7')} itemProp="sku">
           Артикул: <span>{product?.sku}</span>
         </div>
@@ -77,7 +75,7 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
         <div className="h5">Характеристики:</div>
         <div>
           <ul>
-            {product?.specifications?.map((elem) => (
+            {product?.specifications?.slice(0, 3).map((elem) => (
               <li className="body_3" key={elem.id}>
                 {elem?.name} : {elem?.pivot?.value}
               </li>
@@ -120,17 +118,13 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
 
         <div className={s.details}>
           <div className={clsx(s.availability, 'body_6')} itemProp="availability">
-            в наличии: <span>200</span>
+            в наличии
           </div>
           <p className="body_7" itemProp="shippingDeliveryTime">
             <HoursIcon width={24} height={24} />
             14 дней на обмен и возврат
           </p>
 
-          <p className="body_7" itemProp="shippingTime">
-            <HoursIcon width={24} height={24} />
-            14 дней на обмен и возврат
-          </p>
           <p className="body_7" itemProp="warranty">
             <DocumentIcon width={24} height={24} />
             Гарантия 1 месяц

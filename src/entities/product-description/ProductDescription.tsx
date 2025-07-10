@@ -37,14 +37,17 @@ export const ProductDescription = ({
     },
     {
       id: 2,
+      title: 'Все Характеристики',
+    },
+    {
+      id: 3,
       title: 'Доставка',
       content:
         'Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка',
     },
     {
-      id: 3,
+      id: 4,
       title: 'Отзывы',
-      content: <ProductReviews reviews={reviews} />,
     },
   ];
 
@@ -61,11 +64,25 @@ export const ProductDescription = ({
           </button>
         ))}
       </div>
-      {activeTag === 2 ? (
+
+      {activeTag === 1 && (
+        <div className={s.content}>
+          <ul>
+            {product?.specifications?.slice(0, 3).map((elem) => (
+              <li className="body_3" key={elem.id}>
+                {elem?.name} : {elem?.pivot?.value}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {activeTag === 3 && (
         <div className={s.content}>
           <ProductReviews reviews={reviews} />
         </div>
-      ) : (
+      )}
+      {activeTag !== 1 && activeTag !== 3 && (
         <div
           className={s.content}
           dangerouslySetInnerHTML={{ __html: info[activeTag].content || '' }}

@@ -30,7 +30,7 @@ export async function generateViewport() {
   const settings = await getSetting();
 
   return {
-    themeColor: settings?.colors.primary,
+    themeColor: settings?.colors.accent_1,
     width: 'device-width',
     initialScale: 1,
     minimumScale: 1,
@@ -77,11 +77,15 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
         <style>
           {`:root {
-            --color-text: ${settings?.colors.text};
-            --color-accent-1: ${settings?.colors.primary};
-            --color-accent-2: ${settings?.colors.accent};
-            --color-accent-red: ${settings?.colors.secondary};
-            --color-accent-green: ${settings?.colors.button_secondary};
+            --color-accent-1: ${settings?.colors.accent_1};
+            --color-accent-2: ${settings?.colors.accent_2};
+            --color-accent-red: ${settings?.colors.red};
+            --color-accent-green: ${settings?.colors.green};
+            --color-accent-orange: ${settings?.colors.gold};
+            --color-text: ${settings?.colors.text_color};
+            --color-white: ${settings?.colors.background_color};
+            --color-grey: ${settings?.colors.gray};
+            --color-bg-card: ${settings?.colors.card_bg};
           }`}
         </style>
         <Script

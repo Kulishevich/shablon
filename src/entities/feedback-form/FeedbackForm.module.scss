@@ -1,10 +1,10 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .formContainer {
   display: flex;
   flex-direction: column;
   gap: vw-1440(20);
-  align-items: start;
+  align-items: flex-start;
 
   width: 100%;
 

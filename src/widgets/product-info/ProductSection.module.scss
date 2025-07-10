@@ -1,5 +1,33 @@
 @use "../../shared/config/styles/functions" as *;
 
+.header {
+  width: vw-1440(1296);
+  display: flex;
+  align-items: center;
+  gap: vw-1440(24);
+  justify-content: space-between;
+  margin-bottom: vw-1440(-100);
+
+  img {
+    width: auto;
+    height: vw-1440(55);
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    width: 336px;
+    margin-bottom: -52px;
+
+    h1 {
+      text-align: center;
+    }
+
+    img {
+      display: none;
+    }
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;

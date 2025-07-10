@@ -13,7 +13,9 @@ export const ProductReviews = ({ reviews }: { reviews: ReviewT[] | null }) => {
       <div className={s.addReview}>
         <p className={clsx(s.rating, 'h2')}>
           <StarIcon />
-          {reviews && reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length}
+          {reviews && reviews.length > 0
+            ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
+            : 0}
         </p>
         <AddReviewsForm>
           <Button variant="primary" className={s.addReviewButton}>

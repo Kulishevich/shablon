@@ -5,7 +5,11 @@ export const getCategoryBySlug = async (
 ): Promise<CategoryT | null> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/categories/slug/${slug}`
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/categories/slug/${slug}`, {
+      next: {
+        revalidate: 60,
+      }
+    }
     );
 
     const { data } = await res.json();

@@ -1,4 +1,5 @@
 import { CategoryT } from '../category/types';
+import { BrandT } from '../brands/types';
 
 export type ProductsResponseT = {
   current_page: number;
@@ -37,6 +38,7 @@ export type ProductT = {
   category: CategoryT;
   images: ImageT[];
   main_image: ImageT;
+  brand: BrandT;
 };
 
 export type SpecificationT = {

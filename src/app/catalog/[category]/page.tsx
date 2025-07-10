@@ -25,11 +25,12 @@ export default async function Catalog({
   }>;
 }) {
   const { category: categorySlug } = await params;
-  const category_id = categorySlug.split('_').findLast((elem) => elem) || '';
 
   const { page, sort_by, sort_direction, search, price_from, price_to, brand } = await searchParams;
+
+  const category = await getCategoryBySlug(categorySlug);
   const products = await getProducts({
-    category_id,
+    category_id: category?.id.toString() || undefined,
     page,
     sort_by,
     sort_direction,
@@ -38,9 +39,11 @@ export default async function Catalog({
     price_to,
     brand,
   });
-  const category = await getCategoryBySlug(categorySlug);
   const allBrands = await getBrands();
-  const allProducts = await getProductsWithoutPagination({ category_id, search });
+  const allProducts = await getProductsWithoutPagination({
+    category_id: category?.id.toString() || undefined,
+    search,
+  });
 
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
 

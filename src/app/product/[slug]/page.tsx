@@ -11,9 +11,8 @@ import { getReviews } from '@/shared/api/reviews/getReviews';
 export default async function Product({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const reviews = await getReviews();
-  const id = slug.split('_').findLast((elem) => elem) || '';
 
-  const product = await getProductById(id);
+  const product = await getProductById(slug);
 
   if (!product) {
     notFound();
