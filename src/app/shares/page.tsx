@@ -21,7 +21,7 @@ export default async function Shares({
       <Breadcrumbs />
       <main>
         <SharesSection promotions={promotions} page={page} standalone={true} />
-        <SeoBlock page="shares" />
+        <SeoBlock page="/shares" />
         <Feedback />
       </main>
     </>

@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
-import { paths } from '@/shared/config/constants/paths';
 import { showToast } from '@/shared/ui/toast';
 import { CloseIcon, ShoppingCartIcon, StarIcon } from '@/shared/assets';
 import clsx from 'clsx';
@@ -13,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { addInCart, changeProductCount, deleteFromCart } from '@/shared/lib/redux/slices/cartSlice';
 import { TextField } from '@/shared/ui/text-field';
 import debounce from 'lodash.debounce';
+import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 
 export const ProductCard = ({
   product,
@@ -74,14 +74,15 @@ export const ProductCard = ({
   }, [debouncedDispatch]);
 
   return (
-    <div
+    <Link
       className={s.container}
       itemProp="itemListElement"
       itemScope
       itemType="http://schema.org/Product"
+      href={buildProductUrlSync(product)}
     >
       <div className={s.imageContainer}>
-        <Link href={`${paths.product}/${slug}`} itemProp="url">
+        <div>
           <Image
             itemProp="image"
             src={`${process.env.NEXT_PUBLIC_STORE_URL}/${main_image?.image_path}`}
@@ -89,7 +90,7 @@ export const ProductCard = ({
             alt="product"
             className={s.image}
           />
-        </Link>
+        </div>
         <div className={s.tagsContainer}>
           {is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
           {is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
@@ -126,12 +127,18 @@ export const ProductCard = ({
         dangerouslySetInnerHTML={{ __html: description || '' }}
       />
 
-      <div className={clsx(s.sku, 'body_7')}>
+      <div
+        className={clsx(s.sku, 'body_7')}
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
+      >
         Артикул: <span>{sku}</span>
       </div>
 
       <div className={s.footerCard}>
-        <div className={s.priceContainer}>
+        <div
+          className={s.priceContainer}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
+        >
           <div className={s.price} itemScope itemType="http://schema.org/Offer">
             {is_discount && (
               <span className="discount" itemProp="price">
@@ -150,18 +157,28 @@ export const ProductCard = ({
             />
           )}
         </div>
-        <Button fullWidth onClick={handleAddInCard} className={'desktop-only'}>
+        <Button
+          fullWidth
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault();
+            handleAddInCard();
+          }}
+          className={'desktop-only'}
+        >
           В корзину
         </Button>
         <Button
           variant={'icon_outlined'}
           className={'mobile-only'}
-          onClick={handleAddInCard}
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault();
+            handleAddInCard();
+          }}
           aria-label="В корзину"
         >
           <ShoppingCartIcon />
         </Button>
       </div>
-    </div>
+    </Link>
   );
 };

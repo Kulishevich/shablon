@@ -6,7 +6,6 @@ export const paths = {
   contacts: '/contacts',
   privacy_policy: '/privacy-policy',
   catalog: '/catalog',
-  product: '/product',
   cart: '/cart',
   order: '/order',
   about_us: '/about-us',

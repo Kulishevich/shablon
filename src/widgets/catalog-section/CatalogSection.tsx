@@ -14,6 +14,7 @@ import { CatalogSearch } from '@/features/catalog-search';
 import { BrandT } from '@/shared/api/brands/types';
 import { SeoBlock } from '@/entities/seo-block';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import { buildCategoryUrlFromSlugs } from '@/shared/lib/utils/categoryUtils';
 export const CatalogSection = ({
   products,
   subcategoryId,
@@ -22,6 +23,7 @@ export const CatalogSection = ({
   brands,
   minPrice,
   maxPrice,
+  categoryPath,
 }: {
   products: ProductsResponseT | null;
   subcategoryId?: number;
@@ -30,20 +32,28 @@ export const CatalogSection = ({
   brands: BrandT[];
   minPrice: number;
   maxPrice: number;
+  categoryPath?: CategoryT[];
 }) => {
   return (
     <div className={s.container}>
       <h1 className="h1">{category?.name}</h1>
       <div className={s.navigation}>
-        {category?.subcategories?.map((subcategory, index) => (
-          <Link
-            className={clsx(subcategoryId === subcategory.id && s.active, 'h3')}
-            key={index}
-            href={`${paths.catalog}/${category.slug}/${subcategory.slug}`}
-          >
-            {subcategory.name}
-          </Link>
-        ))}
+        {category?.subcategories?.map((subcategory, index) => {
+          // Формируем путь для подкатегории на основе текущего пути
+          const currentSlugs = categoryPath?.map((cat) => cat.slug) || [category?.slug || ''];
+          const subcategorySlugs = [...currentSlugs, subcategory.slug];
+          const subcategoryUrl = buildCategoryUrlFromSlugs(subcategorySlugs);
+
+          return (
+            <Link
+              className={clsx(subcategoryId === subcategory.id && s.active, 'h3')}
+              key={index}
+              href={subcategoryUrl}
+            >
+              {subcategory.name}
+            </Link>
+          );
+        })}
       </div>
       <div className={s.catalog}>
         <Filters brands={brands} min={minPrice} max={maxPrice} />

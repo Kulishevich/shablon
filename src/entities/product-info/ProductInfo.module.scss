@@ -28,6 +28,10 @@
     align-items: center;
     gap: 8px;
     margin-right: 0;
+
+    .sku {
+      display: none;
+    }
   }
 }
 
@@ -184,7 +188,6 @@
   }
 
   @media (max-width: 768px) {
-    margin-bottom: 16px;
   }
 }
 
@@ -199,6 +202,7 @@
   }
 
   @media (max-width: 768px) {
+    margin-bottom: 16px;
     gap: 8px;
   }
 }

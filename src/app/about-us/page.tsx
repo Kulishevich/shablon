@@ -29,7 +29,7 @@ export default async function AboutUs() {
       <AdvantagesSection advantages={advantages} />
       {!!reviews?.length && <ReviewsSection reviews={reviews} />}
       {!!photos?.length && <GallerySection items={photos} />}
-      <SeoBlock page="about-us" />
+      <SeoBlock page="/about-us" />
       <Feedback />
     </main>
   );

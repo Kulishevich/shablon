@@ -8,6 +8,7 @@ import { TextField } from '@/shared/ui/text-field';
 import Link from 'next/link';
 import { CategoryT } from '@/shared/api/category/types';
 import { ProductT } from '@/shared/api/product/types';
+import { useRouter } from 'next/navigation';
 
 export const HeaderSearchPopup = ({
   categories,
@@ -19,6 +20,7 @@ export const HeaderSearchPopup = ({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [searchValue, setSearchValue] = useState('');
+  const router = useRouter();
 
   const searchResult = {
     categories: categories?.filter((category) =>
@@ -43,6 +45,14 @@ export const HeaderSearchPopup = ({
     };
   }, []);
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && searchValue.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchValue.trim())}`);
+      setIsOpen(false);
+      setSearchValue(''); // Очищаем поле после перехода
+    }
+  };
+
   return (
     <div ref={containerRef}>
       <Button variant="icon_secondary" onClick={() => setIsOpen(!isOpen)} aria-label="Поиск">
@@ -54,6 +64,7 @@ export const HeaderSearchPopup = ({
             variant="search"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <div className={s.content}>
             {searchResult.categories &&

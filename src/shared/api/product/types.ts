@@ -39,6 +39,7 @@ export type ProductT = {
   images: ImageT[];
   main_image: ImageT;
   brand: BrandT;
+  fullPath?: string[]; // Полный путь до продукта [category1, category2, ..., product]
 };
 
 export type SpecificationT = {

@@ -12,7 +12,7 @@ export const processCategoryTree = (categories: CategoryWithSubcategories[], par
     const currentPath = parentPath ? `${parentPath}/${category.slug}` : category.slug;
 
     fields.push({
-      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/categories/${currentPath}`,
+      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/catalog/${currentPath}`,
       lastmod: new Date(category.updated_at || new Date()).toISOString(),
       changefreq: 'daily' as const,
       priority: 0.8,

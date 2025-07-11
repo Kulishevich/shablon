@@ -14,6 +14,7 @@ import { CatalogProducts } from '@/widgets/catalog-products';
 import { PopularProductsSection } from '@/widgets/popular-products-section';
 import { AboutUsSection } from '@/widgets/about-us-section';
 import { AdvantagesSection } from '@/widgets/advantages-section';
+import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
@@ -39,7 +40,7 @@ const MainBanner = dynamic(() => import('@/widgets/main-banner').then((mod) => m
 
 export default async function Home() {
   const [
-    popularProducts,
+    popularProductsRaw,
     newsList,
     advantages,
     banners,
@@ -59,6 +60,11 @@ export default async function Home() {
     getBrands(),
     getReviews(),
   ]);
+
+  // Обогащаем популярные продукты полным путем
+  const popularProducts = popularProductsRaw
+    ? await enrichProductsWithFullPath(popularProductsRaw)
+    : null;
 
   return (
     <main>
@@ -81,7 +87,7 @@ export default async function Home() {
         </Suspense>
       )}
 
-      <MainBanner />
+      <MainBanner banner={setting?.main_banner || null} />
 
       <Suspense>
         <ReviewsSection reviews={reviews} />
@@ -98,7 +104,7 @@ export default async function Home() {
       </Suspense>
 
       <Suspense>
-        <SeoBlock page="main" />
+        <SeoBlock page="/main" />
       </Suspense>
 
       <Suspense>

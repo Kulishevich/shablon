@@ -14,6 +14,8 @@ import {
 import debounce from 'lodash.debounce';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
+import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
+import { ProductT } from '@/shared/api/product/types';
 
 export const RowProductCart = ({
   name,
@@ -24,6 +26,7 @@ export const RowProductCart = ({
   id,
   quantity = 1,
   slug,
+  category,
 }: CartProduct) => {
   const [count, setCount] = useState(quantity);
   const dispatch = useDispatch();
@@ -68,7 +71,11 @@ export const RowProductCart = ({
         <CloseIcon />
       </Button>
       <div className={s.card}>
-        <Link className={s.imageContainer} href={`${paths.product}/${slug}`} itemProp="url">
+        <Link
+          className={s.imageContainer}
+          href={buildProductUrlSync({ category, slug } as ProductT)}
+          itemProp="url"
+        >
           <Image
             itemProp="image"
             src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}

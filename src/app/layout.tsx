@@ -15,6 +15,8 @@ import { getProducts } from '@/shared/api/product/getProducts';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import { ToTop } from '@/shared/ui/to-top';
+import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
+import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
 const onest = Onest({
@@ -61,11 +63,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [categories, contacts, products, settings] = await Promise.all([
+  const [categories, contacts, products, settings, seoSettings] = await Promise.all([
     getCategories(),
     getContacts(),
     getProducts({}),
     getSetting(),
+    getSeoSettings(),
   ]);
 
   return (
@@ -92,9 +95,44 @@ export default async function RootLayout({
           src="https://api-maps.yandex.ru/v3/?apikey=e1f9579b-8502-438f-8273-6dff1fc98656&lang=ru_RU"
           strategy="beforeInteractive"
         />
+        {seoSettings?.google_tag && (
+          <Script
+            id="google-tag"
+            dangerouslySetInnerHTML={{
+              __html: extractScriptContent(seoSettings.google_tag),
+            }}
+            strategy="afterInteractive"
+          />
+        )}
+        {seoSettings?.yandex_metrika && (
+          <Script
+            id="yandex-metrika"
+            dangerouslySetInnerHTML={{
+              __html: extractScriptContent(seoSettings.yandex_metrika),
+            }}
+            strategy="afterInteractive"
+          />
+        )}
       </head>
 
       <body className={`${onest.variable}`}>
+        {seoSettings?.google_search_console && (
+          <Script
+            id="google-search-console"
+            dangerouslySetInnerHTML={{
+              __html: seoSettings.google_search_console,
+            }}
+            strategy="afterInteractive"
+          />
+        )}
+        {seoSettings?.yandex_webmaster && (
+          <Script
+            id="yandex-webmaster"
+            dangerouslySetInnerHTML={{ __html: seoSettings.yandex_webmaster }}
+            strategy="afterInteractive"
+          />
+        )}
+
         <HeaderDesktop
           categories={categories || []}
           contacts={contacts}

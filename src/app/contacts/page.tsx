@@ -10,7 +10,7 @@ export default async function Contacts() {
     <main>
       <ContactsSection contacts={contacts} />
       <CompanyDetails contacts={contacts} />
-      <SeoBlock page="contacts" />
+      <SeoBlock page="/contacts" />
       <Feedback />
     </main>
   );

@@ -33,8 +33,8 @@ export const ReviewContent = ({
       </div>
 
       <div className={s.startRating} itemProp="reviewRating">
-        {new Array(rating).fill('').map((_, index) => (
-          <StarIcon key={index} />
+        {new Array(5).fill('').map((_, index) => (
+          <StarIcon key={index} className={clsx(index < rating && s.active)} />
         ))}
       </div>
 

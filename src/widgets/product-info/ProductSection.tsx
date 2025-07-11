@@ -21,6 +21,9 @@ export const ProductSection = ({
         <h1 className="h3" itemProp="name">
           {product?.name}
         </h1>
+        <div className={clsx(s.sku, 'body_5')}>
+          Артикул: <span>{product?.sku}</span>
+        </div>
         {product?.brand && (
           <Image
             src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product?.brand?.image_path}`}

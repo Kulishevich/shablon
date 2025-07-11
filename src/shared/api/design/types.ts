@@ -40,6 +40,14 @@ export type SettingsT = {
   privacy_policy: {
     text: string | null;
   };
+  "main_banner": {
+    tag: string | null;
+    title: string | null;
+    description: string | null;
+    button_text: string | null;
+    button_url: string | null;
+    photo: string | null;
+  };
   block_status: {
     contacts_enabled: boolean;
     advantages_enabled: boolean;

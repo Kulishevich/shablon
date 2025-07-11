@@ -9,6 +9,7 @@ import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWi
 import { getCategoriesTree } from '@/shared/api/category/getCategoriesTree';
 import { ProductT } from '@/shared/api/product/types';
 import { processCategoryTree, CategoryWithSubcategories } from '@/shared/api/category/processCategoryTree';
+import { buildProductUrl, enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 
 export async function GET() {
   try {
@@ -54,14 +55,17 @@ export async function GET() {
       }
 
       if (productsUrls && productsUrls.length > 0) {
-        fields.push(
-          ...productsUrls.map((item: ProductT) => ({
-            loc: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${item.slug}`,
-            lastmod: new Date(item.updated_at || new Date()).toISOString(),
-            changefreq: 'daily' as const,
-            priority: 0.8,
-          })),
-        );
+        // Обогащаем продукты полным путем
+        const enrichedProducts = await enrichProductsWithFullPath(productsUrls);
+
+        const productUrls = enrichedProducts.map((item: ProductT) => ({
+          loc: `${process.env.NEXT_PUBLIC_SITE_URL}/catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
+          lastmod: new Date(item.updated_at || new Date()).toISOString(),
+          changefreq: 'daily' as const,
+          priority: 0.8,
+        }));
+
+        fields.push(...productUrls);
       }
 
       if (categoriesUrls && categoriesUrls.length > 0) {

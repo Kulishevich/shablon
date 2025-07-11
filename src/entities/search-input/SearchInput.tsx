@@ -5,6 +5,7 @@ import { TextField } from '@/shared/ui/text-field';
 import { SearchPopup } from '../search-popup';
 import { ProductT } from '@/shared/api/product/types';
 import { CategoryT } from '@/shared/api/category/types';
+import { useRouter } from 'next/navigation';
 
 export const SearchInput = ({
   categories,
@@ -16,6 +17,7 @@ export const SearchInput = ({
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -42,6 +44,14 @@ export const SearchInput = ({
     setIsOpen(!!value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && searchValue.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchValue.trim())}`);
+      setIsOpen(false);
+      setSearchValue(''); // Очищаем поле после перехода
+    }
+  };
+
   return (
     <div className={s.searchContainer} ref={searchRef}>
       <TextField
@@ -49,6 +59,7 @@ export const SearchInput = ({
         variant="search"
         value={searchValue}
         onChange={(e) => handleChangeValue(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       {!!isOpen && (
         <SearchPopup

@@ -9,7 +9,7 @@ export default async function PaymentAndDelivery() {
   return (
     <main>
       <DeliverySection content={setting?.delivery_payment} contacts={contacts} />
-      <SeoBlock page="payment-and-delivery" />
+      <SeoBlock page="/payment-and-delivery" />
       <Feedback />
     </main>
   );

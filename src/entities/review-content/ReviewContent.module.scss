@@ -50,10 +50,15 @@
   display: flex;
   gap: 2px;
   margin-bottom: vw-1440(16);
+
   & > svg {
     width: vw-1440(20);
     height: vw-1440(20);
     color: var(--color-accent-orange);
+    filter: grayscale(1);
+    &.active {
+      filter: grayscale(0);
+    }
     @media (max-width: 768px) {
       width: 18px;
       height: 18px;

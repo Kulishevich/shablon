@@ -16,7 +16,7 @@ export default async function News({ searchParams }: { searchParams: Promise<{ p
       <Breadcrumbs />
       <main>
         <NewsSection newsList={newsList} page={page} />
-        <SeoBlock page="news" />
+        <SeoBlock page="/news" />
         <Feedback />
       </main>
     </>

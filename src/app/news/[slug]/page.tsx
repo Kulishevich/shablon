@@ -7,6 +7,7 @@ import { getNews } from '@/shared/api/news/getNews';
 import { Feedback } from '@/widgets/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 import { notFound } from 'next/navigation';
+import { SeoBlock } from '@/entities/seo-block';
 
 export default async function New({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -34,6 +35,7 @@ export default async function New({ params }: { params: Promise<{ slug: string }
         <SliderWrapper title="Другие новости" variant="news">
           {otherNews?.map((news, index) => <NewsCard key={index} news={news} />)}
         </SliderWrapper>
+        <SeoBlock page={`/news/${news?.slug}`} />
         <Feedback />
       </main>
     </>

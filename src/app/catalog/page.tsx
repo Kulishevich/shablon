@@ -13,7 +13,7 @@ export default async function Catalog() {
       <main>
         <CatalogProducts title="Каталог" categories={categories} />
 
-        <SeoBlock page="catalog" />
+        <SeoBlock page="/catalog" />
         <Feedback />
       </main>
     </>

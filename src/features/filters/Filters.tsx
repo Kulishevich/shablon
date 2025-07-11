@@ -89,7 +89,29 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
     setCheckedBrands([]);
     setMinPrice(min);
     setMaxPrice(max);
-    router.push('?');
+
+    // Сохраняем поисковой запрос и другие параметры (кроме фильтров) при сбросе
+    const params = new URLSearchParams();
+    const searchQuery = searchParams.get('q');
+    const sortBy = searchParams.get('sort_by');
+    const sortDirection = searchParams.get('sort_direction');
+    const search = searchParams.get('search');
+
+    if (searchQuery) {
+      params.set('q', searchQuery);
+    }
+    if (search) {
+      params.set('search', search);
+    }
+    if (sortBy) {
+      params.set('sort_by', sortBy);
+    }
+    if (sortDirection) {
+      params.set('sort_direction', sortDirection);
+    }
+    params.set('page', '1');
+
+    router.push(`?${params.toString()}`);
   };
 
   return (

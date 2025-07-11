@@ -5,6 +5,7 @@ import { Feedback } from '@/widgets/feedback/Feedback';
 import { getPromotion } from '@/shared/api/promotions/getPromotion';
 import { getPromotions } from '@/shared/api/promotions/getPromotions';
 import { notFound } from 'next/navigation';
+import { SeoBlock } from '@/entities/seo-block';
 
 export default async function Share({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -25,6 +26,7 @@ export default async function Share({ params }: { params: Promise<{ slug: string
           {otherPromotions?.map((promotion, index) => <DiscountCard {...promotion} key={index} />)}
         </SliderWrapper>
       )}
+      <SeoBlock page={`/shares/${slug}`} />
       <Feedback />
     </main>
   );

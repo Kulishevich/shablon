@@ -6,12 +6,13 @@ import { ShoppingCartIcon } from '@/shared/assets';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { ProductT } from '@/shared/api/product/types';
+import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 
 export const SearchProductCard = ({ ...props }: ProductT) => {
-  const { photo_path, name, price, slug, id } = props;
+  const { photo_path, name, price, slug, id, category } = props;
 
   return (
-    <Link href={`${paths.product}/${slug}`} className={s.container}>
+    <Link href={buildProductUrlSync(props)} className={s.container}>
       <div className={s.card}>
         <div className={s.imageContainer}>
           <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt="product" />

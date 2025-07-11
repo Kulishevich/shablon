@@ -6,6 +6,9 @@ import React, { useEffect, useState } from 'react';
 import s from './PreviouslyViewed.module.scss';
 import { ProductT } from '@/shared/api/product/types';
 import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper';
+import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
+import { ProductCard } from '@/entities/product-card/ProductCard';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 
 export const PreviouslyViewed = () => {
   const [viewedProducts, setViewedProducts] = useState<ProductT[]>([]);
@@ -24,20 +27,16 @@ export const PreviouslyViewed = () => {
   }, []);
 
   return (
-    <SectionAnimationWrapper>
-      {!!viewedProducts.length && (
-        <SliderWrapper title={'Вы смотрели ранее'} variant="mini_product">
-          {viewedProducts.map((product, index) => (
-            <Link href={`/product/${product.slug}`} className={s.productLink} key={index}>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product.main_image.image_path}`}
-                fill
-                alt="product"
-              />
-            </Link>
-          ))}
-        </SliderWrapper>
-      )}
-    </SectionAnimationWrapper>
+    <ReduxProvider>
+      <SectionAnimationWrapper>
+        {!!viewedProducts.length && (
+          <SliderWrapper title={'Вы смотрели ранее'} variant="mini_product">
+            {viewedProducts.map((product, index) => (
+              <ProductCard key={index} product={product} />
+            ))}
+          </SliderWrapper>
+        )}
+      </SectionAnimationWrapper>
+    </ReduxProvider>
   );
 };
