@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .trigger {
   margin-top: vw-1440(22);
@@ -26,7 +26,7 @@
   padding: vw-1440(24);
   width: vw-1440(636);
 
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   box-shadow: 0px 48px 48px 0px #252b330d;
   border-radius: 6px;
   animation: fadeIn 0.3s ease-out;

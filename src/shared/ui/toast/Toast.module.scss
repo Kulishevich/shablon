@@ -1,4 +1,4 @@
-@use '../../../shared/config/styles/functions' as *;
+@use "../../../shared/config/styles/functions" as *;
 
 .rootClass {
   position: relative;
@@ -38,7 +38,7 @@
 
   .title,
   .message {
-    color: var(--color-white);
+    color: var(--color-bg);
   }
 
   @media (max-width: 768px) {

@@ -17,7 +17,7 @@
     width: vw-1440(952);
     padding: vw-1440(48);
 
-    background-color: var(--color-white);
+    background-color: var(--color-bg);
     border-radius: 6px;
     box-shadow:
       1px 4px 8px 0 rgba(11, 12, 25, 0.03),
@@ -27,7 +27,7 @@
       22px 89px 26px 0 rgba(11, 12, 25, 0);
 
     & > span {
-      color: var(--color-accent-1);
+      color: var(--color-button);
     }
 
     .breadcrumbs {

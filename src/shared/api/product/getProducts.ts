@@ -12,6 +12,7 @@ type GetProductsProps = {
   brand?: string;
   page?: string;
   per_page?: string;
+  tags?: string;
 };
 
 export const getProducts = async ({
@@ -24,6 +25,7 @@ export const getProducts = async ({
   sort_by,
   sort_direction,
   brand,
+  tags,
   page = '1',
   per_page = '9',
 }: GetProductsProps): Promise<ProductsResponseT | null> => {
@@ -40,6 +42,7 @@ export const getProducts = async ({
   if (brand) params.append('brand', brand);
   if (page) params.append('page', page);
   if (per_page) params.append('per_page', per_page);
+  if (tags) params.append('tags', tags);
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/products?${params.toString()}`;
 

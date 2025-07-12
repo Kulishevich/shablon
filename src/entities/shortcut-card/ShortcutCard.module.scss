@@ -25,8 +25,8 @@
     width: vw-1440(120);
     height: vw-1440(120);
     border-radius: 50%;
-    border: 1px solid var(--color-accent-1);
-    background-color: var(--color-accent-2);
+    border: 1px solid var(--color-button);
+    background-color: var(--color-bg-card);
 
     @media (max-width: 768px) {
       width: 64px;

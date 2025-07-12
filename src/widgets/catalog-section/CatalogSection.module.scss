@@ -19,19 +19,19 @@
   margin-bottom: vw-1440(44);
 
   & > a {
-    background-color: var(--color-grey);
+    background-color: var(--color-bg-card);
     border-radius: 4px;
     padding: vw-1440(12) vw-1440(24);
 
     &.active {
-      color: var(--color-white);
-      background-color: var(--color-accent-1);
+      color: var(--color-bg);
+      background-color: var(--color-button);
     }
 
     &:hover {
       cursor: pointer;
-      color: var(--color-white);
-      background-color: var(--color-accent-1);
+      color: var(--color-bg);
+      background-color: var(--color-button);
       opacity: 0.8;
     }
   }

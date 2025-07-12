@@ -15,6 +15,7 @@ import { PopularProductsSection } from '@/widgets/popular-products-section';
 import { AboutUsSection } from '@/widgets/about-us-section';
 import { AdvantagesSection } from '@/widgets/advantages-section';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
+import { getTags } from '@/shared/api/tags/getTags';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
@@ -49,6 +50,7 @@ export default async function Home() {
     categories,
     brands,
     reviews,
+    tags,
   ] = await Promise.all([
     getPopularProducts(),
     getAllNews({}),
@@ -59,6 +61,7 @@ export default async function Home() {
     getCategories(),
     getBrands(),
     getReviews(),
+    getTags(),
   ]);
 
   // Обогащаем популярные продукты полным путем
@@ -72,7 +75,7 @@ export default async function Home() {
         <MainSlider slides={banners || []} />
       </Suspense>
 
-      <MainShortcuts categories={categories} />
+      <MainShortcuts tags={tags} />
       <CatalogProducts categories={categories} />
 
       <PopularProductsSection products={popularProducts} />

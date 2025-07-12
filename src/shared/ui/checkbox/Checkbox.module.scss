@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -22,7 +22,7 @@
   width: vw-1440(32);
   height: vw-1440(32);
 
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   border: 1px solid #1114341a;
   border-radius: 2px;
 
@@ -33,7 +33,7 @@
   transition: border 0.3s ease;
 
   &:hover {
-    border: 1px solid var(--color-accent-1);
+    border: 1px solid var(--color-button);
   }
 
   &:disabled {
@@ -42,11 +42,11 @@
     border: 1px solid #1114341a;
   }
 
-  &[data-state='checked'] {
+  &[data-state="checked"] {
     width: vw-1440(32);
     height: vw-1440(32);
 
-    background-color: var(--color-accent-1);
+    background-color: var(--color-button);
     border-radius: 2px;
 
     &:disabled {
@@ -59,7 +59,7 @@
     }
   }
 
-  &[data-state='unchecked'] {
+  &[data-state="unchecked"] {
     background-color: transparent;
 
     &:disabled {
@@ -77,7 +77,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-white);
+  color: var(--color-bg);
 }
 
 .icon {

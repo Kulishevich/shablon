@@ -9,6 +9,7 @@ export const commentScheme = () =>
   z
     .string()
     .trim()
+    .min(10, { message: validation.minLength })
     .max(300, { message: validation.maxLength })
     .optional();
 

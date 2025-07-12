@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -37,7 +37,7 @@
     height: vw-1440(92);
 
     & > img {
-      background-color: var(--color-grey);
+      background-color: var(--color-bg-card);
       border-radius: 4px;
       object-fit: cover;
     }

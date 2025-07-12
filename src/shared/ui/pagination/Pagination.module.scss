@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -19,7 +19,7 @@
   height: vw-1440(30);
 
   &:hover {
-    color: var(--color-accent-1);
+    color: var(--color-button);
     cursor: pointer;
   }
 
@@ -51,11 +51,11 @@
   border-radius: 50%;
 
   &:hover {
-    color: var(--color-accent-1);
+    color: var(--color-button);
   }
 
   &.active {
-    background-color: var(--color-accent-2);
+    background-color: var(--color-button-additional);
     & > span {
       color: var(--color-text);
     }

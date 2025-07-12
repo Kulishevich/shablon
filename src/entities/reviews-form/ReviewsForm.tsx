@@ -11,12 +11,15 @@ import { ReviewsFormScheme } from '@/shared/validation/reviews-scheme-creator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
 import { ControlledRatingField } from '@/shared/ui/controlled-rating-field';
+import { postReview } from '@/shared/api/reviews/postReview';
+import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
 
-export const ReviewsForm = () => {
+export const ReviewsForm = ({ closeModal }: { closeModal: () => void }) => {
   const {
     control,
     formState: { isValid },
     handleSubmit,
+    reset,
   } = useForm({
     defaultValues: {
       name: '',
@@ -33,16 +36,24 @@ export const ReviewsForm = () => {
   });
 
   const formHandler = handleSubmit(async (data) => {
-    const { comment, name, phone, title, rating, photo } = data;
-
     try {
-      //! TODO: отправить отзыв на сервер
+      const response = await postReview(data);
 
-      showToast({
-        variant: 'success',
-        title: 'Спасибо за ваш отзыв!',
-        message: 'Ваш отзыв успешно отправлен и скоро появится на сайте',
-      });
+      if (response?.success) {
+        showToast({
+          variant: 'success',
+          title: 'Отзыв успешно отправлен',
+          message: response.message,
+        });
+        reset();
+        closeModal();
+      } else {
+        showToast({
+          variant: 'error',
+          title: 'Не удалось отправить отзыв...',
+          message: 'К сожалению, не удалось отправить ваш отзыв. Повторите попытку снова.',
+        });
+      }
     } catch (err) {
       console.error(err);
       showToast({
@@ -65,13 +76,13 @@ export const ReviewsForm = () => {
             label="Ваше имя"
             isRequired
           />
-          <ControlledTextField
+          <ControlledPhoneField
             control={control}
             name="phone"
             placeholder="Введите ваш телефон"
             label="Ваш телефон"
             isRequired
-            type="tel"
+            mask="+375 (99) 999-99-99"
           />
         </div>
         <ControlledRatingField control={control} name="rating" label="Рейтинг" isRequired />

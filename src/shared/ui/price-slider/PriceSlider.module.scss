@@ -9,7 +9,7 @@
 }
 
 .track {
-  background-color: var(--color-text-30);
+  background-color: var(--color-bg);
   position: relative;
   flex-grow: 1;
   border-radius: 3px;
@@ -18,7 +18,7 @@
 
 .range {
   position: absolute;
-  background-color: var(--color-accent-1);
+  background-color: var(--color-button);
 
   border-radius: 3px;
   height: 100%;
@@ -28,7 +28,7 @@
   display: block;
   width: 14px;
   height: 14px;
-  background-color: var(--color-accent-1);
+  background-color: var(--color-button);
   border-radius: 50%;
 
   &:hover {

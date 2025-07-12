@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .container {
   z-index: 1000;
@@ -15,6 +15,12 @@
   cursor: pointer;
   z-index: 1000;
 
+  &:hover {
+    .phone > svg > g > g:first-child > g > path {
+      fill: var(--color-button-hover);
+    }
+  }
+
   @media (max-width: 768px) {
     right: 16px;
     bottom: 16px;
@@ -30,7 +36,8 @@
   pointer-events: none;
 
   & > svg > g > g:first-child > g > path {
-    fill: var(--color-accent-1);
+    fill: var(--color-button);
+    transition: fill 0.3s ease-in-out;
   }
 
   @media (max-width: 768px) {

@@ -7,13 +7,16 @@ import clsx from 'clsx';
 import { ReviewT } from '@/shared/api/reviews/types';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 import Image from 'next/image';
+import { ProductAdvantageType } from '@/shared/api/advantages/types';
 
 export const ProductSection = ({
   product,
   reviews,
+  advantages,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
+  advantages: ProductAdvantageType[] | null;
 }) => {
   return (
     <>
@@ -35,7 +38,7 @@ export const ProductSection = ({
       </div>
       <div className={s.container} itemScope itemType="http://schema.org/Product">
         <ReduxProvider>
-          <ProductInfo product={product} />
+          <ProductInfo product={product} advantages={advantages} />
           <ProductDescription product={product} reviews={reviews} />
         </ReduxProvider>
       </div>

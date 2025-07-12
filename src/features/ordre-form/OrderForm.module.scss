@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -30,8 +30,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-accent-1);
-    color: var(--color-white);
+    background-color: var(--color-button);
+    color: var(--color-bg);
     width: vw-1440(36);
     height: vw-1440(36);
     border-radius: 50%;

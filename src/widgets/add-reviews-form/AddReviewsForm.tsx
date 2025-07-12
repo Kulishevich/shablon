@@ -19,7 +19,7 @@ export const AddReviewsForm = ({ children }: { children: ReactNode }) => {
             <Dialog.Title>Форма добавления отзыва</Dialog.Title>
           </VisuallyHidden>
           <Dialog.Content className={s.content}>
-            <ReviewsForm />
+            <ReviewsForm closeModal={() => setIsOpen(false)} />
             <Dialog.DialogClose asChild>
               <Button className={s.closeButton}>
                 <CloseIcon />

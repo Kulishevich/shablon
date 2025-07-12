@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -15,7 +15,7 @@
 
 .tableHeader {
   display: flex;
-  background-color: var(--color-grey);
+  background-color: var(--color-bg-card);
   height: vw-1440(63);
   align-items: center;
   border-radius: vw-1440(12);

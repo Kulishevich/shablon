@@ -11,3 +11,18 @@ export type ReviewT = {
   created_at: string;
   updated_at: string;
 };
+
+export type ReviewPostT = {
+  name: string,
+  phone: string,
+  title: string,
+  comment?: string,
+  rating: number,
+  photo?: File,
+};
+
+export type ReviewPostResponseT = {
+  success: true,
+  message: string,
+  data: ReviewT,
+}

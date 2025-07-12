@@ -6,3 +6,9 @@ export type AdvantageType = {
   created_at: string;
   updated_at: string;
 };
+
+export type ProductAdvantageType = {
+  id: number;
+  title: string;
+  icon: string;
+};

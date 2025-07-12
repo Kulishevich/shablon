@@ -27,8 +27,8 @@
     & > span {
       padding: vw-1440(4) vw-1440(8);
       border-radius: 4px;
-      color: var(--color-white);
-      background-color: var(--color-accent-1);
+      color: var(--color-bg);
+      background-color: var(--color-button);
       @media (max-width: 768px) {
         padding: 2px 4px;
       }

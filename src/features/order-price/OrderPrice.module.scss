@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -9,7 +9,7 @@
   padding: vw-1440(24) vw-1440(20);
 
   border-radius: 6px;
-  background-color: var(--color-grey);
+  background-color: var(--color-bg-card);
 
   .button {
     text-decoration: none;

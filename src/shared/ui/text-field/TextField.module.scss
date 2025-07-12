@@ -58,7 +58,7 @@
 
   border: 1px solid #1114341a;
   border-radius: 4px;
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   transition: border 0.3s ease;
 
   &::placeholder {
@@ -70,11 +70,11 @@
     padding: vw-1440(20);
 
     &:focus {
-      border: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-button);
     }
 
     &:hover {
-      border: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-button);
     }
 
     &:disabled {
@@ -91,11 +91,11 @@
     padding-left: vw-1440(50);
 
     &:focus {
-      border: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-button);
     }
 
     &:hover {
-      border: 1px solid var(--color-accent-1);
+      border: 1px solid var(--color-button);
     }
 
     &:disabled {

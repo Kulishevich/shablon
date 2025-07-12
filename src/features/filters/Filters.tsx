@@ -96,6 +96,7 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
     const sortBy = searchParams.get('sort_by');
     const sortDirection = searchParams.get('sort_direction');
     const search = searchParams.get('search');
+    const tags = searchParams.get('tags'); // Сохраняем теги
 
     if (searchQuery) {
       params.set('q', searchQuery);
@@ -108,6 +109,9 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
     }
     if (sortDirection) {
       params.set('sort_direction', sortDirection);
+    }
+    if (tags) {
+      params.set('tags', tags); // Сохраняем теги при сбросе
     }
     params.set('page', '1');
 

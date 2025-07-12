@@ -32,7 +32,7 @@ export async function generateViewport() {
   const settings = await getSetting();
 
   return {
-    themeColor: settings?.colors.accent_1,
+    themeColor: settings?.colors.icon_color,
     width: 'device-width',
     initialScale: 1,
     minimumScale: 1,
@@ -80,15 +80,15 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
         <style>
           {`:root {
-            --color-accent-1: ${settings?.colors.accent_1};
-            --color-accent-2: ${settings?.colors.accent_2};
-            --color-accent-red: ${settings?.colors.red};
-            --color-accent-green: ${settings?.colors.green};
-            --color-accent-orange: ${settings?.colors.gold};
-            --color-text: ${settings?.colors.text_color};
-            --color-white: ${settings?.colors.background_color};
-            --color-grey: ${settings?.colors.gray};
-            --color-bg-card: ${settings?.colors.card_bg};
+            --color-accent-1: ${settings?.colors.icon_color};
+            --color-button: ${settings?.colors.button_color_static};
+            --color-button-additional: ${settings?.colors.button_color_static_additional};
+            --color-button-hover: ${settings?.colors.button_color_hover};
+            --color-text: ${settings?.colors.main_text_color};
+            --color-link: ${settings?.colors.link_color};
+            --color-bg: ${settings?.colors.background_color};
+            --color-bg-card: ${settings?.colors.card_background_color};
+            --color-heading: ${settings?.colors.heading_color};
           }`}
         </style>
         <Script

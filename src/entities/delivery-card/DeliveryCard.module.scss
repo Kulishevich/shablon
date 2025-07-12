@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -17,10 +17,10 @@
 
   &:hover {
     cursor: pointer;
-    background-color: var(--color-accent-1);
+    background-color: var(--color-button);
     opacity: 0.8;
     p {
-      color: var(--color-white);
+      color: var(--color-bg);
     }
   }
 
@@ -32,10 +32,10 @@
 }
 
 .active {
-  background-color: var(--color-accent-1);
+  background-color: var(--color-button);
   border: none;
 
   p {
-    color: var(--color-white);
+    color: var(--color-bg);
   }
 }

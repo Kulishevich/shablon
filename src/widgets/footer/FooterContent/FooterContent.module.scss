@@ -36,7 +36,7 @@
     }
 
     & > div {
-      color: var(--color-white);
+      color: var(--color-bg);
     }
   }
 
@@ -56,7 +56,7 @@
   & > p,
   h5,
   & > div {
-    color: var(--color-white);
+    color: var(--color-bg);
   }
 
   @media (max-width: 768px) {
@@ -115,11 +115,11 @@
   gap: vw-1440(16) vw-1440(20);
 
   & > a {
-    color: var(--color-white);
+    color: var(--color-bg);
     text-decoration: none;
 
     &:hover {
-      color: var(--color-accent-1);
+      color: var(--color-button);
     }
   }
   @media (max-width: 768px) {
@@ -135,11 +135,11 @@
   gap: vw-1440(12);
 
   & > a {
-    color: var(--color-white);
+    color: var(--color-bg);
     text-decoration: none;
 
     &:hover {
-      color: var(--color-accent-1);
+      color: var(--color-button);
     }
   }
 

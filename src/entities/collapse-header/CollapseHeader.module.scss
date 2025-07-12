@@ -25,6 +25,10 @@
   cursor: pointer;
   padding: 8px 0;
 
+  &:hover {
+    color: var(--color-link);
+  }
+
   & > div {
     position: relative;
 
@@ -33,7 +37,7 @@
       text-decoration: none;
 
       &:hover {
-        color: var(--color-accent-1);
+        color: var(--color-link);
       }
     }
 

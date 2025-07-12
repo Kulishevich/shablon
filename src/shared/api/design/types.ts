@@ -16,15 +16,15 @@ export type ContactsT = {
 
 export type SettingsT = {
   colors: {
-    accent_1: string | null;
-    accent_2: string | null;
-    red: string | null;
-    green: string | null;
-    gold: string | null;
-    text_color: string | null;
-    background_color: string | null;
-    gray: string | null;
-    card_bg: string | null;
+    icon_color: string;
+    button_color_static: string;
+    button_color_hover: string;
+    button_color_static_additional: string;
+    heading_color: string;
+    main_text_color: string;
+    link_color: string;
+    background_color: string;
+    card_background_color: string;
   };
   logo: string | null;
   favicon: string | null;

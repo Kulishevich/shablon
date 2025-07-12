@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .icon {
   width: vw-1440(24);
@@ -26,23 +26,23 @@
 
   border: 1px solid #1114341a;
   border-radius: 6px;
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
 
-  &[data-state='open'] .icon {
+  &[data-state="open"] .icon {
     transform: rotate(180deg);
     transition: all 0.5s ease-in-out;
   }
 
-  &[data-state='closed'] .icon {
+  &[data-state="closed"] .icon {
     transition: all 0.5s ease-in-out;
   }
 
   &:hover {
-    border: 1px solid var(--color-accent-1);
+    border: 1px solid var(--color-button);
   }
 
   &:focus {
-    border: 1px solid var(--color-accent-1);
+    border: 1px solid var(--color-button);
     outline: none;
   }
 
@@ -64,7 +64,7 @@
 
   border: 1px solid #1114341a;
   border-radius: 6px;
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   border-top: none;
 
   animation: fade-in 0.6s ease;
@@ -89,11 +89,11 @@
   &:hover {
     & > div > p {
       cursor: pointer;
-      color: var(--color-accent-1);
+      color: var(--color-button);
     }
   }
 
-  &[data-state='checked'] {
+  &[data-state="checked"] {
     outline: none;
     & > div > p {
       color: var(--color-accent-red);

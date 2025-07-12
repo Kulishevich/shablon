@@ -17,8 +17,15 @@ import { Button } from '@/shared/ui/button';
 import { useDispatch } from 'react-redux';
 import { addInCart } from '@/shared/lib/redux/slices/cartSlice';
 import { showToast } from '@/shared/ui/toast';
+import { ProductAdvantageType } from '@/shared/api/advantages/types';
 
-export const ProductInfo = ({ product }: { product: ProductT }) => {
+export const ProductInfo = ({
+  product,
+  advantages,
+}: {
+  product: ProductT;
+  advantages: ProductAdvantageType[] | null;
+}) => {
   const [count, setCount] = useState(1);
   const isDiscount = !!Number(product?.discount);
   const dispatch = useDispatch();
@@ -120,19 +127,12 @@ export const ProductInfo = ({ product }: { product: ProductT }) => {
           <div className={clsx(s.availability, 'body_6')} itemProp="availability">
             в наличии
           </div>
-          <p className="body_7" itemProp="shippingDeliveryTime">
-            <HoursIcon width={24} height={24} />
-            14 дней на обмен и возврат
-          </p>
 
-          <p className="body_7" itemProp="warranty">
-            <DocumentIcon width={24} height={24} />
-            Гарантия 1 месяц
-          </p>
-          <p className="body_7" itemProp="certification">
-            <QualityStarIcon width={24} height={24} />
-            Товар сертифицирован
-          </p>
+          {advantages?.map((advantage) => (
+            <p className="body_7" key={advantage.id} itemProp="shippingDeliveryTime">
+              <i className={clsx(advantage.icon, s.icon)} /> {advantage.title}
+            </p>
+          ))}
         </div>
       </div>
     </div>

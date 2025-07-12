@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .rootState {
   display: flex;
@@ -20,7 +20,7 @@
   align-items: center;
 
   border: none;
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
 
   & > span {
     transition: transform 0.3s ease;
@@ -32,14 +32,14 @@
   &:hover {
     cursor: pointer;
     & > p {
-      color: var(--color-accent-1);
+      color: var(--color-button);
     }
     & > span {
-      background-color: var(--color-accent-1);
-      color: var(--color-white);
+      background-color: var(--color-button);
+      color: var(--color-bg);
     }
   }
-  &[data-state='open'] {
+  &[data-state="open"] {
     & > span {
       transform: rotate(90deg);
     }
@@ -48,10 +48,10 @@
 
 .content {
   overflow: hidden;
-  &[data-state='open'] {
+  &[data-state="open"] {
     animation: slideDown 300ms ease-out;
   }
-  &[data-state='closed'] {
+  &[data-state="closed"] {
     animation: slideUp 300ms ease-out;
   }
 }

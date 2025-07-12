@@ -26,7 +26,7 @@
   height: vw-1440(306);
   margin-bottom: vw-1440(16);
   box-sizing: border-box;
-  background-color: var(--color-grey);
+  background-color: var(--color-bg-card);
   border-radius: 6px;
 
   img {
@@ -38,7 +38,7 @@
     top: vw-1440(8);
     right: vw-1440(8);
     background-color: #25338c1a;
-    color: var(--color-white);
+    color: var(--color-bg);
     @media (max-width: 768px) {
       top: 8px;
       right: 8px;
@@ -71,15 +71,15 @@
     border-radius: 4px;
     opacity: 0.8;
     &.popular {
-      color: var(--color-white);
+      color: var(--color-bg);
       background-color: var(--color-accent-orange);
     }
     &.new {
-      color: var(--color-white);
+      color: var(--color-bg);
       background-color: var(--color-accent-green);
     }
     &.discount {
-      color: var(--color-white);
+      color: var(--color-bg);
       background-color: var(--color-accent-red);
     }
 

@@ -1,9 +1,9 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .rootState {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-grey);
+  background-color: var(--color-bg-card);
   padding: vw-1440(16);
   border-radius: 6px;
 
@@ -32,11 +32,11 @@
   &:hover {
     cursor: pointer;
     & > p {
-      color: var(--color-accent-1);
+      color: var(--color-button);
     }
   }
 
-  &[data-state='open'] {
+  &[data-state="open"] {
     & > svg {
       transform: rotate(180deg);
     }
@@ -64,10 +64,10 @@
     }
   }
 
-  &[data-state='open'] {
+  &[data-state="open"] {
     animation: slideDown 300ms ease-out;
   }
-  &[data-state='closed'] {
+  &[data-state="closed"] {
     animation: slideUp 300ms ease-out;
   }
 }

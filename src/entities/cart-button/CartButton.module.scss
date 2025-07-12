@@ -25,8 +25,8 @@
   &:hover {
     cursor: pointer;
     & > .button {
-      background-color: var(--color-accent-1);
-      color: var(--color-white);
+      background-color: var(--color-button-hover);
+      color: var(--color-bg);
     }
   }
 }
