@@ -31,8 +31,8 @@ export const ProductInfo = ({
   const dispatch = useDispatch();
 
   const totalPrice = !!product?.discount
-    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
-    : product?.price;
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100) * count
+    : Number(product?.price) * count;
 
   const changeCountValue = (value: string) => {
     const numericValue = value.replace(/\D/g, '');

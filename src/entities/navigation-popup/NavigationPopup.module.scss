@@ -29,7 +29,7 @@
 
     &:hover {
       color: var(--color-bg);
-      background-color: var(--color-accent-1);
+      background-color: var(--color-button);
     }
   }
 }
@@ -50,7 +50,7 @@
     text-decoration: none;
 
     &:hover {
-      color: var(--color-accent-1);
+      color: var(--color-link);
     }
   }
 }
