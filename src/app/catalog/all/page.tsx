@@ -10,6 +10,7 @@ import { SeoBlock } from '@/entities/seo-block';
 import { CategoryT } from '@/shared/api/category/types';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 
 export async function generateMetadata({
   searchParams,
@@ -42,6 +43,9 @@ export default async function AllProductsPage({
     tags?: string;
   }>;
 }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const { page, sort_by, sort_direction, search, price_from, price_to, brand, tags } =
     await searchParams;
 
@@ -59,10 +63,10 @@ export default async function AllProductsPage({
 
   // Обогащаем продукты полным путем
   if (products?.data) {
-    products.data = await enrichProductsWithFullPath(products.data);
+    products.data = await enrichProductsWithFullPath({ products: products.data, variant });
   }
 
-  const allBrands = await getBrands();
+  const allBrands = await getBrands({ variant });
   const allProducts = await getProductsWithoutPagination({
     search,
     tags,

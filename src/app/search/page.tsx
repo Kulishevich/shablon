@@ -11,14 +11,18 @@ import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
+import { cookies } from 'next/headers';
 
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
 }): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const { q } = await searchParams;
-  const seo = await getSeoTag('/search');
+  const seo = await getSeoTag({ tag: '/search', variant });
 
   return {
     title: seo?.title ?? `Поиск "${q}"`,
@@ -44,6 +48,9 @@ export default async function SearchPage({
     brand?: string;
   }>;
 }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const { q, page, sort_by, sort_direction, price_from, price_to, brand } = await searchParams;
 
   // Если нет поискового запроса, перенаправляем на главную
@@ -64,10 +71,10 @@ export default async function SearchPage({
 
   // Обогащаем продукты полным путем
   if (products?.data) {
-    products.data = await enrichProductsWithFullPath(products.data);
+    products.data = await enrichProductsWithFullPath({ products: products.data, variant });
   }
 
-  const allBrands = await getBrands();
+  const allBrands = await getBrands({ variant });
   const allProducts = await getProductsWithoutPagination({
     search: q,
   });

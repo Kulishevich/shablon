@@ -8,26 +8,33 @@ import { PromotionT } from '@/shared/api/promotions/types';
 import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
 import { getCategoriesTree } from '@/shared/api/category/getCategoriesTree';
 import { ProductT } from '@/shared/api/product/types';
-import { processCategoryTree, CategoryWithSubcategories } from '@/shared/api/category/processCategoryTree';
-import { buildProductUrl, enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
+import {
+  processCategoryTree,
+  CategoryWithSubcategories,
+} from '@/shared/api/category/processCategoryTree';
+import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
+import { cookies } from 'next/headers';
 
 export async function GET() {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   try {
-    const newsUrls = await getAllNews({ per_page: '10000' });
-    const promotionsUrls = await getPromotions({ per_page: '10000' });
-    const productsUrls = await getProductsWithoutPagination({});
-    const categoriesUrls = await getCategoriesTree();
+    const newsUrls = await getAllNews({ per_page: '10000', variant });
+    const promotionsUrls = await getPromotions({ per_page: '10000', variant });
+    const productsUrls = await getProductsWithoutPagination({ variant });
+    const categoriesUrls = await getCategoriesTree({ variant });
 
     const pathWithPriority: Record<string, number> = {
-      ...Object.fromEntries(Object.keys(paths).map(path => [path, 0.8])),
-      'home': 1,
-      'news': 0.9,
-      'shares': 0.9,
-      'product': 0.9,
+      ...Object.fromEntries(Object.keys(paths).map((path) => [path, 0.8])),
+      home: 1,
+      news: 0.9,
+      shares: 0.9,
+      product: 0.9,
     };
 
     const fields: ISitemapField[] = Object.keys(pathWithPriority).map((page) => ({
-      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/${page == "home" ? "" : page}`,
+      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/${page == 'home' ? '' : page}`,
       lastmod: new Date().toISOString(),
       changefreq: 'daily' as const,
       priority: pathWithPriority[page],
@@ -40,7 +47,7 @@ export async function GET() {
           lastmod: new Date(item.updated_at || new Date()).toISOString(),
           changefreq: 'daily' as const,
           priority: 0.8,
-        })),
+        }))
       );
 
       if (promotionsUrls && promotionsUrls.data && promotionsUrls.data.length > 0) {
@@ -50,13 +57,16 @@ export async function GET() {
             lastmod: new Date(item.updated_at || new Date()).toISOString(),
             changefreq: 'daily' as const,
             priority: 0.8,
-          })),
+          }))
         );
       }
 
       if (productsUrls && productsUrls.length > 0) {
         // Обогащаем продукты полным путем
-        const enrichedProducts = await enrichProductsWithFullPath(productsUrls);
+        const enrichedProducts = await enrichProductsWithFullPath({
+          products: productsUrls,
+          variant,
+        });
 
         const productUrls = enrichedProducts.map((item: ProductT) => ({
           loc: `${process.env.NEXT_PUBLIC_SITE_URL}/catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
@@ -87,5 +97,3 @@ export async function GET() {
     return new NextResponse('Error generating sitemap', { status: 500 });
   }
 }
-
-

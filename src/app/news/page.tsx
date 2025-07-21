@@ -4,11 +4,14 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { NewsSection } from '@/widgets/news-section';
 import { SeoBlock } from '@/entities/seo-block';
 import { CanonicalLink } from '@/shared/ui/canonical-link';
+import { cookies } from 'next/headers';
 
 export default async function News({ searchParams }: { searchParams: Promise<{ page: string }> }) {
-  const page = (await searchParams).page || '1';
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
 
-  const newsList = await getAllNews({ page });
+  const page = (await searchParams).page || '1';
+  const newsList = await getAllNews({ page, variant });
 
   return (
     <>

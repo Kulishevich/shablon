@@ -1,7 +1,14 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { OrderPostT, OrderResponse } from './types';
 
-export const postOrder = async (reqData: OrderPostT): Promise<OrderResponse> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/orders`, {
+export const postOrder = async ({
+  reqData,
+  variant,
+}: {
+  reqData: OrderPostT;
+  variant?: string;
+}): Promise<OrderResponse> => {
+  const res = await fetch(`${getApiBaseUrl(variant)}/v1/orders`, {
     method: 'POST',
     body: JSON.stringify(reqData),
     headers: {

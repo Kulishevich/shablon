@@ -2,13 +2,21 @@ import { BrandT } from '@/shared/api/brands/types';
 import Image from 'next/image';
 import React from 'react';
 import s from './BrandCard.module.scss';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
-export const BrandCard = ({ image_path, name, photo_path }: BrandT) => {
+interface IBrandProps {
+  brand: BrandT;
+  variant?: string;
+}
+
+export const BrandCard = async ({ brand, variant }: IBrandProps) => {
+  const { image_path, name, photo_path } = brand;
+
   return (
     <div className={s.container}>
       {photo_path && (
         <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+          src={`${getStoreBaseUrl(variant)}/${photo_path}`}
           width={306}
           height={240}
           alt={name}
@@ -16,7 +24,7 @@ export const BrandCard = ({ image_path, name, photo_path }: BrandT) => {
         />
       )}
       <Image
-        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image_path}`}
+        src={`${getStoreBaseUrl(variant)}/${image_path}`}
         width={306}
         height={160}
         alt={name}

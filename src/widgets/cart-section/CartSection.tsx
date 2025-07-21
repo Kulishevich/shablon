@@ -12,8 +12,10 @@ import { RootState } from '@/shared/lib/redux/store';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
 import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDiscount';
 import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
+import Cookies from 'js-cookie';
 
 export const CartSection = () => {
+  const variant = Cookies.get('variant');
   const productsCart = useSelector((state: RootState) => state.cart.items);
   const promocode = useSelector((state: RootState) => state.cart.promocode);
   const [productsState, setProductsState] = useState(productsCart);
@@ -28,8 +30,11 @@ export const CartSection = () => {
       setPromocodeDiscount(0);
       try {
         const res = await checkCartPriceWitchPromocode({
-          code: promocode,
-          products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+          reqData: {
+            code: promocode,
+            products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+          },
+          variant,
         });
         if (Number(res.min_order_amount) <= priceWithOutDiscount) {
           if (res.type === 'percentage') {

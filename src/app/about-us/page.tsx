@@ -9,12 +9,16 @@ import { Feedback } from '@/widgets/feedback/Feedback';
 import { GallerySection } from '@/widgets/gallery-section/GallerySection';
 import { MissionSection } from '@/widgets/mission-section';
 import { ReviewsSection } from '@/widgets/reviews-section';
+import { cookies } from 'next/headers';
 
 export default async function AboutUs() {
-  const advantages = await getAdvantages();
-  const photos = await getPhotos();
-  const reviews = await getReviews();
-  const aboutResponse = await getAboutBlocks();
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
+  const advantages = await getAdvantages({ variant });
+  const photos = await getPhotos({ variant });
+  const reviews = await getReviews({ variant });
+  const aboutResponse = await getAboutBlocks({ variant });
 
   return (
     <main>

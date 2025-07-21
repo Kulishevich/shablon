@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import s from './NewsSection.module.scss';
 import { NewsCard } from '@/entities/news-card';
 import { Pagination } from '@/shared/ui/pagination';

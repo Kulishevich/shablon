@@ -6,8 +6,11 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import s from './NewsInfoSection.module.scss';
 import { NewsT } from '@/shared/api/news/types';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 
 export const NewsInfoSection = ({ news }: { news: NewsT | null }) => {
+  const variant = Cookies.get('variant');
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.titleContainer}>
@@ -25,7 +28,7 @@ export const NewsInfoSection = ({ news }: { news: NewsT | null }) => {
         </div>
         <div className={s.imageContainer}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
+            src={`${getStoreBaseUrl(variant)}/${news?.photo_path}`}
             fill
             alt="new"
             itemProp="image"

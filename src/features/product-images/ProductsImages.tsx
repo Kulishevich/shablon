@@ -4,8 +4,11 @@ import Image from 'next/image';
 import s from './ProductsImages.module.scss';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 
 export const ProductsImages = ({ product }: { product: ProductT | null }) => {
+  const variant = Cookies.get('variant');
   const [activeImage, setActiveImage] = useState(product?.main_image.image_path);
 
   const isDiscount = !!Number(product?.discount);
@@ -23,7 +26,7 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
           >
             <Image
               itemProp="image"
-              src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image.image_path}`}
+              src={`${getStoreBaseUrl(variant)}/${image.image_path}`}
               fill
               alt="product"
             />
@@ -33,7 +36,7 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
       <div className={s.imageContainer}>
         <Image
           itemProp="image"
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${activeImage}`}
+          src={`${getStoreBaseUrl(variant)}/${activeImage}`}
           fill
           alt="product"
         />

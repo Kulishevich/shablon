@@ -8,10 +8,14 @@ import { Feedback } from '@/widgets/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 import { notFound } from 'next/navigation';
 import { SeoBlock } from '@/entities/seo-block';
+import { cookies } from 'next/headers';
 
 export default async function New({ params }: { params: Promise<{ slug: string }> }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const { slug } = await params;
-  const news = await getNews(slug);
+  const news = await getNews({ slug, variant });
 
   if (!news) {
     notFound();

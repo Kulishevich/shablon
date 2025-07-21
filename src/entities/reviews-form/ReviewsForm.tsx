@@ -13,8 +13,10 @@ import clsx from 'clsx';
 import { ControlledRatingField } from '@/shared/ui/controlled-rating-field';
 import { postReview } from '@/shared/api/reviews/postReview';
 import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
+import Cookies from 'js-cookie';
 
 export const ReviewsForm = ({ closeModal }: { closeModal: () => void }) => {
+  const variant = Cookies.get('variant');
   const {
     control,
     formState: { isValid },
@@ -37,7 +39,7 @@ export const ReviewsForm = ({ closeModal }: { closeModal: () => void }) => {
 
   const formHandler = handleSubmit(async (data) => {
     try {
-      const response = await postReview(data);
+      const response = await postReview({ review: data, variant });
 
       if (response?.success) {
         showToast({

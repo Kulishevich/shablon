@@ -9,7 +9,11 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
 import 'swiper/css';
 import clsx from 'clsx';
 import { PhotoT } from '@/shared/api/photos/types';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
+
 export const GallerySection = ({ items }: { items: PhotoT[] }) => {
+  const variant = Cookies.get('variant');
   const [activeSlide, setActiveSlide] = useState<number | undefined>(undefined);
   const swiperRef = useRef<SwiperType>(null);
 
@@ -41,7 +45,7 @@ export const GallerySection = ({ items }: { items: PhotoT[] }) => {
           {items?.map((item, index) => (
             <SwiperSlide key={index} className={s.swiperSlide}>
               <Image
-                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.image_path}`}
+                src={`${getStoreBaseUrl(variant)}/${item.image_path}`}
                 alt={item.title || ''}
                 width={416}
                 height={340}
@@ -66,7 +70,7 @@ export const GallerySection = ({ items }: { items: PhotoT[] }) => {
         {activeSlide !== undefined && (
           <div onClick={(e) => e.stopPropagation()}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_STORE_URL}/${items?.[activeSlide].image_path}`}
+              src={`${getStoreBaseUrl(variant)}/${items?.[activeSlide].image_path}`}
               alt={items?.[activeSlide].title || ''}
               width={1000}
               height={1000}

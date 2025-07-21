@@ -1,6 +1,13 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ReviewPostResponseT, ReviewPostT } from './types';
 
-export const postReview = async (review: ReviewPostT): Promise<ReviewPostResponseT | null> => {
+export const postReview = async ({
+  review,
+  variant,
+}: {
+  variant?: string;
+  review: ReviewPostT;
+}): Promise<ReviewPostResponseT | null> => {
   try {
     const formData = new FormData();
     formData.append('author_name', review.name);
@@ -11,11 +18,10 @@ export const postReview = async (review: ReviewPostT): Promise<ReviewPostRespons
       formData.append('author_photo', review.photo);
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/reviews`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/reviews`, {
       method: 'POST',
       body: formData,
       headers: {
-
         Accept: 'application/json',
       },
     });

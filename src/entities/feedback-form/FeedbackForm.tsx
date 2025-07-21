@@ -10,8 +10,10 @@ import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
 import { FeedbackFormScheme } from '@/shared/validation/feedback-scheme-creator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
+import Cookies from 'js-cookie';
 
 export const FeedbackForm = () => {
+  const variant = Cookies.get('variant');
   const {
     control,
     formState: { isValid },
@@ -32,7 +34,7 @@ export const FeedbackForm = () => {
     const { comment, name, phone } = data;
 
     try {
-      await postFeedback({ comment: comment ?? '', name, phone });
+      await postFeedback({ reqData: { comment: comment ?? '', name, phone }, variant });
 
       showToast({
         variant: 'success',

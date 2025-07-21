@@ -1,6 +1,8 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ProductsResponseT } from './types';
 
 type GetProductsProps = {
+  variant?: string;
   search?: string;
   category_id?: string;
   popular?: string;
@@ -16,6 +18,7 @@ type GetProductsProps = {
 };
 
 export const getProducts = async ({
+  variant,
   search,
   category_id,
   popular,
@@ -44,13 +47,13 @@ export const getProducts = async ({
   if (per_page) params.append('per_page', per_page);
   if (tags) params.append('tags', tags);
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/products?${params.toString()}`;
+  const url = `${getApiBaseUrl(variant)}/v1/products?${params.toString()}`;
 
   try {
     const res = await fetch(url, {
       next: {
         revalidate: 60,
-      }
+      },
     });
 
     const { data } = await res.json();

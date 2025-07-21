@@ -5,12 +5,16 @@ import { paths } from '@/shared/config/constants/paths';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { TagT } from '@/shared/api/tags/types';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 
 export const ShortcutCard = ({ photo_path, name }: TagT) => {
+  const variant = Cookies.get('variant');
+
   return (
     <Link href={`${paths.catalog}/all?tags=${name}`} className={s.container}>
       <Image
-        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+        src={`${getStoreBaseUrl(variant)}/${photo_path}`}
         alt={`Фото ${name.split(' ')[0]}`}
         width={120}
         height={120}

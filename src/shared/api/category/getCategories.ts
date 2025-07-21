@@ -1,11 +1,16 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { CategoryT } from './types';
 
-export const getCategories = async (): Promise<CategoryT[] | null> => {
+export const getCategories = async ({
+  variant,
+}: {
+  variant?: string;
+}): Promise<CategoryT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/categories`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/categories`, {
       next: {
         revalidate: 60,
-      }
+      },
     });
 
     const { data } = await res.json();

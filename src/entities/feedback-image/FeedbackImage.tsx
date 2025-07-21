@@ -1,8 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 import s from './FeedbackImage.module.scss';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 
 export const FeedbackImage = ({ image }: { image: string }) => {
+  const variant = Cookies.get('variant');
+
   return (
     <div className={s.titleContainer}>
       <div className={s.textContent}>
@@ -13,7 +17,7 @@ export const FeedbackImage = ({ image }: { image: string }) => {
         </p>
       </div>
       <div className={s.imageContainer}>
-        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image}`} fill alt="feedback" />
+        <Image src={`${getStoreBaseUrl(variant)}/${image}`} fill alt="feedback" />
       </div>
     </div>
   );

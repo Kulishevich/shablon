@@ -4,6 +4,8 @@ import { ReviewT } from '@/shared/api/reviews/types';
 import clsx from 'clsx';
 import { StarIcon } from '@/shared/assets';
 import s from './ReviewContent.module.scss';
+import Cookies from 'js-cookie';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const ReviewContent = ({
   author_name,
@@ -16,11 +18,13 @@ export const ReviewContent = ({
 }: ReviewT & {
   is_card?: boolean;
 }) => {
+  const variant = Cookies.get('variant');
+
   return (
     <>
       <div className={s.head}>
         <div className={s.imageContainer}>
-          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${author_photo}`} fill alt="profile" />
+          <Image src={`${getStoreBaseUrl(variant)}/${author_photo}`} fill alt="profile" />
         </div>
         <div className={s.nameContainer}>
           <p className="body_3" itemProp="author">

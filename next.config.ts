@@ -13,6 +13,41 @@ const nextConfig: NextConfig = {
         hostname: 'webspaceteam.site',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'dlyadoma.lookda.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'odejda.lookda.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'auto.lookda.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'stroyka.lookda.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'podarok.lookda.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tehnika.lookda.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'kosmetika.lookda.com',
+        pathname: '/**',
+      },
     ],
   },
 

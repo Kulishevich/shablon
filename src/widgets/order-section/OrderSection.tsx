@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDiscount';
 import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
+import Cookies from 'js-cookie';
 
 export const OrderSection = ({
   paymentMethods,
@@ -26,6 +27,7 @@ export const OrderSection = ({
   paymentMethods: PaymentT[] | null;
   deliveryMethods: DeliveryT[] | null;
 }) => {
+  const variant = Cookies.get('variant');
   const router = useRouter();
   const productsCart = useSelector((state: RootState) => state.cart.items);
   const promocode = useSelector((state: RootState) => state.cart.promocode);
@@ -41,8 +43,11 @@ export const OrderSection = ({
       setPromocodeDiscount(0);
       try {
         const res = await checkCartPriceWitchPromocode({
-          code: promocode,
-          products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+          reqData: {
+            code: promocode,
+            products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+          },
+          variant,
         });
         if (Number(res.min_order_amount) <= priceWithOutDiscount) {
           if (res.type === 'percentage') {
@@ -101,9 +106,12 @@ export const OrderSection = ({
 
     try {
       const res = await postOrder({
-        ...otherData,
-        customer_name: `${name} ${surname} ${patronymic}`,
-        items,
+        reqData: {
+          ...otherData,
+          customer_name: `${name} ${surname} ${patronymic}`,
+          items,
+        },
+        variant,
       });
 
       dispatch(clearCart());

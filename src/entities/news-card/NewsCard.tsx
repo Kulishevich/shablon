@@ -7,14 +7,13 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import clsx from 'clsx';
 import { NewsT } from '@/shared/api/news/types';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import { cookies } from 'next/headers';
 
-const news = {
-  title: 'Фурнитура для мебели: как выбрать?',
-  date: '12.02.2025',
-  image_path: '/news.png',
-};
+export const NewsCard = async ({ news }: { news: NewsT }) => {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
 
-export const NewsCard = ({ news }: { news: NewsT }) => {
   return (
     <Link
       href={`${paths.news}/${news?.slug}`}
@@ -25,7 +24,7 @@ export const NewsCard = ({ news }: { news: NewsT }) => {
     >
       <div className={s.imageContainer}>
         <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
+          src={`${getStoreBaseUrl(variant)}/${news?.photo_path}`}
           fill
           alt="news"
           itemProp="image"

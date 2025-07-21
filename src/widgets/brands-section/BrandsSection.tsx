@@ -3,10 +3,16 @@ import { SliderWrapper } from '@/entities/slider-wrapper';
 import { BrandT } from '@/shared/api/brands/types';
 import React from 'react';
 
-export const BrandsSection = ({ brands }: { brands: BrandT[] | null }) => {
+export const BrandsSection = ({
+  brands,
+  variant,
+}: {
+  brands: BrandT[] | null;
+  variant?: string;
+}) => {
   return (
     <SliderWrapper title="Бренды, с которыми мы сотрудничаем" variant="news">
-      {brands?.map((brand) => <BrandCard {...brand} key={brand.id} />)}
+      {brands?.map((brand) => <BrandCard brand={brand} variant={variant} key={brand.id} />)}
     </SliderWrapper>
   );
 };

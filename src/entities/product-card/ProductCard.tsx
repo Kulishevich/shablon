@@ -13,6 +13,8 @@ import { addInCart, changeProductCount, deleteFromCart } from '@/shared/lib/redu
 import { TextField } from '@/shared/ui/text-field';
 import debounce from 'lodash.debounce';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 
 export const ProductCard = ({
   product,
@@ -21,6 +23,8 @@ export const ProductCard = ({
   productInCart?: boolean;
   product: ProductT & { quantity?: number };
 }) => {
+  const variant = Cookies.get('variant');
+
   const {
     discount,
     price,
@@ -79,13 +83,13 @@ export const ProductCard = ({
       itemProp="itemListElement"
       itemScope
       itemType="http://schema.org/Product"
-      href={buildProductUrlSync(product)}
+      href={buildProductUrlSync({ product, variant })}
     >
       <div className={s.imageContainer}>
         <div>
           <Image
             itemProp="image"
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${main_image?.image_path}`}
+            src={`${getStoreBaseUrl(variant)}/${main_image?.image_path}`}
             fill
             alt="product"
             className={s.image}

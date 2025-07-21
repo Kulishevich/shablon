@@ -1,14 +1,17 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ProductT } from './types';
 
-export const getPopularProducts = async (): Promise<ProductT[] | null> => {
+export const getPopularProducts = async ({
+  variant,
+}: {
+  variant?: string;
+}): Promise<ProductT[] | null> => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/products/popular`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/products/popular`, {
       next: {
         revalidate: 60,
-      }
-    }
-    );
+      },
+    });
 
     const { data } = await res.json();
 

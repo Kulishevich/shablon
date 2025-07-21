@@ -1,11 +1,12 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { PhotoT } from './types';
 
-export const getPhotos = async (): Promise<PhotoT[] | null> => {
+export const getPhotos = async ({ variant }: { variant?: string }): Promise<PhotoT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/photos`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/photos`, {
       next: {
         revalidate: 60,
-      }
+      },
     });
 
     const { data } = await res.json();

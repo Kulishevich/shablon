@@ -1,7 +1,11 @@
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
+import { cookies } from 'next/headers';
 
 export const generateMetadata = async () => {
-  const seo = await getSeoTag('/shares');
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
+  const seo = await getSeoTag({ tag: '/shares', variant });
 
   return {
     title: seo?.title ?? 'Акции',

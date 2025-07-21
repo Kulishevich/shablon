@@ -6,10 +6,14 @@ import { getPromotion } from '@/shared/api/promotions/getPromotion';
 import { getPromotions } from '@/shared/api/promotions/getPromotions';
 import { notFound } from 'next/navigation';
 import { SeoBlock } from '@/entities/seo-block';
+import { cookies } from 'next/headers';
 
 export default async function Share({ params }: { params: Promise<{ slug: string }> }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const { slug } = await params;
-  const promotion = await getPromotion(slug);
+  const promotion = await getPromotion({ slug, variant });
 
   if (!promotion) {
     notFound();

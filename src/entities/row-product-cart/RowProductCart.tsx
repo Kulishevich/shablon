@@ -13,10 +13,10 @@ import {
 } from '@/shared/lib/redux/slices/cartSlice';
 import debounce from 'lodash.debounce';
 import Link from 'next/link';
-import { paths } from '@/shared/config/constants/paths';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 import { ProductT } from '@/shared/api/product/types';
-
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 export const RowProductCart = ({
   name,
   photo_path,
@@ -28,6 +28,8 @@ export const RowProductCart = ({
   slug,
   category,
 }: CartProduct) => {
+  const variant = Cookies.get('variant');
+
   const [count, setCount] = useState(quantity);
   const dispatch = useDispatch();
   const isDiscount = !!Number(discount);
@@ -73,12 +75,12 @@ export const RowProductCart = ({
       <div className={s.card}>
         <Link
           className={s.imageContainer}
-          href={buildProductUrlSync({ category, slug } as ProductT)}
+          href={buildProductUrlSync({ product: { category, slug } as ProductT, variant })}
           itemProp="url"
         >
           <Image
             itemProp="image"
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+            src={`${getStoreBaseUrl(variant)}/${photo_path}`}
             fill
             alt="product"
           />

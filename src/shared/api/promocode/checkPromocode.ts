@@ -1,7 +1,14 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { CheckPromocodeT } from './type';
 
-export const checkPromocode = async (reqData: CheckPromocodeT) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/promo-codes/check`, {
+export const checkPromocode = async ({
+  reqData,
+  variant,
+}: {
+  reqData: CheckPromocodeT;
+  variant: string;
+}) => {
+  const res = await fetch(`${getApiBaseUrl(variant)}/v1/promo-codes/check`, {
     method: 'POST',
     body: JSON.stringify(reqData),
     headers: {
@@ -10,7 +17,7 @@ export const checkPromocode = async (reqData: CheckPromocodeT) => {
     },
     next: {
       revalidate: 60,
-    }
+    },
   });
   if (!res.ok) {
     throw new Error('Ошибка при отправке формы обратной связи');

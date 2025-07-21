@@ -1,8 +1,15 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { SeoT } from './types';
 
-export const getSeoTag = async (tag: string): Promise<SeoT | null> => {
+export const getSeoTag = async ({
+  variant,
+  tag,
+}: {
+  variant?: string;
+  tag: string;
+}): Promise<SeoT | null> => {
   try {
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/seo/tag?name=${tag}`, {
+    const data = await fetch(`${getApiBaseUrl(variant)}/v1/seo/tag?name=${tag}`, {
       next: {
         revalidate: 60,
       },

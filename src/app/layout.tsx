@@ -17,6 +17,9 @@ import dynamic from 'next/dynamic';
 import { ToTop } from '@/shared/ui/to-top';
 import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
 import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
+import { SiteVariantButtons } from '@/widgets/site-variant-buttons';
+import { cookies } from 'next/headers';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
 const onest = Onest({
@@ -29,7 +32,9 @@ const onest = Onest({
 });
 
 export async function generateViewport() {
-  const settings = await getSetting();
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+  const settings = await getSetting({ variant });
 
   return {
     themeColor: settings?.colors.icon_color,
@@ -42,7 +47,13 @@ export async function generateViewport() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [data, settings] = await Promise.all([getSeoTag('home'), getSetting()]);
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
+  const [data, settings] = await Promise.all([
+    getSeoTag({ tag: 'home', variant }),
+    getSetting({ variant }),
+  ]);
 
   return {
     title: data?.title ?? 'Шаблон',
@@ -53,7 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: data?.og_description ?? data?.description,
     },
     icons: {
-      icon: `${process.env.NEXT_PUBLIC_STORE_URL}/${settings?.favicon}`,
+      icon: `${getStoreBaseUrl(variant)}/${settings?.favicon}`,
     },
   };
 }
@@ -63,12 +74,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const [categories, contacts, products, settings, seoSettings] = await Promise.all([
-    getCategories(),
-    getContacts(),
-    getProducts({}),
-    getSetting(),
-    getSeoSettings(),
+    getCategories({ variant }),
+    getContacts({ variant }),
+    getProducts({ variant }),
+    getSetting({ variant }),
+    getSeoSettings({ variant }),
   ]);
 
   return (
@@ -76,8 +90,8 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://api-maps.yandex.ru" />
         <link rel="dns-prefetch" href="https://api-maps.yandex.ru" />
-        <link rel="preconnect" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
-        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
+        <link rel="preconnect" href={getStoreBaseUrl(variant) || ''} />
+        <link rel="dns-prefetch" href={getStoreBaseUrl(variant) || ''} />
         <style>
           {`:root {
             --color-accent-1: ${settings?.colors.icon_color};
@@ -149,6 +163,7 @@ export default async function RootLayout({
         <Toaster />
         <PhoneAnimation image={settings?.feedback_image || ''} />
         <ToTop />
+        <SiteVariantButtons />
       </body>
     </html>
   );

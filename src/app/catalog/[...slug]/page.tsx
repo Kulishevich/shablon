@@ -24,6 +24,7 @@ import {
   enrichProductsWithFullPath,
 } from '@/shared/lib/utils/productUtils';
 import { getProductsAdvantages } from '@/shared/api/advantages/getProductsAdvantages';
+import { cookies } from 'next/headers';
 
 export default async function Catalog({
   params,
@@ -41,6 +42,9 @@ export default async function Catalog({
     tags?: string;
   }>;
 }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const { slug } = await params;
   const { page, sort_by, sort_direction, search, price_from, price_to, brand, tags } =
     await searchParams;
@@ -60,7 +64,7 @@ export default async function Catalog({
   }
 
   // Сначала пробуем найти категорию
-  const { category, categoryPath } = await getCategoryByPath(slug);
+  const { category, categoryPath } = await getCategoryByPath({ slugs: slug, variant });
 
   if (category) {
     // Если категория найдена, показываем каталог
@@ -81,14 +85,14 @@ export default async function Catalog({
 
   // Если категория не найдена, пробуем найти продукт по последнему slug
   const lastSlug = slug[slug.length - 1];
-  let product = await getProductById(lastSlug);
+  let product = await getProductById({ id: lastSlug, variant });
 
   if (product) {
     // Обогащаем продукт полным путем
-    product = await enrichProductWithFullPath(product);
+    product = await enrichProductWithFullPath({ product, variant });
 
     // Проверяем корректность пути до продукта
-    const isValidPath = await validateProductPath(product, slug);
+    const isValidPath = await validateProductPath({ product, pathSlugs: slug, variant });
 
     if (!isValidPath) {
       // Если путь неверный, показываем 404
@@ -122,6 +126,9 @@ async function renderAllProductsSection({
   brand?: string;
   tags?: string;
 }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   // Получаем все продукты с фильтрацией по тегам
   const products = await getProducts({
     page,
@@ -136,10 +143,10 @@ async function renderAllProductsSection({
 
   // Обогащаем продукты полным путем
   if (products?.data) {
-    products.data = await enrichProductsWithFullPath(products.data);
+    products.data = await enrichProductsWithFullPath({ products: products.data, variant });
   }
 
-  const allBrands = await getBrands();
+  const allBrands = await getBrands({ variant });
   const allProducts = await getProductsWithoutPagination({
     search,
     tags,
@@ -222,6 +229,9 @@ async function renderCatalogSection({
   tags?: string;
   slug: string[];
 }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   // Получаем продукты для данной категории
   const products = await getProducts({
     category_id: category.id.toString(),
@@ -237,10 +247,10 @@ async function renderCatalogSection({
 
   // Обогащаем продукты полным путем
   if (products?.data) {
-    products.data = await enrichProductsWithFullPath(products.data);
+    products.data = await enrichProductsWithFullPath({ products: products.data, variant });
   }
 
-  const allBrands = await getBrands();
+  const allBrands = await getBrands({ variant });
   const allProducts = await getProductsWithoutPagination({
     category_id: category.id.toString(),
     search,
@@ -285,10 +295,13 @@ async function renderCatalogSection({
 }
 
 async function renderProductSection(product: ProductT, slug: string[]) {
-  const reviews = await getReviews();
-  const advantages = await getProductsAdvantages();
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
 
-  const categoriesPath = await getCategoriesFromProductPath(product);
+  const reviews = await getReviews({ variant });
+  const advantages = await getProductsAdvantages({ variant });
+
+  const categoriesPath = await getCategoriesFromProductPath({ product, variant });
 
   const breadcrumbsPath = [
     ...categoriesPath.map((category) => ({
