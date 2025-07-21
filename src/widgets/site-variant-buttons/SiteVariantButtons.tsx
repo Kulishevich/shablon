@@ -3,6 +3,7 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { Button } from '@/shared/ui/button';
 import s from './SiteVariantButtons.module.scss';
+import { CollapseFilter } from '@/shared/ui/collapse-filter';
 
 const siteVariants = [
   {
@@ -54,11 +55,13 @@ export const SiteVariantButtons = () => {
 
   return (
     <div className={s.container}>
-      {siteVariants.map((variant) => (
-        <Button key={variant.id} onClick={() => handleChangeVariantSite(variant.value)}>
-          {variant.name}
-        </Button>
-      ))}
+      <CollapseFilter title="Варианты сайта">
+        {siteVariants.map((variant) => (
+          <Button key={variant.id} onClick={() => handleChangeVariantSite(variant.value)}>
+            {variant.name}
+          </Button>
+        ))}
+      </CollapseFilter>
     </div>
   );
 };

@@ -11,7 +11,11 @@ export const BrandsSection = ({
   variant?: string;
 }) => {
   return (
-    <SliderWrapper title="Бренды, с которыми мы сотрудничаем" variant="news">
+    <SliderWrapper
+      title="Бренды, с которыми мы сотрудничаем"
+      variant="news"
+      itemsCount={brands?.length || 0}
+    >
       {brands?.map((brand) => <BrandCard brand={brand} variant={variant} key={brand.id} />)}
     </SliderWrapper>
   );

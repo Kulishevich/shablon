@@ -5,7 +5,7 @@ import React from 'react';
 
 export const NewsSliderSection = ({ newsList }: { newsList: NewsT[] | null }) => {
   return (
-    <SliderWrapper title="Новости" variant="news">
+    <SliderWrapper title="Новости" variant="news" itemsCount={newsList?.length || 0}>
       {newsList?.map((news, index) => <NewsCard key={index} news={news} />)}
     </SliderWrapper>
   );

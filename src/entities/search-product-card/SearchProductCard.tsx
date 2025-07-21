@@ -17,7 +17,6 @@ export const SearchProductCard = ({ ...props }: ProductT) => {
   useEffect(() => {
     const cookieVariant = Cookies.get('variant');
     setVariant(cookieVariant);
-    console.log('variant from cookie:', cookieVariant);
   }, []);
 
   return (

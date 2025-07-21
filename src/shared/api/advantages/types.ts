@@ -1,6 +1,7 @@
 export type AdvantageType = {
   id: number;
   title: string;
+  description: string;
   icon: string;
   sort_order: number;
   created_at: string;

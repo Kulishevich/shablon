@@ -14,7 +14,6 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
   useEffect(() => {
     const cookieVariant = Cookies.get('variant');
     setVariant(cookieVariant);
-    console.log('variant from cookie:', cookieVariant);
   }, []);
 
   const isDiscount = !!Number(product?.discount);

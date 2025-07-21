@@ -34,7 +34,6 @@ export const RowProductCart = ({
   useEffect(() => {
     const cookieVariant = Cookies.get('variant');
     setVariant(cookieVariant);
-    console.log('variant from cookie:', cookieVariant);
   }, []);
 
   const [count, setCount] = useState(quantity);

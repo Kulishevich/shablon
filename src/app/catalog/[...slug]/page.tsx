@@ -13,12 +13,10 @@ import { ProductSection } from '@/widgets/product-info';
 import { SeoBlock } from '@/entities/seo-block';
 import { getReviews } from '@/shared/api/reviews/getReviews';
 
-import { paths } from '@/shared/config/constants/paths';
 import { CategoryT } from '@/shared/api/category/types';
 import { ProductT } from '@/shared/api/product/types';
 import {
   validateProductPath,
-  buildProductPath,
   getCategoriesFromProductPath,
   enrichProductWithFullPath,
   enrichProductsWithFullPath,
@@ -243,6 +241,7 @@ async function renderCatalogSection({
     price_to,
     brand,
     tags,
+    variant,
   });
 
   // Обогащаем продукты полным путем
@@ -255,6 +254,7 @@ async function renderCatalogSection({
     category_id: category.id.toString(),
     search,
     tags,
+    variant,
   });
 
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
@@ -270,7 +270,6 @@ async function renderCatalogSection({
 
   // Формируем канонический URL
   const canonicalUrl = `/catalog/${slug.join('/')}`;
-  console.log(canonicalUrl);
 
   return (
     <>

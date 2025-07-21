@@ -37,7 +37,7 @@ export default async function New({ params }: { params: Promise<{ slug: string }
       <main>
         <NewsInfoSection news={news} variant={variant} />
         {!!otherNews?.length && (
-          <SliderWrapper title="Другие новости" variant="news">
+          <SliderWrapper title="Другие новости" variant="news" itemsCount={otherNews?.length}>
             {otherNews?.map((news, index) => <NewsCard key={index} news={news} />)}
           </SliderWrapper>
         )}

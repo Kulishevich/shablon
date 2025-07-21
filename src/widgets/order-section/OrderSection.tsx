@@ -41,7 +41,6 @@ export const OrderSection = ({
   useEffect(() => {
     const cookieVariant = Cookies.get('variant');
     setVariant(cookieVariant);
-    console.log('variant from cookie:', cookieVariant);
   }, []);
 
   useEffect(() => {

@@ -26,7 +26,7 @@ export default async function Share({ params }: { params: Promise<{ slug: string
     <main>
       {!!promotion && <ShareInfo {...promotion} variant={variant} />}
       {!!otherPromotions?.length && (
-        <SliderWrapper title="Другие акции" variant="discount">
+        <SliderWrapper title="Другие акции" variant="discount" itemsCount={otherPromotions?.length}>
           {otherPromotions?.map((promotion, index) => <DiscountCard {...promotion} key={index} />)}
         </SliderWrapper>
       )}
