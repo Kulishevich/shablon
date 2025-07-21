@@ -108,7 +108,7 @@ export default async function SearchPage({
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

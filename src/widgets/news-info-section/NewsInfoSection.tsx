@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { ArrowSmLeftIcon } from '@/shared/assets';
@@ -7,10 +6,8 @@ import { paths } from '@/shared/config/constants/paths';
 import s from './NewsInfoSection.module.scss';
 import { NewsT } from '@/shared/api/news/types';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import Cookies from 'js-cookie';
 
-export const NewsInfoSection = ({ news }: { news: NewsT | null }) => {
-  const variant = Cookies.get('variant');
+export const NewsInfoSection = ({ news, variant }: { news: NewsT | null; variant?: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.titleContainer}>

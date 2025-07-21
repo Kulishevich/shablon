@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './SearchProductCard.module.scss';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
@@ -11,7 +11,14 @@ import Cookies from 'js-cookie';
 
 export const SearchProductCard = ({ ...props }: ProductT) => {
   const { photo_path, name, price } = props;
-  const variant = Cookies.get('variant');
+
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   return (
     <Link href={buildProductUrlSync({ product: props, variant })} className={s.container}>

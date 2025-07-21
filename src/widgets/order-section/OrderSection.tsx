@@ -27,7 +27,8 @@ export const OrderSection = ({
   paymentMethods: PaymentT[] | null;
   deliveryMethods: DeliveryT[] | null;
 }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
   const router = useRouter();
   const productsCart = useSelector((state: RootState) => state.cart.items);
   const promocode = useSelector((state: RootState) => state.cart.promocode);
@@ -36,6 +37,12 @@ export const OrderSection = ({
   const [promocodeDiscount, setPromocodeDiscount] = useState(0);
   const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   useEffect(() => {
     const handleCheckPromocode = async () => {

@@ -198,7 +198,7 @@ async function renderAllProductsSection({
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );
@@ -288,7 +288,7 @@ async function renderCatalogSection({
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );
@@ -323,7 +323,7 @@ async function renderProductSection(product: ProductT, slug: string[]) {
         <ProductSection product={product} reviews={reviews} advantages={advantages} />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

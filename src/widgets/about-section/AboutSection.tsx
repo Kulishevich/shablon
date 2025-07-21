@@ -1,15 +1,17 @@
-import React from 'react';
 import s from './AboutSection.module.scss';
 import Image from 'next/image';
 import { ContentImageBlock } from '@/shared/api/about/types';
 import clsx from 'clsx';
 import { parseImageTextBlock } from '@/shared/lib/utils/parseImageTextBlock';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import Cookies from 'js-cookie';
 
-export const AboutSection = ({ items }: { items?: ContentImageBlock[] }) => {
-  const variant = Cookies.get('variant');
-
+export const AboutSection = ({
+  items,
+  variant,
+}: {
+  items?: ContentImageBlock[];
+  variant?: string;
+}) => {
   return (
     <div className={s.container}>
       <h1 className="h1">О нас</h1>

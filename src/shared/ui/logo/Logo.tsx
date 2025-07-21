@@ -12,17 +12,20 @@ import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary' }) => {
   const [image, setImage] = useState<string | null>(null);
   const pathname = usePathname();
-  const siteVariant = Cookies.get('variant');
+  const [variantState, setVariantState] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    const fetchLogo = async () => {
-      const settings = await getSetting({ variant: siteVariant });
+    const fetchData = async () => {
+      const cookieVariant = Cookies.get('variant');
+      setVariantState(cookieVariant);
+
+      const settings = await getSetting({ variant: cookieVariant });
       if (settings?.logo) {
-        setImage(settings?.logo);
+        setImage(settings.logo);
       }
     };
 
-    fetchLogo();
+    fetchData();
   }, []);
 
   if (pathname === '/') {
@@ -30,7 +33,7 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
       <div className={s[variant]}>
         {!!image && (
           <Image
-            src={`${getStoreBaseUrl(siteVariant)}/${image}`}
+            src={`${getStoreBaseUrl(variantState)}/${image}`}
             fill
             alt="logo"
             priority
@@ -46,7 +49,7 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
     <Link href={paths.home} className={s[variant]}>
       {!!image && (
         <Image
-          src={`${getStoreBaseUrl(siteVariant)}/${image}`}
+          src={`${getStoreBaseUrl(variantState)}/${image}`}
           fill
           alt="logo"
           priority

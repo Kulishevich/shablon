@@ -24,14 +24,14 @@ export default async function Share({ params }: { params: Promise<{ slug: string
 
   return (
     <main>
-      {!!promotion && <ShareInfo {...promotion} />}
+      {!!promotion && <ShareInfo {...promotion} variant={variant} />}
       {!!otherPromotions?.length && (
         <SliderWrapper title="Другие акции" variant="discount">
           {otherPromotions?.map((promotion, index) => <DiscountCard {...promotion} key={index} />)}
         </SliderWrapper>
       )}
       <SeoBlock page={`/shares/${slug}`} />
-      <Feedback />
+      <Feedback variant={variant} />
     </main>
   );
 }

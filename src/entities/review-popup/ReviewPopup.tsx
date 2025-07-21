@@ -8,7 +8,7 @@ import { ReviewT } from '@/shared/api/reviews/types';
 import { ReviewContent } from '../review-content';
 import s from './ReviewPopup.module.scss';
 
-export const ReviewPopup = (props: ReviewT) => {
+export const ReviewPopup = ({ review, variant }: { review: ReviewT; variant?: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ export const ReviewPopup = (props: ReviewT) => {
             <Dialog.Title>Отзыв</Dialog.Title>
           </VisuallyHidden>
           <Dialog.Content className={s.content}>
-            <ReviewContent {...props} />
+            <ReviewContent review={review} variant={variant} />
             <Dialog.DialogClose asChild>
               <Button className={s.closeButton}>
                 <CloseIcon />

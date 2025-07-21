@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { ProductDescription } from '@/entities/product-description';
 import { ProductInfo } from '@/entities/product-info';
 import s from './ProductSection.module.scss';
@@ -20,7 +21,13 @@ export const ProductSection = ({
   reviews: ReviewT[] | null;
   advantages: ProductAdvantageType[] | null;
 }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+  }, []);
+
   return (
     <>
       <div className={s.header}>
@@ -42,7 +49,7 @@ export const ProductSection = ({
       <div className={s.container} itemScope itemType="http://schema.org/Product">
         <ReduxProvider>
           <ProductInfo product={product} advantages={advantages} />
-          <ProductDescription product={product} reviews={reviews} />
+          <ProductDescription product={product} reviews={reviews} variant={variant} />
         </ReduxProvider>
       </div>
     </>

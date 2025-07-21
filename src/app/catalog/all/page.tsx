@@ -118,7 +118,7 @@ export default async function AllProductsPage({
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

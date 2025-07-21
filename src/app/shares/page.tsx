@@ -26,7 +26,7 @@ export default async function Shares({
       <main>
         <SharesSection promotions={promotions} page={page} standalone={true} />
         <SeoBlock page="/shares" />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

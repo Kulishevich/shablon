@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import s from './CartPrice.module.scss';
 import { TextField } from '@/shared/ui/text-field';
 import { Button } from '@/shared/ui/button';
@@ -27,9 +27,16 @@ export const CartPrice = ({
   setProductsState,
   setPromocodeDiscount,
 }: CartPriceProps) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
   const [promocodeState, setPromocodeState] = useState<string>(promocode || '');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   const handleCheckPromocode = async () => {
     try {

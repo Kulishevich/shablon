@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import s from './ProductsImages.module.scss';
 import { ProductT } from '@/shared/api/product/types';
@@ -8,8 +8,14 @@ import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import Cookies from 'js-cookie';
 
 export const ProductsImages = ({ product }: { product: ProductT | null }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
   const [activeImage, setActiveImage] = useState(product?.main_image.image_path);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   const isDiscount = !!Number(product?.discount);
 

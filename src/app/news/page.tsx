@@ -20,7 +20,7 @@ export default async function News({ searchParams }: { searchParams: Promise<{ p
       <main>
         <NewsSection newsList={newsList} page={page} />
         <SeoBlock page="/news" />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

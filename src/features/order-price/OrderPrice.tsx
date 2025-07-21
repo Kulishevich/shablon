@@ -1,5 +1,5 @@
 import { Button } from '@/shared/ui/button';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './OrderPrice.module.scss';
 import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
 import { useFormContext } from 'react-hook-form';
@@ -19,13 +19,19 @@ export const OrderPrice = ({
   priceWithDiscount: number;
   productsCart: CartProduct[];
 }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
   const dispatch = useDispatch();
   const { control, watch } = useFormContext();
 
   const deliveryCost = watch('delivery_cost');
   const promocode = watch('promo_code');
 
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
   const handleCheckPromocode = async () => {
     try {
       const res = await checkCartPriceWitchPromocode({

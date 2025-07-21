@@ -1,7 +1,5 @@
-import React from 'react';
 import s from './MissionSection.module.scss';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const MissionSection = ({
@@ -9,14 +7,14 @@ export const MissionSection = ({
   text_primary,
   text_secondary,
   image_path,
+  variant,
 }: {
   title: string;
   text_primary: string;
   text_secondary: string;
   image_path: string;
+  variant?: string;
 }) => {
-  const variant = Cookies.get('variant');
-
   return (
     <div className={s.container}>
       <div className={s.content}>

@@ -79,7 +79,7 @@ export default async function Home() {
         <MainSlider slides={banners || []} variant={variant} />
       </Suspense>
 
-      <MainShortcuts tags={tags} />
+      <MainShortcuts tags={tags} variant={variant} />
       <CatalogProducts categories={categories} />
 
       <PopularProductsSection products={popularProducts} />
@@ -98,10 +98,10 @@ export default async function Home() {
         </Suspense>
       )}
 
-      <MainBanner banner={setting?.main_banner || null} />
+      <MainBanner banner={setting?.main_banner || null} variant={variant} />
 
       <Suspense>
-        <ReviewsSection reviews={reviews} />
+        <ReviewsSection reviews={reviews} variant={variant} />
       </Suspense>
 
       {!!newsList?.data?.length && (
@@ -119,7 +119,7 @@ export default async function Home() {
       </Suspense>
 
       <Suspense>
-        <Feedback />
+        <Feedback variant={variant} />
       </Suspense>
     </main>
   );

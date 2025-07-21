@@ -16,7 +16,7 @@ export default async function Contacts() {
       <ContactsSection contacts={contacts} />
       <CompanyDetails contacts={contacts} />
       <SeoBlock page="/contacts" />
-      <Feedback />
+      <Feedback variant={variant} />
     </main>
   );
 }

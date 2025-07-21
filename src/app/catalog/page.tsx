@@ -18,7 +18,7 @@ export default async function Catalog() {
         <CatalogProducts title="Каталог" categories={categories} />
 
         <SeoBlock page="/catalog" />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

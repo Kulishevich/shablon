@@ -13,13 +13,9 @@ import { Swiper as SwiperType } from 'swiper';
 import { BannerT } from '@/shared/api/banners/types';
 import Link from 'next/link';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import Cookies from 'js-cookie';
 
 export const MainSlider = ({ slides, variant }: { slides: BannerT[]; variant?: string }) => {
   const swiperRef = useRef<SwiperType>(null);
-
-  const variants = Cookies.get('variant');
-  console.log('variant:', variants);
 
   const handleNext = () => {
     if (!swiperRef.current) return;

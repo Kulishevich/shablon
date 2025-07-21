@@ -2,11 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 import s from './FeedbackImage.module.scss';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import Cookies from 'js-cookie';
 
-export const FeedbackImage = ({ image }: { image: string }) => {
-  const variant = Cookies.get('variant');
-
+export const FeedbackImage = ({ image, variant }: { image: string; variant?: string }) => {
   return (
     <div className={s.titleContainer}>
       <div className={s.textContent}>

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import s from './GallerySection.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -13,9 +13,16 @@ import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import Cookies from 'js-cookie';
 
 export const GallerySection = ({ items }: { items: PhotoT[] }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
   const [activeSlide, setActiveSlide] = useState<number | undefined>(undefined);
   const swiperRef = useRef<SwiperType>(null);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   const handlePrevSlide = () => {
     swiperRef.current?.slidePrev();

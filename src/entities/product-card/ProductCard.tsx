@@ -23,7 +23,12 @@ export const ProductCard = ({
   productInCart?: boolean;
   product: ProductT & { quantity?: number };
 }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+  }, []);
 
   const {
     discount,

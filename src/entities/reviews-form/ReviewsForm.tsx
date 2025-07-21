@@ -14,9 +14,17 @@ import { ControlledRatingField } from '@/shared/ui/controlled-rating-field';
 import { postReview } from '@/shared/api/reviews/postReview';
 import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
 import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 
 export const ReviewsForm = ({ closeModal }: { closeModal: () => void }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
+
   const {
     control,
     formState: { isValid },

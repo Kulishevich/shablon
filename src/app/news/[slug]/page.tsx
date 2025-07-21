@@ -35,12 +35,14 @@ export default async function New({ params }: { params: Promise<{ slug: string }
         ]}
       />
       <main>
-        <NewsInfoSection news={news} />
-        <SliderWrapper title="Другие новости" variant="news">
-          {otherNews?.map((news, index) => <NewsCard key={index} news={news} />)}
-        </SliderWrapper>
+        <NewsInfoSection news={news} variant={variant} />
+        {!!otherNews?.length && (
+          <SliderWrapper title="Другие новости" variant="news">
+            {otherNews?.map((news, index) => <NewsCard key={index} news={news} />)}
+          </SliderWrapper>
+        )}
         <SeoBlock page={`/news/${news?.slug}`} />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

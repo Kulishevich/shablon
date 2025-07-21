@@ -10,10 +10,8 @@ import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
 import { FeedbackFormScheme } from '@/shared/validation/feedback-scheme-creator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
-import Cookies from 'js-cookie';
 
-export const FeedbackForm = () => {
-  const variant = Cookies.get('variant');
+export const FeedbackForm = ({ variant }: { variant?: string }) => {
   const {
     control,
     formState: { isValid },

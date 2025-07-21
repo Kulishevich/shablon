@@ -1,24 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ReviewT } from '@/shared/api/reviews/types';
 import clsx from 'clsx';
 import { StarIcon } from '@/shared/assets';
 import s from './ReviewContent.module.scss';
-import Cookies from 'js-cookie';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const ReviewContent = ({
-  author_name,
-  author_photo,
-  rating,
-  created_at,
-  title,
-  review_text,
+  review,
   is_card = false,
-}: ReviewT & {
+  variant,
+}: {
+  review: ReviewT;
   is_card?: boolean;
+  variant?: string;
 }) => {
-  const variant = Cookies.get('variant');
+  const { author_name, author_photo, rating, created_at, title, review_text } = review;
 
   return (
     <>

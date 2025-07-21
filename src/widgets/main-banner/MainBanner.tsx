@@ -14,6 +14,7 @@ export const MainBanner = ({
   variant?: string;
 }) => {
   if (!banner) return null;
+
   return (
     <div className={s.container}>
       <Image src={`${getStoreBaseUrl(variant)}/${banner?.photo}`} alt="main-banner" fill />

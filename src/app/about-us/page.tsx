@@ -26,15 +26,16 @@ export default async function AboutUs() {
         items={aboutResponse?.about.content_blocks?.filter(
           (block) => block.type !== 'feature_section'
         )}
+        variant={variant}
       />
       {aboutResponse?.about.content_blocks
         ?.filter((block) => block.type === 'feature_section')
-        .map((block, index) => <MissionSection key={index} {...block.content} />)}
+        .map((block, index) => <MissionSection key={index} {...block.content} variant={variant} />)}
       <AdvantagesSection advantages={advantages} />
-      {!!reviews?.length && <ReviewsSection reviews={reviews} />}
+      {!!reviews?.length && <ReviewsSection reviews={reviews} variant={variant} />}
       {!!photos?.length && <GallerySection items={photos} />}
       <SeoBlock page="/about-us" />
-      <Feedback />
+      <Feedback variant={variant} />
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import s from './ShareInfo.module.scss';
 import { Button } from '@/shared/ui/button';
@@ -9,11 +9,15 @@ import { PromotionT } from '@/shared/api/promotions/types';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import clsx from 'clsx';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import Cookies from 'js-cookie';
 
-export const ShareInfo = ({ title, published_at, content, photo_path, slug, id }: PromotionT) => {
-  const variant = Cookies.get('variant');
-
+export const ShareInfo = ({
+  title,
+  published_at,
+  content,
+  photo_path,
+  slug,
+  variant,
+}: PromotionT & { variant?: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.imageContainer}>

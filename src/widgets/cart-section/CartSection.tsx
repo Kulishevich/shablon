@@ -15,7 +15,8 @@ import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
 import Cookies from 'js-cookie';
 
 export const CartSection = () => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
   const productsCart = useSelector((state: RootState) => state.cart.items);
   const promocode = useSelector((state: RootState) => state.cart.promocode);
   const [productsState, setProductsState] = useState(productsCart);
@@ -23,6 +24,12 @@ export const CartSection = () => {
   const [promocodeDiscount, setPromocodeDiscount] = useState(0);
   const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   useEffect(() => {
     const handleCheckPromocode = async () => {

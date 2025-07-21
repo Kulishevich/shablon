@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './PaymentMethodCard.module.scss';
 import clsx from 'clsx';
 import { PaymentT } from '@/shared/api/payment-methods/types';
@@ -12,7 +12,13 @@ export const PaymentMethodCard = ({
   active,
   onClick,
 }: PaymentT & { onClick: () => void; active: boolean }) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   return (
     <button type="button" className={clsx(s.container, active && s.active)} onClick={onClick}>

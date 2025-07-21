@@ -17,6 +17,7 @@ import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 import { ProductT } from '@/shared/api/product/types';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import Cookies from 'js-cookie';
+
 export const RowProductCart = ({
   name,
   photo_path,
@@ -28,7 +29,13 @@ export const RowProductCart = ({
   slug,
   category,
 }: CartProduct) => {
-  const variant = Cookies.get('variant');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+    console.log('variant from cookie:', cookieVariant);
+  }, []);
 
   const [count, setCount] = useState(quantity);
   const dispatch = useDispatch();

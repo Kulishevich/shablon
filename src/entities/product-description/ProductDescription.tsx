@@ -3,16 +3,17 @@ import React, { useEffect, useState } from 'react';
 import s from './ProductDescription.module.scss';
 import clsx from 'clsx';
 import { ProductT } from '@/shared/api/product/types';
-import { ReviewsSection } from '@/widgets/reviews-section';
 import { ReviewT } from '@/shared/api/reviews/types';
 import { ProductReviews } from '@/widgets/product-reviews';
 
 export const ProductDescription = ({
   product,
   reviews,
+  variant,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
+  variant?: string;
 }) => {
   const [activeTag, setActiveTag] = useState(0);
 
@@ -79,7 +80,7 @@ export const ProductDescription = ({
 
       {activeTag === 3 && (
         <div className={s.content}>
-          <ProductReviews reviews={reviews} />
+          <ProductReviews reviews={reviews} variant={variant} />
         </div>
       )}
       {activeTag !== 1 && activeTag !== 3 && (
