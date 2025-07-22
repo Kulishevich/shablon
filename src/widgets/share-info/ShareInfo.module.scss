@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .container {
   position: relative;
@@ -66,9 +66,7 @@
   position: relative;
 
   & > img {
-    z-index: -1;
     object-fit: cover;
-    object-position: 50% 45%;
   }
 
   @media (max-width: 768px) {

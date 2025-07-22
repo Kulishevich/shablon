@@ -82,6 +82,8 @@ export const ProductCard = ({
     };
   }, [debouncedDispatch]);
 
+  console.log(product);
+
   return (
     <Link
       className={s.container}

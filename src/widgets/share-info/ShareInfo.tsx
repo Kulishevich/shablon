@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import s from './ShareInfo.module.scss';
 import { Button } from '@/shared/ui/button';
@@ -18,11 +17,13 @@ export const ShareInfo = ({
   slug,
   variant,
 }: PromotionT & { variant?: string }) => {
+  console.log(`${getStoreBaseUrl(variant)}/${photo_path}`);
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.imageContainer}>
         <Image
           src={`${getStoreBaseUrl(variant)}/${photo_path}`}
+          // src={'/banner-placeholder.png'}
           fill
           alt={'discount'}
           itemProp="image"

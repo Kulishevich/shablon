@@ -18,6 +18,7 @@ export const SearchProductCard = ({ ...props }: ProductT) => {
     const cookieVariant = Cookies.get('variant');
     setVariant(cookieVariant);
   }, []);
+  console.log(props);
 
   return (
     <Link href={buildProductUrlSync({ product: props, variant })} className={s.container}>

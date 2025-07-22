@@ -5,7 +5,6 @@ import s from './HeaderDesktop.module.scss';
 import { CategoryT } from '@/shared/api/category/types';
 import { ContactsT } from '@/shared/api/design/types';
 import { ProductT } from '@/shared/api/product/types';
-import clsx from 'clsx';
 import { HeaderFixed } from './HeaderFixed';
 
 export const HeaderDesktop = ({

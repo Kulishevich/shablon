@@ -6,6 +6,8 @@ import { SearchPopup } from '../search-popup';
 import { ProductT } from '@/shared/api/product/types';
 import { CategoryT } from '@/shared/api/category/types';
 import { useRouter } from 'next/navigation';
+import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
+import Cookies from 'js-cookie';
 
 export const SearchInput = ({
   categories,
@@ -14,10 +16,17 @@ export const SearchInput = ({
   categories: CategoryT[] | null;
   products: ProductT[];
 }) => {
+  const [variant, setVariant] = useState<string | undefined>(undefined);
   const [searchValue, setSearchValue] = useState('');
+  const [productResult, setProductResult] = useState<ProductT[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -38,6 +47,19 @@ export const SearchInput = ({
       product.name.toLowerCase().includes(searchValue.toLowerCase())
     ),
   };
+
+  useEffect(() => {
+    const createProductsWithFullPath = async () => {
+      const productsResultWithFullPath = await enrichProductsWithFullPath({
+        products: searchResult.products,
+        variant,
+      });
+
+      setProductResult(productsResultWithFullPath);
+    };
+
+    createProductsWithFullPath();
+  }, [searchResult.products]);
 
   const handleChangeValue = (value: string) => {
     setSearchValue(value);
@@ -62,10 +84,7 @@ export const SearchInput = ({
         onKeyDown={handleKeyDown}
       />
       {!!isOpen && (
-        <SearchPopup
-          categories={searchResult.categories || []}
-          products={searchResult.products || []}
-        />
+        <SearchPopup categories={searchResult.categories || []} products={productResult} />
       )}
     </div>
   );

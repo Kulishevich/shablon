@@ -1,14 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import s from './ProductInfo.module.scss';
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  DocumentIcon,
-  HoursIcon,
-  QualityStarIcon,
-  StarIcon,
-} from '@/shared/assets';
+import { ArrowLeftIcon, ArrowRightIcon, StarIcon } from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';

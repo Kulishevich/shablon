@@ -1,4 +1,4 @@
-@use "../../../shared/config/styles/functions" as *;
+@use '../../../shared/config/styles/functions' as *;
 
 .container {
   width: 100%;
@@ -55,6 +55,7 @@
 
   & > div {
     display: flex;
+    align-items: center;
     gap: vw-1440(6);
     flex: 1;
 

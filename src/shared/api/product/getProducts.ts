@@ -48,7 +48,7 @@ export const getProducts = async ({
   if (tags) params.append('tags', tags);
 
   const url = `${getApiBaseUrl(variant)}/v1/products?${params.toString()}`;
-  console.log(url);
+
   try {
     const res = await fetch(url, {
       next: {

@@ -38,7 +38,6 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
             alt="logo"
             priority
             sizes="(max-width: 768px) 120px, (max-width: 1200px) 160px, 200px"
-            quality={85}
           />
         )}
       </div>
@@ -54,7 +53,6 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
           alt="logo"
           priority
           sizes="(max-width: 768px) 120px, (max-width: 1200px) 160px, 200px"
-          quality={85}
         />
       )}
     </Link>

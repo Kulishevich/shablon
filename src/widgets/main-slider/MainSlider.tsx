@@ -66,7 +66,6 @@ export const MainSlider = ({ slides, variant }: { slides: BannerT[]; variant?: s
                 alt={`Slide ${index + 1}`}
                 fill
                 priority={index === 0}
-                quality={75}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 placeholder="blur"
