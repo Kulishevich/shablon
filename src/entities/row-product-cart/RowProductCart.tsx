@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/button';
 import Image from 'next/image';
 import { TextField } from '@/shared/ui/text-field';
 import clsx from 'clsx';
-import { CloseIcon } from '@/shared/assets';
+import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from '@/shared/assets';
 import { useDispatch } from 'react-redux';
 import {
   CartProduct,
@@ -73,6 +73,14 @@ export const RowProductCart = ({
     };
   }, [debouncedDispatch]);
 
+  const increment = () => {
+    setCount((prev) => ++prev);
+  };
+
+  const decrement = () => {
+    setCount((prev) => Math.max(--prev, 1));
+  };
+
   return (
     <div className={s.container} itemScope itemType="http://schema.org/ListItem">
       <Button variant="icon" onClick={() => dispatch(deleteFromCart(id))}>
@@ -101,11 +109,17 @@ export const RowProductCart = ({
         </div>
       </div>
       <div className={s.count}>
+        <Button variant="icon" onClick={decrement} className={s.countButton}>
+          <ArrowLeftIcon />
+        </Button>
         <TextField
           className={s.input}
           value={count}
           onChange={(e) => changeCountValue(e.target.value)}
         />
+        <Button variant="icon" onClick={increment} className={s.countButton}>
+          <ArrowRightIcon />
+        </Button>
       </div>
       <div className={s.price} itemScope itemType="http://schema.org/Offer">
         <p className="body_3" itemProp="price">

@@ -23,6 +23,8 @@ export const ProductInfo = ({
   const isDiscount = !!Number(product?.discount);
   const dispatch = useDispatch();
 
+  console.log(product);
+
   const totalPrice = !!product?.discount
     ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100) * count
     : Number(product?.price) * count;
@@ -65,7 +67,7 @@ export const ProductInfo = ({
         <div className={s.rating} itemScope itemType="http://schema.org/AggregateRating">
           <div className={s.startRating} itemProp="ratingValue">
             {new Array(5).fill('').map((_, index) => (
-              <StarIcon key={index} className={clsx(index < 4 && s.active)} />
+              <StarIcon key={index} className={clsx(index < 5 && s.active)} />
             ))}
           </div>
           <p className={clsx(s.reviews, 'body_7')} itemProp="reviewCount">
@@ -92,7 +94,7 @@ export const ProductInfo = ({
             </p>
             {isDiscount && (
               <span className="discount" itemProp="price">
-                {product?.price} byn
+                {Number(product?.price) * count} byn
               </span>
             )}
           </div>

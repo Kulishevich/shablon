@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .container {
   width: vw-1440(306);
@@ -193,6 +193,12 @@
     flex-direction: column;
     gap: 8px;
     cursor: default;
+
+    .countContainer {
+      display: grid;
+      grid-template-columns: repeat(3, 48px);
+      gap: 8px;
+    }
 
     .counter {
       height: 48px;

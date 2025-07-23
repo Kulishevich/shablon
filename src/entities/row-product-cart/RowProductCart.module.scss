@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .container {
   display: flex;
@@ -12,14 +12,25 @@
   }
 
   & > .count {
+    display: flex;
+    gap: vw-1440(12);
+
     width: fit-content;
-    margin-right: vw-1440(132);
+    margin-right: vw-1440(72);
     .input {
       width: vw-1440(47);
       height: vw-1440(44);
       padding: 0;
 
       text-align: center;
+    }
+
+    .countButton {
+      width: vw-1440(47);
+      height: vw-1440(44);
+      padding: 0;
+
+      flex-shrink: 0;
     }
   }
 }
@@ -29,7 +40,7 @@
   gap: vw-1440(12);
   align-items: center;
 
-  margin-right: vw-1440(97);
+  margin-right: vw-1440(38);
 
   & > .imageContainer {
     position: relative;

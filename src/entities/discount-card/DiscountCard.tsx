@@ -16,13 +16,17 @@ export const DiscountCard = async ({
   start_date,
   end_date,
   slug,
-  id,
 }: PromotionT) => {
   const cookieStore = await cookies();
   const variant = cookieStore.get('variant')?.value;
 
   return (
-    <div className={s.container} itemScope itemType="http://schema.org/BlogPosting">
+    <Link
+      href={`${paths.shares}/${slug}`}
+      className={s.container}
+      itemScope
+      itemType="http://schema.org/BlogPosting"
+    >
       <div className={s.imageContainer}>
         <Image
           src={`${getStoreBaseUrl(variant)}/${photo_path}`}
@@ -49,17 +53,11 @@ export const DiscountCard = async ({
         <div className={clsx(s.title, 'h5')} itemProp="name">
           {title}
         </div>
-        <Button
-          variant="link"
-          as={Link}
-          href={`${paths.shares}/${slug}`}
-          className={s.button}
-          itemProp="mainEntityOfPage"
-        >
+        <Button variant="link" className={s.button} itemProp="mainEntityOfPage">
           Подробнее
           <ArrowRightUpIcon />
         </Button>
       </div>
-    </div>
+    </Link>
   );
 };

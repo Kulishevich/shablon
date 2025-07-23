@@ -4,7 +4,13 @@ import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
 import { showToast } from '@/shared/ui/toast';
-import { CloseIcon, ShoppingCartIcon, StarIcon } from '@/shared/assets';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CloseIcon,
+  ShoppingCartIcon,
+  StarIcon,
+} from '@/shared/assets';
 import clsx from 'clsx';
 import s from './ProductCard.module.scss';
 import { ProductT } from '@/shared/api/product/types';
@@ -82,7 +88,13 @@ export const ProductCard = ({
     };
   }, [debouncedDispatch]);
 
-  console.log(product);
+  const increment = () => {
+    setCount((prev) => ++prev);
+  };
+
+  const decrement = () => {
+    setCount((prev) => Math.max(--prev, 1));
+  };
 
   return (
     <Link
@@ -161,11 +173,19 @@ export const ProductCard = ({
             </div>
           </div>
           {productInCart && (
-            <TextField
-              className={s.counter}
-              value={count}
-              onChange={(e) => changeCountValue(e.target.value)}
-            />
+            <div className={s.countContainer}>
+              <Button variant="icon" onClick={decrement} className={s.countButton}>
+                <ArrowLeftIcon />
+              </Button>
+              <TextField
+                className={s.counter}
+                value={count}
+                onChange={(e) => changeCountValue(e.target.value)}
+              />
+              <Button variant="icon" onClick={increment} className={s.countButton}>
+                <ArrowRightIcon />
+              </Button>
+            </div>
           )}
         </div>
         <Button
@@ -178,17 +198,19 @@ export const ProductCard = ({
         >
           В корзину
         </Button>
-        <Button
-          variant={'icon_outlined'}
-          className={'mobile-only'}
-          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
-            handleAddInCard();
-          }}
-          aria-label="В корзину"
-        >
-          <ShoppingCartIcon />
-        </Button>
+        {!productInCart && (
+          <Button
+            variant={'icon_outlined'}
+            className={'mobile-only'}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.preventDefault();
+              handleAddInCard();
+            }}
+            aria-label="В корзину"
+          >
+            <ShoppingCartIcon />
+          </Button>
+        )}
       </div>
     </Link>
   );
