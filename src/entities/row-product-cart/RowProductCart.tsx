@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 import { ProductT } from '@/shared/api/product/types';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const RowProductCart = ({
   name,
@@ -34,6 +35,7 @@ export const RowProductCart = ({
   const totalPrice = isDiscount
     ? Math.round((Number(price) * (100 - Number(discount))) / 100)
     : +price;
+  const { storeUrl } = useRuntimeConfig();
 
   useEffect(() => {
     setCount(quantity);
@@ -76,12 +78,7 @@ export const RowProductCart = ({
           href={buildProductUrlSync({ category, slug } as ProductT)}
           itemProp="url"
         >
-          <Image
-            itemProp="image"
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
-            fill
-            alt="product"
-          />
+          <Image itemProp="image" src={`${storeUrl}/${photo_path}`} fill alt="product" />
         </Link>
         <div>
           <p className="body_4" itemProp="name">

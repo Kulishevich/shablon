@@ -7,11 +7,13 @@ export const MissionSection = ({
   text_primary,
   text_secondary,
   image_path,
+  storeUrl,
 }: {
   title: string;
   text_primary: string;
   text_secondary: string;
   image_path: string;
+  storeUrl: string;
 }) => {
   return (
     <div className={s.container}>
@@ -21,7 +23,7 @@ export const MissionSection = ({
         {text_secondary && <p className="body_2">{text_secondary}</p>}
       </div>
       <Image
-        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image_path}`}
+        src={`${storeUrl}/${image_path}`}
         alt="about"
         width={636}
         height={396}

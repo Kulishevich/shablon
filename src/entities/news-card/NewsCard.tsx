@@ -14,7 +14,7 @@ const news = {
   image_path: '/news.png',
 };
 
-export const NewsCard = ({ news }: { news: NewsT }) => {
+export const NewsCard = ({ news, storeUrl }: { news: NewsT; storeUrl: string }) => {
   return (
     <Link
       href={`${paths.news}/${news?.slug}`}
@@ -24,12 +24,7 @@ export const NewsCard = ({ news }: { news: NewsT }) => {
       itemProp="blogPost"
     >
       <div className={s.imageContainer}>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
-          fill
-          alt="news"
-          itemProp="image"
-        />
+        <Image src={`${storeUrl}/${news?.photo_path}`} fill alt="news" itemProp="image" />
       </div>
       <span className={clsx(s.date, 'tag')} itemProp="datePublished">
         {new Date(news?.created_at || '').toLocaleString('ru-RU', {

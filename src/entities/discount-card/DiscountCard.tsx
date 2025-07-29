@@ -8,16 +8,19 @@ import { paths } from '@/shared/config/constants/paths';
 import clsx from 'clsx';
 import { PromotionT } from '@/shared/api/promotions/types';
 
-export const DiscountCard = ({ title, photo_path, start_date, end_date, slug, id }: PromotionT) => {
+export const DiscountCard = ({
+  title,
+  photo_path,
+  start_date,
+  end_date,
+  slug,
+  id,
+  storeUrl,
+}: PromotionT & { storeUrl: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/BlogPosting">
       <div className={s.imageContainer}>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
-          fill
-          alt="discount"
-          itemProp="image"
-        />
+        <Image src={`${storeUrl}/${photo_path}`} fill alt="discount" itemProp="image" />
       </div>
       <div className={s.content}>
         <span className={clsx(s.tag, 'tag')} itemProp="datePublished">

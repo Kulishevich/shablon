@@ -13,6 +13,7 @@ import { addInCart, changeProductCount, deleteFromCart } from '@/shared/lib/redu
 import { TextField } from '@/shared/ui/text-field';
 import debounce from 'lodash.debounce';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const ProductCard = ({
   product,
@@ -40,6 +41,7 @@ export const ProductCard = ({
     ? Math.round((Number(price) * (100 - Number(discount))) / 100)
     : price;
   const is_discount = !!Number(discount);
+  const { storeUrl } = useRuntimeConfig();
 
   const handleAddInCard = () => {
     dispatch(addInCart({ ...product, quantity: count }));
@@ -85,7 +87,7 @@ export const ProductCard = ({
         <div>
           <Image
             itemProp="image"
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${main_image?.image_path}`}
+            src={`${storeUrl}/${main_image?.image_path}`}
             fill
             alt="product"
             className={s.image}

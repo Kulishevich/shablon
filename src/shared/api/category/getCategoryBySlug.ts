@@ -1,11 +1,13 @@
 import { CategoryT } from './types';
+import { getApiUrl } from '../base';
 
 export const getCategoryBySlug = async (
   slug: string
 ): Promise<CategoryT | null> => {
   try {
+    const apiUrl = await getApiUrl();
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/categories/slug/${slug}`, {
+      `${apiUrl}/v1/categories/slug/${slug}`, {
       next: {
         revalidate: 60,
       }

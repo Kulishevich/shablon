@@ -1,4 +1,5 @@
 import { ReviewPostResponseT, ReviewPostT } from './types';
+import { getApiUrl } from '../base';
 
 export const postReview = async (review: ReviewPostT): Promise<ReviewPostResponseT | null> => {
   try {
@@ -11,7 +12,8 @@ export const postReview = async (review: ReviewPostT): Promise<ReviewPostRespons
       formData.append('author_photo', review.photo);
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/reviews`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/reviews`, {
       method: 'POST',
       body: formData,
       headers: {

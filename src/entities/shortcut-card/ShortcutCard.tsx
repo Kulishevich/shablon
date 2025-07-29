@@ -6,11 +6,11 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { TagT } from '@/shared/api/tags/types';
 
-export const ShortcutCard = ({ photo_path, name }: TagT) => {
+export const ShortcutCard = ({ photo_path, name, storeUrl }: TagT & { storeUrl: string }) => {
   return (
     <Link href={`${paths.catalog}/all?tags=${name}`} className={s.container}>
       <Image
-        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
+        src={`${storeUrl}/${photo_path}`}
         alt={`Фото ${name.split(' ')[0]}`}
         width={120}
         height={120}

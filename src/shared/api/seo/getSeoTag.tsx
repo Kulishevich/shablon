@@ -1,8 +1,10 @@
 import { SeoT } from './types';
+import { getApiUrl } from '../base';
 
 export const getSeoTag = async (tag: string): Promise<SeoT | null> => {
   try {
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/seo/tag?name=${tag}`, {
+    const apiUrl = await getApiUrl();
+    const data = await fetch(`${apiUrl}/v1/seo/tag?name=${tag}`, {
       next: {
         revalidate: 60,
       },

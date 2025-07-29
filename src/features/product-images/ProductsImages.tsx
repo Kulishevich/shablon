@@ -4,9 +4,11 @@ import Image from 'next/image';
 import s from './ProductsImages.module.scss';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const ProductsImages = ({ product }: { product: ProductT | null }) => {
   const [activeImage, setActiveImage] = useState(product?.main_image.image_path);
+  const { storeUrl } = useRuntimeConfig();
 
   const isDiscount = !!Number(product?.discount);
 
@@ -21,22 +23,12 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
               [s.active]: activeImage === image.image_path,
             })}
           >
-            <Image
-              itemProp="image"
-              src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image.image_path}`}
-              fill
-              alt="product"
-            />
+            <Image itemProp="image" src={`${storeUrl}/${image.image_path}`} fill alt="product" />
           </button>
         ))}
       </div>
       <div className={s.imageContainer}>
-        <Image
-          itemProp="image"
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${activeImage}`}
-          fill
-          alt="product"
-        />
+        <Image itemProp="image" src={`${storeUrl}/${activeImage}`} fill alt="product" />
         <div className={s.tagsContainer}>
           {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
           {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}

@@ -4,6 +4,7 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { SharesSection } from '@/widgets/shares-section';
 import { SeoBlock } from '@/entities/seo-block';
 import { CanonicalLink } from '@/shared/ui/canonical-link';
+import { getStoreUrl } from '@/shared/api/base';
 
 export default async function Shares({
   searchParams,
@@ -12,7 +13,7 @@ export default async function Shares({
 }) {
   const page = (await searchParams).page || '1';
 
-  const promotions = await getPromotions({ page });
+  const [promotions, storeUrl] = await Promise.all([getPromotions({ page }), getStoreUrl()]);
 
   return (
     <>
@@ -20,7 +21,7 @@ export default async function Shares({
 
       <Breadcrumbs />
       <main>
-        <SharesSection promotions={promotions} page={page} standalone={true} />
+        <SharesSection promotions={promotions} page={page} standalone={true} storeUrl={storeUrl} />
         <SeoBlock page="/shares" />
         <Feedback />
       </main>

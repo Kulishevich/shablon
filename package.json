@@ -28,6 +28,8 @@
     "lodash.debounce": "^4.0.8",
     "lottie-react": "^2.4.1",
     "next": "15.1.7",
+    "next-runtime-env": "^3.3.0",
+    "next-sitemap": "^4.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",

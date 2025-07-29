@@ -10,6 +10,7 @@ import { getCategoriesTree } from '@/shared/api/category/getCategoriesTree';
 import { ProductT } from '@/shared/api/product/types';
 import { processCategoryTree, CategoryWithSubcategories } from '@/shared/api/category/processCategoryTree';
 import { buildProductUrl, enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
+import { getSiteUrl } from '@/shared/api/base';
 
 export async function GET() {
   try {
@@ -17,6 +18,7 @@ export async function GET() {
     const promotionsUrls = await getPromotions({ per_page: '10000' });
     const productsUrls = await getProductsWithoutPagination({});
     const categoriesUrls = await getCategoriesTree();
+    const siteUrl = await getSiteUrl();
 
     const pathWithPriority: Record<string, number> = {
       ...Object.fromEntries(Object.keys(paths).map(path => [path, 0.8])),
@@ -27,7 +29,7 @@ export async function GET() {
     };
 
     const fields: ISitemapField[] = Object.keys(pathWithPriority).map((page) => ({
-      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/${page == "home" ? "" : page}`,
+      loc: `${siteUrl}/${page == "home" ? "" : page}`,
       lastmod: new Date().toISOString(),
       changefreq: 'daily' as const,
       priority: pathWithPriority[page],
@@ -36,7 +38,7 @@ export async function GET() {
     if (newsUrls && newsUrls.data && newsUrls.data.length > 0) {
       fields.push(
         ...newsUrls.data.map((item: NewsT) => ({
-          loc: `${process.env.NEXT_PUBLIC_SITE_URL}/news/${item.slug}`,
+          loc: `${siteUrl}/news/${item.slug}`,
           lastmod: new Date(item.updated_at || new Date()).toISOString(),
           changefreq: 'daily' as const,
           priority: 0.8,
@@ -46,7 +48,7 @@ export async function GET() {
       if (promotionsUrls && promotionsUrls.data && promotionsUrls.data.length > 0) {
         fields.push(
           ...promotionsUrls.data.map((item: PromotionT) => ({
-            loc: `${process.env.NEXT_PUBLIC_SITE_URL}/shares/${item.slug}`,
+            loc: `${siteUrl}/shares/${item.slug}`,
             lastmod: new Date(item.updated_at || new Date()).toISOString(),
             changefreq: 'daily' as const,
             priority: 0.8,
@@ -59,7 +61,7 @@ export async function GET() {
         const enrichedProducts = await enrichProductsWithFullPath(productsUrls);
 
         const productUrls = enrichedProducts.map((item: ProductT) => ({
-          loc: `${process.env.NEXT_PUBLIC_SITE_URL}/catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
+          loc: `${siteUrl}/catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
           lastmod: new Date(item.updated_at || new Date()).toISOString(),
           changefreq: 'daily' as const,
           priority: 0.8,
@@ -69,7 +71,8 @@ export async function GET() {
       }
 
       if (categoriesUrls && categoriesUrls.length > 0) {
-        fields.push(...processCategoryTree(categoriesUrls as CategoryWithSubcategories[]));
+        const categoryFields = await processCategoryTree(categoriesUrls as CategoryWithSubcategories[]);
+        fields.push(...categoryFields);
       }
     }
 

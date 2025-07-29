@@ -5,7 +5,13 @@ import { ContentImageBlock } from '@/shared/api/about/types';
 import clsx from 'clsx';
 import { parseImageTextBlock } from '@/shared/lib/utils/parseImageTextBlock';
 
-export const AboutSection = ({ items }: { items?: ContentImageBlock[] }) => {
+export const AboutSection = ({
+  items,
+  storeUrl,
+}: {
+  items?: ContentImageBlock[];
+  storeUrl: string;
+}) => {
   return (
     <div className={s.container}>
       <h1 className="h1">О нас</h1>
@@ -22,7 +28,7 @@ export const AboutSection = ({ items }: { items?: ContentImageBlock[] }) => {
                   <div className={s.caption} dangerouslySetInnerHTML={{ __html: caption }} />
 
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.content.image_path}`}
+                    src={`${storeUrl}/${item.content.image_path}`}
                     alt="about"
                     width={636}
                     height={396}

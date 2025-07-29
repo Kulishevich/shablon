@@ -4,7 +4,7 @@ import '@/shared/config/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Footer } from '@/widgets/footer';
 import { Toaster } from 'sonner';
-
+import { PublicEnvScript } from 'next-runtime-env';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { HeaderDesktop } from '@/widgets/header-desktop';
@@ -17,6 +17,7 @@ import dynamic from 'next/dynamic';
 import { ToTop } from '@/shared/ui/to-top';
 import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
 import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
+import { getStoreUrl } from '@/shared/api/base';
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
 const onest = Onest({
@@ -42,7 +43,11 @@ export async function generateViewport() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [data, settings] = await Promise.all([getSeoTag('home'), getSetting()]);
+  const [data, settings, storeUrl] = await Promise.all([
+    getSeoTag('home'),
+    getSetting(),
+    getStoreUrl(),
+  ]);
 
   return {
     title: data?.title ?? 'Шаблон',
@@ -53,7 +58,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: data?.og_description ?? data?.description,
     },
     icons: {
-      icon: `${process.env.NEXT_PUBLIC_STORE_URL}/${settings?.favicon}`,
+      icon: `${storeUrl}/${settings?.favicon}`,
     },
   };
 }
@@ -63,12 +68,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [categories, contacts, products, settings, seoSettings] = await Promise.all([
+  const [categories, contacts, products, settings, seoSettings, storeUrl] = await Promise.all([
     getCategories(),
     getContacts(),
     getProducts({}),
     getSetting(),
     getSeoSettings(),
+    getStoreUrl(),
   ]);
 
   return (
@@ -76,8 +82,8 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://api-maps.yandex.ru" />
         <link rel="dns-prefetch" href="https://api-maps.yandex.ru" />
-        <link rel="preconnect" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
-        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STORE_URL || ''} />
+        <link rel="preconnect" href={storeUrl || ''} />
+        <link rel="dns-prefetch" href={storeUrl || ''} />
         <style>
           {`:root {
             --color-accent-1: ${settings?.colors.icon_color};
@@ -113,6 +119,8 @@ export default async function RootLayout({
             strategy="afterInteractive"
           />
         )}
+
+        <PublicEnvScript />
       </head>
 
       <body className={`${onest.variable}`}>

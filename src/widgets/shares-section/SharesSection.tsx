@@ -8,17 +8,21 @@ export const SharesSection = ({
   promotions,
   page,
   standalone = false,
+  storeUrl,
 }: {
   promotions: PromotionsResponse | null;
   page: string;
   standalone?: boolean;
+  storeUrl: string;
 }) => {
   return (
     <div className={s.container}>
       <div className={s.content}>
         {standalone ? <h1 className="h2">Акции</h1> : <h2 className="h2">Акции</h2>}
         <div className={s.newsList} itemScope itemType="http://schema.org/ItemList">
-          {promotions?.data?.map((promotion, index) => <DiscountCard key={index} {...promotion} />)}
+          {promotions?.data?.map((promotion, index) => (
+            <DiscountCard key={index} {...promotion} storeUrl={storeUrl} />
+          ))}
         </div>
       </div>
       <Suspense fallback={<p className="h4">Загрузка...</p>}>

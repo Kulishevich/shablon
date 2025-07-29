@@ -5,11 +5,17 @@ import clsx from 'clsx';
 import { Button } from '@/shared/ui/button';
 import { SettingsT } from '@/shared/api/design/types';
 
-export const MainBanner = ({ banner }: { banner: SettingsT['main_banner'] | null }) => {
+export const MainBanner = ({
+  banner,
+  storeUrl,
+}: {
+  banner: SettingsT['main_banner'] | null;
+  storeUrl: string;
+}) => {
   if (!banner) return null;
   return (
     <div className={s.container}>
-      <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${banner?.photo}`} alt="main-banner" fill />
+      <Image src={`${storeUrl}/${banner?.photo}`} alt="main-banner" fill />
       <div className={s.content}>
         <div className={s.heading}>
           <p className={clsx(s.type, 'body_4')}>{banner?.tag}</p>

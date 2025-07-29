@@ -12,9 +12,11 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
 import { Swiper as SwiperType } from 'swiper';
 import { BannerT } from '@/shared/api/banners/types';
 import Link from 'next/link';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
   const swiperRef = useRef<SwiperType>(null);
+  const { storeUrl } = useRuntimeConfig();
 
   const handleNext = () => {
     if (!swiperRef.current) return;
@@ -61,7 +63,7 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
           <SwiperSlide key={index}>
             <div className={s.slide}>
               <Image
-                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${slide.photo_path}`}
+                src={`${storeUrl}/${slide.photo_path}`}
                 alt={`Slide ${index + 1}`}
                 fill
                 priority={index === 0}

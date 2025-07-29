@@ -1,7 +1,9 @@
 import { CheckPromocodeT } from './type';
+import { getApiUrl } from '../base';
 
 export const checkPromocode = async (reqData: CheckPromocodeT) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/promo-codes/check`, {
+  const apiUrl = await getApiUrl();
+  const res = await fetch(`${apiUrl}/v1/promo-codes/check`, {
     method: 'POST',
     body: JSON.stringify(reqData),
     headers: {

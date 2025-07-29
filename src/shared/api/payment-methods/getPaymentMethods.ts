@@ -1,8 +1,10 @@
 import { PaymentT } from './types';
+import { getApiUrl } from '../base';
 
 export const getPaymentMethods = async (): Promise<PaymentT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/payment-methods`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/payment-methods`, {
       next: {
         revalidate: 60,
       }

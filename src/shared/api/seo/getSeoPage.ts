@@ -1,9 +1,11 @@
 import { SeoPageT } from "./types";
+import { getApiUrl } from '../base';
 
 export const getSeoPage = async (page: string): Promise<SeoPageT | null> => {
   try {
+    const apiUrl = await getApiUrl();
     const data = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/seo/text?page=${page}`, {
+      `${apiUrl}/v1/seo/text?page=${page}`, {
       next: {
         revalidate: 60,
       }

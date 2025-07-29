@@ -1,8 +1,11 @@
+'use client';
 import Image from 'next/image';
 import React from 'react';
 import s from './FeedbackImage.module.scss';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const FeedbackImage = ({ image }: { image: string }) => {
+  const { storeUrl } = useRuntimeConfig();
   return (
     <div className={s.titleContainer}>
       <div className={s.textContent}>
@@ -13,7 +16,7 @@ export const FeedbackImage = ({ image }: { image: string }) => {
         </p>
       </div>
       <div className={s.imageContainer}>
-        <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image}`} fill alt="feedback" />
+        <Image src={`${storeUrl}/${image}`} fill alt="feedback" />
       </div>
     </div>
   );

@@ -5,12 +5,17 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'temapi.webspaceteam.site',
+        hostname: process.env.SITE_NAME || process.env.NEXT_PUBLIC_SITE_NAME || 'webspaceteam.site',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'webspaceteam.site',
+        hostname: `**.${process.env.API_NAME || process.env.NEXT_PUBLIC_API_NAME}`,
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: process.env.STORE_NAME || process.env.NEXT_PUBLIC_STORE_NAME || 'webspaceteam.site',
         pathname: '/**',
       },
     ],

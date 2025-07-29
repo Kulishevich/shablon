@@ -285,8 +285,11 @@ async function renderCatalogSection({
 }
 
 async function renderProductSection(product: ProductT, slug: string[]) {
-  const reviews = await getReviews();
-  const advantages = await getProductsAdvantages();
+  const [reviews, advantages, storeUrl] = await Promise.all([
+    getReviews(),
+    getProductsAdvantages(),
+    (await import('@/shared/api/base')).getStoreUrl(),
+  ]);
 
   const categoriesPath = await getCategoriesFromProductPath(product);
 
@@ -307,7 +310,12 @@ async function renderProductSection(product: ProductT, slug: string[]) {
       <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main>
-        <ProductSection product={product} reviews={reviews} advantages={advantages} />
+        <ProductSection
+          product={product}
+          reviews={reviews}
+          advantages={advantages}
+          storeUrl={storeUrl}
+        />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
         <Feedback />

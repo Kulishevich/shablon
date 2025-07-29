@@ -1,8 +1,10 @@
 import { DeliveryT } from './types';
+import { getApiUrl } from '../base';
 
 export const getDeliveryMethods = async (): Promise<DeliveryT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/delivery-methods`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/delivery-methods`, {
       next: {
         revalidate: 60,
       }

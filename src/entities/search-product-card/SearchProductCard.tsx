@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import s from './SearchProductCard.module.scss';
 import Image from 'next/image';
@@ -7,15 +8,17 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import { ProductT } from '@/shared/api/product/types';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const SearchProductCard = ({ ...props }: ProductT) => {
   const { photo_path, name, price, slug, id, category } = props;
+  const { storeUrl } = useRuntimeConfig();
 
   return (
     <Link href={buildProductUrlSync(props)} className={s.container}>
       <div className={s.card}>
         <div className={s.imageContainer}>
-          <Image src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`} fill alt="product" />
+          <Image src={`${storeUrl}/${photo_path}`} fill alt="product" />
         </div>
         <div className={s.content}>
           <p className="body_4">{name}</p>

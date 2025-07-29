@@ -1,8 +1,10 @@
 import { ProductAdvantageType } from './types';
+import { getApiUrl } from '../base';
 
 export const getProductsAdvantages = async (): Promise<ProductAdvantageType[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/product-advantages`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/product-advantages`, {
       next: {
         revalidate: 60,
       },

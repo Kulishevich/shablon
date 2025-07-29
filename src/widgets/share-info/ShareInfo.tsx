@@ -9,16 +9,19 @@ import { PromotionT } from '@/shared/api/promotions/types';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import clsx from 'clsx';
 
-export const ShareInfo = ({ title, published_at, content, photo_path, slug, id }: PromotionT) => {
+export const ShareInfo = ({
+  title,
+  published_at,
+  content,
+  photo_path,
+  slug,
+  id,
+  storeUrl,
+}: PromotionT & { storeUrl: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.imageContainer}>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${photo_path}`}
-          fill
-          alt={'discount'}
-          itemProp="image"
-        />
+        <Image src={`${storeUrl}/${photo_path}`} fill alt={'discount'} itemProp="image" />
       </div>
       <div className={s.content}>
         <Breadcrumbs

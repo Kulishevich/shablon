@@ -1,27 +1,30 @@
 import { ISitemapField } from 'next-sitemap';
 import { CategoryT } from './types';
+import { getSiteUrl } from '../base';
 
 export type CategoryWithSubcategories = Omit<CategoryT, 'subcategories'> & {
   subcategories?: CategoryWithSubcategories[];
 };
 
-export const processCategoryTree = (categories: CategoryWithSubcategories[], parentPath: string = ''): ISitemapField[] => {
+export const processCategoryTree = async (categories: CategoryWithSubcategories[], parentPath: string = ''): Promise<ISitemapField[]> => {
   let fields: ISitemapField[] = [];
+  const siteUrl = await getSiteUrl();
 
-  categories.forEach((category) => {
+  for (const category of categories) {
     const currentPath = parentPath ? `${parentPath}/${category.slug}` : category.slug;
 
     fields.push({
-      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/catalog/${currentPath}`,
+      loc: `${siteUrl}/catalog/${currentPath}`,
       lastmod: new Date(category.updated_at || new Date()).toISOString(),
       changefreq: 'daily' as const,
       priority: 0.8,
     });
 
     if (category.subcategories && category.subcategories.length > 0) {
-      fields = [...fields, ...processCategoryTree(category.subcategories, currentPath)];
+      const subcategoryFields = await processCategoryTree(category.subcategories, currentPath);
+      fields = [...fields, ...subcategoryFields];
     }
-  });
+  }
 
   return fields;
 }; 

@@ -1,8 +1,10 @@
 import { SeoSettingsT } from './types';
+import { getApiUrl } from '../base';
 
 export const getSeoSettings = async (): Promise<SeoSettingsT | null> => {
   try {
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/seo/settings`, {
+    const apiUrl = await getApiUrl();
+    const data = await fetch(`${apiUrl}/v1/seo/settings`, {
       next: {
         revalidate: 60,
       },

@@ -1,9 +1,11 @@
 import { ProductT } from './types';
+import { getApiUrl } from '../base';
 
 export const getProductById = async (id: string): Promise<ProductT | null> => {
   try {
+    const apiUrl = await getApiUrl();
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/products/${id}`, {
+      `${apiUrl}/v1/products/${id}`, {
       next: {
         revalidate: 60,
       }

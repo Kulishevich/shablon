@@ -1,8 +1,10 @@
 import { TagT } from './types';
+import { getApiUrl } from '../base';
 
 export const getTags = async (): Promise<TagT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/tags`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/tags`, {
       next: {
         revalidate: 60,
       }

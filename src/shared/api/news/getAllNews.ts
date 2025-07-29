@@ -1,4 +1,5 @@
 import { NewsListT } from './types';
+import { getApiUrl } from '../base';
 
 type GetAllNewsProps = {
   search?: string;
@@ -20,7 +21,8 @@ export const getAllNews = async ({
   if (page) params.append('page', page);
   if (per_page) params.append('per_page', per_page);
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/news?${params.toString()}`;
+  const apiUrl = await getApiUrl();
+  const url = `${apiUrl}/v1/news?${params.toString()}`;
 
   try {
     const res = await fetch(url, {

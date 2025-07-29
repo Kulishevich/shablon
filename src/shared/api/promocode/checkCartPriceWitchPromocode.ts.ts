@@ -1,10 +1,12 @@
 import { PromocodeInCartT, PromocodeResponse } from './type';
+import { getApiUrl } from '../base';
 
 export const checkCartPriceWitchPromocode = async (
   reqData: PromocodeInCartT
 ): Promise<PromocodeResponse> => {
+  const apiUrl = await getApiUrl();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/promo-codes/calculate-for-products`,
+    `${apiUrl}/v1/promo-codes/calculate-for-products`,
     {
       method: 'POST',
       body: JSON.stringify(reqData),

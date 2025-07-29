@@ -9,12 +9,16 @@ import { Feedback } from '@/widgets/feedback/Feedback';
 import { GallerySection } from '@/widgets/gallery-section/GallerySection';
 import { MissionSection } from '@/widgets/mission-section';
 import { ReviewsSection } from '@/widgets/reviews-section';
+import { getStoreUrl } from '@/shared/api/base';
 
 export default async function AboutUs() {
-  const advantages = await getAdvantages();
-  const photos = await getPhotos();
-  const reviews = await getReviews();
-  const aboutResponse = await getAboutBlocks();
+  const [advantages, photos, reviews, aboutResponse, storeUrl] = await Promise.all([
+    getAdvantages(),
+    getPhotos(),
+    getReviews(),
+    getAboutBlocks(),
+    getStoreUrl(),
+  ]);
 
   return (
     <main>
@@ -22,10 +26,13 @@ export default async function AboutUs() {
         items={aboutResponse?.about.content_blocks?.filter(
           (block) => block.type !== 'feature_section'
         )}
+        storeUrl={storeUrl}
       />
       {aboutResponse?.about.content_blocks
         ?.filter((block) => block.type === 'feature_section')
-        .map((block, index) => <MissionSection key={index} {...block.content} />)}
+        .map((block, index) => (
+          <MissionSection key={index} {...block.content} storeUrl={storeUrl} />
+        ))}
       <AdvantagesSection advantages={advantages} />
       {!!reviews?.length && <ReviewsSection reviews={reviews} />}
       {!!photos?.length && <GallerySection items={photos} />}

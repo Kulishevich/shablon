@@ -16,6 +16,7 @@ import { AboutUsSection } from '@/widgets/about-us-section';
 import { AdvantagesSection } from '@/widgets/advantages-section';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { getTags } from '@/shared/api/tags/getTags';
+import { getStoreUrl } from '@/shared/api/base';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
@@ -51,6 +52,7 @@ export default async function Home() {
     brands,
     reviews,
     tags,
+    storeUrl,
   ] = await Promise.all([
     getPopularProducts(),
     getAllNews({}),
@@ -62,6 +64,7 @@ export default async function Home() {
     getBrands(),
     getReviews(),
     getTags(),
+    getStoreUrl(),
   ]);
 
   // Обогащаем популярные продукты полным путем
@@ -75,22 +78,26 @@ export default async function Home() {
         <MainSlider slides={banners || []} />
       </Suspense>
 
-      <MainShortcuts tags={tags} />
-      <CatalogProducts categories={categories} />
+      <MainShortcuts tags={tags} storeUrl={storeUrl} />
+      <CatalogProducts categories={categories} storeUrl={storeUrl} />
 
       <PopularProductsSection products={popularProducts} />
 
-      <AboutUsSection text={setting?.about?.text || ''} image={setting?.about?.image || ''} />
+      <AboutUsSection
+        text={setting?.about?.text || ''}
+        image={setting?.about?.image || ''}
+        storeUrl={storeUrl}
+      />
 
       <AdvantagesSection advantages={advantages} />
 
       {!!brands?.length && (
         <Suspense>
-          <BrandsSection brands={brands} />
+          <BrandsSection brands={brands} storeUrl={storeUrl} />
         </Suspense>
       )}
 
-      <MainBanner banner={setting?.main_banner || null} />
+      <MainBanner banner={setting?.main_banner || null} storeUrl={storeUrl} />
 
       <Suspense>
         <ReviewsSection reviews={reviews} />
@@ -98,7 +105,7 @@ export default async function Home() {
 
       {!!newsList?.data?.length && (
         <Suspense>
-          <NewsSliderSection newsList={newsList?.data} />
+          <NewsSliderSection newsList={newsList?.data} storeUrl={storeUrl} />
         </Suspense>
       )}
 

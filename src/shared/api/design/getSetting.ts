@@ -1,9 +1,11 @@
 import { SettingsT } from './types';
+import { getApiUrl } from '../base';
 
 export const getSetting = async (): Promise<SettingsT | null> => {
   try {
+    const apiUrl = await getApiUrl();
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/design/settings`, {
+      `${apiUrl}/v1/design/settings`, {
       next: {
         revalidate: 60,
       }

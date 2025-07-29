@@ -1,9 +1,11 @@
 import { ContactsT } from './types';
+import { getApiUrl } from '../base';
 
 export const getContacts = async (): Promise<ContactsT | null> => {
   try {
+    const apiUrl = await getApiUrl();
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/design/contacts`, {
+      `${apiUrl}/v1/design/contacts`, {
       next: {
         revalidate: 60,
       }

@@ -1,8 +1,10 @@
 import { BrandT } from './types';
+import { getApiUrl } from '../base';
 
 export const getBrands = async (): Promise<BrandT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/brands`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/brands`, {
       next: {
         revalidate: 60,
       }

@@ -6,16 +6,20 @@ import { CategoryCard } from '@/entities/category-card/CategoryCard';
 export const CatalogProducts = ({
   categories,
   title,
+  storeUrl,
 }: {
   categories: CategoryT[] | null;
   title?: string;
+  storeUrl: string;
 }) => {
   return (
     <div className={s.container}>
       {title ? <h1 className="h1">{title}</h1> : <h2 className="h2">Категории товаров</h2>}
 
       <div className={s.cardsContainer}>
-        {categories?.map((category) => <CategoryCard {...category} key={category.id} />)}
+        {categories?.map((category) => (
+          <CategoryCard {...category} storeUrl={storeUrl} key={category.id} />
+        ))}
       </div>
     </div>
   );

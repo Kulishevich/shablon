@@ -1,4 +1,5 @@
 import { PromotionsResponse } from './types';
+import { getApiUrl } from '../base';
 
 type GetPromotionsProps = {
   page?: string;
@@ -15,7 +16,8 @@ export const getPromotions = async ({
     if (page) params.append('page', page);
     if (per_page) params.append('per_page', per_page);
 
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/promotions?${params.toString()}`;
+    const apiUrl = await getApiUrl();
+    const url = `${apiUrl}/v1/promotions?${params.toString()}`;
 
     const res = await fetch(url, {
       next: {

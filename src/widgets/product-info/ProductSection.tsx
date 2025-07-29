@@ -13,10 +13,12 @@ export const ProductSection = ({
   product,
   reviews,
   advantages,
+  storeUrl,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
   advantages: ProductAdvantageType[] | null;
+  storeUrl: string;
 }) => {
   return (
     <>
@@ -29,7 +31,7 @@ export const ProductSection = ({
         </div>
         {product?.brand && (
           <Image
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product?.brand?.image_path}`}
+            src={`${storeUrl}/${product?.brand?.image_path}`}
             alt={product?.brand?.name}
             width={55}
             height={55}

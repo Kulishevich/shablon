@@ -1,8 +1,10 @@
 import { NewsT } from './types';
+import { getApiUrl } from '../base';
 
 export const getNews = async (slug: string): Promise<NewsT | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/news/slug/${slug}`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/news/slug/${slug}`, {
       next: {
         revalidate: 60,
       }

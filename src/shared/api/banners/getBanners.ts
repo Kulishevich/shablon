@@ -1,8 +1,10 @@
 import { BannerT } from './types';
+import { getApiUrl } from '../base';
 
 export const getBanners = async (): Promise<BannerT[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/banners`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/banners`, {
       next: {
         revalidate: 60,
       }

@@ -6,10 +6,12 @@ import React, { useEffect, useState } from 'react';
 import s from './Logo.module.scss';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { usePathname } from 'next/navigation';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary' }) => {
   const [image, setImage] = useState<string | null>(null);
   const pathname = usePathname();
+  const { storeUrl } = useRuntimeConfig();
 
   useEffect(() => {
     const fetchLogo = async () => {
@@ -27,7 +29,7 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
       <div className={s[variant]}>
         {!!image && (
           <Image
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image}`}
+            src={`${storeUrl}/${image}`}
             fill
             alt="logo"
             priority
@@ -43,7 +45,7 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
     <Link href={paths.home} className={s[variant]}>
       {!!image && (
         <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image}`}
+          src={`${storeUrl}/${image}`}
           fill
           alt="logo"
           priority

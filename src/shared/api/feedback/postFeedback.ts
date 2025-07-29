@@ -1,7 +1,9 @@
 import { FeedbackPostT } from './types';
+import { getApiUrl } from '../base';
 
 export const postFeedback = async (reqData: FeedbackPostT) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/feedback`, {
+  const apiUrl = await getApiUrl();
+  const res = await fetch(`${apiUrl}/v1/feedback`, {
     method: 'POST',
     body: JSON.stringify(reqData),
     headers: {

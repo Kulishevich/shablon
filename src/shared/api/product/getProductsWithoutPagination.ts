@@ -1,4 +1,5 @@
 import { ProductT } from './types';
+import { getApiUrl } from '../base';
 
 type GetProductsWithoutPaginationProps = {
   search?: string;
@@ -17,7 +18,8 @@ export const getProductsWithoutPagination = async ({
   if (category_id) params.append('category_id', category_id);
   if (tags) params.append('tags', tags);
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/products/all?${params.toString()}`;
+  const apiUrl = await getApiUrl();
+  const url = `${apiUrl}/v1/products/all?${params.toString()}`;
 
   try {
     const res = await fetch(url, {
