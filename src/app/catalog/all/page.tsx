@@ -59,6 +59,7 @@ export default async function AllProductsPage({
     price_to,
     brand,
     tags,
+    variant,
   });
 
   // Обогащаем продукты полным путем
@@ -70,6 +71,7 @@ export default async function AllProductsPage({
   const allProducts = await getProductsWithoutPagination({
     search,
     tags,
+    variant,
   });
 
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
