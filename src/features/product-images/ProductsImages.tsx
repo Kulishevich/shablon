@@ -16,8 +16,6 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
     setVariant(cookieVariant);
   }, []);
 
-  const isDiscount = !!Number(product?.discount);
-
   return (
     <div className={s.images} itemScope itemType="http://schema.org/ImageGallery">
       <div className={s.miniImages}>
@@ -45,11 +43,6 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
           fill
           alt="product"
         />
-        <div className={s.tagsContainer}>
-          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
-          {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
-          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
-        </div>
       </div>
     </div>
   );

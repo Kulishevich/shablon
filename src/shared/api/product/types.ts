@@ -40,6 +40,19 @@ export type ProductT = {
   main_image: ImageT;
   brand: BrandT;
   fullPath?: string[]; // Полный путь до продукта [category1, category2, ..., product]
+  tags: ProductTag[];
+};
+
+export type ProductTag = {
+  id: number;
+  name: string;
+  color: string;
+  photo_path: string;
+  is_active: boolean;
+  pivot: {
+    product_id: string;
+    tag_id: string;
+  };
 };
 
 export type SpecificationT = {

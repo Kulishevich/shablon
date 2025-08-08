@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { ProductT } from '@/shared/api/product/types';
 import { ReviewT } from '@/shared/api/reviews/types';
 import { ProductReviews } from '@/widgets/product-reviews';
+import { paths } from '@/shared/config/constants/paths';
 
 export const ProductDescription = ({
   product,
@@ -15,7 +16,7 @@ export const ProductDescription = ({
   reviews: ReviewT[] | null;
   variant?: string;
 }) => {
-  const [activeTag, setActiveTag] = useState(0);
+  const [activeTag, setActiveTag] = useState(1);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -43,8 +44,6 @@ export const ProductDescription = ({
     {
       id: 3,
       title: 'Доставка',
-      content:
-        'Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка',
     },
     {
       id: 4,
@@ -52,14 +51,22 @@ export const ProductDescription = ({
     },
   ];
 
+  const changeActiveTag = (tag: number) => {
+    if (tag === 3) {
+      window.open(paths.payment_and_delivery, '_blank');
+    } else {
+      setActiveTag(tag);
+    }
+  };
+
   return (
     <div className={s.container}>
       <div className={s.navigation}>
         {info.map((item, index) => (
           <button
             key={index}
-            onClick={() => setActiveTag(index)}
-            className={clsx(activeTag === index && s.active, 'h6')}
+            onClick={() => changeActiveTag(item.id)}
+            className={clsx(activeTag === item.id && s.active, 'h6')}
           >
             {item.title}
           </button>
@@ -67,6 +74,13 @@ export const ProductDescription = ({
       </div>
 
       {activeTag === 1 && (
+        <div
+          className={s.content}
+          dangerouslySetInnerHTML={{ __html: product.description || '' }}
+        />
+      )}
+
+      {activeTag === 2 && (
         <div className={s.content}>
           <ul>
             {product?.specifications?.slice(0, 3).map((elem) => (
@@ -78,16 +92,10 @@ export const ProductDescription = ({
         </div>
       )}
 
-      {activeTag === 3 && (
+      {activeTag === 4 && (
         <div className={s.content}>
           <ProductReviews reviews={reviews} variant={variant} />
         </div>
-      )}
-      {activeTag !== 1 && activeTag !== 3 && (
-        <div
-          className={s.content}
-          dangerouslySetInnerHTML={{ __html: info[activeTag].content || '' }}
-        />
       )}
     </div>
   );

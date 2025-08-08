@@ -43,7 +43,7 @@ export const CartButton = () => {
       <div className={s.content}>
         <p className="body_4">Корзина</p>
         <span className="body_7">
-          {productsQuantity} {getProductWord(productsQuantity)} ({priceWithDiscount} BYN)
+          {productsQuantity} {getProductWord(productsQuantity)} ({priceWithDiscount.toFixed(2)} BYN)
         </span>
       </div>
     </Link>

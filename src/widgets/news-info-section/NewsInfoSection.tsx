@@ -33,9 +33,12 @@ export const NewsInfoSection = ({ news, variant }: { news: NewsT | null; variant
         </div>
       </div>
       <div className={s.content}>
-        <p className="body_2" itemProp="articleBody">
-          {news?.content}
-        </p>
+        <div
+          className="body_2"
+          itemProp="articleBody"
+          dangerouslySetInnerHTML={{ __html: news?.content || '' }}
+          style={{ whiteSpace: 'pre-line' }}
+        />
 
         <Button variant="link" as={Link} href={paths.news}>
           <ArrowSmLeftIcon /> Назад к новостям

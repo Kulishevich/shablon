@@ -89,11 +89,11 @@ export const CartPrice = ({
       <div className={s.price}>
         <div className={s.elem}>
           <p className="body_7">Стоимость товаров без скидки</p>
-          <h5 className="h5">{priceWithOutDiscount} BYN</h5>
+          <h5 className="h5">{priceWithOutDiscount.toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Скидка</p>
-          <h5 className="h5">{priceWithOutDiscount - priceWithDiscount} BYN</h5>
+          <h5 className="h5">{(priceWithOutDiscount - priceWithDiscount).toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Стоимость доставки</p>
@@ -102,7 +102,7 @@ export const CartPrice = ({
       </div>
       <div className={s.elem}>
         <h5 className="h5">Итого</h5>
-        <h3 className="h3">{priceWithDiscount} BYN</h3>
+        <h3 className="h3">{priceWithDiscount.toFixed(2)} BYN</h3>
       </div>
       {productsCart.length ? (
         <Button as={Link} href={`${paths.cart}${paths.order}`} className={s.button}>

@@ -115,9 +115,11 @@ export const ProductCard = ({
           />
         </div>
         <div className={s.tagsContainer}>
-          {is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
-          {is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
-          {is_discount && <span className={clsx('tag', s.discount)}>акция</span>}
+          {product?.tags?.map((tag) => (
+            <span style={{ background: tag.color }} className={clsx('tag', s.popular)}>
+              {tag.name}
+            </span>
+          ))}
         </div>
         {productInCart && (
           <Button

@@ -70,11 +70,11 @@ export const OrderPrice = ({
       <div className={s.price}>
         <div className={s.elem}>
           <p className="body_7">Стоимость товаров без скидки</p>
-          <h5 className="h5">{priceWithOutDiscount} BYN</h5>
+          <h5 className="h5">{priceWithOutDiscount.toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Скидка</p>
-          <h5 className="h5">{priceWithOutDiscount - priceWithDiscount} BYN</h5>
+          <h5 className="h5">{(priceWithOutDiscount - priceWithDiscount).toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Стоимость доставки</p>
@@ -83,7 +83,7 @@ export const OrderPrice = ({
       </div>
       <div className={s.elem}>
         <h5 className="h5">Итого</h5>
-        <h3 className="h3">{priceWithDiscount + deliveryCost} BYN</h3>
+        <h3 className="h3">{(priceWithDiscount + deliveryCost).toFixed(2)} BYN</h3>
       </div>
       <ControlledCheckbox
         control={control}

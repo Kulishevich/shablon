@@ -13,6 +13,7 @@ import { ControlledTextArea } from '@/shared/ui/controlled-text-area/ControlledT
 import { PaymentT } from '@/shared/api/payment-methods/types';
 import { DeliveryT } from '@/shared/api/delivery-methods/types';
 import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
+
 export const OrderForm = ({
   paymentMethods,
   deliveryMethods,
@@ -24,6 +25,7 @@ export const OrderForm = ({
 
   const deliveryMethodId = watch('delivery_method_id');
   const paymentMethodId = watch('payment_method_id');
+  const deliveryCost = watch('delivery_cost');
 
   return (
     <div className={s.container}>
@@ -109,6 +111,7 @@ export const OrderForm = ({
             label="Адрес доставки"
             placeholder="Введите адрес доставки"
             isRequired
+            disabled={!deliveryCost}
           />
           <ControlledTextArea
             control={control}

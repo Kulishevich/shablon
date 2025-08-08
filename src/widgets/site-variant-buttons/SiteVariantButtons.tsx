@@ -50,6 +50,9 @@ export const SiteVariantButtons = () => {
       path: '/',
     });
 
+    localStorage.removeItem('viewed_products_shablon');
+    localStorage.removeItem('cart_shablon');
+
     window.location.reload();
   };
 

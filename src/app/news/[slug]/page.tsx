@@ -21,7 +21,7 @@ export default async function New({ params }: { params: Promise<{ slug: string }
     notFound();
   }
 
-  const newsList = await getAllNews({});
+  const newsList = await getAllNews({ variant });
   const otherNews = newsList?.data?.filter((elem) => elem.id !== news.id);
 
   return (

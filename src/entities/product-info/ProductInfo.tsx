@@ -56,9 +56,11 @@ export const ProductInfo = ({
 
       <div className={s.characteristics}>
         <div className={s.tagsContainer}>
-          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
-          {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
-          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
+          {product?.tags.map((tag) => (
+            <span style={{ background: tag.color }} className={clsx('tag', s.popular)}>
+              {tag.name}
+            </span>
+          ))}
         </div>
 
         <div className={clsx(s.sku, s.sku_mobile, 'body_7')} itemProp="sku">

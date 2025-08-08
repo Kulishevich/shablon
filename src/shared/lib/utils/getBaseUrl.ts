@@ -1,6 +1,6 @@
 export const getApiBaseUrl = (variant?: string) => {
   const baseApiUrl = variant
-    ? `https://${variant}.lookda.com/api`
+    ? `https://${variant}.webspaceteam.by/api`
     : process.env.NEXT_PUBLIC_API_URL;
 
   return baseApiUrl;
@@ -8,7 +8,7 @@ export const getApiBaseUrl = (variant?: string) => {
 
 export const getStoreBaseUrl = (variant?: string) => {
   const baseApiUrl = variant
-    ? `https://${variant}.lookda.com/storage`
+    ? `https://${variant}.webspaceteam.by/storage`
     : process.env.NEXT_PUBLIC_STORE_URL;
 
   return baseApiUrl;
