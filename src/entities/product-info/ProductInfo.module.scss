@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -19,10 +19,6 @@
   margin-right: vw-1440(60);
   flex: 1 1 auto;
 
-  & > div > ul {
-    list-style: disc inside;
-  }
-
   @media (max-width: 768px) {
     width: 336px;
     align-items: center;
@@ -31,6 +27,43 @@
 
     .sku {
       display: none;
+    }
+  }
+}
+
+.specifications {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(14);
+  list-style: none;
+  width: vw-1440(392);
+  margin-bottom: vw-1440(10);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 10px;
+    gap: 14px;
+  }
+
+  & > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: vw-1440(8);
+    padding: vw-1440(14) 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent-1) 10%, transparent);
+
+    @media (max-width: 768px) {
+      padding: 14px 0;
+      gap: 8px;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    & > span {
+      font-weight: 700;
     }
   }
 }
@@ -95,6 +128,7 @@
 
   @media (max-width: 768px) {
     gap: 16px;
+    padding: 16px;
   }
 }
 
@@ -103,7 +137,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: vw-1440(20);
-  flex: 0 0 vw-1440(360);
+  flex: 0 0 vw-1440(306);
 
   & > .details {
     width: 100%;
@@ -128,12 +162,17 @@
       .icon {
         font-size: vw-1440(24);
         color: var(--color-accent-1);
+        width: vw-1440(24);
+        flex: 0 0 vw-1440(24);
+        text-align: center;
       }
       @media (max-width: 768px) {
         gap: 8px;
 
         .icon {
           font-size: 24px;
+          width: 24px;
+          flex: 0 0 24px;
         }
       }
     }
