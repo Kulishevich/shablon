@@ -60,7 +60,7 @@ export const SearchInput = ({
       }
 
       const productsResultWithFullPath = await enrichProductsWithFullPath({
-        products: filteredProducts,
+        products: searchResult.products,
         variant,
       });
       setProductResult(productsResultWithFullPath);
@@ -91,7 +91,9 @@ export const SearchInput = ({
         onChange={(e) => handleChangeValue(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      {!!isOpen && <SearchPopup categories={filteredCategories} products={productResult} />}
+      {!!isOpen && (
+        <SearchPopup categories={searchResult.categories || []} products={productResult} />
+      )}
     </div>
   );
 };
