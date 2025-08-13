@@ -185,7 +185,7 @@ async function renderAllProductsSection({
     <>
       <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
-      <main>
+      <main className="main-container">
         <CatalogSection
           products={products}
           category={allCategory}
@@ -276,7 +276,7 @@ async function renderCatalogSection({
     <>
       <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
-      <main>
+      <main className="main-container">
         <CatalogSection
           products={products}
           category={category}
@@ -321,8 +321,13 @@ async function renderProductSection(product: ProductT, slug: string[]) {
     <>
       <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
-      <main>
-        <ProductSection product={product} reviews={reviews} advantages={advantages} deliveryAndPayment={deliveryAndPayment}/>
+      <main className="main-container">
+        <ProductSection
+          product={product}
+          reviews={reviews}
+          advantages={advantages}
+          deliveryAndPayment={deliveryAndPayment}
+        />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
         <Feedback variant={variant} />
