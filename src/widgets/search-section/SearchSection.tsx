@@ -8,36 +8,56 @@ import { ProductsResponseT } from '@/shared/api/product/types';
 import { SortSelect } from '@/features/sort-select';
 import { SearchPageSearch } from '@/features/search-page-search';
 import { BrandT } from '@/shared/api/brands/types';
+import { CategoryT } from '@/shared/api/category/types';
 import { SeoBlock } from '@/entities/seo-block';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import { TagT } from '@/shared/api/tags/types';
+import { TagsFilter } from '@/entities/tags-filter';
 
 export const SearchSection = ({
   products,
+  tags,
   searchQuery,
   page,
   brands,
   minPrice,
   maxPrice,
+  allCategories,
+  currentPath,
 }: {
   products: ProductsResponseT | null;
+  tags?: TagT[];
   searchQuery: string;
   page: string;
   brands: BrandT[];
   minPrice: number;
   maxPrice: number;
+  allCategories?: CategoryT[];
+  currentPath: string;
 }) => {
   return (
     <div className={s.container}>
       <h1 className="h1">Результаты поиска по запросу "{searchQuery}"</h1>
 
+      {tags && tags.length > 0 && (
+        <div className={s.navigation}>
+          <TagsFilter tags={tags} currentPath={currentPath} />
+        </div>
+      )}
+
       <div className={s.catalog}>
-        <Filters brands={brands} min={minPrice} max={maxPrice} />
+        <Filters brands={brands} min={minPrice} max={maxPrice} categories={allCategories} />
         <div className={s.productsContainer}>
           <div className={s.search}>
             <SearchPageSearch />
             <div className={s.selectContainer}>
               <SortSelect />
-              <FiltersMobile brands={brands} min={minPrice} max={maxPrice} />
+              <FiltersMobile
+                brands={brands}
+                min={minPrice}
+                max={maxPrice}
+                categories={allCategories}
+              />
             </div>
           </div>
 

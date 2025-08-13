@@ -1,0 +1,37 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  display: flex;
+  gap: vw-1440(24);
+
+  @media (max-width: 768px) {
+    gap: 16px;
+    width: 336px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+}
+
+.tag {
+  background-color: var(--color-bg-card);
+  border-radius: 4px;
+  padding: vw-1440(12) vw-1440(24);
+  border: 2px solid transparent;
+  position: relative;
+  color: var(--color-bg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+  }
+
+  &.active {
+    border-color: var(--color-button);
+    color: var(--color-button);
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 20px;
+    flex-shrink: 0;
+  }
+}

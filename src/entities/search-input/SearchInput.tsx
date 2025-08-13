@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import s from './SearchInput.module.scss';
 import { TextField } from '@/shared/ui/text-field';
 import { SearchPopup } from '../search-popup';
@@ -39,17 +39,25 @@ export const SearchInput = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const searchResult = {
-    categories: categories?.filter((category) =>
-      category.name.toLowerCase().includes(searchValue.toLowerCase())
-    ),
-    products: products?.filter((product) =>
-      product.name.toLowerCase().includes(searchValue.toLowerCase())
-    ),
-  };
+  const searchResult = useMemo(
+    () => ({
+      categories: categories?.filter((category) =>
+        category.name.toLowerCase().includes(searchValue.toLowerCase())
+      ),
+      products: products?.filter((product) =>
+        product.name.toLowerCase().includes(searchValue.toLowerCase())
+      ),
+    }),
+    [categories, products, searchValue]
+  );
 
   useEffect(() => {
     const createProductsWithFullPath = async () => {
+      if (!searchResult.products || searchResult.products.length === 0) {
+        setProductResult([]);
+        return;
+      }
+
       const productsResultWithFullPath = await enrichProductsWithFullPath({
         products: searchResult.products,
         variant,
@@ -59,7 +67,7 @@ export const SearchInput = ({
     };
 
     createProductsWithFullPath();
-  }, [searchResult.products]);
+  }, [searchValue, variant]); // Используем searchValue вместо searchResult.products
 
   const handleChangeValue = (value: string) => {
     setSearchValue(value);

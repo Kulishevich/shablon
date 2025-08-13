@@ -6,15 +6,22 @@ import s from './FiltersMobile.module.scss';
 import { Filters } from '../filters/Filters';
 import clsx from 'clsx';
 import { BrandT } from '@/shared/api/brands/types';
+import { CategoryT } from '@/shared/api/category/types';
 
 export const FiltersMobile = ({
   brands,
   min,
   max,
+  categories,
+  currentCategory,
+  categoryPath,
 }: {
   brands: BrandT[];
   min: number;
   max: number;
+  categories?: CategoryT[];
+  currentCategory?: CategoryT;
+  categoryPath?: CategoryT[];
 }) => {
   return (
     <Dialog.Root>
@@ -28,7 +35,14 @@ export const FiltersMobile = ({
           <Dialog.Title asChild>
             <h2 className="h2">Фильтр</h2>
           </Dialog.Title>
-          <Filters brands={brands} min={min} max={max} />
+          <Filters
+            brands={brands}
+            min={min}
+            max={max}
+            categories={categories}
+            currentCategory={currentCategory}
+            categoryPath={categoryPath}
+          />
           <Dialog.Close asChild>
             <Button variant="icon_secondary" className={s.closeButton}>
               <CloseIcon />
