@@ -11,15 +11,18 @@ import Image from 'next/image';
 import { ProductAdvantageType } from '@/shared/api/advantages/types';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import Cookies from 'js-cookie';
+import { PaymentAndDeliveryT } from '@/shared/api/delivery-and-payment/types';
 
 export const ProductSection = ({
   product,
   reviews,
   advantages,
+  deliveryAndPayment,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
   advantages: ProductAdvantageType[] | null;
+  deliveryAndPayment: PaymentAndDeliveryT[] | null;
 }) => {
   const [variant, setVariant] = useState<string | undefined>(undefined);
 
@@ -49,7 +52,7 @@ export const ProductSection = ({
       <div className={s.container} itemScope itemType="http://schema.org/Product">
         <ReduxProvider>
           <ProductInfo product={product} advantages={advantages} />
-          <ProductDescription product={product} reviews={reviews} variant={variant} />
+          <ProductDescription product={product} reviews={reviews} variant={variant} deliveryAndPayment={deliveryAndPayment}/>
         </ReduxProvider>
       </div>
     </>
