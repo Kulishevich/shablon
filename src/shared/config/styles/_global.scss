@@ -56,6 +56,13 @@ main {
   }
 }
 
+.main-container {
+  @media (max-width: 768px) {
+    max-width: 336px;
+    margin: 0 auto;
+  }
+}
+
 h1,
 h2 {
   color: var(--color-heading);
