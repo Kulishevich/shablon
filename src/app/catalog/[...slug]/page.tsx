@@ -23,6 +23,7 @@ import {
 import { getProductsAdvantages } from '@/shared/api/advantages/getProductsAdvantages';
 import { cookies } from 'next/headers';
 import { getDeliveryAndPayment } from '@/shared/api/delivery-and-payment/getDeliveryPayment';
+import { getTags } from '@/shared/api/tags/getTags';
 
 export default async function Catalog({
   params,
@@ -150,6 +151,12 @@ async function renderAllProductsSection({
     tags,
   });
 
+  const allTags = await getTags({ variant });
+
+  // Получаем дерево категорий для фильтров
+  const { getCategoriesTree } = await import('@/shared/api/category/getCategoriesTree');
+  const allCategories = await getCategoriesTree({ variant });
+
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
   const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
 
@@ -193,6 +200,9 @@ async function renderAllProductsSection({
           minPrice={0}
           maxPrice={maxPrice}
           categoryPath={[]}
+          allCategories={allCategories || undefined}
+          tags={allTags || undefined}
+          currentPath={canonicalUrl}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
@@ -257,6 +267,12 @@ async function renderCatalogSection({
     variant,
   });
 
+  const allTags = await getTags({ variant });
+
+  // Получаем дерево категорий для фильтров
+  const { getCategoriesTree } = await import('@/shared/api/category/getCategoriesTree');
+  const allCategories = await getCategoriesTree({ variant });
+
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
   const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
 
@@ -277,6 +293,7 @@ async function renderCatalogSection({
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main className="main-container">
         <CatalogSection
+          tags={allTags || undefined}
           products={products}
           category={category}
           page={page || '1'}
@@ -284,6 +301,8 @@ async function renderCatalogSection({
           minPrice={0}
           maxPrice={maxPrice}
           categoryPath={categoryPath}
+          allCategories={allCategories || undefined}
+          currentPath={canonicalUrl}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />

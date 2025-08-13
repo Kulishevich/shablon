@@ -11,8 +11,24 @@ import s from './Filters.module.scss';
 import { BrandT } from '@/shared/api/brands/types';
 import { PriceSlider } from '@/shared/ui/price-slider';
 import { TextField } from '@/shared/ui/text-field';
+import { CategoryTree } from '@/entities/category-tree';
+import { CategoryT } from '@/shared/api/category/types';
 
-export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; max: number }) => {
+export const Filters = ({
+  brands,
+  min,
+  max,
+  categories,
+  currentCategory,
+  categoryPath,
+}: {
+  brands: BrandT[];
+  min: number;
+  max: number;
+  categories?: CategoryT[];
+  currentCategory?: CategoryT;
+  categoryPath?: CategoryT[];
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [minPrice, setMinPrice] = useState<number>(Number(searchParams.get('price_from')) || min);
@@ -120,6 +136,16 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
 
   return (
     <div className={clsx(s.filters, 'desktop-only')}>
+      {categories && categories.length > 0 && (
+        <CategoryTree
+          categories={categories}
+          title="Категории"
+          className={s.categoryFilter}
+          currentCategory={currentCategory}
+          categoryPath={categoryPath}
+        />
+      )}
+
       <CollapseFilter title="Бренд">
         {brands.map((brand, index) => (
           <Checkbox

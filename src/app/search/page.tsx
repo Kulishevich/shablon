@@ -12,6 +12,7 @@ import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 import { cookies } from 'next/headers';
+import { getTags } from '@/shared/api/tags/getTags';
 
 export async function generateMetadata({
   searchParams,
@@ -79,6 +80,12 @@ export default async function SearchPage({
     search: q,
   });
 
+  // Получаем дерево категорий для фильтров
+  const { getCategoriesTree } = await import('@/shared/api/category/getCategoriesTree');
+  const allCategories = await getCategoriesTree({ variant });
+
+  const allTags = await getTags({ variant });
+
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
   const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
 
@@ -100,11 +107,14 @@ export default async function SearchPage({
       <main>
         <SearchSection
           products={products}
+          tags={allTags || undefined}
           searchQuery={q}
           page={page || '1'}
           brands={allBrands || []}
           minPrice={0}
           maxPrice={maxPrice}
+          allCategories={allCategories || undefined}
+          currentPath={canonicalUrl}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />

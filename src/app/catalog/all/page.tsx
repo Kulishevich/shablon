@@ -9,6 +9,7 @@ import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { SeoBlock } from '@/entities/seo-block';
 import { CategoryT } from '@/shared/api/category/types';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
+import { getTags } from '@/shared/api/tags/getTags';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
@@ -74,6 +75,8 @@ export default async function AllProductsPage({
     variant,
   });
 
+  const allTags = await getTags({ variant });
+
   const prices = allProducts?.map((product) => Number(product.price)) ?? [];
   const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
 
@@ -117,6 +120,8 @@ export default async function AllProductsPage({
           minPrice={0}
           maxPrice={maxPrice}
           categoryPath={[]}
+          tags={allTags || undefined}
+          currentPath={canonicalUrl}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />

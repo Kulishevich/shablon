@@ -28,6 +28,9 @@
     overflow: hidden;
     margin-bottom: vw-1440(20);
     height: 100%;
+    &.open {
+      overflow: visible;
+    }
   }
 
   .button {

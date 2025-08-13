@@ -116,7 +116,7 @@ export const ProductCard = ({
         </div>
         <div className={s.tagsContainer}>
           {product?.tags?.map((tag) => (
-            <span style={{ background: tag.color }} className={clsx('tag', s.popular)}>
+            <span style={{ background: tag.color }} key={tag.id} className={clsx('tag', s.popular)}>
               {tag.name}
             </span>
           ))}

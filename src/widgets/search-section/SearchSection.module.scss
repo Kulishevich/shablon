@@ -16,10 +16,12 @@
 .catalog {
   display: flex;
   gap: vw-1440(48);
+  margin-top: vw-1440(48);
 
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 48px;
+    margin-top: 48px;
   }
 }
 

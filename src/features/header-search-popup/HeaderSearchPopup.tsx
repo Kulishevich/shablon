@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import s from './HeaderSearchPopup.module.scss';
 import { Button } from '@/shared/ui/button';
 import { SearchIcon } from '@/shared/assets';
@@ -22,14 +22,17 @@ export const HeaderSearchPopup = ({
   const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
 
-  const searchResult = {
-    categories: categories?.filter((category) =>
-      category.name.toLowerCase().includes(searchValue.toLowerCase())
-    ),
-    products: products?.filter((product) =>
-      product.name.toLowerCase().includes(searchValue.toLowerCase())
-    ),
-  };
+  const searchResult = useMemo(
+    () => ({
+      categories: categories?.filter((category) =>
+        category.name.toLowerCase().includes(searchValue.toLowerCase())
+      ),
+      products: products?.filter((product) =>
+        product.name.toLowerCase().includes(searchValue.toLowerCase())
+      ),
+    }),
+    [categories, products, searchValue]
+  );
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

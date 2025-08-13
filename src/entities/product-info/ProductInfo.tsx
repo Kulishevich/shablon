@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import s from './ProductInfo.module.scss';
-import { ArrowLeftIcon, ArrowRightIcon, StarIcon } from '@/shared/assets';
+import { ArrowLeftIcon, ArrowRightIcon, ArrowRightUpIcon, StarIcon } from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { addInCart } from '@/shared/lib/redux/slices/cartSlice';
 import { showToast } from '@/shared/ui/toast';
 import { ProductAdvantageType } from '@/shared/api/advantages/types';
+import Link from 'next/link';
 
 export const ProductInfo = ({
   product,
@@ -57,7 +58,7 @@ export const ProductInfo = ({
       <div className={s.characteristics}>
         <div className={s.tagsContainer}>
           {product?.tags.map((tag) => (
-            <span style={{ background: tag.color }} className={clsx('tag', s.popular)}>
+            <span style={{ background: tag.color }} key={tag.id} className={clsx('tag', s.popular)}>
               {tag.name}
             </span>
           ))}
@@ -78,13 +79,24 @@ export const ProductInfo = ({
         </div>
         <div className="h5">Характеристики:</div>
         <div>
-          <ul>
+          <ul className={s.specifications}>
             {product?.specifications?.slice(0, 3).map((elem) => (
               <li className="body_3" key={elem.id}>
-                {elem?.name} : {elem?.pivot?.value}
+                {elem?.name}
+                <span>{elem?.pivot?.value}</span>
               </li>
             ))}
           </ul>
+
+          <Button
+            variant="link"
+            className={s.button}
+            as="a"
+            href="?characteristics=1#characteristics"
+          >
+            Все характеристики
+            <ArrowRightUpIcon />
+          </Button>
         </div>
       </div>
 

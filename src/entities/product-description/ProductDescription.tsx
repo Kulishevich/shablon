@@ -6,6 +6,7 @@ import { ProductT } from '@/shared/api/product/types';
 import { ReviewT } from '@/shared/api/reviews/types';
 import { ProductReviews } from '@/widgets/product-reviews';
 import { PaymentAndDeliveryT } from '@/shared/api/delivery-and-payment/types';
+import { useSearchParams } from 'next/navigation';
 
 export const ProductDescription = ({
   product,
@@ -18,6 +19,7 @@ export const ProductDescription = ({
   variant?: string;
   deliveryAndPayment: PaymentAndDeliveryT[] | null;
 }) => {
+  const searchParams = useSearchParams();
   const [activeTag, setActiveTag] = useState(1);
 
   useEffect(() => {
@@ -25,6 +27,13 @@ export const ProductDescription = ({
       addViewedProduct(product);
     }
   }, [product.id]);
+
+  // Обработка параметра characteristics для автоматического переключения на вкладку
+  useEffect(() => {
+    if (searchParams.get('characteristics') === '1') {
+      setActiveTag(2);
+    }
+  }, [searchParams]);
 
   const addViewedProduct = (product: ProductT) => {
     const existing = JSON.parse(localStorage.getItem('viewed_products_shablon') || '[]');
@@ -59,7 +68,7 @@ export const ProductDescription = ({
 
   return (
     <div className={s.container}>
-      <div className={s.navigation}>
+      <div className={s.navigation} id="characteristics">
         {info.map((item, index) => (
           <button
             key={index}
@@ -80,10 +89,11 @@ export const ProductDescription = ({
 
       {activeTag === 2 && (
         <div className={s.content}>
-          <ul>
+          <ul className={s.specifications}>
             {product?.specifications?.slice(0, 3).map((elem) => (
               <li className="body_3" key={elem.id}>
-                {elem?.name} : {elem?.pivot?.value}
+                {elem?.name}
+                <span>{elem?.pivot?.value}</span>
               </li>
             ))}
           </ul>

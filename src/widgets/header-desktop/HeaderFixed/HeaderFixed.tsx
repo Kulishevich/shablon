@@ -49,7 +49,7 @@ export const HeaderFixed = ({
       animate={{ height: isOpen ? 'auto' : 0 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
-      <div className={s.inner}>
+      <div className={clsx(s.inner, isOpen && s.open)}>
         <Navigation contacts={contacts} />
         <Search categories={categories} products={products} />
       </div>
