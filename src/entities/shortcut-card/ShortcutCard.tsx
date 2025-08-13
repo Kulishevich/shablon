@@ -13,7 +13,7 @@ interface IShortcutCardProps {
 }
 
 export const ShortcutCard = ({ tag, variant }: IShortcutCardProps) => {
-  const {photo_path,name} = tag;
+  const { photo_path, name } = tag;
 
   return (
     <Link href={`${paths.catalog}/all?tags=${name}`} className={s.container}>
@@ -23,7 +23,7 @@ export const ShortcutCard = ({ tag, variant }: IShortcutCardProps) => {
         width={120}
         height={120}
       />
-      <div className={clsx(s.title, 'h5')}>{name}</div>
+      <p className={clsx(s.title, 'h5')}>{name}</p>
     </Link>
   );
 };

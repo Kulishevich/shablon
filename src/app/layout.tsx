@@ -152,12 +152,7 @@ export default async function RootLayout({
           contacts={contacts}
           products={products?.data || []}
         />
-        <HeaderMobile
-          categories={categories}
-          contacts={contacts}
-          products={products?.data || []}
-          feedbackImage={settings?.feedback_image || ''}
-        />
+        <HeaderMobile categories={categories} contacts={contacts} products={products?.data || []} />
         {children}
         <Footer categories={categories} contacts={contacts} />
         <Toaster />

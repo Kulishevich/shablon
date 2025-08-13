@@ -50,7 +50,7 @@ export const FooterContent = ({
             itemType="http://schema.org/SiteNavigationElement"
           >
             {navigation.slice(0, 7).map((nav, index) => (
-              <Link className="body_6" href={nav.path} key={index} itemProp="url">
+              <Link className="body_3" href={nav.path} key={index} itemProp="url">
                 {nav.title}
               </Link>
             ))}

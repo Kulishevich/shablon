@@ -19,7 +19,7 @@ export default async function Share({ params }: { params: Promise<{ slug: string
     notFound();
   }
 
-  const allPromotions = await getPromotions({});
+  const allPromotions = await getPromotions({ variant });
   const otherPromotions = allPromotions?.data.filter((elem) => elem.id !== promotion.id);
 
   return (

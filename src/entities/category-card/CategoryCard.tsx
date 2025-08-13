@@ -16,12 +16,9 @@ export const CategoryCard = async ({ slug, photo_path, name, description }: Cate
     <Link href={`${paths.catalog}/${slug}`} className={s.container}>
       <div className={clsx(s.title, 'h3')}>{name}</div>
       <div className={clsx(s.description, 'body_3')}>{description}</div>
-      <Image
-        src={`${getStoreBaseUrl(variant)}/${photo_path}`}
-        alt={name}
-        width={584}
-        height={266}
-      />
+      <div className={s.imageContainer}>
+        <Image src={`${getStoreBaseUrl(variant)}/${photo_path}`} alt={name} fill />
+      </div>
     </Link>
   );
 };

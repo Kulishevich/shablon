@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { Button } from '@/shared/ui/button';
 import s from './SiteVariantButtons.module.scss';
 import { CollapseFilter } from '@/shared/ui/collapse-filter';
+import { usePathname, useRouter } from 'next/navigation';
 
 const siteVariants = [
   {
@@ -44,6 +45,9 @@ const siteVariants = [
 ];
 
 export const SiteVariantButtons = () => {
+  const router = useRouter();
+  const pathnanme = usePathname();
+
   const handleChangeVariantSite = (value: string) => {
     Cookies.set('variant', value, {
       expires: 365,
@@ -53,7 +57,11 @@ export const SiteVariantButtons = () => {
     localStorage.removeItem('viewed_products_shablon');
     localStorage.removeItem('cart_shablon');
 
-    window.location.reload();
+    if (pathnanme === '/') {
+      window.location.reload();
+    } else {
+      router.push('/');
+    }
   };
 
   return (
