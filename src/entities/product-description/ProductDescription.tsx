@@ -5,16 +5,18 @@ import clsx from 'clsx';
 import { ProductT } from '@/shared/api/product/types';
 import { ReviewT } from '@/shared/api/reviews/types';
 import { ProductReviews } from '@/widgets/product-reviews';
-import { paths } from '@/shared/config/constants/paths';
+import { PaymentAndDeliveryT } from '@/shared/api/delivery-and-payment/types';
 
 export const ProductDescription = ({
   product,
   reviews,
   variant,
+  deliveryAndPayment,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
   variant?: string;
+  deliveryAndPayment: PaymentAndDeliveryT[] | null;
 }) => {
   const [activeTag, setActiveTag] = useState(1);
 
@@ -39,7 +41,7 @@ export const ProductDescription = ({
     },
     {
       id: 2,
-      title: 'Все Характеристики',
+      title: 'Все характеристики',
     },
     {
       id: 3,
@@ -52,11 +54,7 @@ export const ProductDescription = ({
   ];
 
   const changeActiveTag = (tag: number) => {
-    if (tag === 3) {
-      window.open(paths.payment_and_delivery, '_blank');
-    } else {
-      setActiveTag(tag);
-    }
+    setActiveTag(tag);
   };
 
   return (
@@ -89,6 +87,17 @@ export const ProductDescription = ({
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {activeTag === 3 && (
+        <div>
+          {deliveryAndPayment?.map((item) => (
+            <div className={s.content}>
+              <h3 className="h3">{item.title}</h3>
+              <div dangerouslySetInnerHTML={{ __html: item.content }} className={s.content} />
+            </div>
+          ))}
         </div>
       )}
 

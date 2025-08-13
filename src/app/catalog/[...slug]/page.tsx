@@ -23,6 +23,7 @@ import {
 } from '@/shared/lib/utils/productUtils';
 import { getProductsAdvantages } from '@/shared/api/advantages/getProductsAdvantages';
 import { cookies } from 'next/headers';
+import { getDeliveryAndPayment } from '@/shared/api/delivery-and-payment/getDeliveryPayment';
 
 export default async function Catalog({
   params,
@@ -299,6 +300,7 @@ async function renderProductSection(product: ProductT, slug: string[]) {
 
   const reviews = await getReviews({ variant });
   const advantages = await getProductsAdvantages({ variant });
+  const deliveryAndPayment = await getDeliveryAndPayment({ variant });
 
   const categoriesPath = await getCategoriesFromProductPath({ product, variant });
 
@@ -314,12 +316,13 @@ async function renderProductSection(product: ProductT, slug: string[]) {
   ];
 
   const canonicalUrl = `/catalog/${slug.join('/')}`;
+
   return (
     <>
       <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main>
-        <ProductSection product={product} reviews={reviews} advantages={advantages} />
+        <ProductSection product={product} reviews={reviews} advantages={advantages} deliveryAndPayment={deliveryAndPayment}/>
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
         <Feedback variant={variant} />
