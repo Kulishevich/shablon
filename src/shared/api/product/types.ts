@@ -20,7 +20,7 @@ export type ProductT = {
   id: number;
   name: string;
   slug: string;
-
+  breadcrumb: BreadcrumbItem[];
   description: string;
   photo_path: string;
   price: string;
@@ -41,6 +41,13 @@ export type ProductT = {
   brand: BrandT;
   fullPath?: string[]; // Полный путь до продукта [category1, category2, ..., product]
   tags: ProductTag[];
+};
+
+type BreadcrumbItem = {
+  id: number;
+  name: string;
+  slug: string;
+  url: string;
 };
 
 export type ProductTag = {

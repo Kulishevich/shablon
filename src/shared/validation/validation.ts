@@ -6,12 +6,7 @@ export const nameScheme = () => z.string().trim().min(2, { message: validation.r
 export const addressScheme = () => z.string().trim().min(5, { message: validation.requiredField });
 
 export const commentScheme = () =>
-  z
-    .string()
-    .trim()
-    .min(10, { message: validation.minLength })
-    .max(300, { message: validation.maxLength })
-    .optional();
+  z.string().trim().max(300, { message: validation.maxLength }).optional();
 
 export const checkedScheme = () =>
   z

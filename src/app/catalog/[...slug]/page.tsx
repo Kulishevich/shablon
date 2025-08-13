@@ -17,7 +17,6 @@ import { CategoryT } from '@/shared/api/category/types';
 import { ProductT } from '@/shared/api/product/types';
 import {
   validateProductPath,
-  getCategoriesFromProductPath,
   enrichProductWithFullPath,
   enrichProductsWithFullPath,
 } from '@/shared/lib/utils/productUtils';
@@ -302,10 +301,8 @@ async function renderProductSection(product: ProductT, slug: string[]) {
   const advantages = await getProductsAdvantages({ variant });
   const deliveryAndPayment = await getDeliveryAndPayment({ variant });
 
-  const categoriesPath = await getCategoriesFromProductPath({ product, variant });
-
   const breadcrumbsPath = [
-    ...categoriesPath.map((category) => ({
+    ...product.breadcrumb.map((category) => ({
       title: category.name,
       path: `/${category.slug}`,
     })),

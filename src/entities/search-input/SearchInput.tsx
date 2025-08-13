@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import s from './SearchInput.module.scss';
 import { TextField } from '@/shared/ui/text-field';
 import { SearchPopup } from '../search-popup';
@@ -39,27 +39,34 @@ export const SearchInput = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const searchResult = {
-    categories: categories?.filter((category) =>
-      category.name.toLowerCase().includes(searchValue.toLowerCase())
-    ),
-    products: products?.filter((product) =>
-      product.name.toLowerCase().includes(searchValue.toLowerCase())
-    ),
-  };
+  const filteredCategories = useMemo(() => {
+    return (
+      categories?.filter((category) =>
+        category.name.toLowerCase().includes(searchValue.toLowerCase())
+      ) || []
+    );
+  }, [categories, searchValue]);
+
+  const filteredProducts = useMemo(() => {
+    return (
+      products?.filter((product) =>
+        product.name.toLowerCase().includes(searchValue.toLowerCase())
+      ) || []
+    );
+  }, [products, searchValue]);
 
   useEffect(() => {
+    if (!variant) return;
     const createProductsWithFullPath = async () => {
       const productsResultWithFullPath = await enrichProductsWithFullPath({
-        products: searchResult.products,
+        products: filteredProducts,
         variant,
       });
-
       setProductResult(productsResultWithFullPath);
     };
 
     createProductsWithFullPath();
-  }, [searchResult.products]);
+  }, [filteredProducts, variant]);
 
   const handleChangeValue = (value: string) => {
     setSearchValue(value);
@@ -83,9 +90,7 @@ export const SearchInput = ({
         onChange={(e) => handleChangeValue(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      {!!isOpen && (
-        <SearchPopup categories={searchResult.categories || []} products={productResult} />
-      )}
+      {!!isOpen && <SearchPopup categories={filteredCategories} products={productResult} />}
     </div>
   );
 };

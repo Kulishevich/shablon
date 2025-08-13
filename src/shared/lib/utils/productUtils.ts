@@ -45,7 +45,6 @@ function findCategoryPath({
     if (category.id === targetCategoryId) {
       return [category];
     }
-
     if (category.subcategories && category.subcategories.length > 0) {
       const path = findCategoryPath({
         categories: category.subcategories as CategoryT[],
@@ -57,7 +56,6 @@ function findCategoryPath({
       }
     }
   }
-
   return [];
 }
 
@@ -94,30 +92,6 @@ export const buildProductUrl = async ({
 }): Promise<string> => {
   const pathSlugs = await buildProductPath({ product, variant });
   return `/catalog/${pathSlugs.join('/')}`;
-};
-
-/**
- * Получает информацию о категориях по пути до продукта
- */
-export const getCategoriesFromProductPath = async ({
-  product,
-  variant,
-}: {
-  product: ProductT;
-  variant?: string;
-}): Promise<CategoryT[]> => {
-  const categoriesTree = await getCategoriesTree({ variant });
-
-  if (!categoriesTree) {
-    return [];
-  }
-
-  // Находим полный путь до категории продукта
-  return findCategoryPath({
-    categories: categoriesTree,
-    targetCategoryId: product.category_id,
-    variant,
-  });
 };
 
 /**
@@ -167,6 +141,7 @@ export const buildProductUrlAsync = async ({
   variant: string;
 }): Promise<string> => {
   const categoriesTree = await getCategoriesTree({ variant });
+
   return buildProductUrlSync({
     product: product,
     categoriesTree: categoriesTree || undefined,

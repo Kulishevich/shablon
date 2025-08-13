@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import s from './BrandCard.module.scss';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Link from 'next/link';
 
 interface IBrandProps {
   brand: BrandT;
@@ -10,10 +11,10 @@ interface IBrandProps {
 }
 
 export const BrandCard = async ({ brand, variant }: IBrandProps) => {
-  const { image_path, name, photo_path } = brand;
+  const { image_path, link, name, photo_path } = brand;
 
   return (
-    <div className={s.container}>
+    <Link href={link || ''} className={s.container}>
       {photo_path && (
         <Image
           src={`${getStoreBaseUrl(variant)}/${photo_path}`}
@@ -30,6 +31,6 @@ export const BrandCard = async ({ brand, variant }: IBrandProps) => {
         alt={name}
         className={s.logo}
       />
-    </div>
+    </Link>
   );
 };
