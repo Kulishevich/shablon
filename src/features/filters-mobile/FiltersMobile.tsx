@@ -1,3 +1,4 @@
+'use client';
 import { CloseIcon, FilterIcon } from '@/shared/assets';
 import { Button } from '@/shared/ui/button';
 import React from 'react';

@@ -13,7 +13,6 @@ import { TagT } from '@/shared/api/tags/types';
 import { TagsFilter } from '@/entities/tags-filter';
 import { SeoBlock } from '@/entities/seo-block';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
-import { buildCategoryUrlFromSlugs } from '@/shared/lib/utils/categoryUtils';
 
 export const CatalogSection = ({
   products,
