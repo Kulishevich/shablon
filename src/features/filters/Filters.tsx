@@ -15,6 +15,7 @@ import { CategoryTree } from '@/entities/category-tree';
 import { CategoryT } from '@/shared/api/category/types';
 
 export const Filters = ({
+  className,
   brands,
   min,
   max,
@@ -22,6 +23,7 @@ export const Filters = ({
   currentCategory,
   categoryPath,
 }: {
+  className?: string;
   brands: BrandT[];
   min: number;
   max: number;
@@ -135,7 +137,7 @@ export const Filters = ({
   };
 
   return (
-    <div className={clsx(s.filters, 'desktop-only')}>
+    <div className={clsx(s.filters, className)}>
       {categories && categories.length > 0 && (
         <CategoryTree
           categories={categories}
