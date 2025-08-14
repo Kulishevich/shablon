@@ -14,13 +14,13 @@ interface TagsFilterProps {
 export const TagsFilter: React.FC<TagsFilterProps> = ({ tags, currentPath }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const activeTagId = searchParams.get('tags');
+  const activeTagName = searchParams.get('tags');
 
   const handleTagClick = (tagName: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
     // Если кликнули на уже активный тег, убираем фильтр
-    if (activeTagId === tagName) {
+    if (activeTagName === tagName) {
       params.delete('tags');
     } else {
       // Устанавливаем новый тег
@@ -42,7 +42,7 @@ export const TagsFilter: React.FC<TagsFilterProps> = ({ tags, currentPath }) => 
   return (
     <div className={s.container}>
       {tags.map((tag) => {
-        const isActive = activeTagId === tag.id.toString();
+        const isActive = activeTagName === tag.name.toString();
 
         return (
           <button

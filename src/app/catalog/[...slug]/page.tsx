@@ -267,7 +267,7 @@ async function renderCatalogSection({
     variant,
   });
 
-  const allTags = await getTags({ variant });
+  const allTags = await getTags({ variant, category: category.id.toString() });
 
   // Получаем дерево категорий для фильтров
   const { getCategoriesTree } = await import('@/shared/api/category/getCategoriesTree');

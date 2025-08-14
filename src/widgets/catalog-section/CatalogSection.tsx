@@ -48,6 +48,7 @@ export const CatalogSection = ({
       )}
       <div className={s.catalog}>
         <Filters
+          className="desktop-only"
           brands={brands}
           min={minPrice}
           max={maxPrice}
