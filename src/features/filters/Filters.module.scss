@@ -6,6 +6,11 @@
   display: flex;
   flex-direction: column;
   gap: vw-1440(12);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    gap: 12px;
+  }
 }
 
 .categoryFilter {
