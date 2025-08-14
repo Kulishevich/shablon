@@ -4,6 +4,7 @@ import { paths } from '@/shared/config/constants/paths';
 import { CategoryT } from '@/shared/api/category/types';
 import { CollapseHeader } from '@/entities/collapse-header';
 import s from './CategoryItem.module.scss';
+import clsx from 'clsx';
 
 interface CategoryItemProps {
   category: Omit<CategoryT, 'subcategories'> & {
@@ -19,7 +20,12 @@ export const CategoryItem = ({ category, onClose, parentPath = '' }: CategoryIte
 
   if (!category.subcategories || category.subcategories.length === 0) {
     return (
-      <Link className="h3" href={categoryHref} onClick={onClose} itemProp="url">
+      <Link
+        className={clsx('body_5', s.categoryItem)}
+        href={categoryHref}
+        onClick={onClose}
+        itemProp="url"
+      >
         {category.name}
       </Link>
     );
