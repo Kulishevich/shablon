@@ -4,6 +4,9 @@
   position: relative;
   padding: vw-1440(36);
 
+  display: flex;
+  flex-direction: column;
+
   align-content: flex-start;
   border-radius: vw-1440(6);
   overflow: hidden;
@@ -37,6 +40,7 @@
   .description {
     position: relative;
     z-index: 2;
+    flex: 1;
   }
 
   .imageContainer {
@@ -46,6 +50,19 @@
 
     & > img {
       object-fit: contain;
+    }
+
+    &.mediumImage {
+      height: vw-1440(178);
+      @media (max-width: 768px) {
+        height: 89px;
+      }
+    }
+    &.smallImage {
+      height: vw-1440(133);
+      @media (max-width: 768px) {
+        height: 66px;
+      }
     }
 
     @media (max-width: 768px) {

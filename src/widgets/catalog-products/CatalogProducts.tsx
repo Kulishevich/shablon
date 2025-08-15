@@ -11,6 +11,8 @@ export const CatalogProducts = ({
   categories: CategoryT[] | null;
   title?: string;
 }) => {
+  const categoriesCount = categories?.length || 0;
+
   return (
     <div className={s.container}>
       {title ? <h1 className="h1">{title}</h1> : <h2 className="h2">Категории товаров</h2>}
@@ -19,11 +21,13 @@ export const CatalogProducts = ({
         <div
           className={clsx(
             s.cardsContainer,
-            categories?.length > 4 && s.gridThree,
-            categories?.length > 9 && s.gridFour
+            categoriesCount > 4 && s.gridThree,
+            categoriesCount > 9 && s.gridFour
           )}
         >
-          {categories?.map((category) => <CategoryCard {...category} key={category.id} />)}
+          {categories?.map((category) => (
+            <CategoryCard {...category} key={category.id} categoriesCount={categoriesCount} />
+          ))}
         </div>
       )}
     </div>

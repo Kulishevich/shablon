@@ -8,7 +8,17 @@ import clsx from 'clsx';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { cookies } from 'next/headers';
 
-export const CategoryCard = async ({ slug, photo_path, name, description }: CategoryT) => {
+interface CategoryCardProps extends CategoryT {
+  categoriesCount: number;
+}
+
+export const CategoryCard = async ({
+  slug,
+  photo_path,
+  name,
+  description,
+  categoriesCount,
+}: CategoryCardProps) => {
   const cookieStore = await cookies();
   const variant = cookieStore.get('variant')?.value;
 
@@ -16,7 +26,13 @@ export const CategoryCard = async ({ slug, photo_path, name, description }: Cate
     <Link href={`${paths.catalog}/${slug}`} className={s.container}>
       <div className={clsx(s.title, 'h3')}>{name}</div>
       <div className={clsx(s.description, 'body_3')}>{description}</div>
-      <div className={s.imageContainer}>
+      <div
+        className={clsx(
+          s.imageContainer,
+          categoriesCount > 4 && s.mediumImage,
+          categoriesCount > 9 && s.smallImage
+        )}
+      >
         <Image src={`${getStoreBaseUrl(variant)}/${photo_path}`} alt={name} fill />
       </div>
     </Link>
