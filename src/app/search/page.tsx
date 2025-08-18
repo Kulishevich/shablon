@@ -3,7 +3,7 @@ import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/widgets/feedback/Feedback';
-import { getBrands } from '@/shared/api/brands/getBrands';
+
 import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
 import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { SeoBlock } from '@/entities/seo-block';
@@ -13,6 +13,8 @@ import { Metadata } from 'next';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 import { cookies } from 'next/headers';
 import { getTags } from '@/shared/api/tags/getTags';
+import { parseFiltersFromSearchParams } from '@/shared/lib/utils/filtersUtils';
+import { convertProductsBrandsToStandardBrands } from '@/shared/lib/utils/brandUtils';
 
 export async function generateMetadata({
   searchParams,
@@ -47,17 +49,33 @@ export default async function SearchPage({
     price_from?: string;
     price_to?: string;
     brand?: string;
+    [key: string]: string | undefined;
   }>;
 }) {
   const cookieStore = await cookies();
   const variant = cookieStore.get('variant')?.value;
 
-  const { q, page, sort_by, sort_direction, price_from, price_to, brand } = await searchParams;
+  const searchParamsData = await searchParams;
+  const { q, page, sort_by, sort_direction, price_from, price_to, brand } = searchParamsData;
 
   // Если нет поискового запроса, перенаправляем на главную
   if (!q || q.trim() === '') {
     redirect('/');
   }
+
+  // Сначала получаем продукты без фильтров для получения доступных фильтров
+  const initialProducts = await getProducts({
+    search: q,
+    page: '1',
+    per_page: '1',
+    variant,
+  });
+
+  // Преобразуем фильтры из URL параметров в формат API
+  const filtersForApi = parseFiltersFromSearchParams(
+    searchParamsData,
+    initialProducts?.filters || []
+  );
 
   // Получаем продукты по поисковому запросу
   const products = await getProducts({
@@ -68,14 +86,18 @@ export default async function SearchPage({
     price_from,
     price_to,
     brand,
+    filters: filtersForApi,
+    variant,
   });
 
   // Обогащаем продукты полным путем
-  if (products?.data) {
-    products.data = await enrichProductsWithFullPath({ products: products.data, variant });
+  if (products?.data && products.data.data) {
+    products.data.data = await enrichProductsWithFullPath({
+      products: products.data.data,
+      variant,
+    });
   }
 
-  const allBrands = await getBrands({ variant });
   const allProducts = await getProductsWithoutPagination({
     search: q,
   });
@@ -110,11 +132,12 @@ export default async function SearchPage({
           tags={allTags || undefined}
           searchQuery={q}
           page={page || '1'}
-          brands={allBrands || []}
+          brands={convertProductsBrandsToStandardBrands(products?.brands || [])}
           minPrice={0}
           maxPrice={maxPrice}
           allCategories={allCategories || undefined}
           currentPath={canonicalUrl}
+          filters={products?.filters || []}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />

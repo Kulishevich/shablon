@@ -3,7 +3,7 @@ import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/widgets/feedback/Feedback';
-import { getBrands } from '@/shared/api/brands/getBrands';
+
 import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
 import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { SeoBlock } from '@/entities/seo-block';
@@ -12,6 +12,9 @@ import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { getTags } from '@/shared/api/tags/getTags';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import { parseFiltersFromSearchParams } from '@/shared/lib/utils/filtersUtils';
+import { getCategoriesTree } from '@/shared/api/category/getCategoriesTree';
+import { convertProductsBrandsToStandardBrands } from '@/shared/lib/utils/brandUtils';
 
 export async function generateMetadata({
   searchParams,
@@ -42,13 +45,29 @@ export default async function AllProductsPage({
     price_to?: string;
     brand?: string;
     tags?: string;
+    [key: string]: string | undefined;
   }>;
 }) {
   const cookieStore = await cookies();
   const variant = cookieStore.get('variant')?.value;
 
+  const searchParamsData = await searchParams;
   const { page, sort_by, sort_direction, search, price_from, price_to, brand, tags } =
-    await searchParams;
+    searchParamsData;
+
+  // Сначала получаем продукты без фильтров для получения доступных фильтров
+  const initialProducts = await getProducts({
+    page: '1',
+    per_page: '1',
+    tags,
+    variant,
+  });
+
+  // Преобразуем фильтры из URL параметров в формат API
+  const filtersForApi = parseFiltersFromSearchParams(
+    searchParamsData,
+    initialProducts?.filters || []
+  );
 
   // Получаем все продукты с фильтрацией по тегам
   const products = await getProducts({
@@ -60,25 +79,21 @@ export default async function AllProductsPage({
     price_to,
     brand,
     tags,
+    filters: filtersForApi,
     variant,
   });
 
   // Обогащаем продукты полным путем
-  if (products?.data) {
-    products.data = await enrichProductsWithFullPath({ products: products.data, variant });
+  if (products?.data && products.data.data) {
+    products.data.data = await enrichProductsWithFullPath({
+      products: products.data.data,
+      variant,
+    });
   }
 
-  const allBrands = await getBrands({ variant });
-  const allProducts = await getProductsWithoutPagination({
-    search,
-    tags,
-    variant,
-  });
+  const allCategories = await getCategoriesTree({ variant });
 
   const allTags = await getTags({ variant });
-
-  const prices = allProducts?.map((product) => Number(product.price)) ?? [];
-  const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
 
   // Формируем breadcrumbs
   const breadcrumbsPath = [
@@ -115,13 +130,15 @@ export default async function AllProductsPage({
         <CatalogSection
           products={products}
           category={allCategory}
+          allCategories={allCategories || []}
           page={page || '1'}
-          brands={allBrands || []}
+          brands={convertProductsBrandsToStandardBrands(products?.brands || [])}
           minPrice={0}
-          maxPrice={maxPrice}
+          maxPrice={products?.price_range.max || 0}
           categoryPath={[]}
           tags={allTags || undefined}
           currentPath={canonicalUrl}
+          filters={products?.filters || []}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />

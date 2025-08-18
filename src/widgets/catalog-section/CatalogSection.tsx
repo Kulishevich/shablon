@@ -4,7 +4,7 @@ import { ProductCard } from '@/entities/product-card';
 import { Pagination } from '@/shared/ui/pagination';
 import { Filters } from '@/features/filters';
 import { FiltersMobile } from '@/features/filters-mobile';
-import { ProductsResponseT } from '@/shared/api/product/types';
+import { FilterT, ProductsResponseT } from '@/shared/api/product/types';
 import { CategoryT } from '@/shared/api/category/types';
 import { SortSelect } from '@/features/sort-select';
 import { CatalogSearch } from '@/features/catalog-search';
@@ -25,6 +25,7 @@ export const CatalogSection = ({
   allCategories,
   tags,
   currentPath,
+  filters,
 }: {
   products: ProductsResponseT | null;
   category: CategoryT | null;
@@ -36,6 +37,7 @@ export const CatalogSection = ({
   allCategories?: CategoryT[];
   tags?: TagT[];
   currentPath: string;
+  filters: FilterT[];
 }) => {
   return (
     <div className={s.container}>
@@ -54,6 +56,7 @@ export const CatalogSection = ({
           categories={allCategories}
           currentCategory={category || undefined}
           categoryPath={categoryPath}
+          filters={filters}
         />
         <div className={s.productsContainer}>
           <div className={s.search}>
@@ -67,19 +70,20 @@ export const CatalogSection = ({
                 categories={allCategories}
                 currentCategory={category || undefined}
                 categoryPath={categoryPath}
+                filters={filters}
               />
             </div>
           </div>
           <div className={s.productList} itemScope itemType="http://schema.org/ItemList">
             <ReduxProvider>
-              {products?.data?.map((product, index) => (
+              {products?.data?.data?.map((product, index) => (
                 <ProductCard key={index} product={product} />
               ))}
             </ReduxProvider>
           </div>
           <div className={s.pagination}>
-            <p className="body_7">Всего продуктов: {products?.total || 0}</p>
-            <Pagination totalPages={products?.last_page || 1} currentPage={page} />
+            <p className="body_7">Всего продуктов: {products?.data?.total || 0}</p>
+            <Pagination totalPages={products?.data?.last_page || 1} currentPage={page} />
           </div>
           <SeoBlock page={`catalog`} align="left" />
         </div>

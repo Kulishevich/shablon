@@ -3,6 +3,7 @@
 .container {
   display: flex;
   gap: vw-1440(24);
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     gap: 16px;

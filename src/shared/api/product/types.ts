@@ -1,19 +1,44 @@
 import { CategoryT } from '../category/types';
 import { BrandT } from '../brands/types';
 
+export type ProductsBrandT = {
+  id: number;
+  name: string;
+  slug: string;
+  image_path: string;
+};
+
 export type ProductsResponseT = {
-  current_page: number;
-  data: ProductT[];
-  first_page_url: string;
-  from: number;
-  last_page: number;
-  last_page_url: string;
-  next_page_url: string | null;
-  path: string;
-  per_page: number;
-  prev_page_url: string | null;
-  to: number;
-  total: number;
+  success: boolean;
+  data: {
+    current_page: number;
+    data: ProductT[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number;
+    total: number;
+  },
+  price_range: {
+    min: number;
+    max: number;
+  };
+  filters: FilterT[];
+  brands: ProductsBrandT[];
+};
+
+export type FilterT = {
+  id: number;
+  name: string;
+  slug: string;
+  type: string;
+  unit: string | null;
+  values: string[];
 };
 
 export type ProductT = {

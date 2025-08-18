@@ -8,6 +8,7 @@ import { Filters } from '../filters/Filters';
 import clsx from 'clsx';
 import { BrandT } from '@/shared/api/brands/types';
 import { CategoryT } from '@/shared/api/category/types';
+import { FilterT } from '@/shared/api/product/types';
 
 export const FiltersMobile = ({
   brands,
@@ -16,6 +17,7 @@ export const FiltersMobile = ({
   categories,
   currentCategory,
   categoryPath,
+  filters,
 }: {
   brands: BrandT[];
   min: number;
@@ -23,6 +25,7 @@ export const FiltersMobile = ({
   categories?: CategoryT[];
   currentCategory?: CategoryT;
   categoryPath?: CategoryT[];
+  filters: FilterT[];
 }) => {
   return (
     <Dialog.Root>
@@ -43,6 +46,7 @@ export const FiltersMobile = ({
             categories={categories}
             currentCategory={currentCategory}
             categoryPath={categoryPath}
+            filters={filters}
           />
           <Dialog.Close asChild>
             <Button variant="icon_secondary" className={s.closeButton}>

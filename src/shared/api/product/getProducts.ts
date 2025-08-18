@@ -15,6 +15,7 @@ type GetProductsProps = {
   page?: string;
   per_page?: string;
   tags?: string;
+  filters?: Record<string, string[]>;
 };
 
 export const getProducts = async ({
@@ -29,6 +30,7 @@ export const getProducts = async ({
   sort_direction,
   brand,
   tags,
+  filters,
   page = '1',
   per_page = '9',
 }: GetProductsProps): Promise<ProductsResponseT | null> => {
@@ -47,6 +49,15 @@ export const getProducts = async ({
   if (per_page) params.append('per_page', per_page);
   if (tags) params.append('tags', tags);
 
+  // Добавляем фильтры в формате filters[id][]=value
+  if (filters) {
+    Object.entries(filters).forEach(([filterId, values]) => {
+      values.forEach(value => {
+        params.append(`filters[${filterId}][]`, value);
+      });
+    });
+  }
+
   const url = `${getApiBaseUrl(variant)}/v1/products?${params.toString()}`;
 
   try {
@@ -56,7 +67,7 @@ export const getProducts = async ({
       },
     });
 
-    const { data } = await res.json();
+    const data = await res.json();
 
     return data;
   } catch (err) {
