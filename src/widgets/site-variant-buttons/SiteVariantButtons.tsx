@@ -60,9 +60,10 @@ export const SiteVariantButtons = () => {
     localStorage.removeItem('cart_shablon');
 
     if (pathname === '/') {
-      router.push(pathname);
+      router.refresh();
     } else {
       router.push('/');
+      router.refresh();
     }
   };
 
