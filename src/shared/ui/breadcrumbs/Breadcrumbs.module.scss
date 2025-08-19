@@ -7,6 +7,7 @@
   justify-content: flex-start;
   gap: vw-1440(6);
   margin: vw-1440(36) auto vw-1440(20);
+  list-style: none;
 
   @media (max-width: 768px) {
     justify-content: center;

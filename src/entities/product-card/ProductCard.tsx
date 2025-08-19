@@ -132,7 +132,15 @@ export const ProductCard = ({
         )}
       </div>
       <div className={s.info}>
-        <div className={s.rating} itemProp="aggregateRating">
+        <div
+          className={s.rating}
+          itemProp="aggregateRating"
+          content={'5'}
+          itemType="https://schema.org/AggregateRating"
+          itemScope
+        >
+          <meta itemProp="ratingValue" content={'5'} />
+          <meta itemProp="ratingCount" content={'100'} />
           {Array.from({ length: 5 }).map((_, index) => (
             <StarIcon key={index} className={clsx(s.star, { [s.active]: index < 4 })} />
           ))}
@@ -164,14 +172,15 @@ export const ProductCard = ({
           className={s.priceContainer}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
         >
-          <div className={s.price} itemScope itemType="http://schema.org/Offer">
+          <div className={s.price} itemScope itemProp="offers" itemType="http://schema.org/Offer">
             {is_discount && (
-              <span className="discount" itemProp="price">
-                {product?.price} BYN
+              <span className="discount">
+                <span itemProp="highPrice">{product?.price}</span> BYN
               </span>
             )}
-            <div className="h4" itemProp="price">
-              {totalPrice} BYN
+            <div className="h4">
+              <meta itemProp="priceCurrency" content="BYN" />
+              <span itemProp={'price'}>{totalPrice}</span> BYN
             </div>
           </div>
           {productInCart && (

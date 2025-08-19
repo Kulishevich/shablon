@@ -12,6 +12,8 @@ import { ProductAdvantageType } from '@/shared/api/advantages/types';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import Cookies from 'js-cookie';
 import { PaymentAndDeliveryT } from '@/shared/api/delivery-and-payment/types';
+import Script from 'next/script';
+import { createProductJsonLd } from '@/shared/lib/utils/createJsonLd';
 
 export const ProductSection = ({
   product,
@@ -32,7 +34,14 @@ export const ProductSection = ({
   }, []);
 
   return (
-    <>
+    <div className={s.container}>
+      {/* JSON-LD микроразметка для продукта */}
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: createProductJsonLd(product, reviews, variant),
+        }}
+      />
       <div className={s.header}>
         <h1 className="h3" itemProp="name">
           {product?.name}
@@ -41,20 +50,27 @@ export const ProductSection = ({
           Артикул: <span>{product?.sku}</span>
         </div>
         {product?.brand && (
-          <Image
-            src={`${getStoreBaseUrl(variant)}/${product?.brand?.image_path}`}
-            alt={product?.brand?.name}
-            width={55}
-            height={55}
-          />
+          <span itemProp="brand" content={product?.brand?.name}>
+            <Image
+              src={`${getStoreBaseUrl(variant)}/${product?.brand?.image_path}`}
+              alt={product?.brand?.name}
+              width={55}
+              height={55}
+            />
+          </span>
         )}
       </div>
-      <div className={s.container} itemScope itemType="http://schema.org/Product">
+      <div className={s.container}>
         <ReduxProvider>
           <ProductInfo product={product} advantages={advantages} />
-          <ProductDescription product={product} reviews={reviews} variant={variant} deliveryAndPayment={deliveryAndPayment}/>
+          <ProductDescription
+            product={product}
+            reviews={reviews}
+            variant={variant}
+            deliveryAndPayment={deliveryAndPayment}
+          />
         </ReduxProvider>
       </div>
-    </>
+    </div>
   );
 };

@@ -5,12 +5,10 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const pathname = url.pathname;
   const host = request.headers.get('host') || '';
-
-  console.log(`Middleware processing: ${pathname}, host: ${host}, protocol: ${url.protocol}`);
+  const originalUrl = request.url;
 
   // Полностью исключаем localhost из обработки
   if (host.includes('localhost') || host.includes('127.0.0.1')) {
-    console.log('Localhost detected, skipping middleware');
     return NextResponse.next();
   }
 
@@ -18,24 +16,54 @@ export function middleware(request: NextRequest) {
   const finalUrl = new URL(request.url);
   let needsRedirect = false;
 
+  // Определяем целевой hostname (убираем www если есть)
+  const targetHostname = host.startsWith('www.') ? host.replace('www.', '') : host;
+
   // 1. HTTPS нормализация
   if (finalUrl.protocol === 'http:') {
     finalUrl.protocol = 'https:';
-    finalUrl.port = '';
+    finalUrl.hostname = targetHostname;
+    finalUrl.port = ''; // Убираем порт для продакшн HTTPS
     needsRedirect = true;
   }
 
   // 2. WWW нормализация (убираем www)
-  if (host.startsWith('www.')) {
-    finalUrl.hostname = host.replace('www.', '');
+  if (host.startsWith('www.') && finalUrl.protocol === 'https:') {
+    finalUrl.hostname = targetHostname;
+    finalUrl.port = ''; // Убираем порт для продакшн HTTPS
     needsRedirect = true;
   }
 
+  // 3. Нормализация URL - проверяем на множественные слеши в оригинальном URL
+  const urlParts = originalUrl.split('://');
+  let hasMultipleSlashes = false;
+  if (urlParts.length === 2) {
+    const pathPart = urlParts[1].substring(urlParts[1].indexOf('/'));
 
-  // 3. Нормализация пути
+    // Проверяем наличие множественных слешей в пути после домена
+    if (/\/\/+/.test(pathPart)) {
+      hasMultipleSlashes = true;
+      needsRedirect = true;
+      // Временное логирование для отладки
+      console.log('Multiple slashes detected:', { originalUrl, pathPart, pathname });
+    }
+  }
+
+  // 4. Нормализация пути
   let normalizedPath = pathname;
 
-  // Множественные слеши
+  // Если в оригинальном URL были множественные слеши, нормализуем путь
+  if (hasMultipleSlashes) {
+    // Для главной страницы с множественными слешами (например //) устанавливаем /
+    if (pathname === '/') {
+      normalizedPath = '/';
+    } else {
+      // Для других путей убираем множественные слеши
+      normalizedPath = normalizedPath.replace(/\/\/+/g, '/');
+    }
+  }
+
+  // Множественные слеши в пути (дополнительная проверка)
   if (/\/\/+/.test(normalizedPath)) {
     normalizedPath = normalizedPath.replace(/\/\/+/g, '/');
   }
@@ -45,7 +73,7 @@ export function middleware(request: NextRequest) {
     normalizedPath = normalizedPath.toLowerCase();
   }
 
-  // Завершающий слеш
+  // Завершающий слеш (кроме корня)
   if (normalizedPath.length > 1 && normalizedPath.endsWith('/')) {
     normalizedPath = normalizedPath.slice(0, -1);
   }
@@ -55,9 +83,18 @@ export function middleware(request: NextRequest) {
     needsRedirect = true;
   }
 
-
   if (needsRedirect) {
-    return Response.redirect(finalUrl.toString(), 301);
+    const finalUrlString = finalUrl.toString();
+
+    // Защита от циклических редиректов
+    if (finalUrlString === originalUrl) {
+      console.log('Preventing circular redirect:', { originalUrl, finalUrlString });
+      return NextResponse.next();
+    }
+
+    // Временное логирование для отладки
+    console.log('Redirecting:', { from: originalUrl, to: finalUrlString });
+    return Response.redirect(finalUrlString, 301);
   }
 
   return NextResponse.next();

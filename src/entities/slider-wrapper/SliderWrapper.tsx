@@ -11,12 +11,14 @@ export const SliderWrapper = ({
   variant,
   className,
   itemsCount,
+  ...props
 }: {
   title: string;
   children: ReactNode;
   variant?: 'news' | 'product' | 'discount' | 'mini_product';
   className?: string;
   itemsCount: number;
+  [key: string]: any;
 }) => {
   const { isMobile } = useBreakpoint();
 
@@ -37,7 +39,7 @@ export const SliderWrapper = ({
   return (
     <div className={clsx(s.container, className)}>
       <h2 className="h2">{title}</h2>
-      <Slider itemWidth={itemWidth()} itemsCount={itemsCount}>
+      <Slider itemWidth={itemWidth()} itemsCount={itemsCount} {...props}>
         {children}
       </Slider>
     </div>

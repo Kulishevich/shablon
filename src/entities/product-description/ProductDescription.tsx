@@ -90,7 +90,7 @@ export const ProductDescription = ({
       {activeTag === 2 && (
         <div className={s.content}>
           <ul className={s.specifications}>
-            {product?.specifications?.slice(0, 3).map((elem) => (
+            {product?.specifications?.map((elem) => (
               <li className="body_3" key={elem.id}>
                 {elem?.name}
                 <span>{elem?.pivot?.value}</span>

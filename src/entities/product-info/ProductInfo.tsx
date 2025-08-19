@@ -64,18 +64,16 @@ export const ProductInfo = ({
           ))}
         </div>
 
-        <div className={clsx(s.sku, s.sku_mobile, 'body_7')} itemProp="sku">
+        <div className={clsx(s.sku, s.sku_mobile, 'body_7')}>
           Артикул: <span>{product?.sku}</span>
         </div>
-        <div className={s.rating} itemScope itemType="http://schema.org/AggregateRating">
-          <div className={s.startRating} itemProp="ratingValue">
+        <div className={s.rating}>
+          <div className={s.startRating}>
             {new Array(5).fill('').map((_, index) => (
               <StarIcon key={index} className={clsx(index < 5 && s.active)} />
             ))}
           </div>
-          <p className={clsx(s.reviews, 'body_7')} itemProp="reviewCount">
-            4 отзыва
-          </p>
+          <p className={clsx(s.reviews, 'body_7')}>4 отзыва</p>
         </div>
         <div className="h5">Характеристики:</div>
         <div>
@@ -101,7 +99,7 @@ export const ProductInfo = ({
       </div>
 
       <div className={s.price}>
-        <div className={s.priceContainer} itemScope itemType="http://schema.org/Offer">
+        <div className={s.priceContainer}>
           <div className={s.totalPrice}>
             <p className={clsx('h2', isDiscount && s.discount)} itemProp="price">
               {totalPrice} BYN
@@ -133,12 +131,10 @@ export const ProductInfo = ({
         </div>
 
         <div className={s.details}>
-          <div className={clsx(s.availability, 'body_6')} itemProp="availability">
-            в наличии
-          </div>
+          <div className={clsx(s.availability, 'body_6')}>в наличии</div>
 
           {advantages?.map((advantage) => (
-            <p className="body_7" key={advantage.id} itemProp="shippingDeliveryTime">
+            <p className="body_7" key={advantage.id}>
               <i className={clsx(advantage.icon, s.icon)} /> {advantage.title}
             </p>
           ))}
