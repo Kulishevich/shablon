@@ -4,7 +4,7 @@ import { ProductCard } from '@/entities/product-card';
 import { Pagination } from '@/shared/ui/pagination';
 import { Filters } from '@/features/filters';
 import { FiltersMobile } from '@/features/filters-mobile';
-import { ProductsResponseT } from '@/shared/api/product/types';
+import { FilterT, ProductsResponseT } from '@/shared/api/product/types';
 import { SortSelect } from '@/features/sort-select';
 import { SearchPageSearch } from '@/features/search-page-search';
 import { BrandT } from '@/shared/api/brands/types';
@@ -24,6 +24,7 @@ export const SearchSection = ({
   maxPrice,
   allCategories,
   currentPath,
+  filters,
 }: {
   products: ProductsResponseT | null;
   tags?: TagT[];
@@ -34,6 +35,7 @@ export const SearchSection = ({
   maxPrice: number;
   allCategories?: CategoryT[];
   currentPath: string;
+  filters: FilterT[];
 }) => {
   return (
     <div className={s.container}>
@@ -46,7 +48,14 @@ export const SearchSection = ({
       )}
 
       <div className={s.catalog}>
-        <Filters brands={brands} min={minPrice} max={maxPrice} categories={allCategories} />
+        <Filters
+          className="desktop-only"
+          brands={brands}
+          min={minPrice}
+          max={maxPrice}
+          categories={allCategories}
+          filters={filters}
+        />
         <div className={s.productsContainer}>
           <div className={s.search}>
             <SearchPageSearch />
@@ -57,22 +66,23 @@ export const SearchSection = ({
                 min={minPrice}
                 max={maxPrice}
                 categories={allCategories}
+                filters={filters}
               />
             </div>
           </div>
 
-          {products?.data && products.data.length > 0 ? (
+          {products?.data && products.data.data && products.data.data.length > 0 ? (
             <>
               <div className={s.productList} itemScope itemType="http://schema.org/ItemList">
                 <ReduxProvider>
-                  {products.data.map((product, index) => (
+                  {products.data.data.map((product, index) => (
                     <ProductCard key={index} product={product} />
                   ))}
                 </ReduxProvider>
               </div>
               <div className={s.pagination}>
-                <p className="body_7">Всего продуктов: {products.total || 0}</p>
-                <Pagination totalPages={products.last_page || 1} currentPage={page} />
+                <p className="body_7">Всего продуктов: {products.data.total || 0}</p>
+                <Pagination totalPages={products.data.last_page || 1} currentPage={page} />
               </div>
             </>
           ) : (

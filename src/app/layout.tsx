@@ -150,9 +150,13 @@ export default async function RootLayout({
         <HeaderDesktop
           categories={categories || []}
           contacts={contacts}
-          products={products?.data || []}
+          products={products?.data.data || []}
         />
-        <HeaderMobile categories={categories} contacts={contacts} products={products?.data || []} />
+        <HeaderMobile
+          categories={categories}
+          contacts={contacts}
+          products={products?.data.data || []}
+        />
         {children}
         <Footer categories={categories} contacts={contacts} />
         <Toaster />
