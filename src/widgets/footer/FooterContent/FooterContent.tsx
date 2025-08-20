@@ -28,33 +28,28 @@ export const FooterContent = ({
       <div className={s.catalogContainer}>
         <div className={s.elem}>
           <div className="h5">Каталог</div>
-          <div className={s.catalog} itemScope itemType="http://schema.org/SiteNavigationElement">
+          <ul className={s.catalog} itemScope itemType="http://schema.org/SiteNavigationElement">
             {categories?.map((category, index) => (
-              <Link
-                className="body_3"
-                href={`${paths.catalog}/${category.slug}`}
-                key={index}
-                itemProp="url"
-              >
-                {category.name}
-              </Link>
+              <li itemProp="name" key={index}>
+                <Link className="body_3" href={`${paths.catalog}/${category.slug}`} itemProp="url">
+                  {category.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className={s.elem}>
           <div className="h5">Покупателям</div>
-          <div
-            className={s.navigation}
-            itemScope
-            itemType="http://schema.org/SiteNavigationElement"
-          >
+          <ul className={s.navigation} itemScope itemType="http://schema.org/SiteNavigationElement">
             {navigation.slice(0, 7).map((nav, index) => (
-              <Link className="body_3" href={nav.path} key={index} itemProp="url">
-                {nav.title}
-              </Link>
+              <li itemProp="name" key={index}>
+                <Link className="body_3" href={nav.path} itemProp="url">
+                  {nav.title}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
 

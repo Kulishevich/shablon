@@ -18,10 +18,10 @@ export const HeaderDesktop = ({
 }) => {
   return (
     <>
-      <div className={s.container}>
+      <header className={s.container} data-header-desktop>
         <Navigation contacts={contacts} />
         <Search categories={categories} products={products} />
-      </div>
+      </header>
       <HeaderFixed categories={categories} contacts={contacts} products={products} />
     </>
   );

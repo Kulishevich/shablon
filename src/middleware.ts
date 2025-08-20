@@ -44,8 +44,6 @@ export function middleware(request: NextRequest) {
     if (/\/\/+/.test(pathPart)) {
       hasMultipleSlashes = true;
       needsRedirect = true;
-      // Временное логирование для отладки
-      console.log('Multiple slashes detected:', { originalUrl, pathPart, pathname });
     }
   }
 
@@ -57,6 +55,7 @@ export function middleware(request: NextRequest) {
     // Для главной страницы с множественными слешами (например //) устанавливаем /
     if (pathname === '/') {
       normalizedPath = '/';
+
     } else {
       // Для других путей убираем множественные слеши
       normalizedPath = normalizedPath.replace(/\/\/+/g, '/');
@@ -88,13 +87,11 @@ export function middleware(request: NextRequest) {
 
     // Защита от циклических редиректов
     if (finalUrlString === originalUrl) {
-      console.log('Preventing circular redirect:', { originalUrl, finalUrlString });
       return NextResponse.next();
     }
 
     // Временное логирование для отладки
-    console.log('Redirecting:', { from: originalUrl, to: finalUrlString });
-    return Response.redirect(finalUrlString, 301);
+    return NextResponse.redirect(finalUrlString, 301);
   }
 
   return NextResponse.next();

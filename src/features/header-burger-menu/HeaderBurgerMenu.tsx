@@ -47,19 +47,9 @@ export const HeaderBurgerMenu = ({
                 <CategoryItem key={index} category={category} onClose={() => setIsOpen(false)} />
               ))}
             </CollapseHeader>
-            <div
-              className={s.navigation}
-              itemScope
-              itemType="http://schema.org/SiteNavigationElement"
-            >
+            <div className={s.navigation}>
               {navigation.slice(0, 6).map((nav, index) => (
-                <Link
-                  className="h3"
-                  href={nav.path}
-                  key={index}
-                  onClick={() => setIsOpen(false)}
-                  itemProp="url"
-                >
+                <Link className="h3" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
                   {nav.title}
                 </Link>
               ))}

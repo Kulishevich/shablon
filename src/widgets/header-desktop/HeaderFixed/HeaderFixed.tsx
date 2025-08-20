@@ -23,19 +23,26 @@ export const HeaderFixed = ({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
+    const headerDesktop = document.querySelector('[data-header-desktop]');
 
-      if (scrollPosition >= windowHeight) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+    if (!headerDesktop) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Фиксированный хедер показывается когда основной хедер не виден
+        setIsVisible(!entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+        rootMargin: '0px',
       }
-    };
+    );
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    observer.observe(headerDesktop);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const handleToggle = () => {

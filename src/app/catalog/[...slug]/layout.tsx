@@ -6,6 +6,8 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import { enrichProductWithFullPath, validateProductPath } from '@/shared/lib/utils/productUtils';
 import { cookies } from 'next/headers';
+import { geCategoryMask } from '@/shared/api/meta-tags/geCategoryMask';
+import { getProductMask } from '@/shared/api/meta-tags/getProductMask';
 
 interface LayoutProps {
   params: Promise<{ slug: string[] }>;
@@ -25,9 +27,16 @@ export async function generateMetadata({
   const { category } = await getCategoryByPath({ slugs: slug, variant });
 
   if (category) {
+    const categoryMask = await geCategoryMask({ category, variant });
+
     return {
-      title: `${category.name} - Каталог`,
-      description: category.description || `Каталог товаров в категории ${category.name}`,
+      title: categoryMask?.title || category.name,
+      description: categoryMask?.description || category.description,
+      keywords: categoryMask?.keywords,
+      openGraph: {
+        title: categoryMask?.title || category.name,
+        description: categoryMask?.description || category.description,
+      },
     };
   }
 
@@ -36,6 +45,7 @@ export async function generateMetadata({
 
   if (product) {
     product = await enrichProductWithFullPath({ product, variant });
+    const productMask = await getProductMask({ product, variant });
 
     const isValidPath = await validateProductPath({ product, pathSlugs: slug, variant });
 
@@ -49,12 +59,14 @@ export async function generateMetadata({
     const seo = await getSeoTag({ tag: `/catalog/${slug.join('/')}`, variant });
 
     return {
-      title: seo?.title ?? product.name,
-      description: seo?.description ?? product.description.slice(0, 150),
-      keywords: seo?.keywords,
+      title: productMask?.title ?? seo?.title ?? product.name,
+      description:
+        productMask?.description ?? seo?.description ?? product.description.slice(0, 150),
+      keywords: productMask?.keywords ?? seo?.keywords,
       openGraph: {
-        title: seo?.og_title ?? product.name,
-        description: seo?.og_description ?? product.description.slice(0, 150),
+        title: productMask?.title ?? seo?.og_title ?? product.name,
+        description:
+          productMask?.description ?? seo?.og_description ?? product.description.slice(0, 150),
       },
     };
   }

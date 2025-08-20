@@ -30,7 +30,8 @@ export const NewsCard = async ({ news }: { news: NewsT }) => {
           itemProp="image"
         />
       </div>
-      <span className={clsx(s.date, 'tag')} itemProp="datePublished">
+      <span className={clsx(s.date, 'tag')}>
+        <meta itemProp="datePublished" content={news?.created_at || ''} />
         {new Date(news?.created_at || '').toLocaleString('ru-RU', {
           day: '2-digit',
           month: '2-digit',
@@ -38,7 +39,7 @@ export const NewsCard = async ({ news }: { news: NewsT }) => {
         })}
       </span>
       <div className={s.content}>
-        <div className="h5" itemProp="name">
+        <div className="h5" itemProp="headline">
           {news?.title}
         </div>
         <Button as={'p'} variant="link" className={s.button} itemProp="mainEntityOfPage">
