@@ -15,7 +15,7 @@ export default async function News({ searchParams }: { searchParams: Promise<{ p
 
   return (
     <>
-      <CanonicalLink href={'/news'} />
+      <CanonicalLink href={'news'} />
       <Breadcrumbs />
       <main>
         <NewsSection newsList={newsList} page={page} />

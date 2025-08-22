@@ -1,7 +1,13 @@
 'use client';
 import React, { useState } from 'react';
 import s from './ProductInfo.module.scss';
-import { ArrowLeftIcon, ArrowRightIcon, ArrowRightUpIcon, StarIcon } from '@/shared/assets';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowRightUpIcon,
+  ShoppingCartIcon,
+  StarIcon,
+} from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
@@ -24,11 +30,9 @@ export const ProductInfo = ({
   const isDiscount = !!Number(product?.discount);
   const dispatch = useDispatch();
 
-  console.log(product);
-
   const totalPrice = !!product?.discount
-    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100) * count
-    : Number(product?.price) * count;
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
+    : Number(product?.price);
 
   const changeCountValue = (value: string) => {
     const numericValue = value.replace(/\D/g, '');
@@ -70,13 +74,15 @@ export const ProductInfo = ({
         <div className={s.rating}>
           <div className={s.startRating}>
             {new Array(5).fill('').map((_, index) => (
-              <StarIcon key={index} className={clsx(index < 5 && s.active)} />
+              <StarIcon key={index} className={clsx(index < product?.rating && s.active)} />
             ))}
           </div>
-          <p className={clsx(s.reviews, 'body_7')}>4 отзыва</p>
+          <Link href="?reviews=1#characteristics" className={clsx(s.reviews, 'body_7')}>
+            {product?.reviews_count} отзыва
+          </Link>
         </div>
         <div className="h5">Характеристики:</div>
-        <div>
+        <div className={s.specificationsContainer}>
           <ul className={s.specifications}>
             {product?.specifications?.slice(0, 3).map((elem) => (
               <li className="body_3" key={elem.id}>
@@ -106,7 +112,7 @@ export const ProductInfo = ({
             </p>
             {isDiscount && (
               <span className="discount" itemProp="price">
-                {Number(product?.price) * count} byn
+                {Number(product?.price)} byn
               </span>
             )}
           </div>
@@ -124,8 +130,16 @@ export const ProductInfo = ({
                 <ArrowRightIcon />
               </Button>
             </div>
-            <Button onClick={handleAddInCard} fullWidth>
+            <Button onClick={handleAddInCard} fullWidth className={'desktop-only'}>
               В корзину
+            </Button>
+            <Button
+              variant={'icon_outlined'}
+              className={clsx(s.cartButton, 'mobile-only')}
+              onClick={handleAddInCard}
+              aria-label="В корзину"
+            >
+              <ShoppingCartIcon />
             </Button>
           </div>
         </div>

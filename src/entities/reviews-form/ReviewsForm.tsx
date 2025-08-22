@@ -11,12 +11,18 @@ import { ReviewsFormScheme } from '@/shared/validation/reviews-scheme-creator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
 import { ControlledRatingField } from '@/shared/ui/controlled-rating-field';
-import { postReview } from '@/shared/api/reviews/postReview';
 import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
+import { postProductReview } from '@/shared/api/reviews/postProductReview';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-export const ReviewsForm = ({ closeModal }: { closeModal: () => void }) => {
+export const ReviewsForm = ({
+  closeModal,
+  productId,
+}: {
+  closeModal: () => void;
+  productId: string;
+}) => {
   const [variant, setVariant] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -46,7 +52,7 @@ export const ReviewsForm = ({ closeModal }: { closeModal: () => void }) => {
 
   const formHandler = handleSubmit(async (data) => {
     try {
-      const response = await postReview({ review: data, variant });
+      const response = await postProductReview({ review: data, variant, productId });
 
       if (response?.success) {
         showToast({

@@ -10,10 +10,10 @@ export const Navigation = ({ contacts }: { contacts: ContactsT | null }) => {
     <div className={s.container}>
       <div className={s.content}>
         <nav className={s.navigation}>
-          <ul itemScope itemType="http://www.schema.org/SiteNavigationElement">
+          <ul>
             {navigation.slice(0, 6).map((nav, index) => (
-              <li itemProp="name" key={index}>
-                <Link className="body_3" href={nav.path} itemProp="url">
+              <li key={index}>
+                <Link className="body_3" href={nav.path}>
                   {nav.title === 'Акции' && <DiscountCircleIcon />}
                   {nav.title}
                 </Link>

@@ -27,6 +27,9 @@ export const OrderForm = ({
   const paymentMethodId = watch('payment_method_id');
   const deliveryCost = watch('delivery_cost');
 
+  // Определяем самовывоз как метод доставки с нулевой стоимостью
+  const isPickup = deliveryCost === 0;
+
   return (
     <div className={s.container}>
       <div className={s.elem}>
@@ -69,7 +72,6 @@ export const OrderForm = ({
             name="patronymic"
             placeholder="Отчество"
             label="Отчество(если есть)"
-            isRequired
           />
         </div>
       </div>
@@ -99,33 +101,35 @@ export const OrderForm = ({
         </div>
       </div>
 
-      <div className={s.elem}>
-        <div className={s.title}>
-          <span className="h6">3</span>
-          <p className="h3">Укажите адрес доставки</p>
+      {!isPickup && (
+        <div className={s.elem}>
+          <div className={s.title}>
+            <span className="h6">3</span>
+            <p className="h3">Укажите адрес доставки</p>
+          </div>
+          <div className={s.address}>
+            <ControlledTextField
+              control={control}
+              name="address"
+              label="Адрес доставки"
+              placeholder="Введите адрес доставки"
+              isRequired
+              disabled={!deliveryCost}
+            />
+            <ControlledTextArea
+              control={control}
+              name="comment"
+              label="Комментарий"
+              placeholder="Комментарий"
+              className={s.textarea}
+            />
+          </div>
         </div>
-        <div className={s.address}>
-          <ControlledTextField
-            control={control}
-            name="address"
-            label="Адрес доставки"
-            placeholder="Введите адрес доставки"
-            isRequired
-            disabled={!deliveryCost}
-          />
-          <ControlledTextArea
-            control={control}
-            name="comment"
-            label="Комментарий"
-            placeholder="Комментарий"
-            className={s.textarea}
-          />
-        </div>
-      </div>
+      )}
 
       <div className={s.elem}>
         <div className={s.title}>
-          <span className="h6">4</span>
+          <span className="h6">{isPickup ? '3' : '4'}</span>
           <p className="h3">Способ оплаты</p>
         </div>
         <div className={s.paymentMethod}>

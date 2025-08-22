@@ -41,7 +41,6 @@ export const createProductJsonLd = (
       reviewRating: {
         '@type': 'Rating',
         ratingValue: review.rating,
-        bestRating: 5,
       },
       reviewBody: review.review_text,
       datePublished: review.published_at,
@@ -81,8 +80,6 @@ export const createProductJsonLd = (
         '@type': 'AggregateRating',
         ratingValue: averageRating,
         reviewCount: reviews?.length || 0,
-        bestRating: 5,
-        worstRating: 1,
       },
     }),
     ...(reviewsData.length > 0 && { review: reviewsData }),

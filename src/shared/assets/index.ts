@@ -39,3 +39,4 @@ export { default as PhoneOutlinedIcon } from './PhoneOutlinedIcon';
 export { default as BurgerMobileIcon } from './BurgerMobileIcon';
 export { default as FilterIcon } from './FilterIcon';
 export { default as StarIcon } from './StarIcon';
+export { default as Loader } from './Loader';

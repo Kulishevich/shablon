@@ -13,7 +13,7 @@ export const SliderWrapper = ({
   itemsCount,
   ...props
 }: {
-  title: string;
+  title?: string;
   children: ReactNode;
   variant?: 'news' | 'product' | 'discount' | 'mini_product';
   className?: string;
@@ -38,7 +38,7 @@ export const SliderWrapper = ({
 
   return (
     <div className={clsx(s.container, className)}>
-      <h2 className="h2">{title}</h2>
+      {title && <h2 className="h2">{title}</h2>}
       <Slider itemWidth={itemWidth()} itemsCount={itemsCount} {...props}>
         {children}
       </Slider>

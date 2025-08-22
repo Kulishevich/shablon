@@ -66,8 +66,8 @@ export const ProductSection = ({
           <ProductDescription
             product={product}
             reviews={reviews}
-            variant={variant}
             deliveryAndPayment={deliveryAndPayment}
+            variant={variant}
           />
         </ReduxProvider>
       </div>

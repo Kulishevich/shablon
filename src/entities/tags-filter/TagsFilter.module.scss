@@ -13,6 +13,12 @@
   }
 }
 
+.swiper {
+  .slide {
+    width: fit-content;
+  }
+}
+
 .tag {
   background-color: var(--color-bg-card);
   border-radius: 4px;
@@ -24,11 +30,13 @@
   transition: all 0.2s ease;
 
   &:hover {
+    color: var(--color-text);
   }
 
   &.active {
+    background-color: var(--color-button);
     border-color: var(--color-button);
-    color: var(--color-button);
+    color: var(--color-text);
   }
 
   @media (max-width: 768px) {

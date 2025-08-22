@@ -16,8 +16,12 @@ export const replaceCategoryMaskTemplates = (
 ): CategoryMaskT => {
   const replacements: Record<string, string> = {
     '{{название категории}}': category.name,
+    '{{Название категории}}': category.name,
+    '{{описание категории}}': category.description || '',
     '{{Описание категории}}': category.description || '',
+    '{{родительская категория}}': parentCategory?.name || '',
     '{{Родительская категория}}': parentCategory?.name || '',
+    '{{количество товаров}}': category.products_count?.toString() || '',
     '{{Количество товаров}}': category.products_count?.toString() || '',
   };
 

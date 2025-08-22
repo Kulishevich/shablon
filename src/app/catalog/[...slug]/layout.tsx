@@ -27,15 +27,18 @@ export async function generateMetadata({
   const { category } = await getCategoryByPath({ slugs: slug, variant });
 
   if (category) {
+    const seo = await getSeoTag({ tag: category.slug, variant });
     const categoryMask = await geCategoryMask({ category, variant });
 
     return {
-      title: categoryMask?.title || category.name,
-      description: categoryMask?.description || category.description,
-      keywords: categoryMask?.keywords,
+      title: seo?.title || categoryMask?.title || category.name,
+      description:
+        seo?.description || categoryMask?.description || category.description.slice(0, 150),
+      keywords: seo?.keywords || categoryMask?.keywords,
       openGraph: {
-        title: categoryMask?.title || category.name,
-        description: categoryMask?.description || category.description,
+        title: seo?.og_title || categoryMask?.title || category.name,
+        description:
+          seo?.og_description || categoryMask?.description || category.description.slice(0, 150),
       },
     };
   }
@@ -45,6 +48,7 @@ export async function generateMetadata({
 
   if (product) {
     product = await enrichProductWithFullPath({ product, variant });
+    const seo = await getSeoTag({ tag: product.slug, variant });
     const productMask = await getProductMask({ product, variant });
 
     const isValidPath = await validateProductPath({ product, pathSlugs: slug, variant });
@@ -56,17 +60,15 @@ export async function generateMetadata({
       };
     }
 
-    const seo = await getSeoTag({ tag: `/catalog/${slug.join('/')}`, variant });
-
     return {
-      title: productMask?.title ?? seo?.title ?? product.name,
+      title: seo?.title ?? productMask?.title ?? product.name,
       description:
-        productMask?.description ?? seo?.description ?? product.description.slice(0, 150),
-      keywords: productMask?.keywords ?? seo?.keywords,
+        seo?.description ?? productMask?.description ?? product.description.slice(0, 150),
+      keywords: seo?.keywords ?? productMask?.keywords,
       openGraph: {
-        title: productMask?.title ?? seo?.og_title ?? product.name,
+        title: seo?.og_title ?? productMask?.title ?? product.name,
         description:
-          productMask?.description ?? seo?.og_description ?? product.description.slice(0, 150),
+          seo?.og_description ?? productMask?.description ?? product.description.slice(0, 150),
       },
     };
   }

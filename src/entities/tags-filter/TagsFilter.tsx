@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { TagT } from '@/shared/api/tags/types';
 import s from './TagsFilter.module.scss';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 interface TagsFilterProps {
   tags: TagT[];
@@ -31,7 +33,8 @@ export const TagsFilter: React.FC<TagsFilterProps> = ({ tags, currentPath }) => 
     params.delete('page');
     params.delete('q');
 
-    const newUrl = `${currentPath}${currentPath.includes('?') ? '&' : '?'}${params.toString()}`;
+    const newUrl = `${currentPath.includes('?') ? '&' : '?'}${params.toString()}`;
+
     router.push(newUrl);
   };
 
@@ -40,23 +43,45 @@ export const TagsFilter: React.FC<TagsFilterProps> = ({ tags, currentPath }) => 
   }
 
   return (
-    <div className={s.container}>
-      {tags.map((tag) => {
-        const isActive = activeTagName === tag.name.toString();
+    <>
+      <div className={clsx(s.container, 'desktop-only')}>
+        {tags.map((tag) => {
+          const isActive = activeTagName === tag.name.toString();
 
-        return (
-          <button
-            key={tag.id}
-            type="button"
-            className={clsx(s.tag, 'h3', isActive && s.active)}
-            style={{ backgroundColor: tag.color }}
-            onClick={() => handleTagClick(tag.name)}
-            title={`Фильтр по тегу: ${tag.name}`}
-          >
-            {tag.name}
-          </button>
-        );
-      })}
-    </div>
+          return (
+            <button
+              key={tag.id}
+              type="button"
+              className={clsx(s.tag, 'h3', isActive && s.active)}
+              style={{ background: tag.color }}
+              onClick={() => handleTagClick(tag.name)}
+              title={`Фильтр по тегу: ${tag.name}`}
+            >
+              {tag.name}
+            </button>
+          );
+        })}
+      </div>
+
+      <Swiper slidesPerView={'auto'} spaceBetween={16} className={clsx(s.swiper, 'mobile-only')}>
+        {tags.map((tag) => {
+          const isActive = activeTagName === tag.name.toString();
+
+          return (
+            <SwiperSlide key={tag.id} className={s.slide}>
+              <button
+                type="button"
+                className={clsx(s.tag, 'h3', isActive && s.active)}
+                style={{ background: tag.color }}
+                onClick={() => handleTagClick(tag.name)}
+                title={`Фильтр по тегу: ${tag.name}`}
+              >
+                {tag.name}
+              </button>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
   );
 };

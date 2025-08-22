@@ -38,7 +38,9 @@ export default async function New({ params }: { params: Promise<{ slug: string }
         <NewsInfoSection news={news} variant={variant} />
         {!!otherNews?.length && (
           <SliderWrapper title="Другие новости" variant="news" itemsCount={otherNews?.length}>
-            {otherNews?.map((news, index) => <NewsCard key={index} news={news} />)}
+            {otherNews?.map((news, index) => (
+              <NewsCard key={index} news={news} enableMicrodata={false} />
+            ))}
           </SliderWrapper>
         )}
         <SeoBlock page={`/news/${news?.slug}`} />

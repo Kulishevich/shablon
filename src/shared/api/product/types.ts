@@ -66,6 +66,8 @@ export type ProductT = {
   brand: BrandT;
   fullPath?: string[]; // Полный путь до продукта [category1, category2, ..., product]
   tags: ProductTag[];
+  reviews_count: number;
+  rating: number;
 };
 
 type BreadcrumbItem = {

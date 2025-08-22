@@ -10,28 +10,35 @@ import { NewsT } from '@/shared/api/news/types';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { cookies } from 'next/headers';
 
-export const NewsCard = async ({ news }: { news: NewsT }) => {
+interface NewsCardProps {
+  news: NewsT;
+  enableMicrodata?: boolean;
+}
+
+export const NewsCard = async ({ news, enableMicrodata = true }: NewsCardProps) => {
   const cookieStore = await cookies();
   const variant = cookieStore.get('variant')?.value;
 
+  const linkProps = enableMicrodata
+    ? {
+        itemScope: true,
+        itemType: 'http://schema.org/BlogPosting',
+        itemProp: 'blogPost',
+      }
+    : {};
+
   return (
-    <Link
-      href={`${paths.news}/${news?.slug}`}
-      className={s.cotnainer}
-      itemScope
-      itemType="http://schema.org/BlogPosting"
-      itemProp="blogPost"
-    >
+    <Link href={`${paths.news}/${news?.slug}`} className={s.cotnainer} {...linkProps}>
       <div className={s.imageContainer}>
         <Image
           src={`${getStoreBaseUrl(variant)}/${news?.photo_path}`}
           fill
           alt="news"
-          itemProp="image"
+          {...(enableMicrodata && { itemProp: 'image' })}
         />
       </div>
       <span className={clsx(s.date, 'tag')}>
-        <meta itemProp="datePublished" content={news?.created_at || ''} />
+        {enableMicrodata && <meta itemProp="datePublished" content={news?.created_at || ''} />}
         {new Date(news?.created_at || '').toLocaleString('ru-RU', {
           day: '2-digit',
           month: '2-digit',
@@ -39,10 +46,15 @@ export const NewsCard = async ({ news }: { news: NewsT }) => {
         })}
       </span>
       <div className={s.content}>
-        <div className="h5" itemProp="headline">
+        <div className="h5" {...(enableMicrodata && { itemProp: 'headline' })}>
           {news?.title}
         </div>
-        <Button as={'p'} variant="link" className={s.button} itemProp="mainEntityOfPage">
+        <Button
+          as={'p'}
+          variant="link"
+          className={s.button}
+          {...(enableMicrodata && { itemProp: 'mainEntityOfPage' })}
+        >
           Подробнее
           <ArrowRightUpIcon />
         </Button>

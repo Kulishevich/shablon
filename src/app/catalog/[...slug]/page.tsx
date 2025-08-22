@@ -26,6 +26,7 @@ import { getDeliveryAndPayment } from '@/shared/api/delivery-and-payment/getDeli
 import { getTags } from '@/shared/api/tags/getTags';
 import { parseFiltersFromSearchParams } from '@/shared/lib/utils/filtersUtils';
 import { convertProductsBrandsToStandardBrands } from '@/shared/lib/utils/brandUtils';
+import { getProductReview } from '@/shared/api/reviews/getProductReview';
 
 export default async function Catalog({
   params,
@@ -323,7 +324,7 @@ async function renderCatalogSection({
   ];
 
   // Формируем канонический URL
-  const canonicalUrl = `/catalog/${slug.join('/')}`;
+  const canonicalUrl = `catalog/${slug.join('/')}`;
 
   return (
     <>
@@ -355,7 +356,7 @@ async function renderProductSection(product: ProductT, slug: string[]) {
   const cookieStore = await cookies();
   const variant = cookieStore.get('variant')?.value;
 
-  const reviews = await getReviews({ variant });
+  const reviews = await getProductReview({ variant, productId: product.id.toString() });
   const advantages = await getProductsAdvantages({ variant });
   const deliveryAndPayment = await getDeliveryAndPayment({ variant });
 
@@ -370,7 +371,7 @@ async function renderProductSection(product: ProductT, slug: string[]) {
     },
   ];
 
-  const canonicalUrl = `/catalog/${slug.join('/')}`;
+  const canonicalUrl = `catalog/${slug.join('/')}`;
 
   return (
     <>

@@ -1,11 +1,11 @@
 import {
   checkedScheme,
-  commentScheme,
   nameScheme,
   phoneScheme,
   titleScheme,
   ratingScheme,
   imageFileScheme,
+  commentReviewScheme,
 } from '@/shared/validation/validation';
 import { z } from 'zod';
 
@@ -14,7 +14,7 @@ export const ReviewsFormScheme = () => {
     name: nameScheme(),
     phone: phoneScheme(),
     title: titleScheme(),
-    comment: commentScheme(),
+    comment: commentReviewScheme(),
     rating: ratingScheme(),
     photo: imageFileScheme(),
     checked: checkedScheme(),

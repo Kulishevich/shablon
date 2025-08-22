@@ -9,16 +9,14 @@ import { HeaderBurgerMenu } from '@/features/header-burger-menu';
 import { HeaderSearchPopup } from '@/features/header-search-popup';
 import { CategoryT } from '@/shared/api/category/types';
 import { ContactsT } from '@/shared/api/design/types';
-import { ProductT } from '@/shared/api/product/types';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 
 export const HeaderMobile = ({
   categories,
   contacts,
-  products,
 }: {
   categories: CategoryT[] | null;
   contacts: ContactsT | null;
-  products: ProductT[];
 }) => {
   return (
     <div className={s.container}>
@@ -32,7 +30,9 @@ export const HeaderMobile = ({
         >
           <PhoneOutlinedIcon />
         </Button>
-        <HeaderSearchPopup categories={categories} products={products} />
+        <ReduxProvider>
+          <HeaderSearchPopup categories={categories} />
+        </ReduxProvider>
         <Button variant="icon_secondary" as={Link} href={paths.cart} aria-label="Корзина">
           <ShoppingCartIcon />
         </Button>

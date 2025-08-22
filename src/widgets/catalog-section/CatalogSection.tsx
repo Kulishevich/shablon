@@ -13,6 +13,7 @@ import { TagT } from '@/shared/api/tags/types';
 import { TagsFilter } from '@/entities/tags-filter';
 import { SeoBlock } from '@/entities/seo-block';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import Script from 'next/script';
 
 export const CatalogSection = ({
   products,
@@ -41,6 +42,25 @@ export const CatalogSection = ({
 }) => {
   return (
     <div className={s.container}>
+      {category && (
+        <Script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Product',
+              name: category.name,
+              offers: {
+                '@type': 'AggregateOffer',
+                offerCount: products?.data?.total || 0,
+                highPrice: maxPrice,
+                lowPrice: products?.price_range?.min || 0,
+                priceCurrency: 'BYN',
+              },
+            }),
+          }}
+        />
+      )}
       <h1 className="h1">{category?.name}</h1>
       {tags && tags.length > 0 && (
         <div className={s.navigation}>

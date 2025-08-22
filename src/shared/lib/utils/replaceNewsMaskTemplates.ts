@@ -35,9 +35,13 @@ export const replaceNewsMaskTemplates = (
   };
 
   const replacements: Record<string, string> = {
+    '{{заголовок новости}}': news.title || '',
     '{{Заголовок новости}}': news.title || '',
+    '{{подзаголовок новости}}': news.subtitle || '',
     '{{Подзаголовок новости}}': news.subtitle || '',
+    '{{дата публикации}}': formatPublicationDate(news.publication_date),
     '{{Дата публикации}}': formatPublicationDate(news.publication_date),
+    '{{теги новости}}': formatTags(news.tags),
     '{{Теги новости}}': formatTags(news.tags),
   };
 

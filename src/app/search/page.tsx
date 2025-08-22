@@ -3,8 +3,6 @@ import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/widgets/feedback/Feedback';
-
-import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
 import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { SeoBlock } from '@/entities/seo-block';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
@@ -98,18 +96,11 @@ export default async function SearchPage({
     });
   }
 
-  const allProducts = await getProductsWithoutPagination({
-    search: q,
-  });
-
   // Получаем дерево категорий для фильтров
   const { getCategoriesTree } = await import('@/shared/api/category/getCategoriesTree');
   const allCategories = await getCategoriesTree({ variant });
 
   const allTags = await getTags({ variant });
-
-  const prices = allProducts?.map((product) => Number(product.price)) ?? [];
-  const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
 
   // Формируем breadcrumbs
   const breadcrumbsPath = [
@@ -134,7 +125,7 @@ export default async function SearchPage({
           page={page || '1'}
           brands={convertProductsBrandsToStandardBrands(products?.brands || [])}
           minPrice={0}
-          maxPrice={maxPrice}
+          maxPrice={Math.round(products?.price_range.max || 0)}
           allCategories={allCategories || undefined}
           currentPath={canonicalUrl}
           filters={products?.filters || []}

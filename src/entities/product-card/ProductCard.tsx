@@ -97,17 +97,10 @@ export const ProductCard = ({
   };
 
   return (
-    <Link
-      className={s.container}
-      itemProp="itemListElement"
-      itemScope
-      itemType="http://schema.org/Product"
-      href={buildProductUrlSync({ product, variant })}
-    >
+    <Link className={s.container} href={buildProductUrlSync({ product, variant })}>
       <div className={s.imageContainer}>
         <div>
           <Image
-            itemProp="image"
             src={`${getStoreBaseUrl(variant)}/${main_image?.image_path}`}
             fill
             alt="product"
@@ -132,31 +125,21 @@ export const ProductCard = ({
         )}
       </div>
       <div className={s.info}>
-        <div
-          className={s.rating}
-          itemProp="aggregateRating"
-          content={'5'}
-          itemType="https://schema.org/AggregateRating"
-          itemScope
-        >
-          <meta itemProp="ratingValue" content={'5'} />
-          <meta itemProp="ratingCount" content={'100'} />
+        <div className={s.rating}>
           {Array.from({ length: 5 }).map((_, index) => (
-            <StarIcon key={index} className={clsx(s.star, { [s.active]: index < 4 })} />
+            <StarIcon
+              key={index}
+              className={clsx(s.star, { [s.active]: index < product?.rating })}
+            />
           ))}
         </div>
         <div className={s.availability}>
-          <span className={clsx(s.availabilityText, 'body_6')} itemProp="availability">
-            в наличии
-          </span>
+          <span className={clsx(s.availabilityText, 'body_6')}>в наличии</span>
         </div>
       </div>
-      <div className={clsx(s.title, 'h5')} itemProp="name">
-        {name}
-      </div>
+      <div className={clsx(s.title, 'h5')}>{name}</div>
       <div
         className={clsx(s.description, 'body_5')}
-        itemProp="description"
         dangerouslySetInnerHTML={{ __html: description || '' }}
       />
 
@@ -172,15 +155,14 @@ export const ProductCard = ({
           className={s.priceContainer}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
         >
-          <div className={s.price} itemScope itemProp="offers" itemType="http://schema.org/Offer">
+          <div className={s.price}>
             {is_discount && (
               <span className="discount">
-                <span itemProp="highPrice">{product?.price}</span> BYN
+                <span>{product?.price}</span> BYN
               </span>
             )}
             <div className="h4">
-              <meta itemProp="priceCurrency" content="BYN" />
-              <span itemProp={'price'}>{totalPrice}</span> BYN
+              <span>{totalPrice}</span> BYN
             </div>
           </div>
           {productInCart && (

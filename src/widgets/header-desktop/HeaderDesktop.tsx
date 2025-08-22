@@ -10,19 +10,17 @@ import { HeaderFixed } from './HeaderFixed';
 export const HeaderDesktop = ({
   categories,
   contacts,
-  products,
 }: {
   categories: CategoryT[];
   contacts: ContactsT | null;
-  products: ProductT[];
 }) => {
   return (
     <>
       <header className={s.container} data-header-desktop>
         <Navigation contacts={contacts} />
-        <Search categories={categories} products={products} />
+        <Search categories={categories} />
       </header>
-      <HeaderFixed categories={categories} contacts={contacts} products={products} />
+      <HeaderFixed categories={categories} contacts={contacts} />
     </>
   );
 };

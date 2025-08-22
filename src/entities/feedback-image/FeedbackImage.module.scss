@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .titleContainer {
   display: flex;
@@ -22,6 +22,7 @@
     height: vw-1440(355);
     border-radius: 6px;
     overflow: hidden;
+    flex: 1 1 auto;
 
     & > img {
       object-fit: cover;

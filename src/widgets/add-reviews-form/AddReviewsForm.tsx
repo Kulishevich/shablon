@@ -7,7 +7,13 @@ import { CloseIcon } from '@/shared/assets';
 import { ReviewsForm } from '@/entities/reviews-form';
 import { Button } from '@/shared/ui/button';
 
-export const AddReviewsForm = ({ children }: { children: ReactNode }) => {
+export const AddReviewsForm = ({
+  children,
+  productId,
+}: {
+  children: ReactNode;
+  productId: string;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,7 +25,7 @@ export const AddReviewsForm = ({ children }: { children: ReactNode }) => {
             <Dialog.Title>Форма добавления отзыва</Dialog.Title>
           </VisuallyHidden>
           <Dialog.Content className={s.content}>
-            <ReviewsForm closeModal={() => setIsOpen(false)} />
+            <ReviewsForm closeModal={() => setIsOpen(false)} productId={productId} />
             <Dialog.DialogClose asChild>
               <Button className={s.closeButton}>
                 <CloseIcon />

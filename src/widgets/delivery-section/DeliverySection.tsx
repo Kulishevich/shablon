@@ -16,8 +16,8 @@ export const DeliverySection = ({
   return (
     <div className={s.wrapper}>
       <h1 className="h1">Доставка и оплата</h1>
-      {content?.map((item) => (
-        <Collapse title={item.title} key={item.id}>
+      {content?.map((item, index) => (
+        <Collapse title={item.title} key={item.id} initialOpen={index === 0}>
           <div className={s.container} dangerouslySetInnerHTML={{ __html: item.content }} />
           {contacts?.address && (
             <>

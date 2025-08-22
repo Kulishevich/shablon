@@ -15,12 +15,12 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
     const newsMask = await getNewsMask({ news, variant });
 
     return {
-      title: newsMask?.title ?? seo?.title ?? news?.title,
-      description: newsMask?.description ?? seo?.description ?? news?.content?.slice(0, 150),
-      keywords: newsMask?.keywords ?? seo?.keywords,
+      title: seo?.title ?? newsMask?.title ?? news?.title,
+      description: seo?.description ?? newsMask?.description ?? news?.content?.slice(0, 150),
+      keywords: seo?.keywords ?? newsMask?.keywords,
       openGraph: {
-        title: newsMask?.title ?? seo?.og_title ?? news?.title,
-        description: newsMask?.description ?? seo?.og_description ?? news?.content?.slice(0, 150),
+        title: seo?.og_title ?? newsMask?.title ?? news?.title,
+        description: seo?.og_description ?? newsMask?.description ?? news?.content?.slice(0, 150),
       },
     };
   }
