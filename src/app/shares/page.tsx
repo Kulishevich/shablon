@@ -20,7 +20,7 @@ export default async function Shares({
 
   return (
     <>
-      <CanonicalLink href={'/shares'} />
+      <CanonicalLink href={'shares'} />
 
       <Breadcrumbs />
       <main>

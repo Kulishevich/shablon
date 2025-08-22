@@ -5,21 +5,14 @@ import { BurgerButton } from '@/entities/burger-button';
 import { SearchInput } from '@/entities/search-input';
 import { CartButton } from '@/entities/cart-button';
 import { CategoryT } from '@/shared/api/category/types';
-import { ProductT } from '@/shared/api/product/types';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 
-export const Search = ({
-  categories,
-  products,
-}: {
-  categories: CategoryT[] | null;
-  products: ProductT[];
-}) => {
+export const Search = ({ categories }: { categories: CategoryT[] | null }) => {
   return (
     <div className={s.container}>
       <Logo variant="primary" />
       <BurgerButton categories={categories} />
-      <SearchInput categories={categories} products={products} />
+      <SearchInput categories={categories} />
       <ReduxProvider>
         <CartButton />
       </ReduxProvider>

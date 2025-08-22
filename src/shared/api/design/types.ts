@@ -47,6 +47,7 @@ export type SettingsT = {
     button_text: string | null;
     button_url: string | null;
     photo: string | null;
+    mobile_photo: string | null;
   };
   block_status: {
     contacts_enabled: boolean;

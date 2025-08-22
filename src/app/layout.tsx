@@ -77,10 +77,9 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const variant = cookieStore.get('variant')?.value;
 
-  const [categories, contacts, products, settings, seoSettings] = await Promise.all([
+  const [categories, contacts, settings, seoSettings] = await Promise.all([
     getCategories({ variant }),
     getContacts({ variant }),
-    getProducts({ variant }),
     getSetting({ variant }),
     getSeoSettings({ variant }),
   ]);
@@ -147,16 +146,8 @@ export default async function RootLayout({
           />
         )}
 
-        <HeaderDesktop
-          categories={categories || []}
-          contacts={contacts}
-          products={products?.data.data || []}
-        />
-        <HeaderMobile
-          categories={categories}
-          contacts={contacts}
-          products={products?.data.data || []}
-        />
+        <HeaderDesktop categories={categories || []} contacts={contacts} />
+        <HeaderMobile categories={categories} contacts={contacts} />
         {children}
         <Footer categories={categories} contacts={contacts} />
         <Toaster />

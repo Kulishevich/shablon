@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   position: relative;
@@ -45,11 +45,14 @@
 
   .imageContainer {
     position: relative;
-    width: 100%;
-    height: vw-1440(266);
+    width: calc(100% + vw-1440(72));
+    margin-left: vw-1440(-36);
+    margin-bottom: vw-1440(-36);
+    height: vw-1440(302);
 
     & > img {
       object-fit: contain;
+      object-position: bottom;
     }
 
     &.mediumImage {
@@ -66,7 +69,10 @@
     }
 
     @media (max-width: 768px) {
-      height: 133px;
+      height: 149px;
+      width: calc(100% + 32px);
+      margin-left: -16px;
+      margin-bottom: -16px;
     }
   }
 }

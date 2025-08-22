@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   width: vw-1440(306);
@@ -139,7 +139,13 @@
 
 .title {
   margin-bottom: vw-1440(8);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
   flex: 1;
+
   @media (max-width: 768px) {
     margin-bottom: 4px;
   }

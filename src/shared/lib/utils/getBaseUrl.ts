@@ -13,3 +13,11 @@ export const getStoreBaseUrl = (variant?: string) => {
 
   return baseApiUrl;
 };
+
+export const getSiteBaseUrl = (variant?: string) => {
+  const baseApiUrl = variant
+    ? `https://${variant}.webspaceteam.by`
+    : process.env.NEXT_PUBLIC_SITE_URL;
+
+  return baseApiUrl;
+};

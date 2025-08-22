@@ -5,7 +5,6 @@ import { Search } from '../Search/Search';
 import s from './HeaderFixed.module.scss';
 import { CategoryT } from '@/shared/api/category/types';
 import { ContactsT } from '@/shared/api/design/types';
-import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
 import { ArrowRightIcon } from '@/shared/assets';
 import { motion as m } from 'framer-motion';
@@ -13,29 +12,34 @@ import { motion as m } from 'framer-motion';
 export const HeaderFixed = ({
   categories,
   contacts,
-  products,
 }: {
   categories: CategoryT[];
   contacts: ContactsT | null;
-  products: ProductT[];
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
+    const headerDesktop = document.querySelector('[data-header-desktop]');
 
-      if (scrollPosition >= windowHeight) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+    if (!headerDesktop) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Фиксированный хедер показывается когда основной хедер не виден
+        setIsVisible(!entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+        rootMargin: '0px',
       }
-    };
+    );
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    observer.observe(headerDesktop);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const handleToggle = () => {
@@ -51,7 +55,7 @@ export const HeaderFixed = ({
     >
       <div className={clsx(s.inner, isOpen && s.open)}>
         <Navigation contacts={contacts} />
-        <Search categories={categories} products={products} />
+        <Search categories={categories} />
       </div>
 
       <button className={s.button} onClick={handleToggle} aria-label="Открыть/закрыть меню">

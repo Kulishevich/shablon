@@ -20,6 +20,14 @@
     position: relative;
     z-index: 1;
 
+    p {
+      mix-blend-mode: difference;
+    }
+
+    span > p {
+      mix-blend-mode: initial;
+    }
+
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: center;

@@ -8,9 +8,13 @@ import { ProductT } from '@/shared/api/product/types';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import Cookies from 'js-cookie';
+import { showToast } from '@/shared/ui/toast';
+import { addInCart } from '@/shared/lib/redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
 
 export const SearchProductCard = ({ ...props }: ProductT) => {
-  const { photo_path, name, price } = props;
+  const { photo_path, name, price, id } = props;
+  const dispatch = useDispatch();
 
   const [variant, setVariant] = useState<string | undefined>(undefined);
 
@@ -18,11 +22,18 @@ export const SearchProductCard = ({ ...props }: ProductT) => {
     const cookieVariant = Cookies.get('variant');
     setVariant(cookieVariant);
   }, []);
-  console.log(props);
+
+  const handleAddInCard = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    dispatch(addInCart({ ...props, quantity: 1 }));
+    showToast({ title: 'Добавлено в корзину', variant: 'success' });
+  };
+
+  if (!variant) return null;
 
   return (
-    <Link href={buildProductUrlSync({ product: props, variant })} className={s.container}>
-      <div className={s.card}>
+    <div className={s.container}>
+      <Link href={buildProductUrlSync({ product: props, variant })} className={s.card}>
         <div className={s.imageContainer}>
           <Image src={`${getStoreBaseUrl(variant)}/${photo_path}`} fill alt="product" />
         </div>
@@ -33,10 +44,10 @@ export const SearchProductCard = ({ ...props }: ProductT) => {
             {!!price && <p className="discount">{price} BYN</p>}
           </div>
         </div>
-      </div>
-      <Button variant={'icon_outlined'} className={s.button}>
+      </Link>
+      <Button variant={'icon_outlined'} className={s.button} onClick={handleAddInCard}>
         <ShoppingCartIcon />
       </Button>
-    </Link>
+    </div>
   );
 };

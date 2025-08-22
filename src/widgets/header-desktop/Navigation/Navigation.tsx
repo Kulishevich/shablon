@@ -9,13 +9,17 @@ export const Navigation = ({ contacts }: { contacts: ContactsT | null }) => {
   return (
     <div className={s.container}>
       <div className={s.content}>
-        <nav className={s.navigation} itemScope itemType="http://schema.org/SiteNavigationElement">
-          {navigation.slice(0, 6).map((nav, index) => (
-            <Link className="body_3" href={nav.path} key={index} itemProp="url">
-              {nav.title === 'Акции' && <DiscountCircleIcon />}
-              {nav.title}
-            </Link>
-          ))}
+        <nav className={s.navigation}>
+          <ul>
+            {navigation.slice(0, 6).map((nav, index) => (
+              <li key={index}>
+                <Link className="body_3" href={nav.path}>
+                  {nav.title === 'Акции' && <DiscountCircleIcon />}
+                  {nav.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
         <div className={s.info}>
           <div>

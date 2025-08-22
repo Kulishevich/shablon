@@ -49,12 +49,14 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         </RadixCheckbox.Root>
         {label &&
           (privacyPolicy ? (
-            <Link
-              href={paths.privacy_policy}
+            <label
               className={clsx(s.label, disabled && s.disabled, 'body_4', isRequired && 'required')}
             >
-              {label}
-            </Link>
+              Согласие на{' '}
+              <Link href={paths.privacy_policy} target="_blank">
+                обработку персональных данных
+              </Link>
+            </label>
           ) : (
             <label
               className={clsx(s.label, disabled && s.disabled, 'body_4', isRequired && 'required')}

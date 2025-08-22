@@ -44,10 +44,6 @@
 
       .trigger {
         color: var(--color-bg);
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-        }
       }
     }
   }
@@ -72,10 +68,6 @@
 
       .trigger {
         color: var(--color-text);
-
-        &:hover {
-          background-color: var(--color-bg-card);
-        }
       }
     }
   }
@@ -111,13 +103,16 @@
   font-size: 14px;
   line-height: 1.4;
   transition: color 0.3s ease;
+  width: fit-content;
+  flex: 0 0 auto;
 }
 
 .trigger {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   cursor: pointer;
+  flex: 1 0 auto;
 
   & > svg {
     transition: transform 0.3s ease;

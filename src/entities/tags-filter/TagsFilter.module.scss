@@ -13,22 +13,31 @@
   }
 }
 
+.swiper {
+  .slide {
+    width: fit-content;
+  }
+}
+
 .tag {
   background-color: var(--color-bg-card);
   border-radius: 4px;
   padding: vw-1440(12) vw-1440(24);
   border: 2px solid transparent;
   position: relative;
-  color: var(--color-bg);
+  color: var(--color-text);
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
+    background-color: var(--color-button-hover);
+    color: var(--color-text);
   }
 
   &.active {
+    background-color: var(--color-button);
     border-color: var(--color-button);
-    color: var(--color-button);
+    color: var(--color-bg);
   }
 
   @media (max-width: 768px) {

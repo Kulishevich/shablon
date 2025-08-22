@@ -30,6 +30,8 @@ export const PreviouslyViewed = () => {
             title={'Вы смотрели ранее'}
             variant="mini_product"
             itemsCount={viewedProducts?.length}
+            itemScope
+            itemType="http://schema.org/ItemList"
           >
             {viewedProducts.map((product, index) => (
               <ProductCard key={index} product={product} />

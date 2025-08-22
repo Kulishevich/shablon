@@ -3,10 +3,16 @@ import { validation } from './validation.errors';
 
 export const nameScheme = () => z.string().trim().min(2, { message: validation.requiredField });
 
+export const patronymicScheme = () =>
+  z.string().trim().optional();
+
 export const addressScheme = () => z.string().trim().min(5, { message: validation.requiredField });
 
 export const commentScheme = () =>
   z.string().trim().max(300, { message: validation.maxLength }).optional();
+
+export const commentReviewScheme = () =>
+  z.string().trim().min(10, { message: validation.minLength }).max(300, { message: validation.maxLength });
 
 export const checkedScheme = () =>
   z

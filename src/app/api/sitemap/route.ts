@@ -34,7 +34,7 @@ export async function GET() {
     };
 
     const fields: ISitemapField[] = Object.keys(pathWithPriority).map((page) => ({
-      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/${page == 'home' ? '' : page}`,
+      loc: `${process.env.NEXT_PUBLIC_SITE_URL}${page == 'home' ? '' : page}`,
       lastmod: new Date().toISOString(),
       changefreq: 'daily' as const,
       priority: pathWithPriority[page],
@@ -43,7 +43,7 @@ export async function GET() {
     if (newsUrls && newsUrls.data && newsUrls.data.length > 0) {
       fields.push(
         ...newsUrls.data.map((item: NewsT) => ({
-          loc: `${process.env.NEXT_PUBLIC_SITE_URL}/news/${item.slug}`,
+          loc: `${process.env.NEXT_PUBLIC_SITE_URL}news/${item.slug}`,
           lastmod: new Date(item.updated_at || new Date()).toISOString(),
           changefreq: 'daily' as const,
           priority: 0.8,
@@ -53,7 +53,7 @@ export async function GET() {
       if (promotionsUrls && promotionsUrls.data && promotionsUrls.data.length > 0) {
         fields.push(
           ...promotionsUrls.data.map((item: PromotionT) => ({
-            loc: `${process.env.NEXT_PUBLIC_SITE_URL}/shares/${item.slug}`,
+            loc: `${process.env.NEXT_PUBLIC_SITE_URL}shares/${item.slug}`,
             lastmod: new Date(item.updated_at || new Date()).toISOString(),
             changefreq: 'daily' as const,
             priority: 0.8,
@@ -69,7 +69,7 @@ export async function GET() {
         });
 
         const productUrls = enrichedProducts.map((item: ProductT) => ({
-          loc: `${process.env.NEXT_PUBLIC_SITE_URL}/catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
+          loc: `${process.env.NEXT_PUBLIC_SITE_URL}catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
           lastmod: new Date(item.updated_at || new Date()).toISOString(),
           changefreq: 'daily' as const,
           priority: 0.8,

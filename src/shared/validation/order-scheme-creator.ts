@@ -5,14 +5,15 @@ import {
   emailScheme,
   nameScheme,
   phoneScheme,
+  patronymicScheme,
 } from '@/shared/validation/validation';
 import { z } from 'zod';
 import { validation } from './validation.errors';
 
-export const orderFormSchema = z.object({
+export const createOrderFormSchema = (isPickup: boolean = false) => z.object({
   name: nameScheme(),
   surname: nameScheme(),
-  patronymic: nameScheme(),
+  patronymic: patronymicScheme(),
   phone: phoneScheme(),
   email: emailScheme(),
   delivery_method_id: z
@@ -23,7 +24,9 @@ export const orderFormSchema = z.object({
     .int()
     .min(1, 'Выберите способ доставки'),
   delivery_cost: z.number(),
-  address: addressScheme(),
+  address: isPickup
+    ? z.string().optional()
+    : addressScheme(),
   comment: z.string().max(300, validation.maxLength),
   promo_code: z.string().max(300, validation.maxLength),
   payment_method_id: z
@@ -35,3 +38,6 @@ export const orderFormSchema = z.object({
     .min(1, 'Выберите способ оплаты'),
   checked: checkedScheme(),
 });
+
+// Оставляем старую схему для обратной совместимости
+export const orderFormSchema = createOrderFormSchema();

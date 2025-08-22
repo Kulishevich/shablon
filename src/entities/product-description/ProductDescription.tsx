@@ -11,13 +11,13 @@ import { useSearchParams } from 'next/navigation';
 export const ProductDescription = ({
   product,
   reviews,
-  variant,
   deliveryAndPayment,
+  variant,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
-  variant?: string;
   deliveryAndPayment: PaymentAndDeliveryT[] | null;
+  variant?: string;
 }) => {
   const searchParams = useSearchParams();
   const [activeTag, setActiveTag] = useState(1);
@@ -32,6 +32,9 @@ export const ProductDescription = ({
   useEffect(() => {
     if (searchParams.get('characteristics') === '1') {
       setActiveTag(2);
+    }
+    if (searchParams.get('reviews') === '1') {
+      setActiveTag(4);
     }
   }, [searchParams]);
 
@@ -90,9 +93,9 @@ export const ProductDescription = ({
       {activeTag === 2 && (
         <div className={s.content}>
           <ul className={s.specifications}>
-            {product?.specifications?.slice(0, 3).map((elem) => (
+            {product?.specifications?.map((elem) => (
               <li className="body_3" key={elem.id}>
-                {elem?.name}
+                <div>{elem?.name}</div>
                 <span>{elem?.pivot?.value}</span>
               </li>
             ))}
@@ -113,7 +116,7 @@ export const ProductDescription = ({
 
       {activeTag === 4 && (
         <div className={s.content}>
-          <ProductReviews reviews={reviews} variant={variant} />
+          <ProductReviews reviews={reviews} productId={product.id.toString()} variant={variant} />
         </div>
       )}
     </div>

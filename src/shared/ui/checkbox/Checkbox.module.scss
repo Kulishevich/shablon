@@ -98,6 +98,10 @@
   &.disabled {
     color: var(--color-accent-red);
   }
+
+  a {
+    text-decoration: underline;
+  }
 }
 
 .disabledIcon {

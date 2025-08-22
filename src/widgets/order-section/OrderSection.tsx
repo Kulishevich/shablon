@@ -7,7 +7,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { PaymentT } from '@/shared/api/payment-methods/types';
 import { DeliveryT } from '@/shared/api/delivery-methods/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { orderFormSchema } from '@/shared/validation/order-scheme-creator';
+import { createOrderFormSchema } from '@/shared/validation/order-scheme-creator';
 import { postOrder } from '@/shared/api/order/postOrder';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/redux/store';
@@ -83,6 +83,9 @@ export const OrderSection = ({
     }
   }, [promocode, productsCart]);
 
+  const defaultDeliveryCost = Number(deliveryMethods?.[0]?.cost) || 0;
+  const isPickup = defaultDeliveryCost === 0;
+
   const form = useForm({
     defaultValues: {
       name: '',
@@ -91,7 +94,7 @@ export const OrderSection = ({
       phone: '',
       email: '',
       delivery_method_id: deliveryMethods?.[0]?.id,
-      delivery_cost: Number(deliveryMethods?.[0]?.cost) || 0,
+      delivery_cost: defaultDeliveryCost,
       address: '',
       comment: '',
       payment_method_id: paymentMethods?.[0]?.id,
@@ -100,23 +103,42 @@ export const OrderSection = ({
     },
     mode: 'onChange',
     reValidateMode: 'onBlur',
-    resolver: zodResolver(orderFormSchema),
+    resolver: zodResolver(createOrderFormSchema(isPickup)),
   });
 
+  // Отслеживаем изменения стоимости доставки для обновления схемы валидации
+  const deliveryCost = form.watch('delivery_cost');
+  const currentIsPickup = deliveryCost === 0;
+
+  useEffect(() => {
+    // Обновляем схему валидации при изменении типа доставки
+    form.clearErrors(); // Очищаем ошибки валидации
+    const newResolver = zodResolver(createOrderFormSchema(currentIsPickup));
+    // К сожалению, react-hook-form не позволяет динамически менять resolver
+    // Поэтому мы очищаем ошибки валидации поля address при переключении на самовывоз
+    if (currentIsPickup) {
+      form.clearErrors('address');
+    }
+  }, [currentIsPickup, form]);
+
   const onSubmit = form.handleSubmit(async (data) => {
-    const { checked, name, surname, patronymic, delivery_cost, ...otherData } = data;
+    const { checked, name, surname, patronymic, delivery_cost, address, ...otherData } = data;
     const items = productsCart.map((product) => ({
       product_id: product.id,
       quantity: product.quantity,
     }));
 
+    // При самовывозе отправляем "самовывоз" в поле адреса
+    const orderData = {
+      ...otherData,
+      customer_name: `${name} ${surname} ${patronymic}`,
+      address: currentIsPickup ? 'самовывоз' : address || '',
+      items,
+    };
+
     try {
       const res = await postOrder({
-        reqData: {
-          ...otherData,
-          customer_name: `${name} ${surname} ${patronymic}`,
-          items,
-        },
+        reqData: orderData,
         variant,
       });
 
@@ -134,7 +156,7 @@ export const OrderSection = ({
       console.log(err);
       showToast({
         message: 'Пожалуйста, повторите попытку ещё раз',
-        variant: 'success',
+        variant: 'error',
         title: 'Упс! Кажется, произошла ошибка',
       });
     }

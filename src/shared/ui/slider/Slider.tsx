@@ -8,9 +8,10 @@ type SliderProps = {
   children: ReactNode;
   itemWidth: number;
   itemsCount: number;
+  [key: string]: any;
 };
 
-export const Slider = ({ children, itemWidth, itemsCount }: SliderProps) => {
+export const Slider = ({ children, itemWidth, itemsCount, ...props }: SliderProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -38,7 +39,7 @@ export const Slider = ({ children, itemWidth, itemsCount }: SliderProps) => {
         </Button>
       )}
 
-      <div className={s.itemsContainer} ref={scrollRef}>
+      <div className={s.itemsContainer} ref={scrollRef} {...props}>
         {children}
       </div>
       {itemsCount > 4 && (

@@ -18,7 +18,18 @@ export const MainBanner = ({
 
   return (
     <div className={s.container}>
-      <Image src={`${getStoreBaseUrl(variant)}/${banner?.photo}`} alt="main-banner" fill />
+      <Image
+        src={`${getStoreBaseUrl(variant)}/${banner?.photo}`}
+        alt="main-banner"
+        fill
+        className={clsx(s.image, 'desktop-only')}
+      />
+      <Image
+        src={`${getStoreBaseUrl(variant)}/${banner?.mobile_photo}`}
+        alt="main-banner"
+        fill
+        className={clsx(s.image, 'mobile-only')}
+      />
       <div className={s.content}>
         <div className={s.heading}>
           <div

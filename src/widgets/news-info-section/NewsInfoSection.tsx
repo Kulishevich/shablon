@@ -12,14 +12,15 @@ export const NewsInfoSection = ({ news, variant }: { news: NewsT | null; variant
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.titleContainer}>
         <div className={s.title}>
-          <span className="h5" itemProp="datePublished">
+          <meta itemProp="datePublished" content={news?.created_at || ''} />
+          <span className="h5">
             {new Date(news?.created_at || '').toLocaleDateString('ru-RU', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',
             })}
           </span>
-          <h1 className="h1" itemProp="name">
+          <h1 className="h1" itemProp="headline">
             {news?.title}
           </h1>
         </div>

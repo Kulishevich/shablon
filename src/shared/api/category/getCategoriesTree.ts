@@ -7,7 +7,7 @@ export const getCategoriesTree = async ({
   variant?: string;
 }): Promise<CategoryT[] | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/categories/tree`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/categories/tree?with_products_count=true`, {
       next: {
         revalidate: 60,
       },

@@ -26,6 +26,9 @@ const showToast = ({
   variant = 'success',
   ...props
 }: ToastOptions) => {
+  // Закрываем все предыдущие уведомления
+  toast.dismiss();
+
   const typesClass = {
     error: styles.error,
     info: styles.info,

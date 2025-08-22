@@ -1,7 +1,13 @@
 'use client';
 import React, { useState } from 'react';
 import s from './ProductInfo.module.scss';
-import { ArrowLeftIcon, ArrowRightIcon, ArrowRightUpIcon, StarIcon } from '@/shared/assets';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowRightUpIcon,
+  ShoppingCartIcon,
+  StarIcon,
+} from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
@@ -24,11 +30,9 @@ export const ProductInfo = ({
   const isDiscount = !!Number(product?.discount);
   const dispatch = useDispatch();
 
-  console.log(product);
-
   const totalPrice = !!product?.discount
-    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100) * count
-    : Number(product?.price) * count;
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
+    : Number(product?.price);
 
   const changeCountValue = (value: string) => {
     const numericValue = value.replace(/\D/g, '');
@@ -64,21 +68,21 @@ export const ProductInfo = ({
           ))}
         </div>
 
-        <div className={clsx(s.sku, s.sku_mobile, 'body_7')} itemProp="sku">
+        <div className={clsx(s.sku, s.sku_mobile, 'body_7')}>
           Артикул: <span>{product?.sku}</span>
         </div>
-        <div className={s.rating} itemScope itemType="http://schema.org/AggregateRating">
-          <div className={s.startRating} itemProp="ratingValue">
+        <div className={s.rating}>
+          <div className={s.startRating}>
             {new Array(5).fill('').map((_, index) => (
-              <StarIcon key={index} className={clsx(index < 5 && s.active)} />
+              <StarIcon key={index} className={clsx(index < product?.rating && s.active)} />
             ))}
           </div>
-          <p className={clsx(s.reviews, 'body_7')} itemProp="reviewCount">
-            4 отзыва
-          </p>
+          <Link href="?reviews=1#characteristics" className={clsx(s.reviews, 'body_7')}>
+            {product?.reviews_count} отзыва
+          </Link>
         </div>
         <div className="h5">Характеристики:</div>
-        <div>
+        <div className={s.specificationsContainer}>
           <ul className={s.specifications}>
             {product?.specifications?.slice(0, 3).map((elem) => (
               <li className="body_3" key={elem.id}>
@@ -101,14 +105,14 @@ export const ProductInfo = ({
       </div>
 
       <div className={s.price}>
-        <div className={s.priceContainer} itemScope itemType="http://schema.org/Offer">
+        <div className={s.priceContainer}>
           <div className={s.totalPrice}>
             <p className={clsx('h2', isDiscount && s.discount)} itemProp="price">
               {totalPrice} BYN
             </p>
             {isDiscount && (
               <span className="discount" itemProp="price">
-                {Number(product?.price) * count} byn
+                {Number(product?.price)} byn
               </span>
             )}
           </div>
@@ -126,19 +130,25 @@ export const ProductInfo = ({
                 <ArrowRightIcon />
               </Button>
             </div>
-            <Button onClick={handleAddInCard} fullWidth>
+            <Button onClick={handleAddInCard} fullWidth className={'desktop-only'}>
               В корзину
+            </Button>
+            <Button
+              variant={'icon_outlined'}
+              className={clsx(s.cartButton, 'mobile-only')}
+              onClick={handleAddInCard}
+              aria-label="В корзину"
+            >
+              <ShoppingCartIcon />
             </Button>
           </div>
         </div>
 
         <div className={s.details}>
-          <div className={clsx(s.availability, 'body_6')} itemProp="availability">
-            в наличии
-          </div>
+          <div className={clsx(s.availability, 'body_6')}>в наличии</div>
 
           {advantages?.map((advantage) => (
-            <p className="body_7" key={advantage.id} itemProp="shippingDeliveryTime">
+            <p className="body_7" key={advantage.id}>
               <i className={clsx(advantage.icon, s.icon)} /> {advantage.title}
             </p>
           ))}

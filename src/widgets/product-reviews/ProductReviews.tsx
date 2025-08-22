@@ -9,9 +9,11 @@ import { AddReviewsForm } from '@/widgets/add-reviews-form/AddReviewsForm';
 
 export const ProductReviews = ({
   reviews,
+  productId,
   variant,
 }: {
   reviews: ReviewT[] | null;
+  productId: string;
   variant?: string;
 }) => {
   return (
@@ -23,7 +25,7 @@ export const ProductReviews = ({
             ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
             : 0}
         </p>
-        <AddReviewsForm>
+        <AddReviewsForm productId={productId}>
           <Button variant="primary" className={s.addReviewButton}>
             Добавить свой отзыв
           </Button>
