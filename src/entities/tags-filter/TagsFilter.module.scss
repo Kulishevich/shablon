@@ -30,6 +30,7 @@
   transition: all 0.2s ease;
 
   &:hover {
+    background-color: var(--color-button-hover);
     color: var(--color-text);
   }
 
