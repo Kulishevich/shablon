@@ -53,7 +53,6 @@ export const TagsFilter: React.FC<TagsFilterProps> = ({ tags, currentPath }) => 
               key={tag.id}
               type="button"
               className={clsx(s.tag, 'h3', isActive && s.active)}
-              style={{ background: tag.color }}
               onClick={() => handleTagClick(tag.name)}
               title={`Фильтр по тегу: ${tag.name}`}
             >
@@ -72,7 +71,6 @@ export const TagsFilter: React.FC<TagsFilterProps> = ({ tags, currentPath }) => 
               <button
                 type="button"
                 className={clsx(s.tag, 'h3', isActive && s.active)}
-                style={{ background: tag.color }}
                 onClick={() => handleTagClick(tag.name)}
                 title={`Фильтр по тегу: ${tag.name}`}
               >

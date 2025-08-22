@@ -25,7 +25,7 @@
   padding: vw-1440(12) vw-1440(24);
   border: 2px solid transparent;
   position: relative;
-  color: var(--color-bg);
+  color: var(--color-text);
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -36,7 +36,7 @@
   &.active {
     background-color: var(--color-button);
     border-color: var(--color-button);
-    color: var(--color-text);
+    color: var(--color-bg);
   }
 
   @media (max-width: 768px) {
