@@ -8,13 +8,16 @@ import { ContactsT } from '@/shared/api/design/types';
 import clsx from 'clsx';
 import { ArrowRightIcon } from '@/shared/assets';
 import { motion as m } from 'framer-motion';
+import { ServiceT } from '@/shared/api/services/types';
 
 export const HeaderFixed = ({
   categories,
   contacts,
+  services,
 }: {
   categories: CategoryT[];
   contacts: ContactsT | null;
+  services: ServiceT[];
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +57,7 @@ export const HeaderFixed = ({
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
       <div className={clsx(s.inner, isOpen && s.open)}>
-        <Navigation contacts={contacts} />
+        <Navigation contacts={contacts} services={services} />
         <Search categories={categories} />
       </div>
 

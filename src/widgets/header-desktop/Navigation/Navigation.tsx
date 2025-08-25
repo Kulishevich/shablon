@@ -1,17 +1,36 @@
 import React from 'react';
 import Link from 'next/link';
-import { ClockIcon, DiscountCircleIcon, LocationIcon, PhoneIcon } from '@/shared/assets';
+import {
+  ArrowDownIcon,
+  ClockIcon,
+  DiscountCircleIcon,
+  LocationIcon,
+  PhoneIcon,
+} from '@/shared/assets';
 import { navigation } from '@/shared/config/constants/navigation';
 import s from './Navigation.module.scss';
 import { ContactsT } from '@/shared/api/design/types';
+import clsx from 'clsx';
+import { ServiceT } from '@/shared/api/services/types';
 
-export const Navigation = ({ contacts }: { contacts: ContactsT | null }) => {
+export const Navigation = ({
+  contacts,
+  services,
+}: {
+  contacts: ContactsT | null;
+  services: ServiceT[];
+}) => {
   return (
     <div className={s.container}>
       <div className={s.content}>
         <nav className={s.navigation}>
           <ul>
-            {navigation.slice(0, 6).map((nav, index) => (
+            <li>
+              <Link className="body_3" href={`/services/${services[0].slug}`}>
+                {services[0].title}
+              </Link>
+            </li>
+            {navigation.slice(1, 3).map((nav, index) => (
               <li key={index}>
                 <Link className="body_3" href={nav.path}>
                   {nav.title === 'Акции' && <DiscountCircleIcon />}
@@ -19,6 +38,31 @@ export const Navigation = ({ contacts }: { contacts: ContactsT | null }) => {
                 </Link>
               </li>
             ))}
+            <li className={s.about_us}>
+              <div className={clsx('body_3', s.header)}>
+                О нас
+                <ArrowDownIcon />
+              </div>
+
+              <div className={s.dropdown}>
+                <Link className="body_3" href={'/about-us'}>
+                  О компании
+                </Link>
+                {services.slice(1).map((service, index) => (
+                  <Link className="body_3" href={`/services/${service.slug}`} key={index}>
+                    {service.title}
+                  </Link>
+                ))}
+                <Link className="body_3" href={'/contacts'}>
+                  Контакты
+                </Link>
+              </div>
+            </li>
+            <li>
+              <Link className="body_3" href={'/news'}>
+                Новости
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className={s.info}>

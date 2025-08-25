@@ -17,6 +17,7 @@ import dynamic from 'next/dynamic';
 import { ToTop } from '@/shared/ui/to-top';
 import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
 import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
+import { getServices } from '@/shared/api/services/getServices';
 
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
@@ -68,12 +69,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [categories, contacts, settings, seoSettings, storeUrl] = await Promise.all([
+  const [categories, contacts, settings, seoSettings, storeUrl, services] = await Promise.all([
     getCategories(),
     getContacts(),
     getSetting(),
     getSeoSettings(),
     getStoreUrl(),
+    getServices(),
   ]);
 
   return (
@@ -140,7 +142,11 @@ export default async function RootLayout({
           />
         )}
 
-        <HeaderDesktop categories={categories || []} contacts={contacts} />
+        <HeaderDesktop
+          categories={categories || []}
+          contacts={contacts}
+          services={services || []}
+        />
         <HeaderMobile categories={categories} contacts={contacts} />
         {children}
         <Footer categories={categories} contacts={contacts} />

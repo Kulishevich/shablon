@@ -1,10 +1,10 @@
-import { ProductT } from './types';
+import { ServiceT } from './types';
 import { getApiUrl } from '../base';
 
-export const getPopularProducts = async (): Promise<ProductT[] | null> => {
+export const getServices = async (): Promise<ServiceT[] | null> => {
   try {
     const apiUrl = await getApiUrl();
-    const res = await fetch(`${apiUrl}/v1/products/popular`, {
+    const res = await fetch(`${apiUrl}/v1/services`, {
       next: {
         revalidate: 60,
       },

@@ -12,6 +12,7 @@
 .content {
   width: vw-1440(1296);
   display: flex;
+  justify-content: space-between;
   gap: vw-1440(47);
 }
 
@@ -20,7 +21,7 @@
 
   & > ul {
     display: flex;
-    gap: vw-1440(28);
+    gap: vw-1440(20);
     align-items: center;
     list-style: none;
     height: 100%;
@@ -40,6 +41,7 @@
       align-items: center;
       gap: vw-1440(4);
       text-decoration: none;
+      white-space: nowrap;
 
       & > svg {
         width: vw-1440(22);
@@ -48,6 +50,54 @@
 
       &:hover {
         color: var(--color-accent-1);
+      }
+    }
+  }
+
+  .about_us {
+    position: relative;
+
+    &:hover {
+      .dropdown {
+        opacity: 1;
+        z-index: 100;
+        pointer-events: auto;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: vw-1440(4);
+      cursor: default;
+
+      svg {
+        width: vw-1440(16);
+        height: vw-1440(16);
+        flex-shrink: 0;
+      }
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: vw-1440(-12);
+      width: vw-1440(150);
+      background-color: var(--color-bg);
+      border: 1px solid rgba(37, 51, 140, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: vw-1440(12);
+      border-radius: vw-1440(6);
+      padding: vw-1440(12);
+      opacity: 0;
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+
+      a {
+        text-decoration: none;
+        white-space: wrap;
       }
     }
   }
