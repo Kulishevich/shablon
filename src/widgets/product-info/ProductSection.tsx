@@ -61,15 +61,13 @@ export const ProductSection = ({
         )}
       </div>
       <div className={s.container}>
-        <ReduxProvider>
-          <ProductInfo product={product} advantages={advantages} />
-          <ProductDescription
-            product={product}
-            reviews={reviews}
-            deliveryAndPayment={deliveryAndPayment}
-            variant={variant}
-          />
-        </ReduxProvider>
+        <ProductInfo product={product} advantages={advantages} />
+        <ProductDescription
+          product={product}
+          reviews={reviews}
+          deliveryAndPayment={deliveryAndPayment}
+          variant={variant}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Onest } from 'next/font/google';
+import { Onest, Open_Sans } from 'next/font/google';
 import '@/shared/config/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Footer } from '@/widgets/footer';
@@ -11,7 +11,6 @@ import { HeaderDesktop } from '@/widgets/header-desktop';
 import { HeaderMobile } from '@/widgets/header-mobile';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
-import { getProducts } from '@/shared/api/product/getProducts';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import { ToTop } from '@/shared/ui/to-top';
@@ -20,6 +19,8 @@ import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
 import { SiteVariantButtons } from '@/widgets/site-variant-buttons';
 import { cookies } from 'next/headers';
 import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
 const onest = Onest({
@@ -29,6 +30,12 @@ const onest = Onest({
   display: 'swap',
   preload: true,
   fallback: ['system-ui', 'arial'],
+});
+
+const openSans = Open_Sans({
+  variable: '--font-onest',
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600'],
 });
 
 export async function generateViewport() {
@@ -128,7 +135,7 @@ export default async function RootLayout({
         )}
       </head>
 
-      <body className={`${onest.variable}`}>
+      <body className={`${onest.variable} ${openSans.variable}`}>
         {seoSettings?.google_search_console && (
           <Script
             id="google-search-console"
@@ -146,14 +153,16 @@ export default async function RootLayout({
           />
         )}
 
-        <HeaderDesktop categories={categories || []} contacts={contacts} />
-        <HeaderMobile categories={categories} contacts={contacts} />
-        {children}
-        <Footer categories={categories} contacts={contacts} />
-        <Toaster />
-        <PhoneAnimation image={settings?.feedback_image || ''} />
-        <ToTop />
-        <SiteVariantButtons />
+        <ReduxProvider>
+          <HeaderDesktop categories={categories || []} contacts={contacts} />
+          <HeaderMobile categories={categories} contacts={contacts} />
+          {children}
+          <Footer categories={categories} contacts={contacts} />
+          <Toaster />
+          <PhoneAnimation image={settings?.feedback_image || ''} />
+          <ToTop />
+          <SiteVariantButtons />
+        </ReduxProvider>
       </body>
     </html>
   );

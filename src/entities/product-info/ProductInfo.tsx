@@ -18,6 +18,7 @@ import { addInCart } from '@/shared/lib/redux/slices/cartSlice';
 import { showToast } from '@/shared/ui/toast';
 import { ProductAdvantageType } from '@/shared/api/advantages/types';
 import Link from 'next/link';
+import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 
 export const ProductInfo = ({
   product,
@@ -26,6 +27,7 @@ export const ProductInfo = ({
   product: ProductT;
   advantages: ProductAdvantageType[] | null;
 }) => {
+  const { isTablet } = useBreakpoint();
   const [count, setCount] = useState(1);
   const isDiscount = !!Number(product?.discount);
   const dispatch = useDispatch();
@@ -55,6 +57,7 @@ export const ProductInfo = ({
     setCount((prev) => Math.max(--prev, 1));
   };
 
+  console.log(isTablet)
   return (
     <div className={s.container} itemScope>
       <ProductsImages product={product} />
@@ -95,8 +98,14 @@ export const ProductInfo = ({
           <Button
             variant="link"
             className={s.button}
-            as="a"
-            href="?characteristics=1#characteristics"
+            onClick={() => {
+              const el = document.getElementById('characteristics');
+              if (el) {
+                const yOffset = isTablet ? -110 : -170; // отступ сверху
+                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+              }
+            }}
           >
             Все характеристики
             <ArrowRightUpIcon />

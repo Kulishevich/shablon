@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .container {
   display: flex;
@@ -12,7 +12,7 @@
   gap: vw-1440(48);
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -65,18 +65,32 @@
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(12);
+
   padding-top: vw-1440(24);
+  white-space: pre-line;
+
+  ul,
+  ol {
+    list-style: none;
+  }
   @media (max-width: 768px) {
     padding-top: 24px;
+    gap: 8px;
   }
 }
 
 .specifications {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: vw-1440(14);
+
   list-style: none;
-  width: vw-1440(526);
+  font-size: vw-1440(16);
+
   margin-bottom: vw-1440(10);
 
   @media (max-width: 768px) {
@@ -86,9 +100,8 @@
   }
 
   & > li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: vw-1440(8);
     padding: vw-1440(14) 0;
     border-bottom: 1px solid color-mix(in srgb, var(--color-accent-1) 10%, transparent);

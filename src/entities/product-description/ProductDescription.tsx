@@ -105,12 +105,11 @@ export const ProductDescription = ({
 
       {activeTag === 3 && (
         <div>
-          {deliveryAndPayment?.map((item) => (
-            <div className={s.content}>
-              <h3 className="h3">{item.title}</h3>
+          {deliveryAndPayment
+            ?.filter((elem) => elem.title.toLowerCase().includes('доставка'))
+            .map((item) => (
               <div dangerouslySetInnerHTML={{ __html: item.content }} className={s.content} />
-            </div>
-          ))}
+            ))}
         </div>
       )}
 
