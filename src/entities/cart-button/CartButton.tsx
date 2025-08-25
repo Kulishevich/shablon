@@ -10,6 +10,7 @@ import {
   selectCartCountProducts,
   selectCartPriceWithDiscount,
 } from '@/shared/lib/redux/selectors/CartSelectors';
+import clsx from 'clsx';
 
 const getProductWord = (count: number): string => {
   const lastDigit = count % 10;
@@ -35,15 +36,17 @@ export const CartButton = () => {
 
   const priceWithDiscount = useSelector(selectCartPriceWithDiscount);
 
+  const cartIsNotEmpty = !!productsQuantity;
+
   return (
-    <Link className={s.buttonCart} href={paths.cart}>
+    <Link className={clsx(s.buttonCart, cartIsNotEmpty && s.notEmpty)} href={paths.cart}>
       <Button variant="icon_secondary" as="div" className={s.button}>
         <ShoppingCartIcon width={32} height={32} />
       </Button>
-      <div className={s.content}>
+      <div className={clsx(s.content, cartIsNotEmpty && s.notEmpty)}>
         <p className="body_4">Корзина</p>
         <span className="body_7">
-          {productsQuantity} {getProductWord(productsQuantity)} ({priceWithDiscount} BYN)
+          {productsQuantity} {getProductWord(productsQuantity)} ({priceWithDiscount.toFixed(2)} BYN)
         </span>
       </div>
     </Link>

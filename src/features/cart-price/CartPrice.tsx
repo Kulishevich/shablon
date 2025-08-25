@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import s from './CartPrice.module.scss';
 import { TextField } from '@/shared/ui/text-field';
 import { Button } from '@/shared/ui/button';
@@ -8,6 +8,7 @@ import { showToast } from '@/shared/ui/toast';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
 import { useDispatch } from 'react-redux';
 import { CartProduct, clearPromocode, setPromocode } from '@/shared/lib/redux/slices/cartSlice';
+import Cookies from 'js-cookie';
 
 export type CartPriceProps = {
   productsCart: CartProduct[];
@@ -26,15 +27,24 @@ export const CartPrice = ({
   setProductsState,
   setPromocodeDiscount,
 }: CartPriceProps) => {
-  const [promocodeState, setPromocodeState] = useState<string>(promocode || '');
+  const [variant, setVariant] = useState<string | undefined>(undefined);
 
+  const [promocodeState, setPromocodeState] = useState<string>(promocode || '');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+  }, []);
 
   const handleCheckPromocode = async () => {
     try {
       const res = await checkCartPriceWitchPromocode({
-        code: promocodeState,
-        products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+        reqData: {
+          code: promocodeState,
+          products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+        },
+        variant,
       });
       if (Number(res.min_order_amount) <= priceWithOutDiscount) {
         if (res.type === 'percentage') {
@@ -79,11 +89,11 @@ export const CartPrice = ({
       <div className={s.price}>
         <div className={s.elem}>
           <p className="body_7">Стоимость товаров без скидки</p>
-          <h5 className="h5">{priceWithOutDiscount} BYN</h5>
+          <h5 className="h5">{priceWithOutDiscount.toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Скидка</p>
-          <h5 className="h5">{priceWithOutDiscount - priceWithDiscount} BYN</h5>
+          <h5 className="h5">{(priceWithOutDiscount - priceWithDiscount).toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Стоимость доставки</p>
@@ -92,7 +102,7 @@ export const CartPrice = ({
       </div>
       <div className={s.elem}>
         <h5 className="h5">Итого</h5>
-        <h3 className="h3">{priceWithDiscount} BYN</h3>
+        <h3 className="h3">{priceWithDiscount.toFixed(2)} BYN</h3>
       </div>
       {productsCart.length ? (
         <Button as={Link} href={`${paths.cart}${paths.order}`} className={s.button}>

@@ -1,16 +1,20 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import s from './ProductsImages.module.scss';
 import { ProductT } from '@/shared/api/product/types';
 import clsx from 'clsx';
-import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 
 export const ProductsImages = ({ product }: { product: ProductT | null }) => {
+  const [variant, setVariant] = useState<string | undefined>(undefined);
   const [activeImage, setActiveImage] = useState(product?.main_image.image_path);
-  const { storeUrl } = useRuntimeConfig();
 
-  const isDiscount = !!Number(product?.discount);
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+  }, []);
 
   return (
     <div className={s.images} itemScope itemType="http://schema.org/ImageGallery">
@@ -23,17 +27,22 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
               [s.active]: activeImage === image.image_path,
             })}
           >
-            <Image itemProp="image" src={`${storeUrl}/${image.image_path}`} fill alt="product" />
+            <Image
+              itemProp="image"
+              src={`${getStoreBaseUrl(variant)}/${image.image_path}`}
+              fill
+              alt="product"
+            />
           </button>
         ))}
       </div>
       <div className={s.imageContainer}>
-        <Image itemProp="image" src={`${storeUrl}/${activeImage}`} fill alt="product" />
-        <div className={s.tagsContainer}>
-          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
-          {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
-          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
-        </div>
+        <Image
+          itemProp="image"
+          src={`${getStoreBaseUrl(variant)}/${activeImage}`}
+          fill
+          alt="product"
+        />
       </div>
     </div>
   );

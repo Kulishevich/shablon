@@ -1,9 +1,14 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { FeedbackPostT } from './types';
-import { getApiUrl } from '../base';
 
-export const postFeedback = async (reqData: FeedbackPostT) => {
-  const apiUrl = await getApiUrl();
-  const res = await fetch(`${apiUrl}/v1/feedback`, {
+export const postFeedback = async ({
+  variant,
+  reqData,
+}: {
+  variant?: string;
+  reqData: FeedbackPostT;
+}) => {
+  const res = await fetch(`${getApiBaseUrl(variant)}/v1/feedback`, {
     method: 'POST',
     body: JSON.stringify(reqData),
     headers: {

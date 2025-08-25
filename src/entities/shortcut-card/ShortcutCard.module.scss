@@ -1,15 +1,10 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media (max-width: 768px) {
-  }
-
-  &:hover {
-  }
+  height: 100%;
 
   .title {
     margin-top: vw-1440(14);

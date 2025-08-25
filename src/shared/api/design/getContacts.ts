@@ -1,16 +1,13 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ContactsT } from './types';
-import { getApiUrl } from '../base';
 
-export const getContacts = async (): Promise<ContactsT | null> => {
+export const getContacts = async ({ variant }: { variant?: string }): Promise<ContactsT | null> => {
   try {
-    const apiUrl = await getApiUrl();
-    const res = await fetch(
-      `${apiUrl}/v1/design/contacts`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/design/contacts`, {
       next: {
         revalidate: 60,
-      }
-    }
-    );
+      },
+    });
 
     const { data } = await res.json();
 

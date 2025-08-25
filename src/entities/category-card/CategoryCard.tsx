@@ -4,22 +4,37 @@ import { CategoryT } from '@/shared/api/category/types';
 import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import Image from 'next/image';
-import { Button } from '@/shared/ui/button';
 import clsx from 'clsx';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import { cookies } from 'next/headers';
 
-export const CategoryCard = ({
-  id,
+interface CategoryCardProps extends CategoryT {
+  categoriesCount: number;
+}
+
+export const CategoryCard = async ({
   slug,
   photo_path,
   name,
   description,
-  storeUrl,
-}: CategoryT & { storeUrl: string }) => {
+  categoriesCount,
+}: CategoryCardProps) => {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   return (
     <Link href={`${paths.catalog}/${slug}`} className={s.container}>
       <div className={clsx(s.title, 'h3')}>{name}</div>
       <div className={clsx(s.description, 'body_3')}>{description}</div>
-      <Image src={`${storeUrl}/${photo_path}`} alt={name} width={584} height={266} />
+      <div
+        className={clsx(
+          s.imageContainer,
+          categoriesCount > 4 && s.mediumImage,
+          categoriesCount > 9 && s.smallImage
+        )}
+      >
+        <Image src={`${getStoreBaseUrl(variant)}/${photo_path}`} alt={name} fill />
+      </div>
     </Link>
   );
 };

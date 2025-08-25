@@ -1,13 +1,20 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { TagT } from './types';
-import { getApiUrl } from '../base';
 
-export const getTags = async (): Promise<TagT[] | null> => {
+export const getTags = async ({
+  variant,
+  category,
+}: {
+  variant?: string;
+  category?: string;
+}): Promise<TagT[] | null> => {
   try {
-    const apiUrl = await getApiUrl();
-    const res = await fetch(`${apiUrl}/v1/tags`, {
+    const categoryId = category ? `?category_id=${category}` : '';
+
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/tags${categoryId}`, {
       next: {
         revalidate: 60,
-      }
+      },
     });
 
 

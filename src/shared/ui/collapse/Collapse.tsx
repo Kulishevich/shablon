@@ -9,12 +9,14 @@ export const Collapse = ({
   title,
   children,
   className,
+  initialOpen,
 }: {
   title: string;
   children: ReactNode;
   className?: string;
+  initialOpen?: boolean;
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(initialOpen || false);
 
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen} className={clsx(s.rootState, className)}>

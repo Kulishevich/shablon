@@ -8,21 +8,20 @@ import { Feedback } from '@/widgets/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 import { notFound } from 'next/navigation';
 import { SeoBlock } from '@/entities/seo-block';
-import { getStoreUrl } from '@/shared/api/base';
+import { cookies } from 'next/headers';
 
 export default async function New({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
 
-  const [news, newsList, storeUrl] = await Promise.all([
-    getNews(slug),
-    getAllNews({}),
-    getStoreUrl(),
-  ]);
+  const { slug } = await params;
+  const news = await getNews({ slug, variant });
 
   if (!news) {
     notFound();
   }
 
+  const newsList = await getAllNews({ variant });
   const otherNews = newsList?.data?.filter((elem) => elem.id !== news.id);
 
   return (
@@ -36,14 +35,16 @@ export default async function New({ params }: { params: Promise<{ slug: string }
         ]}
       />
       <main>
-        <NewsInfoSection news={news} storeUrl={storeUrl} />
-        <SliderWrapper title="Другие новости" variant="news">
-          {otherNews?.map((news, index) => (
-            <NewsCard key={index} news={news} storeUrl={storeUrl} />
-          ))}
-        </SliderWrapper>
+        <NewsInfoSection news={news} variant={variant} />
+        {!!otherNews?.length && (
+          <SliderWrapper title="Другие новости" variant="news" itemsCount={otherNews?.length}>
+            {otherNews?.map((news, index) => (
+              <NewsCard key={index} news={news} enableMicrodata={false} />
+            ))}
+          </SliderWrapper>
+        )}
         <SeoBlock page={`/news/${news?.slug}`} />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

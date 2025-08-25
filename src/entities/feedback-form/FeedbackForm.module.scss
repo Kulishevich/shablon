@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: vw-1440(20);
   align-items: flex-start;
-
+  justify-content: space-between;
   width: 100%;
 
   @media (max-width: 768px) {

@@ -4,26 +4,29 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { SharesSection } from '@/widgets/shares-section';
 import { SeoBlock } from '@/entities/seo-block';
 import { CanonicalLink } from '@/shared/ui/canonical-link';
-import { getStoreUrl } from '@/shared/api/base';
+import { cookies } from 'next/headers';
 
 export default async function Shares({
   searchParams,
 }: {
   searchParams: Promise<{ page: string }>;
 }) {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const page = (await searchParams).page || '1';
 
-  const [promotions, storeUrl] = await Promise.all([getPromotions({ page }), getStoreUrl()]);
+  const promotions = await getPromotions({ page, variant });
 
   return (
     <>
-      <CanonicalLink href={'/shares'} />
+      <CanonicalLink href={'shares'} />
 
       <Breadcrumbs />
       <main>
-        <SharesSection promotions={promotions} page={page} standalone={true} storeUrl={storeUrl} />
+        <SharesSection promotions={promotions} page={page} standalone={true} />
         <SeoBlock page="/shares" />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

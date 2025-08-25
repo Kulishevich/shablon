@@ -18,26 +18,33 @@
 .navigation {
   height: 100%;
 
-  display: flex;
-  gap: vw-1440(28);
-  align-items: center;
-  & > a {
+  & > ul {
     display: flex;
+    gap: vw-1440(28);
     align-items: center;
-    gap: vw-1440(4);
-    text-decoration: none;
+    list-style: none;
+    height: 100%;
 
-    & > svg {
-      width: vw-1440(22);
-      height: vw-1440(22);
+    li:nth-child(2) {
+      a {
+        color: var(--color-accent-red);
+
+        &:hover {
+          color: var(--color-accent-1);
+        }
+      }
     }
 
-    &:hover {
-      color: var(--color-accent-1);
-    }
+    a {
+      display: flex;
+      align-items: center;
+      gap: vw-1440(4);
+      text-decoration: none;
 
-    &:nth-child(2) {
-      color: var(--color-accent-red);
+      & > svg {
+        width: vw-1440(22);
+        height: vw-1440(22);
+      }
 
       &:hover {
         color: var(--color-accent-1);
@@ -55,6 +62,7 @@
 
   & > div {
     display: flex;
+    align-items: center;
     gap: vw-1440(6);
     flex: 1;
 

@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .buttonCart {
   display: flex;
@@ -22,6 +22,13 @@
     }
   }
 
+  &.notEmpty {
+    .button {
+      background-color: var(--color-button);
+      color: var(--color-bg);
+    }
+  }
+
   &:hover {
     cursor: pointer;
     & > .button {
@@ -39,5 +46,11 @@
 
   & > span {
     opacity: 0.4;
+  }
+
+  &.notEmpty {
+    & > span {
+      opacity: 1;
+    }
   }
 }

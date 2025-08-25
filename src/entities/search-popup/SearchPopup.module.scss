@@ -28,7 +28,7 @@
   border-radius: 6px;
   overflow-y: auto;
 
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.1s ease-out;
 }
 
 .content {
@@ -45,6 +45,15 @@
   display: flex;
   flex-direction: column;
   gap: vw-1440(12);
+}
+
+.loading,
+.noResults {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: vw-1440(20);
+  color: var(--color-text-secondary);
 }
 
 @keyframes fadeIn {

@@ -1,7 +1,10 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  skipTrailingSlashRedirect: true,
+  skipMiddlewareUrlNormalize: true,
   images: {
+    qualities: [100],
     remotePatterns: [
       {
         protocol: 'https',
@@ -18,6 +21,41 @@ const nextConfig: NextConfig = {
         hostname: process.env.STORE_NAME || process.env.NEXT_PUBLIC_STORE_NAME || 'webspaceteam.site',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'kosmetika.webspaceteam.by',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dlyadoma.webspaceteam.by',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'odejda.webspaceteam.by',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'auto.webspaceteam.by',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tehnika.webspaceteam.by',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'podarok.webspaceteam.by',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'stroyka.webspaceteam.by',
+        pathname: '/**',
+      },
     ],
   },
 
@@ -29,45 +67,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'www.(?<domain>.*)',
-          },
-        ],
-        destination: 'https://:domain/:path*',
-        statusCode: 301,
-      },
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'header',
-            key: 'x-forwarded-proto',
-            value: 'http',
-          },
-        ],
-        destination: 'https://:host/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'header',
-            key: 'x-forwarded-ssl',
-            value: 'off',
-          },
-        ],
-        destination: 'https://:host/:path*',
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;

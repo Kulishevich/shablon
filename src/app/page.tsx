@@ -16,7 +16,7 @@ import { AboutUsSection } from '@/widgets/about-us-section';
 import { AdvantagesSection } from '@/widgets/advantages-section';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { getTags } from '@/shared/api/tags/getTags';
-import { getStoreUrl } from '@/shared/api/base';
+import { cookies } from 'next/headers';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
@@ -41,6 +41,9 @@ const NewsSliderSection = dynamic(() =>
 const MainBanner = dynamic(() => import('@/widgets/main-banner').then((mod) => mod.MainBanner));
 
 export default async function Home() {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   const [
     popularProductsRaw,
     newsList,
@@ -52,60 +55,58 @@ export default async function Home() {
     brands,
     reviews,
     tags,
-    storeUrl,
   ] = await Promise.all([
-    getPopularProducts(),
-    getAllNews({}),
-    getAdvantages(),
-    getBanners(),
-    getSetting(),
-    getContacts(),
-    getCategories(),
-    getBrands(),
-    getReviews(),
-    getTags(),
-    getStoreUrl(),
+    getPopularProducts({ variant }),
+    getAllNews({ variant }),
+    getAdvantages({ variant }),
+    getBanners({ variant }),
+    getSetting({ variant }),
+    getContacts({ variant }),
+    getCategories({ variant }),
+    getBrands({ variant }),
+    getReviews({ variant }),
+    getTags({ variant }),
   ]);
 
   // Обогащаем популярные продукты полным путем
   const popularProducts = popularProductsRaw
-    ? await enrichProductsWithFullPath(popularProductsRaw)
+    ? await enrichProductsWithFullPath({ products: popularProductsRaw, variant })
     : null;
 
   return (
     <main>
       <Suspense fallback={<div style={{ height: '400px', background: '#f5f5f5' }} />}>
-        <MainSlider slides={banners || []} />
+        <MainSlider slides={banners || []} variant={variant} />
       </Suspense>
 
-      <MainShortcuts tags={tags} storeUrl={storeUrl} />
-      <CatalogProducts categories={categories} storeUrl={storeUrl} />
+      <MainShortcuts tags={tags} variant={variant} />
+      <CatalogProducts categories={categories} />
 
       <PopularProductsSection products={popularProducts} />
 
       <AboutUsSection
         text={setting?.about?.text || ''}
         image={setting?.about?.image || ''}
-        storeUrl={storeUrl}
+        variant={variant}
       />
 
       <AdvantagesSection advantages={advantages} />
 
       {!!brands?.length && (
         <Suspense>
-          <BrandsSection brands={brands} storeUrl={storeUrl} />
+          <BrandsSection brands={brands} variant={variant} />
         </Suspense>
       )}
 
-      <MainBanner banner={setting?.main_banner || null} storeUrl={storeUrl} />
+      <MainBanner banner={setting?.main_banner || null} variant={variant} />
 
       <Suspense>
-        <ReviewsSection reviews={reviews} />
+        <ReviewsSection reviews={reviews} variant={variant} />
       </Suspense>
 
       {!!newsList?.data?.length && (
         <Suspense>
-          <NewsSliderSection newsList={newsList?.data} storeUrl={storeUrl} />
+          <NewsSliderSection newsList={newsList?.data} />
         </Suspense>
       )}
 
@@ -118,7 +119,7 @@ export default async function Home() {
       </Suspense>
 
       <Suspense>
-        <Feedback />
+        <Feedback variant={variant} />
       </Suspense>
     </main>
   );

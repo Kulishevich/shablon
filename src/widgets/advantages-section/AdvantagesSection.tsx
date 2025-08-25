@@ -8,9 +8,7 @@ export const AdvantagesSection = ({ advantages }: { advantages: AdvantageType[] 
     <div className={s.container}>
       <h2 className="h2">Наши преимущества</h2>
       <div className={s.advantagesContainer}>
-        {advantages?.map((elem, index) => (
-          <AdvantageCard title={elem.title} icon={elem.icon} key={index} />
-        ))}
+        {advantages?.map((elem, index) => <AdvantageCard {...elem} key={index} />)}
       </div>
     </div>
   );

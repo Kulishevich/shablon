@@ -1,13 +1,16 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { AdvantageType } from './types';
-import { getApiUrl } from '../base';
 
-export const getAdvantages = async (): Promise<AdvantageType[] | null> => {
+export const getAdvantages = async ({
+  variant,
+}: {
+  variant?: string;
+}): Promise<AdvantageType[] | null> => {
   try {
-    const apiUrl = await getApiUrl();
-    const res = await fetch(`${apiUrl}/v1/advantages`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/advantages`, {
       next: {
         revalidate: 60,
-      }
+      },
     });
 
     const { data } = await res.json();

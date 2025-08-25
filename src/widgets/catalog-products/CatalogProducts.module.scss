@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .container {
   display: flex;
@@ -27,9 +27,24 @@
   gap: vw-1440(24);
   width: 100%;
 
+  &.gridThree {
+    grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+    }
+  }
+
+  &.gridFour {
+    grid-template-columns: repeat(4, 1fr);
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+    }
+  }
+
   @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(1, 1fr);
     gap: 20px;
   }
 }

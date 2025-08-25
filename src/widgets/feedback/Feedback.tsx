@@ -4,13 +4,13 @@ import { FeedbackForm } from '../../entities/feedback-form';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { FeedbackImage } from '@/entities/feedback-image';
 
-export const Feedback = async () => {
-  const setting = await getSetting();
+export const Feedback = async ({ variant }: { variant?: string }) => {
+  const setting = await getSetting({ variant });
 
   return (
     <div className={s.container}>
-      <FeedbackImage image={setting?.feedback_image || ''} />
-      <FeedbackForm />
+      <FeedbackImage image={setting?.feedback_image || ''} variant={variant} />
+      <FeedbackForm variant={variant} />
     </div>
   );
 };

@@ -4,9 +4,8 @@ import s from './ProductInfo.module.scss';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  DocumentIcon,
-  HoursIcon,
-  QualityStarIcon,
+  ArrowRightUpIcon,
+  ShoppingCartIcon,
   StarIcon,
 } from '@/shared/assets';
 import { ProductsImages } from '@/features/product-images';
@@ -18,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { addInCart } from '@/shared/lib/redux/slices/cartSlice';
 import { showToast } from '@/shared/ui/toast';
 import { ProductAdvantageType } from '@/shared/api/advantages/types';
+import Link from 'next/link';
 
 export const ProductInfo = ({
   product,
@@ -31,8 +31,8 @@ export const ProductInfo = ({
   const dispatch = useDispatch();
 
   const totalPrice = !!product?.discount
-    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100) * count
-    : Number(product?.price) * count;
+    ? Math.round((Number(product?.price) * (100 - Number(product?.discount))) / 100)
+    : Number(product?.price);
 
   const changeCountValue = (value: string) => {
     const numericValue = value.replace(/\D/g, '');
@@ -61,45 +61,58 @@ export const ProductInfo = ({
 
       <div className={s.characteristics}>
         <div className={s.tagsContainer}>
-          {product?.is_popular && <span className={clsx('tag', s.popular)}>бестселлер</span>}
-          {isDiscount && <span className={clsx('tag', s.discount)}>акция</span>}
-          {product?.is_novelty && <span className={clsx('tag', s.new)}>новинка</span>}
+          {product?.tags.map((tag) => (
+            <span style={{ background: tag.color }} key={tag.id} className={clsx('tag', s.popular)}>
+              {tag.name}
+            </span>
+          ))}
         </div>
 
-        <div className={clsx(s.sku, s.sku_mobile, 'body_7')} itemProp="sku">
+        <div className={clsx(s.sku, s.sku_mobile, 'body_7')}>
           Артикул: <span>{product?.sku}</span>
         </div>
-        <div className={s.rating} itemScope itemType="http://schema.org/AggregateRating">
-          <div className={s.startRating} itemProp="ratingValue">
+        <div className={s.rating}>
+          <div className={s.startRating}>
             {new Array(5).fill('').map((_, index) => (
-              <StarIcon key={index} className={clsx(index < 4 && s.active)} />
+              <StarIcon key={index} className={clsx(index < product?.rating && s.active)} />
             ))}
           </div>
-          <p className={clsx(s.reviews, 'body_7')} itemProp="reviewCount">
-            4 отзыва
-          </p>
+          <Link href="?reviews=1#characteristics" className={clsx(s.reviews, 'body_7')}>
+            {product?.reviews_count} отзыва
+          </Link>
         </div>
         <div className="h5">Характеристики:</div>
-        <div>
-          <ul>
+        <div className={s.specificationsContainer}>
+          <ul className={s.specifications}>
             {product?.specifications?.slice(0, 3).map((elem) => (
               <li className="body_3" key={elem.id}>
-                {elem?.name} : {elem?.pivot?.value}
+                {elem?.name}
+                <span>{elem?.pivot?.value}</span>
               </li>
             ))}
           </ul>
+
+          <Button
+            variant="link"
+            className={s.button}
+            as="a"
+            href="?characteristics=1#characteristics"
+          >
+            Все характеристики
+            <ArrowRightUpIcon />
+          </Button>
         </div>
       </div>
 
       <div className={s.price}>
-        <div className={s.priceContainer} itemScope itemType="http://schema.org/Offer">
+        <div className={s.priceContainer}>
           <div className={s.totalPrice}>
             <p className={clsx('h2', isDiscount && s.discount)} itemProp="price">
               {totalPrice} BYN
             </p>
             {isDiscount && (
               <span className="discount" itemProp="price">
-                {product?.price} byn
+                {Number(product?.price)} byn
               </span>
             )}
           </div>
@@ -117,19 +130,25 @@ export const ProductInfo = ({
                 <ArrowRightIcon />
               </Button>
             </div>
-            <Button onClick={handleAddInCard} fullWidth>
+            <Button onClick={handleAddInCard} fullWidth className={'desktop-only'}>
               В корзину
+            </Button>
+            <Button
+              variant={'icon_outlined'}
+              className={clsx(s.cartButton, 'mobile-only')}
+              onClick={handleAddInCard}
+              aria-label="В корзину"
+            >
+              <ShoppingCartIcon />
             </Button>
           </div>
         </div>
 
         <div className={s.details}>
-          <div className={clsx(s.availability, 'body_6')} itemProp="availability">
-            в наличии
-          </div>
+          <div className={clsx(s.availability, 'body_6')}>в наличии</div>
 
           {advantages?.map((advantage) => (
-            <p className="body_7" key={advantage.id} itemProp="shippingDeliveryTime">
+            <p className="body_7" key={advantage.id}>
               <i className={clsx(advantage.icon, s.icon)} /> {advantage.title}
             </p>
           ))}

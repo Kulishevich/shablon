@@ -1,11 +1,9 @@
-'use client';
 import Image from 'next/image';
 import React from 'react';
 import s from './FeedbackImage.module.scss';
-import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
-export const FeedbackImage = ({ image }: { image: string }) => {
-  const { storeUrl } = useRuntimeConfig();
+export const FeedbackImage = ({ image, variant }: { image: string; variant?: string }) => {
   return (
     <div className={s.titleContainer}>
       <div className={s.textContent}>
@@ -16,7 +14,7 @@ export const FeedbackImage = ({ image }: { image: string }) => {
         </p>
       </div>
       <div className={s.imageContainer}>
-        <Image src={`${storeUrl}/${image}`} fill alt="feedback" />
+        <Image src={`${getStoreBaseUrl(variant)}/${image}`} fill alt="feedback" />
       </div>
     </div>
   );

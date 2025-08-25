@@ -1,16 +1,19 @@
-import { SeoPageT } from "./types";
-import { getApiUrl } from '../base';
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import { SeoPageT } from './types';
 
-export const getSeoPage = async (page: string): Promise<SeoPageT | null> => {
+export const getSeoPage = async ({
+  page,
+  variant,
+}: {
+  page: string;
+  variant?: string;
+}): Promise<SeoPageT | null> => {
   try {
-    const apiUrl = await getApiUrl();
-    const data = await fetch(
-      `${apiUrl}/v1/seo/text?page=${page}`, {
+    const data = await fetch(`${getApiBaseUrl(variant)}/v1/seo/text?page=${page}`, {
       next: {
         revalidate: 60,
-      }
-    }
-    );
+      },
+    });
 
     const res = await data.json();
 

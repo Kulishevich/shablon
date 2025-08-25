@@ -1,8 +1,12 @@
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
+import { cookies } from 'next/headers';
 
 export const generateMetadata = async () => {
-  const seo = await getSeoTag('/about-us');
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
+  const seo = await getSeoTag({ tag: '/about-us', variant });
 
   return {
     title: seo?.title ?? 'О нас',

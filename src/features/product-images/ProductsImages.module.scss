@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .images {
   display: flex;
@@ -71,42 +71,5 @@
   @media (max-width: 768px) {
     width: 335px;
     height: 335px;
-  }
-}
-
-.tagsContainer {
-  position: absolute;
-  left: vw-1440(16);
-  top: vw-1440(16);
-
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  & > span {
-    padding: vw-1440(2) vw-1440(6);
-    border-radius: 4px;
-    color: var(--color-bg);
-    width: fit-content;
-    opacity: 0.8;
-
-    &.popular {
-      background-color: var(--color-accent-orange);
-    }
-    &.new {
-      background-color: var(--color-accent-green);
-    }
-    &.discount {
-      background-color: var(--color-accent-red);
-    }
-
-    @media (max-width: 768px) {
-      padding: 2px 6px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    top: 16px;
-    left: 16px;
   }
 }

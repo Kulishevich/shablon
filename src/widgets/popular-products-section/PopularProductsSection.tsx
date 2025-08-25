@@ -9,7 +9,13 @@ export const PopularProductsSection = ({ products }: { products: ProductT[] | nu
   return (
     <>
       <ReduxProvider>
-        <SliderWrapper title="Популярные товары" className={'desktop-only'}>
+        <SliderWrapper
+          title="Популярные товары"
+          className={'desktop-only'}
+          itemsCount={products?.length || 0}
+          itemScope
+          itemType="http://schema.org/ItemList"
+        >
           {products?.map((product, index) => <ProductCard key={index} product={product} />)}
         </SliderWrapper>
         <PopularProductsMobile products={products || []} />

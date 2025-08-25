@@ -7,9 +7,11 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
 type SliderProps = {
   children: ReactNode;
   itemWidth: number;
+  itemsCount: number;
+  [key: string]: any;
 };
 
-export const Slider = ({ children, itemWidth }: SliderProps) => {
+export const Slider = ({ children, itemWidth, itemsCount, ...props }: SliderProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -26,26 +28,30 @@ export const Slider = ({ children, itemWidth }: SliderProps) => {
 
   return (
     <div className={s.container}>
-      <Button
-        variant="icon_secondary"
-        className={s.iconLeft}
-        onClick={() => scroll('left')}
-        aria-label="Слайд влево"
-      >
-        <ArrowLeftIcon />
-      </Button>
+      {itemsCount > 4 && (
+        <Button
+          variant="icon_secondary"
+          className={s.iconLeft}
+          onClick={() => scroll('left')}
+          aria-label="Слайд влево"
+        >
+          <ArrowLeftIcon />
+        </Button>
+      )}
 
-      <div className={s.itemsContainer} ref={scrollRef}>
+      <div className={s.itemsContainer} ref={scrollRef} {...props}>
         {children}
       </div>
-      <Button
-        variant="icon_secondary"
-        className={s.iconRight}
-        onClick={() => scroll('right')}
-        aria-label="Слайд вправо"
-      >
-        <ArrowRightIcon />
-      </Button>
+      {itemsCount > 4 && (
+        <Button
+          variant="icon_secondary"
+          className={s.iconRight}
+          onClick={() => scroll('right')}
+          aria-label="Слайд вправо"
+        >
+          <ArrowRightIcon />
+        </Button>
+      )}
     </div>
   );
 };

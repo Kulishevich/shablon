@@ -1,18 +1,19 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { CategoryT } from './types';
-import { getApiUrl } from '../base';
 
-export const getCategoryBySlug = async (
-  slug: string
-): Promise<CategoryT | null> => {
+export const getCategoryBySlug = async ({
+  variant,
+  slug,
+}: {
+  slug: string;
+  variant: string;
+}): Promise<CategoryT | null> => {
   try {
-    const apiUrl = await getApiUrl();
-    const res = await fetch(
-      `${apiUrl}/v1/categories/slug/${slug}`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/categories/slug/${slug}`, {
       next: {
         revalidate: 60,
-      }
-    }
-    );
+      },
+    });
 
     const { data } = await res.json();
 

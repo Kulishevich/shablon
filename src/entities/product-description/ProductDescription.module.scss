@@ -70,3 +70,45 @@
     padding-top: 24px;
   }
 }
+
+.specifications {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(14);
+  list-style: none;
+  width: vw-1440(526);
+  margin-bottom: vw-1440(10);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 10px;
+    gap: 14px;
+  }
+
+  & > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: vw-1440(8);
+    padding: vw-1440(14) 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent-1) 10%, transparent);
+
+    @media (max-width: 768px) {
+      padding: 14px 0;
+      gap: 8px;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    & > div {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    & > span {
+      font-weight: 700;
+    }
+  }
+}

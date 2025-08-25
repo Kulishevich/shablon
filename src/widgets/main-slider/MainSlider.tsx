@@ -12,11 +12,10 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
 import { Swiper as SwiperType } from 'swiper';
 import { BannerT } from '@/shared/api/banners/types';
 import Link from 'next/link';
-import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
-export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
+export const MainSlider = ({ slides, variant }: { slides: BannerT[]; variant?: string }) => {
   const swiperRef = useRef<SwiperType>(null);
-  const { storeUrl } = useRuntimeConfig();
 
   const handleNext = () => {
     if (!swiperRef.current) return;
@@ -63,11 +62,10 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
           <SwiperSlide key={index}>
             <div className={s.slide}>
               <Image
-                src={`${storeUrl}/${slide.photo_path}`}
+                src={`${getStoreBaseUrl(variant)}/${slide.photo_path}`}
                 alt={`Slide ${index + 1}`}
                 fill
                 priority={index === 0}
-                quality={75}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 placeholder="blur"
@@ -91,22 +89,26 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
         ))}
       </Swiper>
 
-      <Button
-        variant="icon_primary"
-        onClick={handlePrev}
-        className={s.iconLeft}
-        aria-label="Слайд влево"
-      >
-        <ArrowLeftIcon />
-      </Button>
-      <Button
-        variant="icon_primary"
-        onClick={handleNext}
-        className={s.iconRight}
-        aria-label="Слайд вправо"
-      >
-        <ArrowRightIcon />
-      </Button>
+      {slides.length > 1 && (
+        <Button
+          variant="icon_primary"
+          onClick={handlePrev}
+          className={s.iconLeft}
+          aria-label="Слайд влево"
+        >
+          <ArrowLeftIcon />
+        </Button>
+      )}
+      {slides.length > 1 && (
+        <Button
+          variant="icon_primary"
+          onClick={handleNext}
+          className={s.iconRight}
+          aria-label="Слайд вправо"
+        >
+          <ArrowRightIcon />
+        </Button>
+      )}
       <div className={`custom-pagination ${s.pagination}`} />
     </div>
   );

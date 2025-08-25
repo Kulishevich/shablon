@@ -7,20 +7,33 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import clsx from 'clsx';
 import { PromotionT } from '@/shared/api/promotions/types';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import { cookies } from 'next/headers';
 
-export const DiscountCard = ({
+export const DiscountCard = async ({
   title,
   photo_path,
   start_date,
   end_date,
   slug,
-  id,
-  storeUrl,
-}: PromotionT & { storeUrl: string }) => {
+}: PromotionT) => {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
   return (
-    <div className={s.container} itemScope itemType="http://schema.org/BlogPosting">
+    <Link
+      href={`${paths.shares}/${slug}`}
+      className={s.container}
+      itemScope
+      itemType="http://schema.org/BlogPosting"
+    >
       <div className={s.imageContainer}>
-        <Image src={`${storeUrl}/${photo_path}`} fill alt="discount" itemProp="image" />
+        <Image
+          src={`${getStoreBaseUrl(variant)}/${photo_path}`}
+          fill
+          alt="discount"
+          itemProp="image"
+        />
       </div>
       <div className={s.content}>
         <span className={clsx(s.tag, 'tag')} itemProp="datePublished">
@@ -40,17 +53,11 @@ export const DiscountCard = ({
         <div className={clsx(s.title, 'h5')} itemProp="name">
           {title}
         </div>
-        <Button
-          variant="link"
-          as={Link}
-          href={`${paths.shares}/${slug}`}
-          className={s.button}
-          itemProp="mainEntityOfPage"
-        >
+        <Button variant="link" className={s.button} itemProp="mainEntityOfPage">
           Подробнее
           <ArrowRightUpIcon />
         </Button>
       </div>
-    </div>
+    </Link>
   );
 };

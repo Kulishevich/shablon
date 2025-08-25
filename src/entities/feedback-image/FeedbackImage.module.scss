@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .titleContainer {
   display: flex;
@@ -19,9 +19,14 @@
   .imageContainer {
     position: relative;
     width: 100%;
-    height: vw-1440(355);
+    height: 100%;
     border-radius: 6px;
     overflow: hidden;
+    flex: 1 1 auto;
+
+    & > img {
+      object-fit: cover;
+    }
 
     @media (max-width: 768px) {
       height: 195px;

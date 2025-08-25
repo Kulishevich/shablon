@@ -6,22 +6,26 @@ import React, { useEffect, useState } from 'react';
 import s from './Logo.module.scss';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { usePathname } from 'next/navigation';
-import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
+import Cookies from 'js-cookie';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary' }) => {
   const [image, setImage] = useState<string | null>(null);
   const pathname = usePathname();
-  const { storeUrl } = useRuntimeConfig();
+  const [variantState, setVariantState] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    const fetchLogo = async () => {
-      const settings = await getSetting();
+    const fetchData = async () => {
+      const cookieVariant = Cookies.get('variant');
+      setVariantState(cookieVariant);
+
+      const settings = await getSetting({ variant: cookieVariant });
       if (settings?.logo) {
-        setImage(settings?.logo);
+        setImage(settings.logo);
       }
     };
 
-    fetchLogo();
+    fetchData();
   }, []);
 
   if (pathname === '/') {
@@ -29,12 +33,11 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
       <div className={s[variant]}>
         {!!image && (
           <Image
-            src={`${storeUrl}/${image}`}
+            src={`${getStoreBaseUrl(variantState)}/${image}`}
             fill
             alt="logo"
             priority
             sizes="(max-width: 768px) 120px, (max-width: 1200px) 160px, 200px"
-            quality={85}
           />
         )}
       </div>
@@ -45,12 +48,11 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
     <Link href={paths.home} className={s[variant]}>
       {!!image && (
         <Image
-          src={`${storeUrl}/${image}`}
+          src={`${getStoreBaseUrl(variantState)}/${image}`}
           fill
           alt="logo"
           priority
           sizes="(max-width: 768px) 120px, (max-width: 1200px) 160px, 200px"
-          quality={85}
         />
       )}
     </Link>

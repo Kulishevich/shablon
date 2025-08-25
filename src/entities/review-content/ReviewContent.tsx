@@ -1,29 +1,27 @@
-'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ReviewT } from '@/shared/api/reviews/types';
 import clsx from 'clsx';
 import { StarIcon } from '@/shared/assets';
 import s from './ReviewContent.module.scss';
-import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const ReviewContent = ({
-  author_name,
-  author_photo,
-  rating,
-  created_at,
-  title,
-  review_text,
+  review,
   is_card = false,
-}: ReviewT & {
+  variant,
+}: {
+  review: ReviewT;
   is_card?: boolean;
+  variant?: string;
 }) => {
-  const { storeUrl } = useRuntimeConfig();
+  const { author_name, author_photo, rating, created_at, title, review_text } = review;
+
   return (
     <>
       <div className={s.head}>
         <div className={s.imageContainer}>
-          <Image src={`${storeUrl}/${author_photo}`} fill alt="profile" />
+          <Image src={`${getStoreBaseUrl(variant)}/${author_photo}`} fill alt="profile" />
         </div>
         <div className={s.nameContainer}>
           <p className="body_3" itemProp="author">

@@ -1,5 +1,5 @@
 import { Button } from '@/shared/ui/button';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './OrderPrice.module.scss';
 import { ControlledCheckbox } from '@/shared/ui/controlled-checkbox';
 import { useFormContext } from 'react-hook-form';
@@ -8,6 +8,7 @@ import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPr
 import { CartProduct, clearPromocode, setPromocode } from '@/shared/lib/redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import { showToast } from '@/shared/ui/toast';
+import Cookies from 'js-cookie';
 
 export const OrderPrice = ({
   priceWithOutDiscount,
@@ -18,17 +19,26 @@ export const OrderPrice = ({
   priceWithDiscount: number;
   productsCart: CartProduct[];
 }) => {
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
   const dispatch = useDispatch();
   const { control, watch } = useFormContext();
 
   const deliveryCost = watch('delivery_cost');
   const promocode = watch('promo_code');
 
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+  }, []);
   const handleCheckPromocode = async () => {
     try {
       const res = await checkCartPriceWitchPromocode({
-        code: promocode,
-        products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+        reqData: {
+          code: promocode,
+          products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
+        },
+        variant,
       });
       if (Number(res.min_order_amount) <= priceWithOutDiscount) {
         showToast({ variant: 'success', title: 'Промокод активирован' });
@@ -60,11 +70,11 @@ export const OrderPrice = ({
       <div className={s.price}>
         <div className={s.elem}>
           <p className="body_7">Стоимость товаров без скидки</p>
-          <h5 className="h5">{priceWithOutDiscount} BYN</h5>
+          <h5 className="h5">{priceWithOutDiscount.toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Скидка</p>
-          <h5 className="h5">{priceWithOutDiscount - priceWithDiscount} BYN</h5>
+          <h5 className="h5">{(priceWithOutDiscount - priceWithDiscount).toFixed(2)} BYN</h5>
         </div>
         <div className={s.elem}>
           <p className="body_7">Стоимость доставки</p>
@@ -73,7 +83,7 @@ export const OrderPrice = ({
       </div>
       <div className={s.elem}>
         <h5 className="h5">Итого</h5>
-        <h3 className="h3">{priceWithDiscount + deliveryCost} BYN</h3>
+        <h3 className="h3">{(priceWithDiscount + deliveryCost).toFixed(2)} BYN</h3>
       </div>
       <ControlledCheckbox
         control={control}

@@ -1,13 +1,16 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { CategoryT } from './types';
-import { getApiUrl } from '../base';
 
-export const getCategories = async (): Promise<CategoryT[] | null> => {
+export const getCategories = async ({
+  variant,
+}: {
+  variant?: string;
+}): Promise<CategoryT[] | null> => {
   try {
-    const apiUrl = await getApiUrl();
-    const res = await fetch(`${apiUrl}/v1/categories`, {
+    const res = await fetch(`${getApiBaseUrl(variant)}/v1/categories?with_products_count=true`, {
       next: {
         revalidate: 60,
-      }
+      },
     });
 
     const { data } = await res.json();

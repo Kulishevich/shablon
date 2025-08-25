@@ -1,10 +1,13 @@
+import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { SeoSettingsT } from './types';
-import { getApiUrl } from '../base';
 
-export const getSeoSettings = async (): Promise<SeoSettingsT | null> => {
+export const getSeoSettings = async ({
+  variant,
+}: {
+  variant?: string;
+}): Promise<SeoSettingsT | null> => {
   try {
-    const apiUrl = await getApiUrl();
-    const data = await fetch(`${apiUrl}/v1/seo/settings`, {
+    const data = await fetch(`${getApiBaseUrl(variant)}/v1/seo/settings`, {
       next: {
         revalidate: 60,
       },

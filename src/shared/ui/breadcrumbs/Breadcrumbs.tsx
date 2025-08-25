@@ -25,7 +25,7 @@ export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
   ].filter((elem) => !!elem);
 
   return (
-    <div
+    <ul
       className={clsx(s.container, className)}
       itemScope
       itemType="http://schema.org/BreadcrumbList"
@@ -39,24 +39,30 @@ export const Breadcrumbs = ({ className, dynamicPath }: Props) => {
 
         if (lastItem) {
           return (
-            <a className={cn(s.elem, 'body_6_bold')} key={idx} itemProp="itemListElement">
-              <span itemProp="name">{path?.title}</span>
-            </a>
+            <li
+              key={idx}
+              itemProp="itemListElement"
+              itemScope
+              itemType="https://schema.org/ListItem"
+            >
+              <a className={cn(s.elem, 'body_6_bold')} itemProp="item">
+                <span itemProp="name">{path?.title}</span>
+              </a>
+              <meta itemProp="position" content={(idx + 1).toString()} />
+            </li>
           );
         }
 
         return (
-          <Link
-            href={href || '/'}
-            className={cn(s.elem, 'body_6')}
-            key={idx}
-            itemProp="itemListElement"
-          >
-            <span itemProp="name">{path?.title}</span>
-            <ArrowRightIcon className={s.icon} />
-          </Link>
+          <li itemProp="itemListElement" key={idx} itemScope itemType="https://schema.org/ListItem">
+            <Link href={href || '/'} className={cn(s.elem, 'body_6')} itemProp="item">
+              <span itemProp="name">{path?.title}</span>
+              <ArrowRightIcon className={s.icon} />
+              <meta itemProp="position" content={(idx + 1).toString()} />
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };

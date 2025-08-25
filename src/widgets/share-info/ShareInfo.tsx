@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import s from './ShareInfo.module.scss';
 import { Button } from '@/shared/ui/button';
@@ -8,6 +7,7 @@ import { ArrowSmLeftIcon } from '@/shared/assets';
 import { PromotionT } from '@/shared/api/promotions/types';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import clsx from 'clsx';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const ShareInfo = ({
   title,
@@ -15,13 +15,17 @@ export const ShareInfo = ({
   content,
   photo_path,
   slug,
-  id,
-  storeUrl,
-}: PromotionT & { storeUrl: string }) => {
+  variant,
+}: PromotionT & { variant?: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.imageContainer}>
-        <Image src={`${storeUrl}/${photo_path}`} fill alt={'discount'} itemProp="image" />
+        <Image
+          src={`${getStoreBaseUrl(variant)}/${photo_path}`}
+          fill
+          alt={'discount'}
+          itemProp="image"
+        />
       </div>
       <div className={s.content}>
         <Breadcrumbs

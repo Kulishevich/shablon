@@ -2,6 +2,29 @@
 
 .wrapper {
   position: relative;
+
+  .iconLeft {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(vw-1440(-754), -50%);
+    z-index: 100;
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .iconRight {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(vw-1440(754), -50%);
+
+    z-index: 100;
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 }
 
 .container {
@@ -65,29 +88,6 @@
     z-index: -1;
     object-fit: cover;
     object-position: bottom;
-  }
-}
-
-.iconLeft {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(vw-1440(-754), -50%);
-  z-index: 100;
-  @media (max-width: 768px) {
-    display: none;
-  }
-}
-
-.iconRight {
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  transform: translate(vw-1440(754), -50%);
-
-  z-index: 100;
-  @media (max-width: 768px) {
-    display: none;
   }
 }
 

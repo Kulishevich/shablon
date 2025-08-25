@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/button';
 import Image from 'next/image';
 import { TextField } from '@/shared/ui/text-field';
 import clsx from 'clsx';
-import { CloseIcon } from '@/shared/assets';
+import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from '@/shared/assets';
 import { useDispatch } from 'react-redux';
 import {
   CartProduct,
@@ -13,10 +13,10 @@ import {
 } from '@/shared/lib/redux/slices/cartSlice';
 import debounce from 'lodash.debounce';
 import Link from 'next/link';
-import { paths } from '@/shared/config/constants/paths';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 import { ProductT } from '@/shared/api/product/types';
-import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import Cookies from 'js-cookie';
 
 export const RowProductCart = ({
   name,
@@ -29,13 +29,19 @@ export const RowProductCart = ({
   slug,
   category,
 }: CartProduct) => {
+  const [variant, setVariant] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const cookieVariant = Cookies.get('variant');
+    setVariant(cookieVariant);
+  }, []);
+
   const [count, setCount] = useState(quantity);
   const dispatch = useDispatch();
   const isDiscount = !!Number(discount);
   const totalPrice = isDiscount
     ? Math.round((Number(price) * (100 - Number(discount))) / 100)
     : +price;
-  const { storeUrl } = useRuntimeConfig();
 
   useEffect(() => {
     setCount(quantity);
@@ -67,6 +73,14 @@ export const RowProductCart = ({
     };
   }, [debouncedDispatch]);
 
+  const increment = () => {
+    setCount((prev) => ++prev);
+  };
+
+  const decrement = () => {
+    setCount((prev) => Math.max(--prev, 1));
+  };
+
   return (
     <div className={s.container} itemScope itemType="http://schema.org/ListItem">
       <Button variant="icon" onClick={() => dispatch(deleteFromCart(id))}>
@@ -75,10 +89,15 @@ export const RowProductCart = ({
       <div className={s.card}>
         <Link
           className={s.imageContainer}
-          href={buildProductUrlSync({ category, slug } as ProductT)}
+          href={buildProductUrlSync({ product: { category, slug } as ProductT, variant })}
           itemProp="url"
         >
-          <Image itemProp="image" src={`${storeUrl}/${photo_path}`} fill alt="product" />
+          <Image
+            itemProp="image"
+            src={`${getStoreBaseUrl(variant)}/${photo_path}`}
+            fill
+            alt="product"
+          />
         </Link>
         <div>
           <p className="body_4" itemProp="name">
@@ -90,11 +109,17 @@ export const RowProductCart = ({
         </div>
       </div>
       <div className={s.count}>
+        <Button variant="icon" onClick={decrement} className={s.countButton}>
+          <ArrowLeftIcon />
+        </Button>
         <TextField
           className={s.input}
           value={count}
           onChange={(e) => changeCountValue(e.target.value)}
         />
+        <Button variant="icon" onClick={increment} className={s.countButton}>
+          <ArrowRightIcon />
+        </Button>
       </div>
       <div className={s.price} itemScope itemType="http://schema.org/Offer">
         <p className="body_3" itemProp="price">

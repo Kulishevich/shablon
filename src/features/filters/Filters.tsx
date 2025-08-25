@@ -11,20 +11,54 @@ import s from './Filters.module.scss';
 import { BrandT } from '@/shared/api/brands/types';
 import { PriceSlider } from '@/shared/ui/price-slider';
 import { TextField } from '@/shared/ui/text-field';
+import { CategoryTree } from '@/entities/category-tree';
+import { CategoryT } from '@/shared/api/category/types';
+import { FilterT } from '@/shared/api/product/types';
 
-export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; max: number }) => {
+export const Filters = ({
+  className,
+  brands,
+  min,
+  max,
+  categories,
+  currentCategory,
+  categoryPath,
+  filters,
+}: {
+  className?: string;
+  brands: BrandT[];
+  min: number;
+  max: number;
+  categories?: CategoryT[];
+  currentCategory?: CategoryT;
+  categoryPath?: CategoryT[];
+  filters: FilterT[];
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [minPrice, setMinPrice] = useState<number>(Number(searchParams.get('price_from')) || min);
   const [maxPrice, setMaxPrice] = useState<number>(Number(searchParams.get('price_to')) || max);
   const [checkedBrands, setCheckedBrands] = useState<string[]>([]);
+  const [dynamicFilters, setDynamicFilters] = useState<Record<string, string[]>>({});
   const isFirstRender = useRef(true);
 
   useEffect(() => {
     const brandParam = searchParams.get('brand');
     const initialBrands = brandParam ? brandParam.split(',') : [];
     setCheckedBrands(initialBrands);
-  }, []);
+
+    // Инициализация динамических фильтров из URL
+    const initialDynamicFilters: Record<string, string[]> = {};
+    filters.forEach((filter) => {
+      const paramValue = searchParams.get(filter.slug);
+      if (paramValue) {
+        initialDynamicFilters[filter.slug] = paramValue.split('|');
+      } else {
+        initialDynamicFilters[filter.slug] = [];
+      }
+    });
+    setDynamicFilters(initialDynamicFilters);
+  }, [filters]);
 
   const updatePriceUrl = useMemo(
     () =>
@@ -50,6 +84,21 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
     [searchParams]
   );
 
+  const updateDynamicFilterUrl = useMemo(
+    () =>
+      debounce((filterSlug: string, values: string[]) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (values.length > 0) {
+          params.set(filterSlug, values.join('|'));
+        } else {
+          params.delete(filterSlug);
+        }
+        params.set('page', '1');
+        router.push(`?${params.toString()}`);
+      }, 500),
+    [searchParams]
+  );
+
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -63,8 +112,9 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
     return () => {
       updatePriceUrl.cancel();
       updateUrl.cancel();
+      updateDynamicFilterUrl.cancel();
     };
-  }, [updatePriceUrl, updateUrl]);
+  }, [updatePriceUrl, updateUrl, updateDynamicFilterUrl]);
 
   const handleChangeBrands = (value: string, checked: boolean) => {
     const lower = value.toLowerCase();
@@ -85,10 +135,28 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
     }
   };
 
+  const handleChangeDynamicFilter = (filterSlug: string, value: string, checked: boolean) => {
+    const currentValues = dynamicFilters[filterSlug] || [];
+    const updated = checked ? [...currentValues, value] : currentValues.filter((v) => v !== value);
+
+    setDynamicFilters((prev) => ({
+      ...prev,
+      [filterSlug]: updated,
+    }));
+    updateDynamicFilterUrl(filterSlug, updated);
+  };
+
   const resetFilters = () => {
     setCheckedBrands([]);
     setMinPrice(min);
     setMaxPrice(max);
+
+    // Сброс динамических фильтров
+    const resetDynamicFilters: Record<string, string[]> = {};
+    filters.forEach((filter) => {
+      resetDynamicFilters[filter.slug] = [];
+    });
+    setDynamicFilters(resetDynamicFilters);
 
     // Сохраняем поисковой запрос и другие параметры (кроме фильтров) при сбросе
     const params = new URLSearchParams();
@@ -119,17 +187,29 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
   };
 
   return (
-    <div className={clsx(s.filters, 'desktop-only')}>
-      <CollapseFilter title="Бренд">
-        {brands.map((brand, index) => (
-          <Checkbox
-            label={brand.name}
-            checked={checkedBrands.includes(brand.name.toLowerCase())}
-            onCheckedChange={(checked) => handleChangeBrands(brand.name, !!checked)}
-            key={index}
-          />
-        ))}
-      </CollapseFilter>
+    <div className={clsx(s.filters, className)}>
+      {categories && categories.length > 0 && (
+        <CategoryTree
+          categories={categories}
+          title="Категории"
+          className={s.categoryFilter}
+          currentCategory={currentCategory}
+          categoryPath={categoryPath}
+        />
+      )}
+
+      {brands.length > 0 && (
+        <CollapseFilter title="Бренд">
+          {brands.map((brand, index) => (
+            <Checkbox
+              label={brand.name}
+              checked={checkedBrands.includes(brand.name.toLowerCase())}
+              onCheckedChange={(checked) => handleChangeBrands(brand.name, !!checked)}
+              key={index}
+            />
+          ))}
+        </CollapseFilter>
+      )}
 
       <CollapseFilter title="Цена">
         <div className={s.inputsContainer}>
@@ -153,6 +233,21 @@ export const Filters = ({ brands, min, max }: { brands: BrandT[]; min: number; m
           setMaxPrice={setMaxPrice}
         />
       </CollapseFilter>
+
+      {filters.map((filter) => (
+        <CollapseFilter key={filter.id} title={filter.name}>
+          {filter.values.map((value, index) => (
+            <Checkbox
+              key={index}
+              label={value}
+              checked={dynamicFilters[filter.slug]?.includes(value) || false}
+              onCheckedChange={(checked) =>
+                handleChangeDynamicFilter(filter.slug, value, !!checked)
+              }
+            />
+          ))}
+        </CollapseFilter>
+      ))}
 
       <Button variant="secondary" fullWidth onClick={resetFilters}>
         Сбросить фильтр

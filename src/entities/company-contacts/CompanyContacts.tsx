@@ -3,14 +3,16 @@ import React from 'react';
 import s from './CompanyContacts.module.scss';
 import Link from 'next/link';
 import { ContactsT } from '@/shared/api/design/types';
+import clsx from 'clsx';
 
-export const CompanyContacts = ({
-  contacts,
-}: {
+interface CompanyContactsProps {
   contacts: ContactsT | null;
-}) => {
+  className?: string;
+}
+
+export const CompanyContacts = ({ contacts, className }: CompanyContactsProps) => {
   return (
-    <div className={s.contacts}>
+    <div className={clsx(s.contacts, className)}>
       <div className={s.contactElem}>
         <LocationIcon />
         <p className="body_6">{contacts?.address}</p>

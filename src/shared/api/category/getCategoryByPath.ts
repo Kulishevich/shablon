@@ -1,14 +1,18 @@
 import { CategoryT } from './types';
 import { getCategoriesTree } from './getCategoriesTree';
 
-export const getCategoryByPath = async (
-  slugs: string[]
-): Promise<{
+export const getCategoryByPath = async ({
+  slugs,
+  variant,
+}: {
+  variant?: string;
+  slugs: string[];
+}): Promise<{
   category: CategoryT | null;
   categoryPath: CategoryT[];
 }> => {
   try {
-    const categoriesTree = await getCategoriesTree();
+    const categoriesTree = await getCategoriesTree({ variant });
 
     if (!categoriesTree || slugs.length === 0) {
       return { category: null, categoryPath: [] };
@@ -20,7 +24,7 @@ export const getCategoryByPath = async (
 
     // Проходим по каждому slug в пути
     for (const slug of slugs) {
-      const foundCategory = currentCategories.find(cat => cat.slug === slug);
+      const foundCategory = currentCategories.find((cat) => cat.slug === slug);
 
       if (!foundCategory) {
         return { category: null, categoryPath: [] };
@@ -39,4 +43,4 @@ export const getCategoryByPath = async (
     console.log(err);
     return { category: null, categoryPath: [] };
   }
-}; 
+};

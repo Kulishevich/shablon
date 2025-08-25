@@ -1,4 +1,4 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .cotnainer {
   display: flex;
@@ -22,6 +22,11 @@
     height: vw-1440(220);
     border-radius: 6px;
     overflow: hidden;
+
+    & > img {
+      object-fit: cover;
+    }
+
     @media (max-width: 768px) {
       width: 160px;
       height: 110px;

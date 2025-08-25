@@ -3,24 +3,40 @@ import React, { useEffect, useState } from 'react';
 import s from './ProductDescription.module.scss';
 import clsx from 'clsx';
 import { ProductT } from '@/shared/api/product/types';
-import { ReviewsSection } from '@/widgets/reviews-section';
 import { ReviewT } from '@/shared/api/reviews/types';
 import { ProductReviews } from '@/widgets/product-reviews';
+import { PaymentAndDeliveryT } from '@/shared/api/delivery-and-payment/types';
+import { useSearchParams } from 'next/navigation';
 
 export const ProductDescription = ({
   product,
   reviews,
+  deliveryAndPayment,
+  variant,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
+  deliveryAndPayment: PaymentAndDeliveryT[] | null;
+  variant?: string;
 }) => {
-  const [activeTag, setActiveTag] = useState(0);
+  const searchParams = useSearchParams();
+  const [activeTag, setActiveTag] = useState(1);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       addViewedProduct(product);
     }
   }, [product.id]);
+
+  // Обработка параметра characteristics для автоматического переключения на вкладку
+  useEffect(() => {
+    if (searchParams.get('characteristics') === '1') {
+      setActiveTag(2);
+    }
+    if (searchParams.get('reviews') === '1') {
+      setActiveTag(4);
+    }
+  }, [searchParams]);
 
   const addViewedProduct = (product: ProductT) => {
     const existing = JSON.parse(localStorage.getItem('viewed_products_shablon') || '[]');
@@ -37,13 +53,11 @@ export const ProductDescription = ({
     },
     {
       id: 2,
-      title: 'Все Характеристики',
+      title: 'Все характеристики',
     },
     {
       id: 3,
       title: 'Доставка',
-      content:
-        'Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка Доставка',
     },
     {
       id: 4,
@@ -51,14 +65,18 @@ export const ProductDescription = ({
     },
   ];
 
+  const changeActiveTag = (tag: number) => {
+    setActiveTag(tag);
+  };
+
   return (
     <div className={s.container}>
-      <div className={s.navigation}>
+      <div className={s.navigation} id="characteristics">
         {info.map((item, index) => (
           <button
             key={index}
-            onClick={() => setActiveTag(index)}
-            className={clsx(activeTag === index && s.active, 'h6')}
+            onClick={() => changeActiveTag(item.id)}
+            className={clsx(activeTag === item.id && s.active, 'h6')}
           >
             {item.title}
           </button>
@@ -66,11 +84,19 @@ export const ProductDescription = ({
       </div>
 
       {activeTag === 1 && (
+        <div
+          className={s.content}
+          dangerouslySetInnerHTML={{ __html: product.description || '' }}
+        />
+      )}
+
+      {activeTag === 2 && (
         <div className={s.content}>
-          <ul>
-            {product?.specifications?.slice(0, 3).map((elem) => (
+          <ul className={s.specifications}>
+            {product?.specifications?.map((elem) => (
               <li className="body_3" key={elem.id}>
-                {elem?.name} : {elem?.pivot?.value}
+                <div>{elem?.name}</div>
+                <span>{elem?.pivot?.value}</span>
               </li>
             ))}
           </ul>
@@ -78,15 +104,20 @@ export const ProductDescription = ({
       )}
 
       {activeTag === 3 && (
-        <div className={s.content}>
-          <ProductReviews reviews={reviews} />
+        <div>
+          {deliveryAndPayment?.map((item) => (
+            <div className={s.content}>
+              <h3 className="h3">{item.title}</h3>
+              <div dangerouslySetInnerHTML={{ __html: item.content }} className={s.content} />
+            </div>
+          ))}
         </div>
       )}
-      {activeTag !== 1 && activeTag !== 3 && (
-        <div
-          className={s.content}
-          dangerouslySetInnerHTML={{ __html: info[activeTag].content || '' }}
-        />
+
+      {activeTag === 4 && (
+        <div className={s.content}>
+          <ProductReviews reviews={reviews} productId={product.id.toString()} variant={variant} />
+        </div>
       )}
     </div>
   );

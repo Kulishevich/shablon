@@ -1,16 +1,16 @@
-import React from 'react';
 import s from './AboutSection.module.scss';
 import Image from 'next/image';
 import { ContentImageBlock } from '@/shared/api/about/types';
 import clsx from 'clsx';
 import { parseImageTextBlock } from '@/shared/lib/utils/parseImageTextBlock';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const AboutSection = ({
   items,
-  storeUrl,
+  variant,
 }: {
   items?: ContentImageBlock[];
-  storeUrl: string;
+  variant?: string;
 }) => {
   return (
     <div className={s.container}>
@@ -28,7 +28,7 @@ export const AboutSection = ({
                   <div className={s.caption} dangerouslySetInnerHTML={{ __html: caption }} />
 
                   <Image
-                    src={`${storeUrl}/${item.content.image_path}`}
+                    src={`${getStoreBaseUrl(variant)}/${item.content.image_path}`}
                     alt="about"
                     width={636}
                     height={396}

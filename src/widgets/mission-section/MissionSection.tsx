@@ -1,19 +1,19 @@
-import React from 'react';
 import s from './MissionSection.module.scss';
 import Image from 'next/image';
+import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const MissionSection = ({
   title,
   text_primary,
   text_secondary,
   image_path,
-  storeUrl,
+  variant,
 }: {
   title: string;
   text_primary: string;
   text_secondary: string;
   image_path: string;
-  storeUrl: string;
+  variant?: string;
 }) => {
   return (
     <div className={s.container}>
@@ -23,7 +23,7 @@ export const MissionSection = ({
         {text_secondary && <p className="body_2">{text_secondary}</p>}
       </div>
       <Image
-        src={`${storeUrl}/${image_path}`}
+        src={`${getStoreBaseUrl(variant)}/${image_path}`}
         alt="about"
         width={636}
         height={396}

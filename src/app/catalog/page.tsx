@@ -3,19 +3,22 @@ import { CatalogProducts } from '@/widgets/catalog-products';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { Feedback } from '@/widgets/feedback/Feedback';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
-import { getStoreUrl } from '@/shared/api/base';
+import { cookies } from 'next/headers';
 
 export default async function Catalog() {
-  const [categories, storeUrl] = await Promise.all([getCategories(), getStoreUrl()]);
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
+  const categories = await getCategories({ variant });
 
   return (
     <>
       <Breadcrumbs />
       <main>
-        <CatalogProducts title="Каталог" categories={categories} storeUrl={storeUrl} />
+        <CatalogProducts title="Каталог" categories={categories} />
 
         <SeoBlock page="/catalog" />
-        <Feedback />
+        <Feedback variant={variant} />
       </main>
     </>
   );

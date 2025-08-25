@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import s from './SeoBlock.module.scss';
 import { getSeoPage } from '@/shared/api/seo/getSeoPage';
+import { cookies } from 'next/headers';
 
 export const SeoBlock = async ({
   page,
@@ -11,7 +12,10 @@ export const SeoBlock = async ({
   align?: 'left' | 'center';
   className?: string;
 }) => {
-  const seoPage = await getSeoPage(page);
+  const cookieStore = await cookies();
+  const variant = cookieStore.get('variant')?.value;
+
+  const seoPage = await getSeoPage({ page, variant });
 
   if (!seoPage) {
     return null;

@@ -56,6 +56,25 @@ main {
   }
 }
 
+.main-container {
+  @media (max-width: 768px) {
+    max-width: 336px;
+    margin: 0 auto;
+  }
+}
+
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-left {
+  text-align: left;
+}
+
 h1,
 h2 {
   color: var(--color-heading);
