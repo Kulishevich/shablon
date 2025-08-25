@@ -4,7 +4,6 @@ import { Search } from './Search/Search';
 import s from './HeaderDesktop.module.scss';
 import { CategoryT } from '@/shared/api/category/types';
 import { ContactsT } from '@/shared/api/design/types';
-import { ProductT } from '@/shared/api/product/types';
 import { HeaderFixed } from './HeaderFixed';
 import { ServiceT } from '@/shared/api/services/types';
 
