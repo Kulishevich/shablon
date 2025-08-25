@@ -1,14 +1,11 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import { cookies } from 'next/headers';
+import { getApiUrl } from '@/shared/api/base';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function GET() {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
-  const res = await fetch(`${getApiBaseUrl(variant)}/v1/seo/robots.txt`);
+  const apiUrl = await getApiUrl();
+  const res = await fetch(`${apiUrl}/v1/seo/robots.txt`);
   const text = await res.text();
 
   return new Response(text, {

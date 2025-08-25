@@ -1,14 +1,13 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { CheckPromocodeT } from './type';
+import { getApiUrl } from '../base';
 
 export const checkPromocode = async ({
   reqData,
-  variant,
 }: {
   reqData: CheckPromocodeT;
-  variant: string;
 }) => {
-  const res = await fetch(`${getApiBaseUrl(variant)}/v1/promo-codes/check`, {
+  const apiUrl = await getApiUrl();
+  const res = await fetch(`${apiUrl}/v1/promo-codes/check`, {
     method: 'POST',
     body: JSON.stringify(reqData),
     headers: {

@@ -1,13 +1,10 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { PaymentT } from './types';
+import { getApiUrl } from '../base';
 
-export const getPaymentMethods = async ({
-  variant,
-}: {
-  variant?: string;
-}): Promise<PaymentT[] | null> => {
+export const getPaymentMethods = async (): Promise<PaymentT[] | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/payment-methods`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/payment-methods`, {
       next: {
         revalidate: 60,
       },

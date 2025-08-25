@@ -25,6 +25,7 @@ export const SearchSection = ({
   allCategories,
   currentPath,
   filters,
+  storeUrl,
 }: {
   products: ProductsResponseT | null;
   tags?: TagT[];
@@ -36,6 +37,7 @@ export const SearchSection = ({
   allCategories?: CategoryT[];
   currentPath: string;
   filters: FilterT[];
+  storeUrl: string;
 }) => {
   return (
     <div className={s.container}>
@@ -76,7 +78,7 @@ export const SearchSection = ({
               <div className={s.productList} itemScope itemType="http://schema.org/ItemList">
                 <ReduxProvider>
                   {products.data.data.map((product, index) => (
-                    <ProductCard key={index} product={product} />
+                    <ProductCard key={index} product={product} storeUrl={storeUrl} />
                   ))}
                 </ReduxProvider>
               </div>

@@ -8,7 +8,7 @@ import { ReviewT } from '@/shared/api/reviews/types';
 import { ReviewContent } from '../review-content';
 import s from './ReviewPopup.module.scss';
 
-export const ReviewPopup = ({ review, variant }: { review: ReviewT; variant?: string }) => {
+export const ReviewPopup = ({ review, storeUrl }: { review: ReviewT; storeUrl: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ export const ReviewPopup = ({ review, variant }: { review: ReviewT; variant?: st
             <Dialog.Title>Отзыв</Dialog.Title>
           </VisuallyHidden>
           <Dialog.Content className={s.content}>
-            <ReviewContent review={review} variant={variant} />
+            <ReviewContent review={review} storeUrl={storeUrl} />
             <Dialog.DialogClose asChild>
               <Button className={s.closeButton}>
                 <CloseIcon />

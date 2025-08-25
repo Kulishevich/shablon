@@ -1,12 +1,10 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ReviewPostResponseT, ReviewPostT } from './types';
+import { getApiUrl } from '../base';
 
 export const postProductReview = async ({
   review,
-  variant,
   productId,
 }: {
-  variant?: string;
   review: ReviewPostT;
   productId: string;
 }): Promise<ReviewPostResponseT | null> => {
@@ -21,7 +19,8 @@ export const postProductReview = async ({
       formData.append('author_photo', review.photo);
     }
 
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/products/${productId}/reviews`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/products/${productId}/reviews`, {
       method: 'POST',
       body: formData,
       headers: {

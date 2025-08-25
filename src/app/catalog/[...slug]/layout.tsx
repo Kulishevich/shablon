@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import { enrichProductWithFullPath, validateProductPath } from '@/shared/lib/utils/productUtils';
-import { cookies } from 'next/headers';
 import { geCategoryMask } from '@/shared/api/meta-tags/geCategoryMask';
 import { getProductMask } from '@/shared/api/meta-tags/getProductMask';
 
@@ -19,16 +18,13 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
   const { slug } = await params;
 
-  const { category } = await getCategoryByPath({ slugs: slug, variant });
+  const { category } = await getCategoryByPath({ slugs: slug });
 
   if (category) {
-    const seo = await getSeoTag({ tag: category.slug, variant });
-    const categoryMask = await geCategoryMask({ category, variant });
+    const seo = await getSeoTag({ tag: category.slug });
+    const categoryMask = await geCategoryMask({ category });
 
     return {
       title: seo?.title || categoryMask?.title || category.name,
@@ -44,14 +40,14 @@ export async function generateMetadata({
   }
 
   const lastSlug = slug[slug.length - 1];
-  let product = await getProductById({ id: lastSlug, variant });
+  let product = await getProductById({ id: lastSlug });
 
   if (product) {
-    product = await enrichProductWithFullPath({ product, variant });
-    const seo = await getSeoTag({ tag: product.slug, variant });
-    const productMask = await getProductMask({ product, variant });
+    product = await enrichProductWithFullPath({ product });
+    const seo = await getSeoTag({ tag: product.slug });
+    const productMask = await getProductMask({ product });
 
-    const isValidPath = await validateProductPath({ product, pathSlugs: slug, variant });
+    const isValidPath = await validateProductPath({ product, pathSlugs: slug });
 
     if (!isValidPath) {
       return {
@@ -79,24 +75,21 @@ export async function generateMetadata({
 }
 
 export default async function Layout({ params, children }: LayoutProps) {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
   const { slug } = await params;
 
-  const { category } = await getCategoryByPath({ slugs: slug, variant });
+  const { category } = await getCategoryByPath({ slugs: slug });
 
   if (category) {
     return <>{children}</>;
   }
 
   const lastSlug = slug[slug.length - 1];
-  let product = await getProductById({ id: lastSlug, variant });
+  let product = await getProductById({ id: lastSlug });
 
   if (product) {
-    product = await enrichProductWithFullPath({ product, variant });
+    product = await enrichProductWithFullPath({ product });
 
-    const isValidPath = await validateProductPath({ product, pathSlugs: slug, variant });
+    const isValidPath = await validateProductPath({ product, pathSlugs: slug });
 
     if (!isValidPath) {
       notFound();

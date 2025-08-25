@@ -8,10 +8,8 @@ import { CategoryT } from '@/shared/api/category/types';
 import { useRouter } from 'next/navigation';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { searchProducts } from '@/shared/api/product/searchProducts';
-import Cookies from 'js-cookie';
 
 export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) => {
-  const [variant, setVariant] = useState<string | undefined>(undefined);
   const [searchValue, setSearchValue] = useState('');
   const [products, setProducts] = useState<ProductT[]>([]);
   const [productResult, setProductResult] = useState<ProductT[]>([]);
@@ -19,11 +17,6 @@ export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) 
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-
-  useEffect(() => {
-    const cookieVariant = Cookies.get('variant');
-    setVariant(cookieVariant);
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -40,7 +33,7 @@ export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) 
   const debouncedSearch = useCallback(
     (() => {
       let timeoutId: NodeJS.Timeout;
-      return (searchQuery: string, variant: string) => {
+      return (searchQuery: string) => {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(async () => {
           if (!searchQuery.trim() || searchQuery.trim().length < 2) {
@@ -53,7 +46,6 @@ export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) 
           try {
             const searchResults = await searchProducts({
               search: searchQuery,
-              variant,
               limit: 10,
             });
             setProducts(searchResults || []);
@@ -71,16 +63,14 @@ export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) 
 
   // Effect для поиска продуктов при изменении поискового запроса
   useEffect(() => {
-    if (!variant) return;
-
     if (!searchValue.trim()) {
       setProducts([]);
       setIsLoading(false);
       return;
     }
 
-    debouncedSearch(searchValue, variant);
-  }, [searchValue, variant, debouncedSearch]);
+    debouncedSearch(searchValue);
+  }, [searchValue, debouncedSearch]);
 
   const searchResult = useMemo(
     () => ({
@@ -95,7 +85,7 @@ export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) 
   );
 
   useEffect(() => {
-    if (!variant || !products.length) {
+    if (!products.length) {
       setProductResult([]);
       return;
     }
@@ -104,7 +94,6 @@ export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) 
       try {
         const productsResultWithFullPath = await enrichProductsWithFullPath({
           products,
-          variant,
         });
         setProductResult(productsResultWithFullPath);
       } catch (error) {
@@ -114,7 +103,7 @@ export const SearchInput = ({ categories }: { categories: CategoryT[] | null }) 
     };
 
     createProductsWithFullPath();
-  }, [products, variant]);
+  }, [products]);
 
   const handleChangeValue = (value: string) => {
     setSearchValue(value);

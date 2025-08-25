@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ProductDescription } from '@/entities/product-description';
 import { ProductInfo } from '@/entities/product-info';
 import s from './ProductSection.module.scss';
@@ -9,11 +9,10 @@ import { ReviewT } from '@/shared/api/reviews/types';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 import Image from 'next/image';
 import { ProductAdvantageType } from '@/shared/api/advantages/types';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import Cookies from 'js-cookie';
 import { PaymentAndDeliveryT } from '@/shared/api/delivery-and-payment/types';
 import Script from 'next/script';
 import { createProductJsonLd } from '@/shared/lib/utils/createJsonLd';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const ProductSection = ({
   product,
@@ -26,12 +25,7 @@ export const ProductSection = ({
   advantages: ProductAdvantageType[] | null;
   deliveryAndPayment: PaymentAndDeliveryT[] | null;
 }) => {
-  const [variant, setVariant] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    const cookieVariant = Cookies.get('variant');
-    setVariant(cookieVariant);
-  }, []);
+  const { storeUrl } = useRuntimeConfig();
 
   return (
     <div className={s.container}>
@@ -39,7 +33,7 @@ export const ProductSection = ({
       <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: createProductJsonLd(product, reviews, variant),
+          __html: createProductJsonLd(product, reviews),
         }}
       />
       <div className={s.header}>
@@ -52,7 +46,7 @@ export const ProductSection = ({
         {product?.brand && (
           <span itemProp="brand" content={product?.brand?.name}>
             <Image
-              src={`${getStoreBaseUrl(variant)}/${product?.brand?.image_path}`}
+              src={`${storeUrl}/${product?.brand?.image_path}`}
               alt={product?.brand?.name}
               width={55}
               height={55}
@@ -67,7 +61,7 @@ export const ProductSection = ({
             product={product}
             reviews={reviews}
             deliveryAndPayment={deliveryAndPayment}
-            variant={variant}
+            storeUrl={storeUrl}
           />
         </ReduxProvider>
       </div>

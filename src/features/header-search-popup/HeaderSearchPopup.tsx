@@ -12,10 +12,8 @@ import { useRouter } from 'next/navigation';
 import { searchProducts } from '@/shared/api/product/searchProducts';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { paths } from '@/shared/config/constants/paths';
-import Cookies from 'js-cookie';
 
 export const HeaderSearchPopup = ({ categories }: { categories: CategoryT[] | null }) => {
-  const [variant, setVariant] = useState<string | undefined>(undefined);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [searchValue, setSearchValue] = useState('');
@@ -24,16 +22,11 @@ export const HeaderSearchPopup = ({ categories }: { categories: CategoryT[] | nu
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const cookieVariant = Cookies.get('variant');
-    setVariant(cookieVariant);
-  }, []);
-
   // Debounced search function
   const debouncedSearch = useCallback(
     (() => {
       let timeoutId: NodeJS.Timeout;
-      return (searchQuery: string, variant: string) => {
+      return (searchQuery: string) => {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(async () => {
           if (!searchQuery.trim() || searchQuery.trim().length < 2) {
@@ -46,7 +39,6 @@ export const HeaderSearchPopup = ({ categories }: { categories: CategoryT[] | nu
           try {
             const searchResults = await searchProducts({
               search: searchQuery,
-              variant,
               limit: 10,
             });
             setProducts(searchResults || []);
@@ -64,20 +56,18 @@ export const HeaderSearchPopup = ({ categories }: { categories: CategoryT[] | nu
 
   // Effect для поиска продуктов при изменении поискового запроса
   useEffect(() => {
-    if (!variant) return;
-
     if (!searchValue.trim()) {
       setProducts([]);
       setIsLoading(false);
       return;
     }
 
-    debouncedSearch(searchValue, variant);
-  }, [searchValue, variant, debouncedSearch]);
+    debouncedSearch(searchValue);
+  }, [searchValue, debouncedSearch]);
 
   // Effect для обогащения продуктов полными путями
   useEffect(() => {
-    if (!variant || !products.length) {
+    if (!products.length) {
       setProductResult([]);
       return;
     }
@@ -86,7 +76,6 @@ export const HeaderSearchPopup = ({ categories }: { categories: CategoryT[] | nu
       try {
         const productsResultWithFullPath = await enrichProductsWithFullPath({
           products,
-          variant,
         });
         setProductResult(productsResultWithFullPath);
       } catch (error) {
@@ -96,7 +85,7 @@ export const HeaderSearchPopup = ({ categories }: { categories: CategoryT[] | nu
     };
 
     createProductsWithFullPath();
-  }, [products, variant]);
+  }, [products]);
 
   const searchResult = useMemo(
     () => ({

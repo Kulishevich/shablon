@@ -1,9 +1,10 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { SettingsT } from './types';
+import { getApiUrl } from '../base';
 
-export const getSetting = async ({ variant }: { variant?: string }): Promise<SettingsT | null> => {
+export const getSetting = async (): Promise<SettingsT | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/design/settings`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/design/settings`, {
       next: {
         revalidate: 60,
       },

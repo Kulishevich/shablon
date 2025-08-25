@@ -3,16 +3,14 @@ import { getCategoriesTree } from './getCategoriesTree';
 
 export const getCategoryByPath = async ({
   slugs,
-  variant,
 }: {
-  variant?: string;
   slugs: string[];
 }): Promise<{
   category: CategoryT | null;
   categoryPath: CategoryT[];
 }> => {
   try {
-    const categoriesTree = await getCategoriesTree({ variant });
+    const categoriesTree = await getCategoriesTree();
 
     if (!categoriesTree || slugs.length === 0) {
       return { category: null, categoryPath: [] };

@@ -1,8 +1,7 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ProductsResponseT } from './types';
+import { getApiUrl } from '../base';
 
 type GetProductsProps = {
-  variant?: string;
   search?: string;
   category_id?: string;
   popular?: string;
@@ -19,7 +18,6 @@ type GetProductsProps = {
 };
 
 export const getProducts = async ({
-  variant,
   search,
   category_id,
   popular,
@@ -58,7 +56,8 @@ export const getProducts = async ({
     });
   }
 
-  const url = `${getApiBaseUrl(variant)}/v1/products?${params.toString()}`;
+  const apiUrl = await getApiUrl();
+  const url = `${apiUrl}/v1/products?${params.toString()}`;
 
   try {
     const res = await fetch(url, {

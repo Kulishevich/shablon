@@ -1,16 +1,13 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { AboutBlockType } from './types';
+import { getApiUrl } from '../base';
 
-export const getAboutBlocks = async ({
-  variant,
-}: {
-  variant?: string;
-}): Promise<AboutBlockType | null> => {
+export const getAboutBlocks = async (): Promise<AboutBlockType | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/design/settings`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/design/settings`, {
       next: {
         revalidate: 60,
-      },
+      }
     });
 
     const { data } = await res.json();

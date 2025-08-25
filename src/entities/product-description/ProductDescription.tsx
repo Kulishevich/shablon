@@ -12,12 +12,12 @@ export const ProductDescription = ({
   product,
   reviews,
   deliveryAndPayment,
-  variant,
+  storeUrl,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
   deliveryAndPayment: PaymentAndDeliveryT[] | null;
-  variant?: string;
+  storeUrl: string;
 }) => {
   const searchParams = useSearchParams();
   const [activeTag, setActiveTag] = useState(1);
@@ -116,7 +116,7 @@ export const ProductDescription = ({
 
       {activeTag === 4 && (
         <div className={s.content}>
-          <ProductReviews reviews={reviews} productId={product.id.toString()} variant={variant} />
+          <ProductReviews reviews={reviews} productId={product.id.toString()} storeUrl={storeUrl} />
         </div>
       )}
     </div>

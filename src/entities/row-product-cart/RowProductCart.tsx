@@ -15,8 +15,6 @@ import debounce from 'lodash.debounce';
 import Link from 'next/link';
 import { buildProductUrlSync } from '@/shared/lib/utils/productUtils';
 import { ProductT } from '@/shared/api/product/types';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import Cookies from 'js-cookie';
 
 export const RowProductCart = ({
   name,
@@ -28,14 +26,8 @@ export const RowProductCart = ({
   quantity = 1,
   slug,
   category,
-}: CartProduct) => {
-  const [variant, setVariant] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    const cookieVariant = Cookies.get('variant');
-    setVariant(cookieVariant);
-  }, []);
-
+  storeUrl,
+}: CartProduct & { storeUrl: string }) => {
   const [count, setCount] = useState(quantity);
   const dispatch = useDispatch();
   const isDiscount = !!Number(discount);
@@ -89,15 +81,10 @@ export const RowProductCart = ({
       <div className={s.card}>
         <Link
           className={s.imageContainer}
-          href={buildProductUrlSync({ product: { category, slug } as ProductT, variant })}
+          href={buildProductUrlSync({ product: { category, slug } as ProductT })}
           itemProp="url"
         >
-          <Image
-            itemProp="image"
-            src={`${getStoreBaseUrl(variant)}/${photo_path}`}
-            fill
-            alt="product"
-          />
+          <Image itemProp="image" src={`${storeUrl}/${photo_path}`} fill alt="product" />
         </Link>
         <div>
           <p className="body_4" itemProp="name">

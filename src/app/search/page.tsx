@@ -9,21 +9,18 @@ import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
-import { cookies } from 'next/headers';
 import { getTags } from '@/shared/api/tags/getTags';
 import { parseFiltersFromSearchParams } from '@/shared/lib/utils/filtersUtils';
 import { convertProductsBrandsToStandardBrands } from '@/shared/lib/utils/brandUtils';
+import { getStoreUrl } from '@/shared/api/base';
 
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
 }): Promise<Metadata> {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
   const { q } = await searchParams;
-  const seo = await getSeoTag({ tag: '/search', variant });
+  const seo = await getSeoTag({ tag: '/search' });
 
   return {
     title: seo?.title ?? `Поиск "${q}"`,
@@ -50,12 +47,9 @@ export default async function SearchPage({
     [key: string]: string | undefined;
   }>;
 }) {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
   const searchParamsData = await searchParams;
   const { q, page, sort_by, sort_direction, price_from, price_to, brand } = searchParamsData;
-
+  const storeUrl = await getStoreUrl();
   // Если нет поискового запроса, перенаправляем на главную
   if (!q || q.trim() === '') {
     redirect('/');
@@ -66,7 +60,6 @@ export default async function SearchPage({
     search: q,
     page: '1',
     per_page: '1',
-    variant,
   });
 
   // Преобразуем фильтры из URL параметров в формат API
@@ -85,22 +78,20 @@ export default async function SearchPage({
     price_to,
     brand,
     filters: filtersForApi,
-    variant,
   });
 
   // Обогащаем продукты полным путем
   if (products?.data && products.data.data) {
     products.data.data = await enrichProductsWithFullPath({
       products: products.data.data,
-      variant,
     });
   }
 
   // Получаем дерево категорий для фильтров
   const { getCategoriesTree } = await import('@/shared/api/category/getCategoriesTree');
-  const allCategories = await getCategoriesTree({ variant });
+  const allCategories = await getCategoriesTree();
 
-  const allTags = await getTags({ variant });
+  const allTags = await getTags({});
 
   // Формируем breadcrumbs
   const breadcrumbsPath = [
@@ -129,10 +120,11 @@ export default async function SearchPage({
           allCategories={allCategories || undefined}
           currentPath={canonicalUrl}
           filters={products?.filters || []}
+          storeUrl={storeUrl}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
-        <Feedback variant={variant} />
+        <Feedback />
       </main>
     </>
   );

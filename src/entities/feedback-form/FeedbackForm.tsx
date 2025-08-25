@@ -11,7 +11,7 @@ import { FeedbackFormScheme } from '@/shared/validation/feedback-scheme-creator'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
 
-export const FeedbackForm = ({ variant }: { variant?: string }) => {
+export const FeedbackForm = () => {
   const {
     control,
     formState: { isValid },
@@ -32,7 +32,7 @@ export const FeedbackForm = ({ variant }: { variant?: string }) => {
     const { comment, name, phone } = data;
 
     try {
-      await postFeedback({ reqData: { comment: comment ?? '', name, phone }, variant });
+      await postFeedback({ reqData: { comment: comment ?? '', name, phone } });
 
       showToast({
         variant: 'success',

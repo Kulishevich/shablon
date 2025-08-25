@@ -5,10 +5,10 @@ import React from 'react';
 
 export const BrandsSection = ({
   brands,
-  variant,
+  storeUrl,
 }: {
   brands: BrandT[] | null;
-  variant?: string;
+  storeUrl: string;
 }) => {
   return (
     <SliderWrapper
@@ -16,7 +16,7 @@ export const BrandsSection = ({
       variant="news"
       itemsCount={brands?.length || 0}
     >
-      {brands?.map((brand) => <BrandCard brand={brand} variant={variant} key={brand.id} />)}
+      {brands?.map((brand) => <BrandCard brand={brand} storeUrl={storeUrl} key={brand.id} />)}
     </SliderWrapper>
   );
 };

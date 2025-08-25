@@ -4,22 +4,20 @@ import '@/shared/config/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Footer } from '@/widgets/footer';
 import { Toaster } from 'sonner';
-
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 import { getCategories } from '@/shared/api/category/getCategories';
 import { HeaderDesktop } from '@/widgets/header-desktop';
 import { HeaderMobile } from '@/widgets/header-mobile';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { getContacts } from '@/shared/api/design/getContacts';
-import { getProducts } from '@/shared/api/product/getProducts';
+import { PublicEnvScript } from 'next-runtime-env';
+import { getStoreUrl } from '@/shared/api/base';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import { ToTop } from '@/shared/ui/to-top';
 import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
 import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
-import { SiteVariantButtons } from '@/widgets/site-variant-buttons';
-import { cookies } from 'next/headers';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
 const onest = Onest({
@@ -32,9 +30,7 @@ const onest = Onest({
 });
 
 export async function generateViewport() {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-  const settings = await getSetting({ variant });
+  const settings = await getSetting();
 
   return {
     themeColor: settings?.colors.icon_color,
@@ -47,12 +43,10 @@ export async function generateViewport() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
-  const [data, settings] = await Promise.all([
-    getSeoTag({ tag: 'home', variant }),
-    getSetting({ variant }),
+  const [data, settings, storeUrl] = await Promise.all([
+    getSeoTag({ tag: 'home' }),
+    getSetting(),
+    getStoreUrl(),
   ]);
 
   return {
@@ -64,7 +58,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: data?.og_description ?? data?.description,
     },
     icons: {
-      icon: `${getStoreBaseUrl(variant)}/${settings?.favicon}`,
+      icon: `${storeUrl}/${settings?.favicon}`,
     },
   };
 }
@@ -74,14 +68,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
-  const [categories, contacts, settings, seoSettings] = await Promise.all([
-    getCategories({ variant }),
-    getContacts({ variant }),
-    getSetting({ variant }),
-    getSeoSettings({ variant }),
+  const [categories, contacts, settings, seoSettings, storeUrl] = await Promise.all([
+    getCategories(),
+    getContacts(),
+    getSetting(),
+    getSeoSettings(),
+    getStoreUrl(),
   ]);
 
   return (
@@ -89,8 +81,8 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://api-maps.yandex.ru" />
         <link rel="dns-prefetch" href="https://api-maps.yandex.ru" />
-        <link rel="preconnect" href={getStoreBaseUrl(variant) || ''} />
-        <link rel="dns-prefetch" href={getStoreBaseUrl(variant) || ''} />
+        <link rel="preconnect" href={storeUrl || ''} />
+        <link rel="dns-prefetch" href={storeUrl || ''} />
         <style>
           {`:root {
             --color-accent-1: ${settings?.colors.icon_color};
@@ -126,6 +118,8 @@ export default async function RootLayout({
             strategy="afterInteractive"
           />
         )}
+
+        <PublicEnvScript />
       </head>
 
       <body className={`${onest.variable}`}>
@@ -153,7 +147,6 @@ export default async function RootLayout({
         <Toaster />
         <PhoneAnimation image={settings?.feedback_image || ''} />
         <ToTop />
-        <SiteVariantButtons />
       </body>
     </html>
   );

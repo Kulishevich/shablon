@@ -1,19 +1,18 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ProductMaskT } from './types';
-import { replaceProductMaskTemplates } from '@/shared/lib/utils/replaceProductMaskTemplates';
 import { ProductT } from '../product/types';
+import { getApiUrl } from '../base';
+import { replaceProductMaskTemplates } from '@/shared/lib/utils/replaceProductMaskTemplates';
 
 
 
 export const getProductMask = async ({
-  variant,
   product,
 }: {
-  variant?: string;
   product: ProductT;
 }): Promise<ProductMaskT | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/meta-tags/product/${product.id}`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/meta-tags/product/${product.id}`, {
       next: {
         revalidate: 60,
       },

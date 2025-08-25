@@ -1,7 +1,7 @@
 export type SeoT = {
   created_at: string;
   description: string;
-  id: 1;
+  id: number;
   keywords: string;
   name: string;
   og_description: string;

@@ -3,14 +3,16 @@ import s from './Feedback.module.scss';
 import { FeedbackForm } from '../../entities/feedback-form';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { FeedbackImage } from '@/entities/feedback-image';
+import { getStoreUrl } from '@/shared/api/base';
 
-export const Feedback = async ({ variant }: { variant?: string }) => {
-  const setting = await getSetting({ variant });
+export const Feedback = async () => {
+  const setting = await getSetting();
+  const storeUrl = await getStoreUrl();
 
   return (
     <div className={s.container}>
-      <FeedbackImage image={setting?.feedback_image || ''} variant={variant} />
-      <FeedbackForm variant={variant} />
+      <FeedbackImage image={`${storeUrl}/${setting?.feedback_image}`} />
+      <FeedbackForm />
     </div>
   );
 };

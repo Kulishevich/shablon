@@ -10,11 +10,11 @@ import { AddReviewsForm } from '@/widgets/add-reviews-form/AddReviewsForm';
 export const ProductReviews = ({
   reviews,
   productId,
-  variant,
+  storeUrl,
 }: {
   reviews: ReviewT[] | null;
   productId: string;
-  variant?: string;
+  storeUrl: string;
 }) => {
   return (
     <div className={s.container}>
@@ -32,7 +32,9 @@ export const ProductReviews = ({
         </AddReviewsForm>
       </div>
       <div className={s.reviews} itemScope itemType="http://schema.org/ItemList">
-        {reviews?.map((review) => <ReviewCard key={review.id} review={review} variant={variant} />)}
+        {reviews?.map((review) => (
+          <ReviewCard key={review.id} review={review} storeUrl={storeUrl} />
+        ))}
       </div>
     </div>
   );

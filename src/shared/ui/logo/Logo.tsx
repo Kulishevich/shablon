@@ -6,20 +6,16 @@ import React, { useEffect, useState } from 'react';
 import s from './Logo.module.scss';
 import { getSetting } from '@/shared/api/design/getSetting';
 import { usePathname } from 'next/navigation';
-import Cookies from 'js-cookie';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary' }) => {
   const [image, setImage] = useState<string | null>(null);
   const pathname = usePathname();
-  const [variantState, setVariantState] = useState<string | undefined>(undefined);
+  const { storeUrl } = useRuntimeConfig();
 
   useEffect(() => {
     const fetchData = async () => {
-      const cookieVariant = Cookies.get('variant');
-      setVariantState(cookieVariant);
-
-      const settings = await getSetting({ variant: cookieVariant });
+      const settings = await getSetting();
       if (settings?.logo) {
         setImage(settings.logo);
       }
@@ -33,7 +29,7 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
       <div className={s[variant]}>
         {!!image && (
           <Image
-            src={`${getStoreBaseUrl(variantState)}/${image}`}
+            src={`${storeUrl}/${image}`}
             fill
             alt="logo"
             priority
@@ -48,7 +44,7 @@ export const Logo = ({ variant = 'primary' }: { variant?: 'primary' | 'secondary
     <Link href={paths.home} className={s[variant]}>
       {!!image && (
         <Image
-          src={`${getStoreBaseUrl(variantState)}/${image}`}
+          src={`${storeUrl}/${image}`}
           fill
           alt="logo"
           priority

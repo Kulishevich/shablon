@@ -1,15 +1,14 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { NewsT } from './types';
+import { getApiUrl } from '../base';
 
 export const getNews = async ({
-  variant,
   slug,
 }: {
   slug: string;
-  variant?: string;
 }): Promise<NewsT | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/news/slug/${slug}`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/news/slug/${slug}`, {
       next: {
         revalidate: 60,
       },

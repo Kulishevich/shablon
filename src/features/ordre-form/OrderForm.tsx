@@ -17,9 +17,11 @@ import { ControlledPhoneField } from '@/shared/ui/controlled-phone-field';
 export const OrderForm = ({
   paymentMethods,
   deliveryMethods,
+  storeUrl,
 }: {
   paymentMethods: PaymentT[] | null;
   deliveryMethods: DeliveryT[] | null;
+  storeUrl: string;
 }) => {
   const { control, watch, setValue } = useFormContext();
 
@@ -139,6 +141,7 @@ export const OrderForm = ({
               key={item.id}
               active={paymentMethodId === item.id}
               onClick={() => setValue('payment_method_id', item.id)}
+              storeUrl={storeUrl}
             />
           ))}
         </div>

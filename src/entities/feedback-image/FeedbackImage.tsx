@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 import s from './FeedbackImage.module.scss';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
-export const FeedbackImage = ({ image, variant }: { image: string; variant?: string }) => {
+export const FeedbackImage = ({ image }: { image: string }) => {
   return (
     <div className={s.titleContainer}>
       <div className={s.textContent}>
@@ -14,7 +13,7 @@ export const FeedbackImage = ({ image, variant }: { image: string; variant?: str
         </p>
       </div>
       <div className={s.imageContainer}>
-        <Image src={`${getStoreBaseUrl(variant)}/${image}`} fill alt="feedback" />
+        <Image src={image} fill alt="feedback" />
       </div>
     </div>
   );

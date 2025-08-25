@@ -8,7 +8,6 @@ import { showToast } from '@/shared/ui/toast';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
 import { useDispatch } from 'react-redux';
 import { CartProduct, clearPromocode, setPromocode } from '@/shared/lib/redux/slices/cartSlice';
-import Cookies from 'js-cookie';
 
 export type CartPriceProps = {
   productsCart: CartProduct[];
@@ -27,15 +26,8 @@ export const CartPrice = ({
   setProductsState,
   setPromocodeDiscount,
 }: CartPriceProps) => {
-  const [variant, setVariant] = useState<string | undefined>(undefined);
-
   const [promocodeState, setPromocodeState] = useState<string>(promocode || '');
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const cookieVariant = Cookies.get('variant');
-    setVariant(cookieVariant);
-  }, []);
 
   const handleCheckPromocode = async () => {
     try {
@@ -44,7 +36,6 @@ export const CartPrice = ({
           code: promocodeState,
           products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
         },
-        variant,
       });
       if (Number(res.min_order_amount) <= priceWithOutDiscount) {
         if (res.type === 'percentage') {

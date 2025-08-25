@@ -1,12 +1,11 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { NewsListT } from './types';
+import { getApiUrl } from '../base';
 
 type GetAllNewsProps = {
   search?: string;
   tag?: string;
   page?: string;
   per_page?: string;
-  variant?: string;
 };
 
 export const getAllNews = async ({
@@ -14,7 +13,6 @@ export const getAllNews = async ({
   tag,
   page,
   per_page = '12',
-  variant,
 }: GetAllNewsProps): Promise<NewsListT | null> => {
   const params = new URLSearchParams();
 
@@ -23,7 +21,8 @@ export const getAllNews = async ({
   if (page) params.append('page', page);
   if (per_page) params.append('per_page', per_page);
 
-  const url = `${getApiBaseUrl(variant)}/v1/news?${params.toString()}`;
+  const apiUrl = await getApiUrl();
+  const url = `${apiUrl}/v1/news?${params.toString()}`;
 
   try {
     const res = await fetch(url, {

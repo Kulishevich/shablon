@@ -8,20 +8,17 @@ import { Feedback } from '@/widgets/feedback/Feedback';
 import { paths } from '@/shared/config/constants/paths';
 import { notFound } from 'next/navigation';
 import { SeoBlock } from '@/entities/seo-block';
-import { cookies } from 'next/headers';
+import { getStoreUrl } from '@/shared/api/base';
 
 export default async function New({ params }: { params: Promise<{ slug: string }> }) {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
   const { slug } = await params;
-  const news = await getNews({ slug, variant });
-
+  const news = await getNews({ slug });
+  const storeUrl = await getStoreUrl();
   if (!news) {
     notFound();
   }
 
-  const newsList = await getAllNews({ variant });
+  const newsList = await getAllNews({ page: '1' });
   const otherNews = newsList?.data?.filter((elem) => elem.id !== news.id);
 
   return (
@@ -35,16 +32,16 @@ export default async function New({ params }: { params: Promise<{ slug: string }
         ]}
       />
       <main>
-        <NewsInfoSection news={news} variant={variant} />
+        <NewsInfoSection news={news} storeUrl={storeUrl} />
         {!!otherNews?.length && (
           <SliderWrapper title="Другие новости" variant="news" itemsCount={otherNews?.length}>
             {otherNews?.map((news, index) => (
-              <NewsCard key={index} news={news} enableMicrodata={false} />
+              <NewsCard key={index} news={news} enableMicrodata={false} storeUrl={storeUrl} />
             ))}
           </SliderWrapper>
         )}
         <SeoBlock page={`/news/${news?.slug}`} />
-        <Feedback variant={variant} />
+        <Feedback />
       </main>
     </>
   );

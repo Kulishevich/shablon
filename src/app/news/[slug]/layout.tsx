@@ -1,18 +1,14 @@
 import { getNewsMask } from '@/shared/api/meta-tags/getNewsMask';
 import { getNews } from '@/shared/api/news/getNews';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
-import { cookies } from 'next/headers';
 
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
   const slug = (await params).slug;
-  const seo = await getSeoTag({ tag: `/news/${slug}`, variant });
-  const news = await getNews({ slug, variant });
+  const seo = await getSeoTag({ tag: `/news/${slug}` });
+  const news = await getNews({ slug });
 
   if (news) {
-    const newsMask = await getNewsMask({ news, variant });
+    const newsMask = await getNewsMask({ news });
 
     return {
       title: seo?.title ?? newsMask?.title ?? news?.title,

@@ -4,11 +4,11 @@ import { ReviewT } from '@/shared/api/reviews/types';
 import { ReviewPopup } from '../review-popup';
 import { ReviewContent } from '../review-content';
 
-export const ReviewCard = ({ review, variant }: { review: ReviewT; variant?: string }) => {
+export const ReviewCard = ({ review, storeUrl }: { review: ReviewT; storeUrl: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Review">
-      <ReviewContent review={review} is_card variant={variant} />
-      <ReviewPopup review={review} variant={variant} />
+      <ReviewContent review={review} is_card storeUrl={storeUrl} />
+      <ReviewPopup review={review} storeUrl={storeUrl} />
     </div>
   );
 };

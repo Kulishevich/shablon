@@ -6,9 +6,11 @@ import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 import { ProductCard } from '@/entities/product-card';
 import { CartProduct } from '@/shared/lib/redux/slices/cartSlice';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const CartTable = ({ productsState }: { productsState: CartProduct[] }) => {
   const { isMobile } = useBreakpoint();
+  const { storeUrl } = useRuntimeConfig();
 
   return (
     <ReduxProvider>
@@ -21,9 +23,9 @@ export const CartTable = ({ productsState }: { productsState: CartProduct[] }) =
         </div>
         {productsState.map((product) =>
           !isMobile ? (
-            <RowProductCart {...product} key={product.id} />
+            <RowProductCart {...product} key={product.id} storeUrl={storeUrl} />
           ) : (
-            <ProductCard productInCart product={product} key={product.id} />
+            <ProductCard productInCart product={product} key={product.id} storeUrl={storeUrl} />
           )
         )}
       </div>

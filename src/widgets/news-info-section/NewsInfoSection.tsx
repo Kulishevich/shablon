@@ -5,9 +5,8 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import s from './NewsInfoSection.module.scss';
 import { NewsT } from '@/shared/api/news/types';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
-export const NewsInfoSection = ({ news, variant }: { news: NewsT | null; variant?: string }) => {
+export const NewsInfoSection = ({ news, storeUrl }: { news: NewsT | null; storeUrl: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.titleContainer}>
@@ -25,12 +24,7 @@ export const NewsInfoSection = ({ news, variant }: { news: NewsT | null; variant
           </h1>
         </div>
         <div className={s.imageContainer}>
-          <Image
-            src={`${getStoreBaseUrl(variant)}/${news?.photo_path}`}
-            fill
-            alt="new"
-            itemProp="image"
-          />
+          <Image src={`${storeUrl}/${news?.photo_path}`} fill alt="new" itemProp="image" />
         </div>
       </div>
       <div className={s.content}>

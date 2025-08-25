@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDiscount';
 import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
-import Cookies from 'js-cookie';
+import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const OrderSection = ({
   paymentMethods,
@@ -27,8 +27,6 @@ export const OrderSection = ({
   paymentMethods: PaymentT[] | null;
   deliveryMethods: DeliveryT[] | null;
 }) => {
-  const [variant, setVariant] = useState<string | undefined>(undefined);
-
   const router = useRouter();
   const productsCart = useSelector((state: RootState) => state.cart.items);
   const promocode = useSelector((state: RootState) => state.cart.promocode);
@@ -37,11 +35,7 @@ export const OrderSection = ({
   const [promocodeDiscount, setPromocodeDiscount] = useState(0);
   const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const cookieVariant = Cookies.get('variant');
-    setVariant(cookieVariant);
-  }, []);
+  const { storeUrl } = useRuntimeConfig();
 
   useEffect(() => {
     const handleCheckPromocode = async () => {
@@ -53,7 +47,6 @@ export const OrderSection = ({
             code: promocode,
             products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
           },
-          variant,
         });
         if (Number(res.min_order_amount) <= priceWithOutDiscount) {
           if (res.type === 'percentage') {
@@ -139,7 +132,6 @@ export const OrderSection = ({
     try {
       const res = await postOrder({
         reqData: orderData,
-        variant,
       });
 
       dispatch(clearCart());
@@ -168,7 +160,11 @@ export const OrderSection = ({
         <div className={s.container}>
           <h1 className="h1">Оформление заказа</h1>
           <form onSubmit={onSubmit} className={s.content}>
-            <OrderForm paymentMethods={paymentMethods} deliveryMethods={deliveryMethods} />
+            <OrderForm
+              paymentMethods={paymentMethods}
+              deliveryMethods={deliveryMethods}
+              storeUrl={storeUrl}
+            />
             <OrderPrice
               priceWithOutDiscount={priceWithOutDiscount}
               priceWithDiscount={priceWithDiscount}

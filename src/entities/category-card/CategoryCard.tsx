@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import { cookies } from 'next/headers';
+import { getStoreUrl } from '@/shared/api/base';
 
 interface CategoryCardProps extends CategoryT {
   categoriesCount: number;
@@ -19,8 +18,7 @@ export const CategoryCard = async ({
   description,
   categoriesCount,
 }: CategoryCardProps) => {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
+  const storeUrl = await getStoreUrl();
 
   return (
     <Link href={`${paths.catalog}/${slug}`} className={s.container}>
@@ -33,7 +31,7 @@ export const CategoryCard = async ({
           categoriesCount > 9 && s.smallImage
         )}
       >
-        <Image src={`${getStoreBaseUrl(variant)}/${photo_path}`} alt={name} fill />
+        <Image src={`${storeUrl}/${photo_path}`} alt={name} fill />
       </div>
     </Link>
   );

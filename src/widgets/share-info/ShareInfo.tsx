@@ -7,7 +7,6 @@ import { ArrowSmLeftIcon } from '@/shared/assets';
 import { PromotionT } from '@/shared/api/promotions/types';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import clsx from 'clsx';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const ShareInfo = ({
   title,
@@ -15,17 +14,12 @@ export const ShareInfo = ({
   content,
   photo_path,
   slug,
-  variant,
-}: PromotionT & { variant?: string }) => {
+  storeUrl,
+}: PromotionT & { storeUrl: string }) => {
   return (
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.imageContainer}>
-        <Image
-          src={`${getStoreBaseUrl(variant)}/${photo_path}`}
-          fill
-          alt={'discount'}
-          itemProp="image"
-        />
+        <Image src={`${storeUrl}/${photo_path}`} fill alt={'discount'} itemProp="image" />
       </div>
       <div className={s.content}>
         <Breadcrumbs

@@ -1,15 +1,14 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ProductT } from './types';
+import { getApiUrl } from '../base';
 
 export const getProductById = async ({
-  variant,
   id,
 }: {
   id: string;
-  variant?: string;
 }): Promise<ProductT | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/products/${id}`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/products/${id}`, {
       next: {
         revalidate: 60,
       },

@@ -5,7 +5,13 @@ import { ProductT } from '@/shared/api/product/types';
 import { PopularProductsMobile } from './popular-products-mobile';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 
-export const PopularProductsSection = ({ products }: { products: ProductT[] | null }) => {
+export const PopularProductsSection = ({
+  products,
+  storeUrl,
+}: {
+  products: ProductT[] | null;
+  storeUrl: string;
+}) => {
   return (
     <>
       <ReduxProvider>
@@ -16,9 +22,11 @@ export const PopularProductsSection = ({ products }: { products: ProductT[] | nu
           itemScope
           itemType="http://schema.org/ItemList"
         >
-          {products?.map((product, index) => <ProductCard key={index} product={product} />)}
+          {products?.map((product, index) => (
+            <ProductCard key={index} product={product} storeUrl={storeUrl} />
+          ))}
         </SliderWrapper>
-        <PopularProductsMobile products={products || []} />
+        <PopularProductsMobile products={products || []} storeUrl={storeUrl} />
       </ReduxProvider>
     </>
   );

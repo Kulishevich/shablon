@@ -1,14 +1,13 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { OrderPostT, OrderResponse } from './types';
+import { getApiUrl } from '../base';
 
 export const postOrder = async ({
   reqData,
-  variant,
 }: {
   reqData: OrderPostT;
-  variant?: string;
 }): Promise<OrderResponse> => {
-  const res = await fetch(`${getApiBaseUrl(variant)}/v1/orders`, {
+  const apiUrl = await getApiUrl();
+  const res = await fetch(`${apiUrl}/v1/orders`, {
     method: 'POST',
     body: JSON.stringify(reqData),
     headers: {

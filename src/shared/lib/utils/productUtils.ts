@@ -7,12 +7,10 @@ import { getCategoriesTree } from '@/shared/api/category/getCategoriesTree';
  */
 export const buildProductPath = async ({
   product,
-  variant,
 }: {
   product: ProductT;
-  variant?: string;
 }): Promise<string[]> => {
-  const categoriesTree = await getCategoriesTree({ variant });
+  const categoriesTree = await getCategoriesTree();
 
   if (!categoriesTree) {
     return [product.slug];
@@ -22,7 +20,6 @@ export const buildProductPath = async ({
   const categoryPath = findCategoryPath({
     categories: categoriesTree,
     targetCategoryId: product.category_id,
-    variant,
   });
 
   // Возвращаем путь: [категория1, категория2, ..., продукт]
@@ -35,11 +32,9 @@ export const buildProductPath = async ({
 function findCategoryPath({
   categories,
   targetCategoryId,
-  variant,
 }: {
   categories: CategoryT[];
   targetCategoryId: number;
-  variant?: string;
 }): CategoryT[] {
   for (const category of categories) {
     if (category.id === targetCategoryId) {
@@ -49,7 +44,6 @@ function findCategoryPath({
       const path = findCategoryPath({
         categories: category.subcategories as CategoryT[],
         targetCategoryId,
-        variant,
       });
       if (path.length > 0) {
         return [category, ...path];
@@ -65,13 +59,11 @@ function findCategoryPath({
 export const validateProductPath = async ({
   product,
   pathSlugs,
-  variant,
 }: {
   product: ProductT;
   pathSlugs: string[];
-  variant?: string;
 }): Promise<boolean> => {
-  const correctPath = await buildProductPath({ product, variant });
+  const correctPath = await buildProductPath({ product });
 
   // Проверяем, что пути совпадают
   return (
@@ -85,12 +77,10 @@ export const validateProductPath = async ({
  */
 export const buildProductUrl = async ({
   product,
-  variant,
 }: {
   product: ProductT;
-  variant: string;
 }): Promise<string> => {
-  const pathSlugs = await buildProductPath({ product, variant });
+  const pathSlugs = await buildProductPath({ product });
   return `/catalog/${pathSlugs.join('/')}`;
 };
 
@@ -100,11 +90,9 @@ export const buildProductUrl = async ({
 export const buildProductUrlSync = ({
   product,
   categoriesTree,
-  variant,
 }: {
   product: ProductT;
   categoriesTree?: CategoryT[];
-  variant?: string;
 }): string => {
   // Если у продукта уже есть полный путь, используем его
   if (product.fullPath && product.fullPath.length > 0) {
@@ -120,7 +108,6 @@ export const buildProductUrlSync = ({
   const categoryPath = findCategoryPath({
     categories: categoriesTree,
     targetCategoryId: product.category_id,
-    variant,
   });
 
   // Формируем полный путь: [категория1, категория2, ..., продукт]
@@ -135,17 +122,14 @@ export const buildProductUrlSync = ({
  */
 export const buildProductUrlAsync = async ({
   product,
-  variant,
 }: {
   product: ProductT;
-  variant: string;
 }): Promise<string> => {
-  const categoriesTree = await getCategoriesTree({ variant });
+  const categoriesTree = await getCategoriesTree();
 
   return buildProductUrlSync({
     product: product,
     categoriesTree: categoriesTree || undefined,
-    variant,
   });
 };
 /**
@@ -153,12 +137,10 @@ export const buildProductUrlAsync = async ({
  */
 export const enrichProductWithFullPath = async ({
   product,
-  variant,
 }: {
   product: ProductT;
-  variant?: string;
 }): Promise<ProductT> => {
-  const fullPath = await buildProductPath({ product, variant });
+  const fullPath = await buildProductPath({ product });
   return {
     ...product,
     fullPath,
@@ -170,12 +152,10 @@ export const enrichProductWithFullPath = async ({
  */
 export const enrichProductsWithFullPath = async ({
   products,
-  variant,
 }: {
   products: ProductT[];
-  variant?: string;
 }): Promise<ProductT[]> => {
-  const categoriesTree = await getCategoriesTree({ variant });
+  const categoriesTree = await getCategoriesTree();
 
   if (!categoriesTree) {
     return products.map((product) => ({
@@ -188,7 +168,6 @@ export const enrichProductsWithFullPath = async ({
     const categoryPath = findCategoryPath({
       categories: categoriesTree,
       targetCategoryId: product.category_id,
-      variant,
     });
     const fullPath = [...categoryPath.map((cat) => cat.slug), product.slug];
 

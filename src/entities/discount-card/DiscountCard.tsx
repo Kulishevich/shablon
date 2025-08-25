@@ -7,8 +7,6 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import clsx from 'clsx';
 import { PromotionT } from '@/shared/api/promotions/types';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import { cookies } from 'next/headers';
 
 export const DiscountCard = async ({
   title,
@@ -16,10 +14,8 @@ export const DiscountCard = async ({
   start_date,
   end_date,
   slug,
-}: PromotionT) => {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
+  storeUrl,
+}: PromotionT & { storeUrl: string }) => {
   return (
     <Link
       href={`${paths.shares}/${slug}`}
@@ -28,12 +24,7 @@ export const DiscountCard = async ({
       itemType="http://schema.org/BlogPosting"
     >
       <div className={s.imageContainer}>
-        <Image
-          src={`${getStoreBaseUrl(variant)}/${photo_path}`}
-          fill
-          alt="discount"
-          itemProp="image"
-        />
+        <Image src={`${storeUrl}/${photo_path}`} fill alt="discount" itemProp="image" />
       </div>
       <div className={s.content}>
         <span className={clsx(s.tag, 'tag')} itemProp="datePublished">

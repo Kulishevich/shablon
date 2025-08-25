@@ -4,28 +4,27 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui/button';
 import { SettingsT } from '@/shared/api/design/types';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import Link from 'next/link';
 
 export const MainBanner = ({
   banner,
-  variant,
+  storeUrl,
 }: {
   banner: SettingsT['main_banner'] | null;
-  variant?: string;
+  storeUrl: string;
 }) => {
   if (!banner) return null;
 
   return (
     <div className={s.container}>
       <Image
-        src={`${getStoreBaseUrl(variant)}/${banner?.photo}`}
+        src={`${storeUrl}/${banner?.photo}`}
         alt="main-banner"
         fill
         className={clsx(s.image, 'desktop-only')}
       />
       <Image
-        src={`${getStoreBaseUrl(variant)}/${banner?.mobile_photo}`}
+        src={`${storeUrl}/${banner?.mobile_photo}`}
         alt="main-banner"
         fill
         className={clsx(s.image, 'mobile-only')}

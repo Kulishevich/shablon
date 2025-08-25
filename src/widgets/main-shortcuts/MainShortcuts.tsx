@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button } from '@/shared/ui/button';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets/index';
 
-export const MainShortcuts = ({ tags, variant }: { tags: TagT[] | null; variant?: string }) => {
+export const MainShortcuts = ({ tags, storeUrl }: { tags: TagT[] | null; storeUrl: string }) => {
   const swiperRef = useRef<SwiperType | null>(null);
   return (
     <div className={s.container}>
@@ -26,7 +26,7 @@ export const MainShortcuts = ({ tags, variant }: { tags: TagT[] | null; variant?
       >
         {tags?.map((tag) => (
           <SwiperSlide key={tag.id} className={s.slide}>
-            <ShortcutCard tag={tag} variant={variant} />
+            <ShortcutCard tag={tag} storeUrl={storeUrl} />
           </SwiperSlide>
         ))}
       </Swiper>

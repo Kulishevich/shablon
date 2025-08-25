@@ -1,12 +1,8 @@
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
-import { cookies } from 'next/headers';
 
 export const generateMetadata = async () => {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
-  const seo = await getSeoTag({ tag: '/privacy-policy', variant });
+  const seo = await getSeoTag({ tag: '/privacy-policy' });
 
   return {
     title: seo?.title ?? 'Политика конфиденциальности',

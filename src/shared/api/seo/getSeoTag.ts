@@ -1,10 +1,10 @@
-import { SeoSettingsT } from './types';
+import { SeoT } from './types';
 import { getApiUrl } from '../base';
 
-export const getSeoSettings = async (): Promise<SeoSettingsT | null> => {
+export const getSeoTag = async ({ tag }: { tag: string }): Promise<SeoT | null> => {
   try {
     const apiUrl = await getApiUrl();
-    const data = await fetch(`${apiUrl}/v1/seo/settings`, {
+    const data = await fetch(`${apiUrl}/v1/seo/tag?name=${tag}`, {
       next: {
         revalidate: 60,
       },

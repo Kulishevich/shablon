@@ -5,15 +5,17 @@ import React from 'react';
 
 export const ReviewsSection = ({
   reviews,
-  variant,
+  storeUrl,
 }: {
   reviews: ReviewT[] | null;
-  variant?: string;
+  storeUrl: string;
 }) => {
   return (
     !!reviews?.length && (
       <SliderWrapper title="Отзывы" variant="news" itemsCount={reviews?.length}>
-        {reviews?.map((review) => <ReviewCard key={review.id} review={review} variant={variant} />)}
+        {reviews?.map((review) => (
+          <ReviewCard key={review.id} review={review} storeUrl={storeUrl} />
+        ))}
       </SliderWrapper>
     )
   );

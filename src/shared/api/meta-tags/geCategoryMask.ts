@@ -1,19 +1,18 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { CategoryMaskT } from './types';
 import { CategoryT } from '../category/types';
+import { getApiUrl } from '../base';
 import { replaceCategoryMaskTemplates } from '@/shared/lib/utils/replaceCategoryMaskTemplates';
 
 
 
 export const geCategoryMask = async ({
-  variant,
   category,
 }: {
-  variant?: string;
   category: CategoryT;
 }): Promise<CategoryMaskT | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/meta-tags/category/${category.id}`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/meta-tags/category/${category.id}`, {
       next: {
         revalidate: 60,
       },

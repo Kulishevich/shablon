@@ -1,15 +1,13 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { ProductT } from './types';
+import { getApiUrl } from '../base';
 
 type SearchProductsProps = {
   search: string;
-  variant?: string;
   limit?: number;
 };
 
 export const searchProducts = async ({
   search,
-  variant,
   limit = 10,
 }: SearchProductsProps): Promise<ProductT[] | null> => {
   if (!search || search.trim().length < 2) {
@@ -20,7 +18,8 @@ export const searchProducts = async ({
   params.append('search', search.trim());
   params.append('per_page', limit.toString());
 
-  const url = `${getApiBaseUrl(variant)}/v1/products/all?${params.toString()}`;
+  const apiUrl = await getApiUrl();
+  const url = `${apiUrl}/v1/products/all?${params.toString()}`;
 
   try {
     const res = await fetch(url, {

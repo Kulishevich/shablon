@@ -4,17 +4,16 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/widgets/feedback/Feedback';
 
-import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
 import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { SeoBlock } from '@/entities/seo-block';
 import { CategoryT } from '@/shared/api/category/types';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { getTags } from '@/shared/api/tags/getTags';
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
 import { parseFiltersFromSearchParams } from '@/shared/lib/utils/filtersUtils';
 import { getCategoriesTree } from '@/shared/api/category/getCategoriesTree';
 import { convertProductsBrandsToStandardBrands } from '@/shared/lib/utils/brandUtils';
+import { getStoreUrl } from '@/shared/api/base';
 
 export async function generateMetadata({
   searchParams,
@@ -48,9 +47,7 @@ export default async function AllProductsPage({
     [key: string]: string | undefined;
   }>;
 }) {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
+  const storeUrl = await getStoreUrl();
   const searchParamsData = await searchParams;
   const { page, sort_by, sort_direction, search, price_from, price_to, brand, tags } =
     searchParamsData;
@@ -60,7 +57,6 @@ export default async function AllProductsPage({
     page: '1',
     per_page: '1',
     tags,
-    variant,
   });
 
   // Преобразуем фильтры из URL параметров в формат API
@@ -80,20 +76,18 @@ export default async function AllProductsPage({
     brand,
     tags,
     filters: filtersForApi,
-    variant,
   });
 
   // Обогащаем продукты полным путем
   if (products?.data && products.data.data) {
     products.data.data = await enrichProductsWithFullPath({
       products: products.data.data,
-      variant,
     });
   }
 
-  const allCategories = await getCategoriesTree({ variant });
+  const allCategories = await getCategoriesTree();
 
-  const allTags = await getTags({ variant });
+  const allTags = await getTags({});
 
   // Формируем breadcrumbs
   const breadcrumbsPath = [
@@ -139,10 +133,11 @@ export default async function AllProductsPage({
           tags={allTags || undefined}
           currentPath={canonicalUrl}
           filters={products?.filters || []}
+          storeUrl={storeUrl}
         />
         <PreviouslyViewed />
         <SeoBlock page={canonicalUrl} />
-        <Feedback variant={variant} />
+        <Feedback />
       </main>
     </>
   );

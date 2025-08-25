@@ -4,16 +4,15 @@ import { ReviewT } from '@/shared/api/reviews/types';
 import clsx from 'clsx';
 import { StarIcon } from '@/shared/assets';
 import s from './ReviewContent.module.scss';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 
 export const ReviewContent = ({
   review,
   is_card = false,
-  variant,
+  storeUrl,
 }: {
   review: ReviewT;
   is_card?: boolean;
-  variant?: string;
+  storeUrl: string;
 }) => {
   const { author_name, author_photo, rating, created_at, title, review_text } = review;
 
@@ -21,7 +20,7 @@ export const ReviewContent = ({
     <>
       <div className={s.head}>
         <div className={s.imageContainer}>
-          <Image src={`${getStoreBaseUrl(variant)}/${author_photo}`} fill alt="profile" />
+          <Image src={`${storeUrl}/${author_photo}`} fill alt="profile" />
         </div>
         <div className={s.nameContainer}>
           <p className="body_3" itemProp="author">

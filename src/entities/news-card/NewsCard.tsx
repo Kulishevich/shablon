@@ -7,18 +7,14 @@ import Link from 'next/link';
 import { paths } from '@/shared/config/constants/paths';
 import clsx from 'clsx';
 import { NewsT } from '@/shared/api/news/types';
-import { getStoreBaseUrl } from '@/shared/lib/utils/getBaseUrl';
-import { cookies } from 'next/headers';
 
 interface NewsCardProps {
   news: NewsT;
   enableMicrodata?: boolean;
+  storeUrl: string;
 }
 
-export const NewsCard = async ({ news, enableMicrodata = true }: NewsCardProps) => {
-  const cookieStore = await cookies();
-  const variant = cookieStore.get('variant')?.value;
-
+export const NewsCard = async ({ news, enableMicrodata = true, storeUrl }: NewsCardProps) => {
   const linkProps = enableMicrodata
     ? {
         itemScope: true,
@@ -31,7 +27,7 @@ export const NewsCard = async ({ news, enableMicrodata = true }: NewsCardProps) 
     <Link href={`${paths.news}/${news?.slug}`} className={s.cotnainer} {...linkProps}>
       <div className={s.imageContainer}>
         <Image
-          src={`${getStoreBaseUrl(variant)}/${news?.photo_path}`}
+          src={`${storeUrl}/${news?.photo_path}`}
           fill
           alt="news"
           {...(enableMicrodata && { itemProp: 'image' })}

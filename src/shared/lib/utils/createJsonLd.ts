@@ -1,22 +1,20 @@
+import { getStoreUrl } from '@/shared/api/base';
 import { ProductT } from '@/shared/api/product/types';
 import { ReviewT } from '@/shared/api/reviews/types';
-import { getStoreBaseUrl } from './getBaseUrl';
 
 /**
  * Создает JSON-LD микроразметку для продукта
  * @param product - данные продукта
  * @param reviews - массив отзывов о продукте
- * @param variant - вариант сайта (из cookies)
  * @param storeName - название магазина
  * @returns JSON строка с микроразметкой
  */
 export const createProductJsonLd = (
   product: ProductT,
   reviews: ReviewT[] | null,
-  variant: string | undefined,
   storeName: string = 'Название вашего магазина'
 ): string => {
-  const baseUrl = getStoreBaseUrl(variant);
+  const baseUrl = getStoreUrl();
 
   // Подсчет средней оценки из отзывов
   const averageRating =

@@ -8,7 +8,6 @@ import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPr
 import { CartProduct, clearPromocode, setPromocode } from '@/shared/lib/redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import { showToast } from '@/shared/ui/toast';
-import Cookies from 'js-cookie';
 
 export const OrderPrice = ({
   priceWithOutDiscount,
@@ -19,18 +18,12 @@ export const OrderPrice = ({
   priceWithDiscount: number;
   productsCart: CartProduct[];
 }) => {
-  const [variant, setVariant] = useState<string | undefined>(undefined);
-
   const dispatch = useDispatch();
   const { control, watch } = useFormContext();
 
   const deliveryCost = watch('delivery_cost');
   const promocode = watch('promo_code');
 
-  useEffect(() => {
-    const cookieVariant = Cookies.get('variant');
-    setVariant(cookieVariant);
-  }, []);
   const handleCheckPromocode = async () => {
     try {
       const res = await checkCartPriceWitchPromocode({
@@ -38,7 +31,6 @@ export const OrderPrice = ({
           code: promocode,
           products: productsCart.map((elem) => ({ id: elem.id, quantity: elem.quantity })),
         },
-        variant,
       });
       if (Number(res.min_order_amount) <= priceWithOutDiscount) {
         showToast({ variant: 'success', title: 'Промокод активирован' });

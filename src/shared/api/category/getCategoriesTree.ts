@@ -1,16 +1,13 @@
-import { getApiBaseUrl } from '@/shared/lib/utils/getBaseUrl';
 import { CategoryT } from './types';
+import { getApiUrl } from '../base';
 
-export const getCategoriesTree = async ({
-  variant,
-}: {
-  variant?: string;
-}): Promise<CategoryT[] | null> => {
+export const getCategoriesTree = async (): Promise<CategoryT[] | null> => {
   try {
-    const res = await fetch(`${getApiBaseUrl(variant)}/v1/categories/tree?with_products_count=true`, {
+    const apiUrl = await getApiUrl();
+    const res = await fetch(`${apiUrl}/v1/categories/tree?with_products_count=true`, {
       next: {
         revalidate: 60,
-      },
+      }
     });
 
     const { data } = await res.json();
