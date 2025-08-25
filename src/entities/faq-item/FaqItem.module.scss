@@ -1,0 +1,56 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  cursor: pointer;
+
+  border-radius: vw-1440(6);
+  padding: vw-1440(24);
+  box-shadow:
+    1px 4px 8px 0 rgba(11, 12, 25, 0.03),
+    4px 14px 15px 0 rgba(11, 12, 25, 0.02),
+    8px 32px 20px 0 rgba(11, 12, 25, 0.01),
+    14px 57px 24px 0 rgba(11, 12, 25, 0.01),
+    22px 89px 26px 0 rgba(11, 12, 25, 0);
+  background-color: var(--color-bg-card);
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: border 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    padding: 24px;
+    border-radius: 6px;
+  }
+
+  &:hover {
+    border: 1px solid rgba(14, 21, 40, 0.2);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: vw-1440(42);
+
+    @media (max-width: 768px) {
+      gap: 16px;
+    }
+
+    .icon {
+      flex: 0 0 vw-1440(42);
+      width: vw-1440(42);
+      height: vw-1440(42);
+      color: var(--color-button);
+      transition: transform 0.3s ease-in-out;
+
+      &.open {
+        transform: rotate(90deg);
+      }
+
+      @media (max-width: 768px) {
+        flex: 0 0 36px;
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+}

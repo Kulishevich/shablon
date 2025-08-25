@@ -58,7 +58,7 @@ export async function GET() {
 
       if (productsUrls && productsUrls.length > 0) {
         // Обогащаем продукты полным путем
-        const enrichedProducts = await enrichProductsWithFullPath(productsUrls);
+        const enrichedProducts = await enrichProductsWithFullPath({ products: productsUrls });
 
         const productUrls = enrichedProducts.map((item: ProductT) => ({
           loc: `${siteUrl}/catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,

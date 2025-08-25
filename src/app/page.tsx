@@ -17,6 +17,9 @@ import { AdvantagesSection } from '@/widgets/advantages-section';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { getTags } from '@/shared/api/tags/getTags';
 import { getStoreUrl } from '@/shared/api/base';
+import { CertificatesSection } from '@/widgets/certificates-section/CertificatesSection';
+import { FaqSection } from '@/widgets/faq-section';
+import { getCertificates } from '@/shared/api/certificates/getCertificates';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
@@ -53,6 +56,7 @@ export default async function Home() {
     reviews,
     tags,
     storeUrl,
+    certificates,
   ] = await Promise.all([
     getPopularProducts(),
     getAllNews({}),
@@ -65,6 +69,7 @@ export default async function Home() {
     getReviews(),
     getTags({}),
     getStoreUrl(),
+    getCertificates(),
   ]);
 
   // Обогащаем популярные продукты полным путем
@@ -81,7 +86,9 @@ export default async function Home() {
       <MainShortcuts tags={tags} storeUrl={storeUrl} />
       <CatalogProducts categories={categories} />
 
-      <PopularProductsSection products={popularProducts} storeUrl={storeUrl} />
+      {!!popularProducts?.length && (
+        <PopularProductsSection products={popularProducts} storeUrl={storeUrl} />
+      )}
 
       <AboutUsSection
         text={setting?.about?.text || ''}
@@ -90,6 +97,8 @@ export default async function Home() {
       />
 
       <AdvantagesSection advantages={advantages} />
+
+      {!!certificates?.length && <CertificatesSection items={certificates} />}
 
       {!!brands?.length && (
         <Suspense>
@@ -108,6 +117,8 @@ export default async function Home() {
           <NewsSliderSection newsList={newsList?.data} storeUrl={storeUrl} />
         </Suspense>
       )}
+
+      <FaqSection />
 
       <Suspense>
         <ContactsSection contacts={contacts} isMain />
