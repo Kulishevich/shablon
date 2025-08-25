@@ -67,10 +67,15 @@
   display: grid;
   grid-template-columns: repeat(2, vw-1440(170));
   gap: vw-1440(12);
-  
+
   &:nth-child(2) {
     & > p {
       color: var(--color-accent-red) !important;
     }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 142px);
+    gap: 12px;
   }
 }
