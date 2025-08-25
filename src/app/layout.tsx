@@ -153,14 +153,14 @@ export default async function RootLayout({
           />
         )}
 
+        <HeaderDesktop categories={categories || []} contacts={contacts} />
+        <HeaderMobile categories={categories} contacts={contacts} />
+        {children}
+        <Footer categories={categories} contacts={contacts} />
+        <Toaster />
+        <PhoneAnimation image={settings?.feedback_image || ''} />
+        <ToTop />
         <ReduxProvider>
-          <HeaderDesktop categories={categories || []} contacts={contacts} />
-          <HeaderMobile categories={categories} contacts={contacts} />
-          {children}
-          <Footer categories={categories} contacts={contacts} />
-          <Toaster />
-          <PhoneAnimation image={settings?.feedback_image || ''} />
-          <ToTop />
           <SiteVariantButtons />
         </ReduxProvider>
       </body>
