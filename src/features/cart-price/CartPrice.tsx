@@ -80,15 +80,15 @@ export const CartPrice = ({
       <div className={s.price}>
         <div className={s.elem}>
           <p className="body_7">Стоимость товаров без скидки</p>
-          <h5 className="h5">{priceWithOutDiscount.toFixed(2)} BYN</h5>
+          <p className="h6">{priceWithOutDiscount.toFixed(2)} BYN</p>
         </div>
         <div className={s.elem}>
           <p className="body_7">Скидка</p>
-          <h5 className="h5">{(priceWithOutDiscount - priceWithDiscount).toFixed(2)} BYN</h5>
+          <p className="h6">{(priceWithOutDiscount - priceWithDiscount).toFixed(2)} BYN</p>
         </div>
         <div className={s.elem}>
           <p className="body_7">Стоимость доставки</p>
-          <h5 className="h5">При оформлении</h5>
+          <p className="h6">При оформлении</p>
         </div>
       </div>
       <div className={s.elem}>

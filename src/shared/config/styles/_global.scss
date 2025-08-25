@@ -1,4 +1,4 @@
-@use "./functions" as *;
+@use './functions' as *;
 
 * {
   box-sizing: border-box;
@@ -406,7 +406,7 @@ h2 {
 
 .required {
   &::after {
-    content: "*";
+    content: '*';
     color: var(--color-accent-red);
   }
 }

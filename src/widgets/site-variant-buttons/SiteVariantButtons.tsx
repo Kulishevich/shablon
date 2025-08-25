@@ -5,6 +5,9 @@ import { Button } from '@/shared/ui/button';
 import s from './SiteVariantButtons.module.scss';
 import { CollapseFilter } from '@/shared/ui/collapse-filter';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { clearCart, clearPromocode } from '@/shared/lib/redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
 
 const siteVariants = [
   {
@@ -49,6 +52,7 @@ export const SiteVariantButtons = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const variant = searchParams.get('variant');
+  const dispatch = useDispatch();
 
   const handleChangeVariantSite = (value: string) => {
     Cookies.set('variant', value, {
@@ -56,6 +60,7 @@ export const SiteVariantButtons = () => {
       path: '/',
     });
 
+    dispatch(clearCart());
     localStorage.removeItem('viewed_products_shablon');
     localStorage.removeItem('cart_shablon');
 

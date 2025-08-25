@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Onest } from 'next/font/google';
+import { Onest, Open_Sans } from 'next/font/google';
 import '@/shared/config/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Footer } from '@/widgets/footer';
@@ -18,6 +18,8 @@ import { ToTop } from '@/shared/ui/to-top';
 import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
 import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
 import { getServices } from '@/shared/api/services/getServices';
+import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import { SiteVariantButtons } from '@/widgets/site-variant-buttons';
 
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
@@ -28,6 +30,12 @@ const onest = Onest({
   display: 'swap',
   preload: true,
   fallback: ['system-ui', 'arial'],
+});
+
+const openSans = Open_Sans({
+  variable: '--font-onest',
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600'],
 });
 
 export async function generateViewport() {
@@ -124,7 +132,7 @@ export default async function RootLayout({
         <PublicEnvScript />
       </head>
 
-      <body className={`${onest.variable}`}>
+      <body className={`${onest.variable} ${openSans.variable}`}>
         {seoSettings?.google_search_console && (
           <Script
             id="google-search-console"
@@ -153,6 +161,9 @@ export default async function RootLayout({
         <Toaster />
         <PhoneAnimation image={settings?.feedback_image || ''} />
         <ToTop />
+        <ReduxProvider>
+          <SiteVariantButtons />
+        </ReduxProvider>
       </body>
     </html>
   );
