@@ -26,7 +26,7 @@ export const Navigation = ({
         <nav className={s.navigation}>
           <ul>
             <li>
-              <Link className="body_3" href={`/services/${services[0].slug}`}>
+              <Link className="body_3" href={`/${services[0].slug}`}>
                 {services[0].title}
               </Link>
             </li>
@@ -49,7 +49,7 @@ export const Navigation = ({
                   О компании
                 </Link>
                 {services.slice(1).map((service, index) => (
-                  <Link className="body_3" href={`/services/${service.slug}`} key={index}>
+                  <Link className="body_3" href={`/${service.slug}`} key={index}>
                     {service.title}
                   </Link>
                 ))}

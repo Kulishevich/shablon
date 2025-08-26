@@ -1,0 +1,89 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  display: grid;
+  grid-template-columns: vw-1440(636) 1fr;
+  gap: vw-1440(48);
+  max-width: vw-1440(1296);
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 32px;
+    max-width: 335px;
+  }
+
+  &.right {
+    .image {
+      order: -1;
+    }
+  }
+
+  .image {
+    position: relative;
+    flex-shrink: 0;
+    width: vw-1440(636);
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 220px;
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: vw-1440(24);
+
+    @media (max-width: 768px) {
+      gap: 24px;
+      align-items: center;
+    }
+
+    .text {
+      strong {
+        font-family: var(--font-onest);
+        font-weight: 400;
+        font-size: vw-1440(24);
+        line-height: 140%;
+        color: var(--color-text);
+
+        @media (max-width: 768px) {
+          font-size: 20px;
+          text-align: center;
+        }
+      }
+
+      p {
+        margin-bottom: vw-1440(12);
+        font-family: var(--font-onest);
+        font-weight: 400;
+        font-size: vw-1440(20);
+        line-height: 140%;
+        color: var(--color-text);
+
+        @media (max-width: 768px) {
+          font-size: 18px;
+          text-align: center;
+          margin-bottom: 12px;
+        }
+      }
+    }
+
+    .button {
+      width: vw-1440(220);
+
+      @media (max-width: 768px) {
+        width: 220px;
+      }
+    }
+  }
+}

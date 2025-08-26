@@ -18,8 +18,6 @@ import { ToTop } from '@/shared/ui/to-top';
 import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
 import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
 import { getServices } from '@/shared/api/services/getServices';
-import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
-import { SiteVariantButtons } from '@/widgets/site-variant-buttons';
 
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
@@ -161,9 +159,6 @@ export default async function RootLayout({
         <Toaster />
         <PhoneAnimation image={settings?.feedback_image || ''} />
         <ToTop />
-        <ReduxProvider>
-          <SiteVariantButtons />
-        </ReduxProvider>
       </body>
     </html>
   );
