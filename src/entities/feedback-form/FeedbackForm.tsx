@@ -74,12 +74,14 @@ export const FeedbackForm = ({ variant }: { variant?: string }) => {
           label="Комментарий"
           className={s.textarea}
         />
-        <ControlledCheckbox
-          control={control}
-          name="checked"
-          label="Согласие на обработку персональных данных"
-          privacyPolicy
-        />
+        <div className={s.checkboxContainer}>
+          <ControlledCheckbox
+            control={control}
+            name="checked"
+            label="Согласие на обработку персональных данных"
+            privacyPolicy
+          />
+        </div>
       </div>
       <Button type="submit" className={s.submitButton} disabled={!isValid}>
         Отправить
