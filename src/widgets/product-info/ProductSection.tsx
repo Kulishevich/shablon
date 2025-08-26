@@ -27,6 +27,7 @@ export const ProductSection = ({
   deliveryAndPayment: PaymentAndDeliveryT[] | null;
 }) => {
   const [variant, setVariant] = useState<string | undefined>(undefined);
+  const [activeTag, setActiveTag] = useState(1);
 
   useEffect(() => {
     const cookieVariant = Cookies.get('variant');
@@ -62,12 +63,14 @@ export const ProductSection = ({
       </div>
       <div className={s.container}>
         <ReduxProvider>
-          <ProductInfo product={product} advantages={advantages} />
+          <ProductInfo product={product} advantages={advantages} setActiveTag={setActiveTag} />
           <ProductDescription
             product={product}
             reviews={reviews}
             deliveryAndPayment={deliveryAndPayment}
             variant={variant}
+            activeTag={activeTag}
+            setActiveTag={setActiveTag}
           />
         </ReduxProvider>
       </div>

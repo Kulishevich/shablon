@@ -11,7 +11,9 @@ export const AdvantageCard = ({ title, icon, description }: AdvantageType) => {
         <h3 className="h5" lang="ru">
           {title}
         </h3>
-        <p className="body_6">{description}</p>
+        <p className="body_6">
+          {description}ыыыыв ыфв фыв фывфы вфы вфы вфы вфы вфыв фыв фывфы вфы вфы вфы вфы вфывы{' '}
+        </p>
       </div>
     </div>
   );

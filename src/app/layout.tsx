@@ -33,7 +33,7 @@ const onest = Onest({
 });
 
 const openSans = Open_Sans({
-  variable: '--font-onest',
+  variable: '--font-open-sans',
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '600'],
 });
