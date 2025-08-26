@@ -8,11 +8,9 @@ export const CompanyDetails = ({ contacts }: { contacts: ContactsT | null }) => 
       <h2 className="h2">Реквизиты компании</h2>
       <div className={s.content}>
         <div className={s.elem}>
-          <h3 className="h5">Юридический адрес:</h3>
           <p className="body_4">{contacts?.company_info}</p>
         </div>
         <div className={s.elem}>
-          <h3 className="h5">Банковские реквизиты:</h3>
           <p className="body_4">{contacts?.bank_details}</p>
         </div>
       </div>

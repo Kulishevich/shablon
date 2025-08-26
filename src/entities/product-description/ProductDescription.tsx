@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import s from './ProductDescription.module.scss';
 import clsx from 'clsx';
 import { ProductT } from '@/shared/api/product/types';
@@ -13,14 +13,17 @@ export const ProductDescription = ({
   reviews,
   deliveryAndPayment,
   storeUrl,
+  activeTag,
+  setActiveTag,
 }: {
   product: ProductT;
   reviews: ReviewT[] | null;
   deliveryAndPayment: PaymentAndDeliveryT[] | null;
   storeUrl: string;
+  activeTag: number;
+  setActiveTag: Dispatch<React.SetStateAction<number>>;
 }) => {
   const searchParams = useSearchParams();
-  const [activeTag, setActiveTag] = useState(1);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
