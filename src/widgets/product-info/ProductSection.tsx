@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { ProductDescription } from '@/entities/product-description';
 import { ProductInfo } from '@/entities/product-info';
 import s from './ProductSection.module.scss';
@@ -26,6 +26,7 @@ export const ProductSection = ({
   deliveryAndPayment: PaymentAndDeliveryT[] | null;
 }) => {
   const { storeUrl } = useRuntimeConfig();
+  const [activeTag, setActiveTag] = useState(1);
 
   return (
     <div className={s.container}>
@@ -56,12 +57,14 @@ export const ProductSection = ({
       </div>
       <div className={s.container}>
         <ReduxProvider>
-          <ProductInfo product={product} advantages={advantages} />
+          <ProductInfo product={product} advantages={advantages} setActiveTag={setActiveTag} />
           <ProductDescription
             product={product}
             reviews={reviews}
             deliveryAndPayment={deliveryAndPayment}
             storeUrl={storeUrl}
+            activeTag={activeTag}
+            setActiveTag={setActiveTag}
           />
         </ReduxProvider>
       </div>

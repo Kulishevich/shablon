@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { Dispatch, useState } from 'react';
 import s from './ProductInfo.module.scss';
 import {
   ArrowLeftIcon,
@@ -23,9 +23,11 @@ import { useBreakpoint } from '@/shared/lib/hooks/useBreakpoint';
 export const ProductInfo = ({
   product,
   advantages,
+  setActiveTag,
 }: {
   product: ProductT;
   advantages: ProductAdvantageType[] | null;
+  setActiveTag: Dispatch<React.SetStateAction<number>>;
 }) => {
   const { isTablet } = useBreakpoint();
   const [count, setCount] = useState(1);
@@ -57,7 +59,6 @@ export const ProductInfo = ({
     setCount((prev) => Math.max(--prev, 1));
   };
 
-  console.log(isTablet)
   return (
     <div className={s.container} itemScope>
       <ProductsImages product={product} />
@@ -99,9 +100,11 @@ export const ProductInfo = ({
             variant="link"
             className={s.button}
             onClick={() => {
+              setActiveTag(2);
+
               const el = document.getElementById('characteristics');
               if (el) {
-                const yOffset = isTablet ? -110 : -170; // отступ сверху
+                const yOffset = isTablet ? -110 : -210; // отступ сверху
                 const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
                 window.scrollTo({ top: y, behavior: 'smooth' });
               }
