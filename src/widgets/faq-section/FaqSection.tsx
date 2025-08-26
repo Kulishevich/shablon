@@ -1,29 +1,22 @@
 import { FaqItem } from '@/entities/faq-item';
+import { getFaq } from '@/shared/api/faq';
 import s from './FaqSection.module.scss';
-import clsx from 'clsx';
 
-export const FaqSection = () => {
+export const FaqSection = async () => {
+  const faqs = await getFaq();
+
+  if (!faqs || faqs.length === 0) {
+    return null;
+  }
+
   return (
     <div className={s.container}>
       <h2 className="h2">Ответы на часто задаваемые вопросы</h2>
 
       <div className={s.list}>
-        <FaqItem
-          faq={{
-            id: 1,
-            title: 'Какая цена на кварцевый обогреватель Теплея?',
-            content:
-              'Стоимость вне зависимости от мощности электрообогревателя - от 250 белорусских рублей за комплект. При заказе от 15 шт. мы предложим вам скидку на обогреватель и бесплатно доставим по г. Минску и Минской области до подъезда вашего дома.',
-          }}
-        />
-        <FaqItem
-          faq={{
-            id: 2,
-            title: 'Какая цена на кварцевый обогреватель Теплея?',
-            content:
-              'Стоимость вне зависимости от мощности электрообогревателя - от 250 белорусских рублей за комплект. При заказе от 15 шт. мы предложим вам скидку на обогреватель и бесплатно доставим по г. Минску и Минской области до подъезда вашего дома.',
-          }}
-        />
+        {faqs.map((faq) => (
+          <FaqItem key={faq.id} faq={faq} />
+        ))}
       </div>
     </div>
   );

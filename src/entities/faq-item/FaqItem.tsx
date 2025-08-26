@@ -12,7 +12,7 @@ export const FaqItem = ({ faq, defaultOpen = false }: { faq: FaqT; defaultOpen?:
   return (
     <m.div layout className={s.container} onClick={() => setIsOpen(!isOpen)}>
       <m.div layout className={s.header}>
-        <div className={clsx('h3', s.title)}>{faq.title}</div>
+        <div className={clsx('h3', s.title)}>{faq.question}</div>
         <ArrowRightUpIcon className={clsx(s.icon, { [s.open]: isOpen })} />
       </m.div>
 
@@ -27,7 +27,10 @@ export const FaqItem = ({ faq, defaultOpen = false }: { faq: FaqT; defaultOpen?:
           transition={{ duration: 0.3 }}
           className={s.content}
         >
-          <div className={clsx('body_2', s.description)}>{faq.content}</div>
+          <div
+            className={clsx('body_2', s.description)}
+            dangerouslySetInnerHTML={{ __html: faq.answer }}
+          />
         </m.div>
       </AnimatePresence>
     </m.div>

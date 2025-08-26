@@ -4,7 +4,7 @@ import { getApiUrl } from '../base';
 export const getFaq = async (): Promise<FaqT[] | null> => {
   try {
     const apiUrl = await getApiUrl();
-    const res = await fetch(`${apiUrl}/v1/faqs`, {
+    const res = await fetch(`${apiUrl}/v1/design/faq`, {
       next: {
         revalidate: 60,
       },
@@ -14,9 +14,8 @@ export const getFaq = async (): Promise<FaqT[] | null> => {
       return null;
     }
 
-    const data = await res.json();
+    const { data } = await res.json();
 
-    console.log(data);
 
     return data;
   } catch (err) {

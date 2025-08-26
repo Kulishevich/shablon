@@ -1,5 +1,5 @@
 export type FaqT = {
   id: number;
-  title: string;
-  content: string;
+  question: string;
+  answer: string;
 };
