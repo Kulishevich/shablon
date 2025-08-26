@@ -153,7 +153,7 @@ export default async function RootLayout({
           contacts={contacts}
           services={services || []}
         />
-        <HeaderMobile categories={categories} contacts={contacts} />
+        <HeaderMobile categories={categories} contacts={contacts} services={services} />
         {children}
         <Footer categories={categories} contacts={contacts} />
         <Toaster />

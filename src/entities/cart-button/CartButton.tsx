@@ -44,9 +44,9 @@ export const CartButton = () => {
         <ShoppingCartIcon width={32} height={32} />
       </Button>
       <div className={clsx(s.content, cartIsNotEmpty && s.notEmpty)}>
-        <p className="body_4">Корзина</p>
+        <p className="body_4">Коммерческое предложение</p>
         <span className="body_7">
-          {productsQuantity} {getProductWord(productsQuantity)} ({priceWithDiscount.toFixed(2)} BYN)
+          {productsQuantity} {getProductWord(productsQuantity)}
         </span>
       </div>
     </Link>

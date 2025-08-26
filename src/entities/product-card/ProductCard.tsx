@@ -51,7 +51,7 @@ export const ProductCard = ({
 
   const handleAddInCard = () => {
     dispatch(addInCart({ ...product, quantity: count }));
-    showToast({ title: 'Добавлено в корзину', variant: 'success' });
+    showToast({ title: 'Добавлено в коммерческое предложение', variant: 'success' });
   };
 
   useEffect(() => {
@@ -182,7 +182,7 @@ export const ProductCard = ({
           }}
           className={'desktop-only'}
         >
-          В корзину
+          Добавить в КП
         </Button>
         {!productInCart && (
           <Button
@@ -192,7 +192,7 @@ export const ProductCard = ({
               e.preventDefault();
               handleAddInCard();
             }}
-            aria-label="В корзину"
+            aria-label="Добавить в КП"
           >
             <ShoppingCartIcon />
           </Button>

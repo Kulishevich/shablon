@@ -14,13 +14,17 @@ import { CategoryItem } from '@/entities/category-item';
 import { paths } from '@/shared/config/constants/paths';
 import * as Dialog from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { ServiceT } from '@/shared/api/services/types';
+import clsx from 'clsx';
 
 export const HeaderBurgerMenu = ({
   categories,
   contacts,
+  services,
 }: {
   categories: CategoryT[] | null;
   contacts: ContactsT | null;
+  services: ServiceT[] | null;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,18 +46,40 @@ export const HeaderBurgerMenu = ({
             <Dialog.Title>Форма обратной связи</Dialog.Title>
           </VisuallyHidden>
           <Dialog.Content className={s.content}>
-            <CollapseHeader title={'Каталог'} onClick={() => setIsOpen(false)} href={paths.catalog}>
-              {categories?.map((category, index) => (
-                <CategoryItem key={index} category={category} onClose={() => setIsOpen(false)} />
-              ))}
-            </CollapseHeader>
             <div className={s.navigation}>
-              {navigation.slice(0, 6).map((nav, index) => (
+              <CollapseHeader
+                title={'Каталог'}
+                onClick={() => setIsOpen(false)}
+                href={paths.catalog}
+              >
+                {categories?.map((category, index) => (
+                  <CategoryItem key={index} category={category} onClose={() => setIsOpen(false)} />
+                ))}
+              </CollapseHeader>
+              {navigation.slice(0, 3).map((nav, index) => (
+                <Link className="h3" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
+                  {nav.title}
+                </Link>
+              ))}
+              <CollapseHeader title={'Услуги'} onClick={() => setIsOpen(false)}>
+                {services?.map((service, index) => (
+                  <Link
+                    key={index}
+                    className={clsx('body_5', s.serviceItem)}
+                    href={`/${service.slug}`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </CollapseHeader>
+              {navigation.slice(3, 5).map((nav, index) => (
                 <Link className="h3" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
                   {nav.title}
                 </Link>
               ))}
             </div>
+
             <SocialMedia
               className={s.socialMedia}
               telegram={contacts?.social_links?.telegram}

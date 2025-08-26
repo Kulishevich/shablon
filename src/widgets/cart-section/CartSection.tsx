@@ -18,14 +18,11 @@ export const CartSection = () => {
   const promocode = useSelector((state: RootState) => state.cart.promocode);
   const [productsState, setProductsState] = useState(productsCart);
   const priceWithOutDiscount = getPriceWithoutDiscount(productsState);
-  const [promocodeDiscount, setPromocodeDiscount] = useState(0);
-  const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
 
   useEffect(() => {
     const handleCheckPromocode = async () => {
       setProductsState(productsCart);
-      setPromocodeDiscount(0);
       try {
         const res = await checkCartPriceWitchPromocode({
           reqData: {
@@ -42,8 +39,6 @@ export const CartSection = () => {
                   res.products.find((elem) => elem.id === product.id)?.best_discount_percent || '',
               }))
             );
-          } else {
-            setPromocodeDiscount(+res.value);
           }
         } else {
           dispatch(clearPromocode());
@@ -57,7 +52,6 @@ export const CartSection = () => {
       handleCheckPromocode();
     } else {
       setProductsState(productsCart);
-      setPromocodeDiscount(0);
     }
   }, [promocode, productsCart]);
 
@@ -65,22 +59,15 @@ export const CartSection = () => {
     <SectionAnimationWrapper>
       <div className={s.container}>
         <div className={s.title}>
-          <h1 className="h1">Корзина</h1>
+          <h1 className="h1">Коммерческое предложение</h1>
           <Button variant="link" as="button" onClick={() => dispatch(clearCart())}>
-            Очистить корзину
+            Очистить КП
             <ArrowRightUpIcon />
           </Button>
         </div>
         <div className={s.content}>
           <CartTable productsState={productsState} />
-          <CartPrice
-            priceWithOutDiscount={priceWithOutDiscount}
-            priceWithDiscount={priceWithDiscount}
-            productsCart={productsCart}
-            promocode={promocode}
-            setProductsState={setProductsState}
-            setPromocodeDiscount={setPromocodeDiscount}
-          />
+          <CartPrice priceWithOutDiscount={priceWithOutDiscount} productsCart={productsCart} />
         </div>
       </div>
     </SectionAnimationWrapper>

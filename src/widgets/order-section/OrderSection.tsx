@@ -16,7 +16,6 @@ import SectionAnimationWrapper from '@/shared/ui/section/SectionAnimationWrapper
 import { showToast } from '@/shared/ui/toast';
 import { useRouter } from 'next/navigation';
 import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDiscount';
-import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
 import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
@@ -32,15 +31,12 @@ export const OrderSection = ({
   const promocode = useSelector((state: RootState) => state.cart.promocode);
   const [productsState, setProductsState] = useState(productsCart);
   const priceWithOutDiscount = getPriceWithoutDiscount(productsState);
-  const [promocodeDiscount, setPromocodeDiscount] = useState(0);
-  const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
   const { storeUrl } = useRuntimeConfig();
 
   useEffect(() => {
     const handleCheckPromocode = async () => {
       setProductsState(productsCart);
-      setPromocodeDiscount(0);
       try {
         const res = await checkCartPriceWitchPromocode({
           reqData: {
@@ -58,7 +54,6 @@ export const OrderSection = ({
               }))
             );
           } else {
-            setPromocodeDiscount(+res.value);
           }
         } else {
           dispatch(clearPromocode());
@@ -72,7 +67,6 @@ export const OrderSection = ({
       handleCheckPromocode();
     } else {
       setProductsState(productsCart);
-      setPromocodeDiscount(0);
     }
   }, [promocode, productsCart]);
 
@@ -99,16 +93,12 @@ export const OrderSection = ({
     resolver: zodResolver(createOrderFormSchema(isPickup)),
   });
 
-  // Отслеживаем изменения стоимости доставки для обновления схемы валидации
   const deliveryCost = form.watch('delivery_cost');
   const currentIsPickup = deliveryCost === 0;
 
   useEffect(() => {
-    // Обновляем схему валидации при изменении типа доставки
-    form.clearErrors(); // Очищаем ошибки валидации
+    form.clearErrors();
     const newResolver = zodResolver(createOrderFormSchema(currentIsPickup));
-    // К сожалению, react-hook-form не позволяет динамически менять resolver
-    // Поэтому мы очищаем ошибки валидации поля address при переключении на самовывоз
     if (currentIsPickup) {
       form.clearErrors('address');
     }
@@ -121,7 +111,6 @@ export const OrderSection = ({
       quantity: product.quantity,
     }));
 
-    // При самовывозе отправляем "самовывоз" в поле адреса
     const orderData = {
       ...otherData,
       customer_name: `${name} ${surname} ${patronymic}`,
@@ -165,11 +154,7 @@ export const OrderSection = ({
               deliveryMethods={deliveryMethods}
               storeUrl={storeUrl}
             />
-            <OrderPrice
-              priceWithOutDiscount={priceWithOutDiscount}
-              priceWithDiscount={priceWithDiscount}
-              productsCart={productsCart}
-            />
+            <OrderPrice priceWithOutDiscount={priceWithOutDiscount} />
           </form>
         </div>
       </FormProvider>

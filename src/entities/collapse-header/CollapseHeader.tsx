@@ -16,7 +16,7 @@ export const CollapseHeader = ({
   children: ReactNode;
   subcategory?: boolean;
   onClick: () => void;
-  href: string;
+  href?: string;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -27,9 +27,13 @@ export const CollapseHeader = ({
       className={clsx(s.rootState, { [s.subcategory]: subcategory })}
     >
       <Collapsible.Trigger className={clsx(s.trigger, subcategory ? 'body_3' : 'h2')}>
-        <Link href={href} onClick={onClick}>
-          {title}
-        </Link>
+        {href ? (
+          <Link href={href} onClick={onClick}>
+            {title}
+          </Link>
+        ) : (
+          <span>{title}</span>
+        )}
         <ArrowRightIcon width={24} height={24} className={open ? s.rotated : ''} />
       </Collapsible.Trigger>
       <Collapsible.Content className={s.content}>

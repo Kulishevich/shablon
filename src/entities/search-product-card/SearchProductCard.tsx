@@ -19,7 +19,7 @@ export const SearchProductCard = ({ ...props }: ProductT) => {
   const handleAddInCard = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     dispatch(addInCart({ ...props, quantity: 1 }));
-    showToast({ title: 'Добавлено в корзину', variant: 'success' });
+    showToast({ title: 'Добавлено в коммерческое предложение', variant: 'success' });
   };
 
   return (

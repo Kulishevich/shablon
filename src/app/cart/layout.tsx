@@ -5,12 +5,12 @@ export const generateMetadata = async () => {
   const seo = await getSeoTag({ tag: '/cart' });
 
   return {
-    title: seo?.title ?? 'Корзина',
-    description: seo?.description ?? 'Корзина',
+    title: seo?.title ?? 'Коммерческое предложение',
+    description: seo?.description ?? 'Коммерческое предложение',
     keywords: seo?.keywords,
     openGraph: {
-      title: seo?.og_title ?? 'Корзина',
-      description: seo?.og_description ?? 'Корзина',
+      title: seo?.og_title ?? 'Коммерческое предложение',
+      description: seo?.og_description ?? 'Коммерческое предложение',
     },
   };
 };

@@ -10,13 +10,16 @@ import { HeaderSearchPopup } from '@/features/header-search-popup';
 import { CategoryT } from '@/shared/api/category/types';
 import { ContactsT } from '@/shared/api/design/types';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import { ServiceT } from '@/shared/api/services/types';
 
 export const HeaderMobile = ({
   categories,
   contacts,
+  services,
 }: {
   categories: CategoryT[] | null;
   contacts: ContactsT | null;
+  services: ServiceT[] | null;
 }) => {
   return (
     <div className={s.container}>
@@ -33,10 +36,15 @@ export const HeaderMobile = ({
         <ReduxProvider>
           <HeaderSearchPopup categories={categories} />
         </ReduxProvider>
-        <Button variant="icon_secondary" as={Link} href={paths.cart} aria-label="Корзина">
+        <Button
+          variant="icon_secondary"
+          as={Link}
+          href={paths.cart}
+          aria-label="Коммерческое предложение"
+        >
           <ShoppingCartIcon />
         </Button>
-        <HeaderBurgerMenu categories={categories} contacts={contacts} />
+        <HeaderBurgerMenu categories={categories} contacts={contacts} services={services} />
       </div>
     </div>
   );

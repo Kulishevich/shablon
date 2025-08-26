@@ -30,7 +30,7 @@ export const Navigation = ({
                 {services[0].title}
               </Link>
             </li>
-            {navigation.slice(1, 3).map((nav, index) => (
+            {navigation.slice(1, 2).map((nav, index) => (
               <li key={index}>
                 <Link className="body_3" href={nav.path}>
                   {nav.title === 'Акции' && <DiscountCircleIcon />}

@@ -4,6 +4,7 @@ import { TextImageBlockT } from '@/shared/api/services/types';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui/button';
+import { FeedbackPopup } from '../feedback-popup/FeedbackPopup';
 
 export const TextImageBlock = ({
   storeUrl,
@@ -19,7 +20,11 @@ export const TextImageBlock = ({
       <div className={s.content}>
         <div className={s.text} dangerouslySetInnerHTML={{ __html: block.text }} />
 
-        {isButton && <Button className={s.button}>Оставить заявку</Button>}
+        {isButton && (
+          <FeedbackPopup image={block.image_path || ''}>
+            <Button className={s.button}>Оставить заявку</Button>
+          </FeedbackPopup>
+        )}
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ export const ProductInfo = ({
 
   const handleAddInCard = () => {
     dispatch(addInCart({ ...product, quantity: count }));
-    showToast({ title: 'Добавлено в корзину', variant: 'success' });
+    showToast({ title: 'Добавлено в коммерческое предложение', variant: 'success' });
   };
 
   const increment = () => {
@@ -57,7 +57,7 @@ export const ProductInfo = ({
     setCount((prev) => Math.max(--prev, 1));
   };
 
-  console.log(isTablet)
+  console.log(isTablet);
   return (
     <div className={s.container} itemScope>
       <ProductsImages product={product} />
@@ -140,13 +140,13 @@ export const ProductInfo = ({
               </Button>
             </div>
             <Button onClick={handleAddInCard} fullWidth className={'desktop-only'}>
-              В корзину
+              Добавить в КП
             </Button>
             <Button
               variant={'icon_outlined'}
               className={clsx(s.cartButton, 'mobile-only')}
               onClick={handleAddInCard}
-              aria-label="В корзину"
+              aria-label="Добавить в КП"
             >
               <ShoppingCartIcon />
             </Button>
