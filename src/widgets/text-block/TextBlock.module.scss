@@ -1,0 +1,17 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  max-width: vw-1440(1296);
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(12);
+
+  @media (max-width: 768px) {
+    max-width: 336px;
+    gap: 12px;
+
+    text-align: center;
+  }
+}

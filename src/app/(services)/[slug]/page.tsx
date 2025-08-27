@@ -16,6 +16,8 @@ import { GallerySection } from '@/widgets/gallery-section';
 import { TextImageBlock } from '@/widgets/text-image-block';
 import { TextGridBlock } from '@/widgets/text-grid-block';
 import { WorksBlock } from '@/widgets/works-block';
+import { TextBlock } from '@/widgets/text-block';
+import { ImageBlock } from '@/widgets/image-block';
 
 export default async function Service({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -45,46 +47,29 @@ export default async function Service({ params }: { params: Promise<{ slug: stri
       <main>
         <h1 className="h1 service-title">{service?.title}</h1>
 
-        {service.blocks?.map((block, index) => (
-          <TextImageBlock key={block.id} storeUrl={storeUrl} isButton={index === 0} {...block} />
-        ))}
+        {service.blocks?.map((block, index) => {
+          switch (block.type) {
+            case 'text_image':
+              return (
+                <TextImageBlock
+                  key={block.id}
+                  storeUrl={storeUrl}
+                  isButton={index === 0}
+                  {...block}
+                />
+              );
+            case 'features4':
+              return <TextGridBlock key={block.id} {...block} />;
+            case 'images3':
+              return <WorksBlock key={block.id} {...block} storeUrl={storeUrl} />;
+            case 'text':
+              return <TextBlock key={block.id} text={block.text} />;
+            case 'image':
+              return <ImageBlock key={block.id} image_path={`${storeUrl}/${block.image_path}`} />;
+          }
 
-        <TextGridBlock
-          title={'Преимущества плиточного покрытия'}
-          text={` <p>
-          <strong>
-            В настоящее время популярны несколько модных тенденций: имитация натурального покрытия
-            из мрамора и камня, восточные узоры и пэчворк.
-          </strong>
-        </p>
-        <p>
-          В настоящее время популярны несколько модных тенденций: имитация натурального покрытия
-          из мрамора и камня, восточные узоры и пэчворк. Каждая из них уникальна и интересна
-          по‑своему, но перед покупкой плитки самое важное — найти подрядчика для проведения
-          качественных плиточных работ.
-        </p>`}
-          items={[
-            {
-              title: 'Просто <br/> ухаживать',
-              text: 'Плитка легко поддаётся уборке и очистке: загрязнения и пятна можно легко удалить, используя обычные чистящие средства',
-            },
-            {
-              title: 'Износостойкое и прочное',
-              text: 'Плитка отличается высокой прочностью, что делает её идеальным выбором для высоконагруженных зон',
-            },
-            {
-              title: 'Не подвержено воздействиям влаги',
-              text: 'Плиточное покрытие устойчиво к влаге, что делает его отличным вариантом для ванной',
-            },
-
-            {
-              title: 'Широкая цветовая палитра',
-              text: 'Плитка доступна в огромном ассортименте цветов и форм, что позволяет создавать уникальные интерьеры',
-            },
-          ]}
-        />
-
-        <WorksBlock />
+          return null;
+        })}
 
         {!!advantages?.length && <AdvantagesSection advantages={advantages} />}
 
