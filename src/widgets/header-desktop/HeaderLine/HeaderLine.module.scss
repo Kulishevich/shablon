@@ -1,0 +1,30 @@
+@use "../../../shared/config/styles/functions" as *;
+
+.container {
+  width: 100%;
+  height: vw-1440(42);
+  margin-bottom: vw-1440(-20);
+
+  background-color: var(--color-bg-card);
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: vw-1440(1296);
+  display: flex;
+  justify-content: space-between;
+  gap: vw-1440(47);
+  align-items: center;
+
+  .country {
+    display: flex;
+    align-items: center;
+    gap: vw-1440(6);
+
+    svg {
+      width: vw-1440(18);
+      height: vw-1440(18);
+    }
+  }
+}

@@ -30,6 +30,16 @@
     height: 100%;
     &.open {
       overflow: visible;
+      animation: fadeOut 0.3s ease-in-out;
+    }
+
+    @keyframes fadeOut {
+      from {
+        overflow: hidden;
+      }
+      to {
+        overflow: visible;
+      }
     }
   }
 

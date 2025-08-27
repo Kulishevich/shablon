@@ -3,8 +3,8 @@
 .container {
   width: 100%;
   height: vw-1440(68);
+  border-bottom: 1px solid rgba(17, 20, 52, 0.1);
 
-  background-color: var(--color-bg-card);
   display: flex;
   justify-content: center;
 }
