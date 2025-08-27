@@ -1,15 +1,13 @@
-@use "../../shared/config/styles/functions" as *;
+@use '../../shared/config/styles/functions' as *;
 
 .formContainer {
   display: flex;
   flex-direction: column;
-  gap: vw-1440(20);
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
 
   @media (max-width: 768px) {
-    gap: 20px;
     align-items: center;
   }
 }
@@ -28,6 +26,14 @@
   height: vw-1440(144);
   @media (max-width: 768px) {
     height: 144px;
+  }
+}
+
+.checkboxContainer {
+  height: vw-1440(52);
+
+  @media (max-width: 768px) {
+    height: 60px;
   }
 }
 
