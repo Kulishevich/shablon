@@ -27,19 +27,19 @@ export const Navigation = ({
           <ul>
             {services.length > 0 && (
               <li>
-                <Link className="body_3" href={`/services/${services[0].slug}`}>
+                <Link className="body_3" href={`/${services[0].slug}`}>
                   {services[0].title}
                 </Link>
               </li>
             )}
-            {navigation.slice(1, 3).map((nav, index) => (
-              <li key={index}>
-                <Link className="body_3" href={nav.path}>
-                  {nav.title === 'Акции' && <DiscountCircleIcon />}
-                  {nav.title}
+            {services.length > 1 && (
+              <li>
+                <Link className="body_3" href={`/${services[1].slug}`}>
+                  {services[1].title}
                 </Link>
               </li>
-            ))}
+            )}
+
             <li className={s.about_us}>
               <div className={clsx('body_3', s.header)}>
                 О нас
@@ -50,11 +50,15 @@ export const Navigation = ({
                 <Link className="body_3" href={'/about-us'}>
                   О компании
                 </Link>
-                {services.slice(1).map((service, index) => (
+
+                {services.slice(2).map((service, index) => (
                   <Link className="body_3" href={`/${service.slug}`} key={index}>
                     {service.title}
                   </Link>
                 ))}
+                <Link className="body_3" href={'/payment-and-delivery'}>
+                  Оплата и доставка
+                </Link>
                 <Link className="body_3" href={'/contacts'}>
                   Контакты
                 </Link>
