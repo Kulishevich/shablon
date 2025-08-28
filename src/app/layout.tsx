@@ -18,7 +18,7 @@ import { ToTop } from '@/shared/ui/to-top';
 import { extractScriptContent } from '@/shared/lib/utils/extractScriptContent';
 import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
 import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
-import { SiteVariantButtons } from '@/widgets/site-variant-buttons';
+import { NotificationProvider } from '@/widgets/notification-popup/NotificationPopup';
 
 const PhoneAnimation = dynamic(() => import('@/shared/ui/phone-animation/PhoneAnimation'));
 
@@ -149,15 +149,16 @@ export default async function RootLayout({
         )}
 
         <HeaderDesktop categories={categories || []} contacts={contacts} />
-        <HeaderMobile categories={categories} contacts={contacts} />
+        <ReduxProvider>
+          <NotificationProvider>
+            <HeaderMobile categories={categories} contacts={contacts} />
+          </NotificationProvider>
+        </ReduxProvider>
         {children}
         <Footer categories={categories} contacts={contacts} />
         <Toaster />
         <PhoneAnimation image={settings?.feedback_image || ''} />
         <ToTop />
-        <ReduxProvider>
-          <SiteVariantButtons />
-        </ReduxProvider>
       </body>
     </html>
   );

@@ -13,6 +13,7 @@ import {
 } from '@/shared/assets';
 import Link from 'next/link';
 import { logout } from '@/shared/lib/redux/slices/profileSlice';
+import { AuthPopup } from '@/widgets/auth-popup';
 
 export const ProfileButton = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.profile);
@@ -20,10 +21,12 @@ export const ProfileButton = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className={s.container}>
-        <UserIcon />
-        <span className="body_7">Личный кабинет</span>
-      </div>
+      <AuthPopup>
+        <div className={s.container}>
+          <UserIcon />
+          <span className="body_7">Личный кабинет</span>
+        </div>
+      </AuthPopup>
     );
   }
 

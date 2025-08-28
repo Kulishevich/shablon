@@ -1,0 +1,60 @@
+@use "../../shared/config/styles/functions" as *;
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+
+  .title {
+    margin-bottom: vw-1440(16);
+    text-align: center;
+
+    @media (max-width: 768px) {
+      margin-bottom: 8px;
+    }
+  }
+
+  .description {
+    margin-bottom: vw-1440(24);
+    text-align: center;
+
+    @media (max-width: 768px) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: vw-1440(32);
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+}
+
+.submitButton {
+  width: vw-1440(220);
+  margin-bottom: vw-1440(20);
+
+  @media (max-width: 768px) {
+    width: 220px;
+    margin-bottom: 16px;
+  }
+}
+
+.notificationButton {
+  min-width: vw-1440(220);
+
+  @media (max-width: 768px) {
+    min-width: 220px;
+  }
+}

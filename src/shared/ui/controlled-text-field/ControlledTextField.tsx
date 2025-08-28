@@ -1,8 +1,4 @@
-import {
-  FieldValues,
-  UseControllerProps,
-  useController,
-} from 'react-hook-form';
+import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
 import { TextField, TextFieldProps } from '../text-field';
 
 type ControlledTextFieldProps<T extends FieldValues> = Omit<
@@ -48,6 +44,7 @@ export const ControlledTextField = <T extends FieldValues>({
   return (
     <TextField
       {...props}
+      type={type}
       errorMessage={errorMessage ?? error?.message}
       onBlur={onBlur}
       onChange={handleChange}

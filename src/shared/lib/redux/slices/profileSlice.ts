@@ -10,12 +10,13 @@ import {
 // Типы для пользователя
 export interface UserProfile {
   id: number;
-  firstName: string;
-  lastName: string;
+  name: string;
+  firstName?: string;
+  lastName?: string;
   phone: string;
   email: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 // Типы для состояния аутентификации
@@ -39,7 +40,7 @@ export interface ProfileState extends AuthState {
 
 // Начальное состояние
 export const initialState: ProfileState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   isLoading: false,
   error: null,
   token: null,
@@ -53,9 +54,8 @@ export const initialState: ProfileState = {
 
 // Типы для API запросов
 export interface LoginRequest {
-  email: string;
+  phone: string;
   password: string;
-  rememberMe?: boolean;
 }
 
 export interface RegisterRequest {
@@ -64,8 +64,6 @@ export interface RegisterRequest {
   email: string;
   phone: string;
   password: string;
-  confirmPassword: string;
-  agreeToTerms: boolean;
 }
 
 export interface ForgotPasswordRequest {
@@ -97,6 +95,7 @@ export const registerUser = createAsyncThunk(
   async (userData: RegisterRequest, { rejectWithValue }) => {
     try {
       const data = await registerUserApi(userData);
+
       return data;
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Ошибка регистрации');
@@ -241,8 +240,7 @@ export const profileSlice = createSlice({
         state.isLoading = false;
         state.isAuthenticated = true;
         state.token = action.payload.token;
-        state.refreshToken = action.payload.refreshToken;
-        state.user = action.payload.user;
+        state.user = action.payload.client;
         state.error = null;
       })
       .addCase(registerUser.rejected, (state, action) => {

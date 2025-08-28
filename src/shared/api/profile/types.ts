@@ -1,19 +1,17 @@
 // Основные типы для API профиля
 export interface UserProfile {
   id: number;
-  firstName: string;
-  lastName: string;
+  name: string;
   phone: string;
   email: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 // Типы для запросов аутентификации
 export interface LoginRequest {
-  email: string;
+  phone: string;
   password: string;
-  rememberMe?: boolean;
 }
 
 export interface LoginResponse {
@@ -29,16 +27,11 @@ export interface RegisterRequest {
   email: string;
   phone: string;
   password: string;
-  confirmPassword: string;
-  agreeToTerms: boolean;
 }
 
 export interface RegisterResponse {
-  user: UserProfile;
   token: string;
-  refreshToken: string;
-  expiresIn: number;
-  message: string;
+  client: UserProfile;
 }
 
 // Типы для восстановления пароля

@@ -1,0 +1,124 @@
+@use "../../shared/config/styles/functions" as *;
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1002;
+  top: 0;
+  left: 0;
+  background-color: #252b3399;
+  animation: fadeIn 0.1s ease-out;
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  gap: vw-1440(24);
+  padding: vw-1440(42);
+  width: vw-1440(530);
+  background-color: var(--color-bg);
+  box-shadow: 0px 48px 48px 0px #252b330d;
+  border-radius: vw-1440(6);
+  animation: fadeIn 0.3s ease-out;
+  max-height: 95vh;
+  overflow-y: auto;
+
+  .closeButton {
+    display: flex;
+    position: absolute;
+    top: vw-1440(16);
+    right: vw-1440(16);
+    border-radius: 50%;
+    padding: vw-1440(10);
+
+    & > svg {
+      width: vw-1440(19);
+      height: vw-1440(19);
+      @media (max-width: 768px) {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      top: 8px;
+      right: 8px;
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 335px;
+    padding: 48px 24px 33px;
+    border-radius: 6px;
+
+    flex-direction: column;
+    & > img {
+      display: none;
+    }
+  }
+
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: vw-1440(32);
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+
+    @media (max-width: 768px) {
+      gap: 20px;
+    }
+
+    .navigation {
+      display: flex;
+      gap: vw-1440(20);
+      width: vw-1440(374);
+
+      @media (max-width: 768px) {
+        width: 270px;
+        gap: 10px;
+      }
+
+      .navigationItem {
+        flex: 1 1 100%;
+        background-color: var(--color-bg);
+        opacity: 0.5;
+        color: var(--color-text);
+
+        @media (max-width: 768px) {
+          padding: 10px 14px;
+        }
+
+        &:hover {
+          background: var(--color-button-additional);
+          color: var(--color-text);
+        }
+
+        &.active {
+          opacity: 1;
+          background: var(--color-button-additional);
+
+          &:hover {
+            background: var(--color-button-additional);
+            color: var(--color-text);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

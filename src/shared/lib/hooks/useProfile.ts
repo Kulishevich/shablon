@@ -34,12 +34,10 @@ import {
   ForgotPasswordRequest,
   UpdateProfileRequest,
 } from '../../api/profile/types';
-import { useTokenManager } from '../redux/providers/ProfileProvider';
 
 // Основной хук для работы с профилем
 export const useProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { clearTokens } = useTokenManager();
 
   // Селекторы состояния
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -80,9 +78,8 @@ export const useProfile = () => {
   }, [dispatch]);
 
   const signOut = useCallback(() => {
-    clearTokens();
     dispatch(logout());
-  }, [dispatch, clearTokens]);
+  }, [dispatch]);
 
   const clearErrors = useCallback(() => {
     dispatch(clearError());
@@ -118,7 +115,6 @@ export const useProfile = () => {
 // Хук для работы с аутентификацией
 export const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { clearTokens } = useTokenManager();
 
   const authStatus = useSelector(selectAuthStatus);
 
@@ -135,9 +131,8 @@ export const useAuth = () => {
   }, [dispatch]);
 
   const signOut = useCallback(() => {
-    clearTokens();
     dispatch(logout());
-  }, [dispatch, clearTokens]);
+  }, [dispatch]);
 
   const clearErrors = useCallback(() => {
     dispatch(clearError());

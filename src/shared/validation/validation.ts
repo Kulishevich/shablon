@@ -71,3 +71,7 @@ export const imageFileScheme = () =>
         message: 'Поддерживаются только файлы формата PNG и JPEG',
       }
     );
+
+
+export const passwordScheme = () =>
+  z.string().trim().min(6, { message: validation.minLength });

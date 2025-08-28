@@ -17,10 +17,12 @@ import {
 export async function loginUser(credentials: LoginRequest): Promise<LoginResponse> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/auth/login`, {
+    const response = await fetch(`${apiUrl}/v1/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'accept': 'application/json',
       },
       body: JSON.stringify(credentials),
     });
@@ -49,18 +51,22 @@ export async function loginUser(credentials: LoginRequest): Promise<LoginRespons
 export async function registerUser(userData: RegisterRequest): Promise<RegisterResponse> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/auth/register`, {
+    const response = await fetch(`${apiUrl}/v1/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'accept': 'application/json',
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify({ ...userData, name: `${userData.firstName} ${userData.lastName}` }),
     });
+
 
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Ошибка регистрации');
     }
+
 
     const data: ApiResponse<RegisterResponse> = await response.json();
 
@@ -81,7 +87,7 @@ export async function registerUser(userData: RegisterRequest): Promise<RegisterR
 export async function forgotPassword(request: ForgotPasswordRequest): Promise<ForgotPasswordResponse> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/auth/forgot-password`, {
+    const response = await fetch(`${apiUrl}/v1/auth/forgot-password`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -113,7 +119,7 @@ export async function forgotPassword(request: ForgotPasswordRequest): Promise<Fo
 export async function resetPassword(request: ResetPasswordRequest): Promise<ResetPasswordResponse> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/auth/reset-password`, {
+    const response = await fetch(`${apiUrl}/v1/auth/reset-password`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -145,7 +151,7 @@ export async function resetPassword(request: ResetPasswordRequest): Promise<Rese
 export async function refreshToken(request: RefreshTokenRequest): Promise<RefreshTokenResponse> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/auth/refresh`, {
+    const response = await fetch(`${apiUrl}/v1/auth/refresh`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -177,7 +183,7 @@ export async function refreshToken(request: RefreshTokenRequest): Promise<Refres
 export async function logoutUser(token: string): Promise<void> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/auth/logout`, {
+    const response = await fetch(`${apiUrl}/v1/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -199,7 +205,7 @@ export async function logoutUser(token: string): Promise<void> {
 export async function validateToken(token: string): Promise<boolean> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/auth/validate`, {
+    const response = await fetch(`${apiUrl}/v1/auth/validate`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,

@@ -63,8 +63,8 @@ export const selectUserInitials = (state: RootState) => {
   const user = state.profile.user;
   if (!user) return null;
 
-  const firstInitial = user.firstName.charAt(0).toUpperCase();
-  const lastInitial = user.lastName.charAt(0).toUpperCase();
+  const firstInitial = user.firstName?.charAt(0).toUpperCase() || '';
+  const lastInitial = user.lastName?.charAt(0).toUpperCase() || '';
 
   return `${firstInitial}${lastInitial}`;
 };
