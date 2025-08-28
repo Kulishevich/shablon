@@ -111,7 +111,7 @@ export default async function Home() {
       )}
 
       <Suspense>
-        <ContactsSection contacts={contacts} isMain />
+        <ContactsSection contacts={contacts} isMain variant={variant} />
       </Suspense>
 
       <Suspense>

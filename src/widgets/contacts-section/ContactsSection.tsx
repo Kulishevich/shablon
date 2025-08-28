@@ -6,6 +6,7 @@ import { ContactsT } from '@/shared/api/design/types';
 import Link from 'next/link';
 import clsx from 'clsx';
 import Script from 'next/script';
+import { getSeoSettings } from '@/shared/api/seo/getSeoSettings';
 
 const formatPhoneNumber = (number: string) => number.replace(/\D/g, '');
 
@@ -33,34 +34,42 @@ const mapSocialLinks = (socialLinks: ContactsT['social_links']) => {
   return socialMedia;
 };
 
-export const ContactsSection = ({
+export const ContactsSection = async ({
   contacts,
   isMain = false,
+  variant,
 }: {
   contacts: ContactsT | null;
   isMain?: boolean;
+  variant?: string;
 }) => {
+  const seoSettings = await getSeoSettings({ variant });
+
   return (
     <div className={clsx(s.container, !isMain && s.standalone)}>
       {isMain ? <h2 className="h2">Контакты компании</h2> : <h1 className="h1">Контакты</h1>}
       <div className={s.content}>
-        <Script id="contacts-schema" type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: contacts?.company_info,
-            description: contacts?.company_description,
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: contacts?.address,
-              streetAddress: contacts?.address,
-            },
-            email: contacts?.email,
-            telephone: contacts?.phones,
-            workingHours: contacts?.working_hours,
-            socialMedia: contacts?.social_links ? mapSocialLinks(contacts.social_links) : [],
-          })}
-        </Script>
+        {!isMain && (
+          <Script id="contacts-schema" type="application/ld+json">
+            {JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: contacts?.company_info,
+              description: contacts?.company_description,
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: seoSettings?.microdata_addresses[0].addressLocality,
+                streetAddress: seoSettings?.microdata_addresses[0].streetAddress,
+                postalCode: seoSettings?.microdata_addresses[0].postalCode,
+                addressRegion: seoSettings?.microdata_addresses[0].addressRegion,
+              },
+              email: contacts?.email,
+              telephone: contacts?.phones,
+              workingHours: contacts?.working_hours,
+              socialMedia: contacts?.social_links ? mapSocialLinks(contacts.social_links) : [],
+            })}
+          </Script>
+        )}
         <div className={s.inner}>
           <div className={s.info}>
             <div className={s.elem}>

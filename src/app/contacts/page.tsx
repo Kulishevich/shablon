@@ -13,7 +13,7 @@ export default async function Contacts() {
 
   return (
     <main>
-      <ContactsSection contacts={contacts} />
+      <ContactsSection contacts={contacts} variant={variant} />
       <CompanyDetails contacts={contacts} />
       <SeoBlock page="/contacts" />
       <Feedback variant={variant} />
