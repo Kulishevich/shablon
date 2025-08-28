@@ -25,11 +25,13 @@ export const Navigation = ({
       <div className={s.content}>
         <nav className={s.navigation}>
           <ul>
-            <li>
-              <Link className="body_3" href={`/services/${services[0].slug}`}>
-                {services[0].title}
-              </Link>
-            </li>
+            {services.length > 0 && (
+              <li>
+                <Link className="body_3" href={`/services/${services[0].slug}`}>
+                  {services[0].title}
+                </Link>
+              </li>
+            )}
             {navigation.slice(1, 3).map((nav, index) => (
               <li key={index}>
                 <Link className="body_3" href={nav.path}>
