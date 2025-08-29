@@ -17,7 +17,7 @@ import {
 export async function getUserProfile(token: string): Promise<UserProfile> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/profile`, {
+    const response = await fetch(`${apiUrl}/v1/auth/me`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -29,13 +29,10 @@ export async function getUserProfile(token: string): Promise<UserProfile> {
       throw new Error(errorData.message || 'Ошибка получения профиля');
     }
 
-    const data: ApiResponse<UserProfile> = await response.json();
+    const data: UserProfile = await response.json();
 
-    if (!data.success || !data.data) {
-      throw new Error(data.error?.message || 'Ошибка получения профиля');
-    }
 
-    return data.data;
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       throw error;

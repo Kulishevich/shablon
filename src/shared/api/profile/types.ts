@@ -2,6 +2,8 @@
 export interface UserProfile {
   id: number;
   name: string;
+  firstName?: string;
+  lastName?: string;
   phone: string;
   email: string;
   created_at: string;
@@ -15,10 +17,8 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  user: UserProfile;
+  client: UserProfile;
   token: string;
-  refreshToken: string;
-  expiresIn: number;
 }
 
 export interface RegisterRequest {

@@ -11,4 +11,7 @@ export const paths = {
   order: '/order',
   about_us: '/about-us',
   profile: '/profile',
+  profile_info: '/profile/info',
+  profile_orders: '/profile/orders',
+  profile_settings: '/profile/settings',
 };

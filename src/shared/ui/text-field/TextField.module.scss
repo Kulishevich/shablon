@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -15,6 +15,24 @@
   position: relative;
   display: flex;
   align-items: center;
+
+  &:has(.password) {
+    svg {
+      position: absolute;
+      right: vw-1440(20);
+      top: 50%;
+      transform: translateY(-50%);
+      width: vw-1440(22);
+      height: vw-1440(22);
+      cursor: pointer;
+
+      @media (max-width: 768px) {
+        width: 22px;
+        height: 22px;
+        right: 16px;
+      }
+    }
+  }
 }
 
 .iconSearch {
@@ -106,6 +124,28 @@
       padding: 15px;
       padding-left: 50px;
       padding-right: 43px;
+    }
+  }
+
+  &.password {
+    padding: vw-1440(20);
+    padding-right: vw-1440(50);
+
+    &:focus {
+      border: 1px solid var(--color-button);
+    }
+
+    &:hover {
+      border: 1px solid var(--color-button);
+    }
+
+    &:disabled {
+      opacity: 0.2;
+    }
+
+    @media (max-width: 768px) {
+      padding: 20px;
+      padding-right: 46px;
     }
   }
 }

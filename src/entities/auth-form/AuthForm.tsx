@@ -39,6 +39,8 @@ export const AuthForm = ({
     try {
       const result = await dispatch(loginUser({ phone, password }));
 
+      console.log(result);
+
       if (loginUser.fulfilled.match(result)) {
         showToast({
           variant: 'success',
@@ -81,6 +83,7 @@ export const AuthForm = ({
           name="password"
           placeholder="Введите ваш пароль"
           label="Пароль"
+          variant="password"
           isRequired
         />
       </div>

@@ -1,0 +1,119 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(36);
+  width: vw-1440(1296);
+  align-items: center;
+  @media (max-width: 768px) {
+    width: 336px;
+    gap: 32px;
+  }
+
+  .button {
+    background-color: var(--color-accent-red);
+    width: vw-1440(260);
+    display: flex;
+    align-items: center;
+    gap: vw-1440(6);
+
+    svg {
+      width: vw-1440(20);
+      height: vw-1440(20);
+
+      path {
+        stroke: var(--color-bg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      width: 260px;
+      gap: 6px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.title {
+  display: flex;
+  gap: vw-1440(20);
+  align-items: flex-end;
+  width: 100%;
+
+  & > button {
+    margin-bottom: vw-1440(11);
+  }
+  @media (max-width: 768px) {
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    & > button {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.content {
+  display: grid;
+  gap: vw-1440(24);
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contentItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: vw-1440(12);
+    height: vw-1440(206);
+    border-radius: vw-1440(6);
+    background-color: var(--color-bg-card);
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow:
+        1px 4px 8px 0 rgba(11, 12, 25, 0.03),
+        4px 14px 15px 0 rgba(11, 12, 25, 0.02),
+        8px 32px 20px 0 rgba(11, 12, 25, 0.01),
+        14px 57px 24px 0 rgba(11, 12, 25, 0.01),
+        22px 89px 26px 0 rgba(11, 12, 25, 0);
+      background: var(--color-button-additional);
+      color: var(--color-text);
+    }
+
+    @media (max-width: 768px) {
+      gap: 12px;
+      border-radius: 6px;
+      height: 157px;
+    }
+
+    svg {
+      width: vw-1440(64);
+      height: vw-1440(64);
+
+      path {
+        stroke-width: 1px;
+      }
+
+      @media (max-width: 768px) {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    &:first-of-type svg {
+      path {
+        stroke-width: 3px;
+      }
+    }
+  }
+}

@@ -11,15 +11,23 @@
   transition: background-color 0.3s ease;
   position: relative;
 
+  a {
+    display: flex;
+    align-items: center;
+    gap: vw-1440(9);
+  }
+
   &:hover {
     background-color: var(--color-button);
 
+    & > a > svg,
     & > svg {
       path {
         stroke: var(--color-bg);
       }
     }
 
+    & > a > span,
     & > span {
       color: var(--color-bg);
     }

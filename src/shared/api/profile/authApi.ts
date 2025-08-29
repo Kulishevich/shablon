@@ -32,13 +32,10 @@ export async function loginUser(credentials: LoginRequest): Promise<LoginRespons
       throw new Error(errorData.message || 'Ошибка авторизации');
     }
 
-    const data: ApiResponse<LoginResponse> = await response.json();
+    const data: LoginResponse = await response.json();
 
-    if (!data.success || !data.data) {
-      throw new Error(data.error?.message || 'Ошибка авторизации');
-    }
 
-    return data.data;
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       throw error;

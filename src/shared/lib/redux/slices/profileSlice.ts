@@ -6,18 +6,16 @@ import {
   getUserProfile,
   updateUserProfile as updateUserProfileApi,
 } from '../../../api/profile';
+import type {
+  UserProfile,
+  LoginRequest,
+  RegisterRequest,
+  ForgotPasswordRequest,
+  UpdateProfileRequest,
+} from '../../../api/profile/types';
+import { showToast } from '@/shared/ui/toast';
 
-// Типы для пользователя
-export interface UserProfile {
-  id: number;
-  name: string;
-  firstName?: string;
-  lastName?: string;
-  phone: string;
-  email: string;
-  created_at: string;
-  updated_at: string;
-}
+
 
 // Типы для состояния аутентификации
 export interface AuthState {
@@ -52,30 +50,7 @@ export const initialState: ProfileState = {
   orderHistory: [],
 };
 
-// Типы для API запросов
-export interface LoginRequest {
-  phone: string;
-  password: string;
-}
 
-export interface RegisterRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-}
-
-export interface ForgotPasswordRequest {
-  email: string;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
-  email?: string;
-}
 
 // Async thunks с реальными API вызовами
 export const loginUser = createAsyncThunk(
@@ -179,6 +154,11 @@ export const profileSlice = createSlice({
       state.profileError = null;
       state.orderHistory = [];
 
+      showToast({
+        variant: 'success',
+        title: 'Вы вышли из системы!',
+      });
+
       // Очищаем localStorage при выходе
       if (typeof window !== 'undefined') {
         localStorage.removeItem('profile_shablon');
@@ -221,8 +201,7 @@ export const profileSlice = createSlice({
         state.isLoading = false;
         state.isAuthenticated = true;
         state.token = action.payload.token;
-        state.refreshToken = action.payload.refreshToken;
-        state.user = action.payload.user;
+        state.user = action.payload.client;
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {

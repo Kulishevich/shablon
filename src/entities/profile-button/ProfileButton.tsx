@@ -32,11 +32,13 @@ export const ProfileButton = () => {
 
   return (
     <div className={s.container}>
-      <UserIcon />
-      <span className="body_7">Личный кабинет</span>
+      <Link href="/profile">
+        <UserIcon />
+        <span className="body_7">Личный кабинет</span>
+      </Link>
 
       <div className={s.dropdown}>
-        <Link href="/profile/orders" className={s.dropdownItem}>
+        <Link href="/profile/info" className={s.dropdownItem}>
           <UserInfoIcon />
           <span className="body_7">Личные данные</span>
         </Link>
@@ -44,7 +46,7 @@ export const ProfileButton = () => {
           <OrderHistoryIcon />
           <span className="body_7">История заказов</span>
         </Link>
-        <Link href="/profile/orders" className={s.dropdownItem}>
+        <Link href="/profile/settings" className={s.dropdownItem}>
           <UserSettingIcon />
           <span className="body_7">Настройки профиля</span>
         </Link>

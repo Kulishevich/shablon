@@ -46,3 +46,5 @@ export { default as UserInfoIcon } from './UserInfoIcon';
 export { default as OrderHistoryIcon } from './OrderHistoryIcon';
 export { default as UserSettingIcon } from './UserSettingIcon';
 export { default as UserLogOutIcon } from './UserLogOutIcon';
+export { default as EyeIcon } from './EyeIcon';
+export { default as UserProfileIcon } from './UserProfileIcon';

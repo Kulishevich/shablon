@@ -8,11 +8,12 @@ import {
   useEffect,
   useId,
   useRef,
+  useState,
 } from 'react';
 import clsx from 'clsx';
 
 import s from './TextField.module.scss';
-import { CloseIcon, SearchIcon } from '../../assets';
+import { CloseIcon, EyeIcon, SearchIcon } from '../../assets';
 
 export type TextFieldProps = {
   errorMessage?: ReactNode | string;
@@ -34,9 +35,10 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
     placeholder,
     value,
     variant = 'text',
+    type,
     ...rest
   } = props;
-
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const id = useId();
@@ -76,7 +78,8 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
             s[variant],
             errorMessage && s.error,
             disabled && s.disabled,
-            className
+            className,
+            { [s.password]: variant === 'password' }
           )}
           disabled={disabled}
           id={id}
@@ -84,8 +87,18 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           placeholder={placeholder}
           ref={ref}
           value={value}
+          type={variant === 'password' ? (isPasswordVisible ? 'text' : 'password') : type}
           {...rest}
         />
+        {variant === 'password' && (
+          <EyeIcon
+            className={s.eyeIcon}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsPasswordVisible((prev) => !prev);
+            }}
+          />
+        )}
         {isSearch && (
           <CloseIcon
             className={s.clearIcon}
