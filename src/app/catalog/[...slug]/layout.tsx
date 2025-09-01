@@ -40,6 +40,9 @@ export async function generateMetadata({
         description:
           seo?.og_description || categoryMask?.description || category.description.slice(0, 150),
       },
+      alternates: {
+        canonical: `${slug.join('/')}`,
+      },
     };
   }
 

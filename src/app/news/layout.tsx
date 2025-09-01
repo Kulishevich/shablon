@@ -15,6 +15,9 @@ export const generateMetadata = async () => {
       title: seo?.og_title ?? 'Новости',
       description: seo?.og_description ?? 'Новости',
     },
+    alternates: {
+      canonical: `/news`,
+    },
   };
 };
 

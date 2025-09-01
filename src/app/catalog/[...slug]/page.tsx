@@ -6,7 +6,6 @@ import { Feedback } from '@/widgets/feedback/Feedback';
 import { getCategoryByPath } from '@/shared/api/category/getCategoryByPath';
 
 import { getProductsWithoutPagination } from '@/shared/api/product/getProductsWithoutPagination';
-import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { notFound } from 'next/navigation';
 import { getProductById } from '@/shared/api/product/getProductById';
 import { ProductSection } from '@/widgets/product-info';
@@ -184,11 +183,6 @@ async function renderAllProductsSection({
   const { getCategoriesTree } = await import('@/shared/api/category/getCategoriesTree');
   const allCategories = await getCategoriesTree({ variant });
 
-  // Преобразуем фильтры из URL параметров в формат API
-  const filtersForApi = parseFiltersFromSearchParams(searchParamsData, products?.filters || []);
-
-  const prices = allProducts?.map((product) => Number(product.price)) ?? [];
-
   // Формируем breadcrumbs
   const breadcrumbsPath = [
     {
@@ -218,7 +212,6 @@ async function renderAllProductsSection({
 
   return (
     <>
-      <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main className="main-container">
         <CatalogSection
@@ -328,7 +321,6 @@ async function renderCatalogSection({
 
   return (
     <>
-      <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main className="main-container">
         <CatalogSection
@@ -375,7 +367,6 @@ async function renderProductSection(product: ProductT, slug: string[]) {
 
   return (
     <>
-      <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main className="main-container">
         <ProductSection

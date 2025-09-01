@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     title: 'Поиск',
     description: 'Поиск товаров',
   },
+  alternates: {
+    canonical: `/search`,
+  },
 };
 
 export default function SearchLayout({ children }: { children: React.ReactNode }) {

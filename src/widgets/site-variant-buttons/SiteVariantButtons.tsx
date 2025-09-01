@@ -4,10 +4,10 @@ import Cookies from 'js-cookie';
 import { Button } from '@/shared/ui/button';
 import s from './SiteVariantButtons.module.scss';
 import { CollapseFilter } from '@/shared/ui/collapse-filter';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { clearCart, clearPromocode } from '@/shared/lib/redux/slices/cartSlice';
+import { useSearchParams } from 'next/navigation';
+import { clearCart } from '@/shared/lib/redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
-import { ReduxProvider } from '@/shared/lib/redux/providers/ReduxProvider';
+import revalidatePath from '@/shared/lib/utils/revalidatePath';
 
 const siteVariants = [
   {
@@ -48,8 +48,6 @@ const siteVariants = [
 ];
 
 export const SiteVariantButtons = () => {
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const variant = searchParams.get('variant');
   const dispatch = useDispatch();
@@ -64,11 +62,14 @@ export const SiteVariantButtons = () => {
     localStorage.removeItem('viewed_products_shablon');
     localStorage.removeItem('cart_shablon');
 
-    if (pathname === '/') {
-      router.refresh();
-    } else {
-      router.push('/');
-      router.refresh();
+    revalidatePath('');
+
+    if (window) {
+      if (window.location.pathname === '/') {
+        window.location.reload();
+      } else {
+        window.location.href = '/';
+      }
     }
   };
 

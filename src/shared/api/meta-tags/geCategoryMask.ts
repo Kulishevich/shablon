@@ -22,7 +22,6 @@ export const geCategoryMask = async ({
 
     const data = await res.json();
 
-
     if (data) {
       const processedMask = replaceCategoryMaskTemplates(data, category);
 
