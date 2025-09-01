@@ -5,13 +5,19 @@
   margin: 0 auto;
   width: 100%;
   position: relative;
-  height: vw-1440(620);
+  height: auto;
   border-radius: vw-1440(6);
   overflow: hidden;
 
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
   @media (max-width: 768px) {
     max-width: 336px;
-    height: 220px;
+
     border-radius: 5px;
   }
 }

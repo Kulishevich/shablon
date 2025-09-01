@@ -8,10 +8,18 @@
   flex-direction: column;
   gap: vw-1440(12);
 
+  ul,
+  ol {
+    margin-left: vw-1440(28);
+  }
+
   @media (max-width: 768px) {
     max-width: 336px;
     gap: 12px;
 
-    text-align: center;
+    ul,
+    ol {
+      margin-left: 28px;
+    }
   }
 }

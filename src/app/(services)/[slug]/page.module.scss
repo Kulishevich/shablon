@@ -1,0 +1,29 @@
+@use "../../../shared/config/styles/functions" as *;
+
+.main {
+  .blocks {
+    display: flex;
+    flex-direction: column;
+    gap: vw-1440(120);
+
+    @media (max-width: 768px) {
+      gap: 72px;
+    }
+  }
+
+  div.imageBlock:not(:first-child) {
+    margin-top: vw-1440(-100);
+
+    @media (max-width: 768px) {
+      margin-top: -48px;
+    }
+  }
+
+  div.imageBlock:not(:last-child) {
+    margin-bottom: vw-1440(-100);
+
+    @media (max-width: 768px) {
+      margin-bottom: -48px;
+    }
+  }
+}

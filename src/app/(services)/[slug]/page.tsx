@@ -18,6 +18,7 @@ import { TextGridBlock } from '@/widgets/text-grid-block';
 import { WorksBlock } from '@/widgets/works-block';
 import { TextBlock } from '@/widgets/text-block';
 import { ImageBlock } from '@/widgets/image-block';
+import s from './page.module.scss';
 
 export default async function Service({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -44,32 +45,40 @@ export default async function Service({ params }: { params: Promise<{ slug: stri
           },
         ]}
       />
-      <main>
+      <main className={s.main}>
         <h1 className="h1 service-title">{service?.title}</h1>
 
-        {service.blocks?.map((block, index) => {
-          switch (block.type) {
-            case 'text_image':
-              return (
-                <TextImageBlock
-                  key={block.id}
-                  storeUrl={storeUrl}
-                  isButton={index === 0}
-                  {...block}
-                />
-              );
-            case 'features4':
-              return <TextGridBlock key={block.id} {...block} />;
-            case 'images3':
-              return <WorksBlock key={block.id} {...block} storeUrl={storeUrl} />;
-            case 'text':
-              return <TextBlock key={block.id} text={block.text} />;
-            case 'image':
-              return <ImageBlock key={block.id} image_path={`${storeUrl}/${block.image_path}`} />;
-          }
+        <div className={s.blocks}>
+          {service.blocks?.map((block, index) => {
+            switch (block.type) {
+              case 'text_image':
+                return (
+                  <TextImageBlock
+                    key={block.id}
+                    storeUrl={storeUrl}
+                    isButton={index === 0}
+                    {...block}
+                  />
+                );
+              case 'features4':
+                return <TextGridBlock key={block.id} {...block} />;
+              case 'images3':
+                return <WorksBlock key={block.id} {...block} storeUrl={storeUrl} />;
+              case 'text':
+                return <TextBlock key={block.id} text={block.text} />;
+              case 'image':
+                return (
+                  <ImageBlock
+                    key={block.id}
+                    image_path={`${storeUrl}/${block.image_path}`}
+                    className={s.imageBlock}
+                  />
+                );
+            }
 
-          return null;
-        })}
+            return null;
+          })}
+        </div>
 
         {!!advantages?.length && <AdvantagesSection advantages={advantages} />}
 
