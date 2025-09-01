@@ -48,7 +48,7 @@ export async function updateUserProfile(
 ): Promise<UserProfile> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/profile`, {
+    const response = await fetch(`${apiUrl}/v1/auth/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -62,13 +62,21 @@ export async function updateUserProfile(
       throw new Error(errorData.message || 'Ошибка обновления профиля');
     }
 
-    const data: ApiResponse<UpdateProfileResponse> = await response.json();
+    const data: ApiResponse<UpdateProfileResponse> | UserProfile = await response.json();
 
-    if (!data.success || !data.data) {
-      throw new Error(data.error?.message || 'Ошибка обновления профиля');
+    // Если сервер возвращает данные напрямую (без обёртки ApiResponse)
+    if ('id' in data && 'email' in data) {
+      // Это UserProfile напрямую
+      return data as UserProfile;
     }
 
-    return data.data.user;
+    // Если данные в обёртке ApiResponse
+    const apiResponseData = data as ApiResponse<UpdateProfileResponse>;
+    if (!apiResponseData.success || !apiResponseData.data) {
+      throw new Error(apiResponseData.error?.message || 'Ошибка обновления профиля');
+    }
+
+    return apiResponseData.data.user;
   } catch (error) {
     if (error instanceof Error) {
       throw error;
@@ -77,14 +85,14 @@ export async function updateUserProfile(
   }
 }
 
-// Смена пароля (для будущего использования)
+// Смена пароля
 export async function changePassword(
   token: string,
   passwordData: ChangePasswordRequest
 ): Promise<ChangePasswordResponse> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/profile/change-password`, {
+    const response = await fetch(`${apiUrl}/v1/auth/change-password`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,13 +106,21 @@ export async function changePassword(
       throw new Error(errorData.message || 'Ошибка смены пароля');
     }
 
-    const data: ApiResponse<ChangePasswordResponse> = await response.json();
+    const data: ApiResponse<ChangePasswordResponse> | ChangePasswordResponse = await response.json();
 
-    if (!data.success || !data.data) {
-      throw new Error(data.error?.message || 'Ошибка смены пароля');
+    // Если сервер возвращает данные напрямую (без обёртки ApiResponse)
+    if ('message' in data && !('success' in data)) {
+      // Это ChangePasswordResponse напрямую
+      return data as ChangePasswordResponse;
     }
 
-    return data.data;
+    // Если данные в обёртке ApiResponse
+    const apiResponseData = data as ApiResponse<ChangePasswordResponse>;
+    if (!apiResponseData.success || !apiResponseData.data) {
+      throw new Error(apiResponseData.error?.message || 'Ошибка смены пароля');
+    }
+
+    return apiResponseData.data;
   } catch (error) {
     if (error instanceof Error) {
       throw error;

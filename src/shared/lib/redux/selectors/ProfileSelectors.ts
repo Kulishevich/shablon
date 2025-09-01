@@ -19,11 +19,11 @@ export const selectProfileError = (state: RootState) => state.profile.profileErr
 // Селекторы для отдельных полей пользователя
 export const selectUserName = (state: RootState) => {
   const user = state.profile.user;
-  return user ? `${user.firstName} ${user.lastName}` : null;
+  return user ? `${user.name} ${user.last_name || ''}`.trim() : null;
 };
 
-export const selectUserFirstName = (state: RootState) => state.profile.user?.firstName;
-export const selectUserLastName = (state: RootState) => state.profile.user?.lastName;
+export const selectUserFirstName = (state: RootState) => state.profile.user?.name;
+export const selectUserLastName = (state: RootState) => state.profile.user?.last_name;
 export const selectUserEmail = (state: RootState) => state.profile.user?.email;
 export const selectUserPhone = (state: RootState) => state.profile.user?.phone;
 
@@ -33,6 +33,7 @@ export const selectUserId = (state: RootState) => state.profile.user?.id;
 
 // Селекторы для будущих функций
 export const selectPasswordChangeLoading = (state: RootState) => state.profile.passwordChangeLoading;
+export const selectDeleteAccountLoading = (state: RootState) => state.profile.deleteAccountLoading;
 export const selectOrderHistory = (state: RootState) => state.profile.orderHistory;
 
 // Комбинированные селекторы
@@ -63,8 +64,8 @@ export const selectUserInitials = (state: RootState) => {
   const user = state.profile.user;
   if (!user) return null;
 
-  const firstInitial = user.firstName?.charAt(0).toUpperCase() || '';
-  const lastInitial = user.lastName?.charAt(0).toUpperCase() || '';
+  const firstInitial = user.name?.charAt(0).toUpperCase() || '';
+  const lastInitial = user.last_name?.charAt(0).toUpperCase() || '';
 
   return `${firstInitial}${lastInitial}`;
 };
@@ -75,8 +76,8 @@ export const selectIsProfileComplete = (state: RootState) => {
   if (!user) return false;
 
   return Boolean(
-    user.firstName &&
-    user.lastName &&
+    user.name &&
+    user.last_name &&
     user.email &&
     user.phone
   );

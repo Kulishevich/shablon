@@ -1,5 +1,8 @@
 import { ProfileNavigation } from '@/entities/profile-navigation';
 import s from './ProfileInfoSection.module.scss';
+import { ProfileInfo } from '@/entities/profile-info/ProfileInfo';
+import { ProfileSettings } from '@/entities/profile-settings/ProfileSettings';
+import { ProfileHistory } from '@/entities/profile-history';
 
 export const ProfileInfoSection = ({ page }: { page: string }) => {
   return (
@@ -13,6 +16,9 @@ export const ProfileInfoSection = ({ page }: { page: string }) => {
       </div>
       <div className={s.content}>
         <ProfileNavigation activePage={page} />
+        {page === 'info' && <ProfileInfo />}
+        {page === 'settings' && <ProfileSettings />}
+        {page === 'orders' && <ProfileHistory />}
       </div>
     </div>
   );

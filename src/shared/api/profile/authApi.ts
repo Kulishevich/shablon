@@ -55,17 +55,19 @@ export async function registerUser(userData: RegisterRequest): Promise<RegisterR
         'Access-Control-Allow-Origin': '*',
         'accept': 'application/json',
       },
-      body: JSON.stringify({ ...userData, name: `${userData.firstName} ${userData.lastName}` }),
+      body: JSON.stringify({ ...userData }),
     });
 
-
-    if (!response.ok) {
+    if (!response.ok && response.status !== 201) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Ошибка регистрации');
     }
 
-
     const data: ApiResponse<RegisterResponse> = await response.json();
+
+    if (response.status === 201 && !data.hasOwnProperty('success')) {
+      return data as unknown as RegisterResponse;
+    }
 
     if (!data.success || !data.data) {
       throw new Error(data.error?.message || 'Ошибка регистрации');

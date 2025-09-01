@@ -1,0 +1,138 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  background-color: var(--color-bg);
+  border-radius: vw-1440(6);
+  box-shadow:
+    1px 4px 8px 0 rgba(11, 12, 25, 0.03),
+    4px 14px 15px 0 rgba(11, 12, 25, 0.02),
+    8px 32px 20px 0 rgba(11, 12, 25, 0.01),
+    14px 57px 24px 0 rgba(11, 12, 25, 0.01),
+    22px 89px 26px 0 rgba(11, 12, 25, 0);
+  padding: vw-1440(20);
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: vw-1440(20);
+  max-width: vw-1440(416);
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    gap: 20px;
+    max-width: 335px;
+  }
+
+  &:hover {
+    border-color: rgba(37, 51, 140, 0.2);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .status {
+      color: var(--color-bg);
+      border-radius: 4px;
+      padding: vw-1440(5) vw-1440(16);
+
+      @media (max-width: 768px) {
+        border-radius: 4px;
+        padding: 5px 16px;
+      }
+
+      &.success {
+        background-color: var(--color-accent-green);
+      }
+    }
+  }
+
+  .products {
+    display: flex;
+    width: calc(100% + vw-1440(40));
+    margin-left: vw-1440(-20);
+    padding-left: vw-1440(20);
+    padding-right: vw-1440(20);
+    gap: vw-1440(10);
+    overflow-x: auto;
+
+    @media (max-width: 768px) {
+      gap: 8px;
+      padding-left: 20px;
+      padding-right: 20px;
+      width: calc(100% + 40px);
+      margin-left: -20px;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product {
+      width: vw-1440(64);
+      height: vw-1440(64);
+      flex: 0 0 vw-1440(64);
+      border-radius: vw-1440(4);
+      overflow: hidden;
+
+      @media (max-width: 768px) {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border-radius: 4px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .orderInfo {
+    display: flex;
+    flex-direction: column;
+    gap: vw-1440(10);
+
+    @media (max-width: 768px) {
+      gap: 8px;
+    }
+
+    .orderInfoItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: vw-1440(10);
+
+      @media (max-width: 768px) {
+        gap: 10px;
+      }
+
+      .orderInfoItemValue {
+        font-weight: 700;
+        line-height: 100%;
+      }
+    }
+  }
+
+  .button {
+    width: 100%;
+    gap: vw-1440(6);
+
+    svg {
+      width: vw-1440(20);
+      height: vw-1440(20);
+    }
+
+    @media (max-width: 768px) {
+      gap: 6px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}

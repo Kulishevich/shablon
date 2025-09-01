@@ -39,7 +39,9 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
     const { firstName, lastName, phone, email, password, checked } = data;
 
     try {
-      const result = await dispatch(registerUser({ firstName, lastName, phone, email, password }));
+      const result = await dispatch(
+        registerUser({ name: firstName, last_name: lastName, phone, email, password })
+      );
 
       if (registerUser.fulfilled.match(result)) {
         showNotification({

@@ -5,6 +5,8 @@ import {
   forgotPassword as forgotPasswordApi,
   getUserProfile,
   updateUserProfile as updateUserProfileApi,
+  changePassword as changePasswordApi,
+  deleteAccount as deleteAccountApi,
 } from '../../../api/profile';
 import type {
   UserProfile,
@@ -12,6 +14,8 @@ import type {
   RegisterRequest,
   ForgotPasswordRequest,
   UpdateProfileRequest,
+  ChangePasswordRequest,
+  DeleteAccountRequest,
 } from '../../../api/profile/types';
 import { showToast } from '@/shared/ui/toast';
 
@@ -33,6 +37,7 @@ export interface ProfileState extends AuthState {
   profileError: string | null;
   // Расширяемость для будущих функций
   passwordChangeLoading: boolean;
+  deleteAccountLoading: boolean;
   orderHistory: any[]; // Заглушка для будущего функционала
 }
 
@@ -47,6 +52,7 @@ export const initialState: ProfileState = {
   isProfileLoading: false,
   profileError: null,
   passwordChangeLoading: false,
+  deleteAccountLoading: false,
   orderHistory: [],
 };
 
@@ -128,6 +134,44 @@ export const updateUserProfile = createAsyncThunk(
   }
 );
 
+export const changePassword = createAsyncThunk(
+  'profile/changePassword',
+  async (passwordData: ChangePasswordRequest, { rejectWithValue, getState }) => {
+    try {
+      const state = getState() as { profile: ProfileState };
+      const token = state.profile.token;
+
+      if (!token) {
+        throw new Error('Токен не найден');
+      }
+
+      const data = await changePasswordApi(token, passwordData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error instanceof Error ? error.message : 'Ошибка смены пароля');
+    }
+  }
+);
+
+export const deleteAccount = createAsyncThunk(
+  'profile/deleteAccount',
+  async (deleteData: DeleteAccountRequest, { rejectWithValue, getState }) => {
+    try {
+      const state = getState() as { profile: ProfileState };
+      const token = state.profile.token;
+
+      if (!token) {
+        throw new Error('Токен не найден');
+      }
+
+      const data = await deleteAccountApi(token, deleteData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error instanceof Error ? error.message : 'Ошибка удаления аккаунта');
+    }
+  }
+);
+
 // Slice
 export const profileSlice = createSlice({
   name: 'profile',
@@ -184,6 +228,10 @@ export const profileSlice = createSlice({
     // Заглушки для будущих функций
     setPasswordChangeLoading: (state, action: PayloadAction<boolean>) => {
       state.passwordChangeLoading = action.payload;
+    },
+
+    setDeleteAccountLoading: (state, action: PayloadAction<boolean>) => {
+      state.deleteAccountLoading = action.payload;
     },
 
     setOrderHistory: (state, action: PayloadAction<any[]>) => {
@@ -269,6 +317,46 @@ export const profileSlice = createSlice({
       .addCase(updateUserProfile.rejected, (state, action) => {
         state.isProfileLoading = false;
         state.profileError = action.payload as string;
+      })
+
+      // Change Password
+      .addCase(changePassword.pending, (state) => {
+        state.passwordChangeLoading = true;
+        state.error = null;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.passwordChangeLoading = false;
+        state.error = null;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.passwordChangeLoading = false;
+        state.error = action.payload as string;
+      })
+
+      // Delete Account
+      .addCase(deleteAccount.pending, (state) => {
+        state.deleteAccountLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteAccount.fulfilled, (state) => {
+        // После успешного удаления аккаунта очищаем все данные
+        state.isAuthenticated = false;
+        state.user = null;
+        state.token = null;
+        state.refreshToken = null;
+        state.deleteAccountLoading = false;
+        state.error = null;
+        state.profileError = null;
+        state.orderHistory = [];
+
+        // Очищаем localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('profile_shablon');
+        }
+      })
+      .addCase(deleteAccount.rejected, (state, action) => {
+        state.deleteAccountLoading = false;
+        state.error = action.payload as string;
       });
   },
 });
@@ -280,6 +368,7 @@ export const {
   setToken,
   updateUserData,
   setPasswordChangeLoading,
+  setDeleteAccountLoading,
   setOrderHistory,
 } = profileSlice.actions;
 

@@ -2,8 +2,7 @@
 export interface UserProfile {
   id: number;
   name: string;
-  firstName?: string;
-  lastName?: string;
+  last_name?: string;
   phone: string;
   email: string;
   created_at: string;
@@ -22,8 +21,8 @@ export interface LoginResponse {
 }
 
 export interface RegisterRequest {
-  firstName: string;
-  lastName: string;
+  name: string;
+  last_name: string;
   email: string;
   phone: string;
   password: string;
@@ -56,8 +55,8 @@ export interface ResetPasswordResponse {
 
 // Типы для работы с профилем
 export interface UpdateProfileRequest {
-  firstName?: string;
-  lastName?: string;
+  name?: string;
+  last_name?: string;
   phone?: string;
   email?: string;
 }
@@ -69,9 +68,8 @@ export interface UpdateProfileResponse {
 
 // Типы для смены пароля (для будущего использования)
 export interface ChangePasswordRequest {
-  currentPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
+  current_password?: string;
+  new_password: string;
 }
 
 export interface ChangePasswordResponse {
