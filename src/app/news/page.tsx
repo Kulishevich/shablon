@@ -3,7 +3,6 @@ import { getAllNews } from '@/shared/api/news/getAllNews';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { NewsSection } from '@/widgets/news-section';
 import { SeoBlock } from '@/entities/seo-block';
-import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { getStoreUrl } from '@/shared/api/base';
 
 export default async function News({ searchParams }: { searchParams: Promise<{ page: string }> }) {
@@ -13,7 +12,6 @@ export default async function News({ searchParams }: { searchParams: Promise<{ p
 
   return (
     <>
-      <CanonicalLink href={'news'} />
       <Breadcrumbs />
       <main>
         <NewsSection newsList={newsList} page={page} storeUrl={storeUrl} />

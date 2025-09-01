@@ -11,6 +11,9 @@ export const generateMetadata = async () => {
       title: seo?.og_title ?? 'Акции',
       description: seo?.og_description ?? 'Акции',
     },
+    alternates: {
+      canonical: `/shares`,
+    },
   };
 };
 

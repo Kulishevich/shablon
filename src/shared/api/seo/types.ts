@@ -29,4 +29,10 @@ export type SeoSettingsT = {
   robots_path: string | null;
   feed_path: string | null;
   frontend_sitemap_url: string | null;
+  microdata_addresses: {
+    postalCode: string;
+    addressRegion: string;
+    streetAddress: string;
+    addressLocality: string;
+  }[];
 };

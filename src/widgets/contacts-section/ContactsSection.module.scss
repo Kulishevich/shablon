@@ -86,6 +86,10 @@
 .phones {
   display: flex;
   flex-direction: column;
+
+  a {
+    font-family: var(--font-open-sans);
+  }
 }
 
 .map {
