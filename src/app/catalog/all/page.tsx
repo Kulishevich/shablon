@@ -3,8 +3,6 @@ import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/widgets/feedback/Feedback';
-
-import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { SeoBlock } from '@/entities/seo-block';
 import { CategoryT } from '@/shared/api/category/types';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
@@ -29,6 +27,9 @@ export async function generateMetadata({
     description: tags
       ? `Все товары в каталоге с тегом ${tags}`
       : 'Все товары в каталоге с возможностью фильтрации по тегам',
+    alternates: {
+      canonical: `/catalog/all`,
+    },
   };
 }
 
@@ -118,7 +119,6 @@ export default async function AllProductsPage({
 
   return (
     <>
-      <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main className="main-container">
         <CatalogSection

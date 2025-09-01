@@ -56,19 +56,19 @@ export const ContactsSection = async ({
               address: {
                 '@type': 'PostalAddress',
                 addressLocality:
-                  seoSettings?.microdata_addresses && seoSettings?.microdata_addresses.length > 0
+                  seoSettings && seoSettings.microdata_addresses?.length > 0
                     ? seoSettings?.microdata_addresses[0].addressLocality
                     : '',
                 streetAddress:
-                  seoSettings?.microdata_addresses && seoSettings?.microdata_addresses.length > 0
+                  seoSettings && seoSettings.microdata_addresses?.length > 0
                     ? seoSettings?.microdata_addresses[0].streetAddress
                     : '',
                 postalCode:
-                  seoSettings?.microdata_addresses && seoSettings?.microdata_addresses.length > 0
+                  seoSettings && seoSettings.microdata_addresses?.length > 0
                     ? seoSettings?.microdata_addresses[0].postalCode
                     : '',
                 addressRegion:
-                  seoSettings?.microdata_addresses && seoSettings?.microdata_addresses.length > 0
+                  seoSettings && seoSettings.microdata_addresses?.length > 0
                     ? seoSettings?.microdata_addresses[0].addressRegion
                     : '',
               },
