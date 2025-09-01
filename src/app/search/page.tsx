@@ -3,7 +3,6 @@ import { PreviouslyViewed } from '@/features/previously-viewed';
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { getProducts } from '@/shared/api/product/getProducts';
 import { Feedback } from '@/widgets/feedback/Feedback';
-import { CanonicalLink } from '@/shared/ui/canonical-link';
 import { SeoBlock } from '@/entities/seo-block';
 import { enrichProductsWithFullPath } from '@/shared/lib/utils/productUtils';
 import { redirect } from 'next/navigation';
@@ -106,7 +105,6 @@ export default async function SearchPage({
 
   return (
     <>
-      <CanonicalLink href={canonicalUrl} />
       <Breadcrumbs dynamicPath={breadcrumbsPath} />
       <main>
         <SearchSection
