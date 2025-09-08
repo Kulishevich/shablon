@@ -16,19 +16,12 @@ import {
 } from '@/shared/lib/redux/selectors/ProfileSelectors';
 import { changePassword, deleteAccount, logout } from '@/shared/lib/redux/slices/profileSlice';
 import { useRouter } from 'next/navigation';
+import { ConfirmationDialog } from '@/shared/ui/confirmation-dialog';
 
 export const ProfileSettings = () => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-  const [deletePassword, setDeletePassword] = useState('');
-
-  // Получаем данные из стора
-  const authError = useSelector(selectAuthError);
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-  };
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const {
     control,
@@ -81,22 +74,8 @@ export const ProfileSettings = () => {
   });
 
   const handleDeleteAccount = async () => {
-    if (!deletePassword.trim()) {
-      showToast({
-        variant: 'error',
-        title: 'Ошибка',
-        message: 'Введите пароль для подтверждения удаления аккаунта',
-      });
-      return;
-    }
-
     try {
-      const result = await dispatch(
-        deleteAccount({
-          password: deletePassword,
-          confirmDeletion: true,
-        })
-      );
+      const result = await dispatch(deleteAccount());
 
       if (deleteAccount.fulfilled.match(result)) {
         showToast({
@@ -120,6 +99,10 @@ export const ProfileSettings = () => {
         message: 'Не удалось удалить аккаунт. Попробуйте снова.',
       });
     }
+  };
+
+  const handleOpenDeleteDialog = () => {
+    setIsDeleteDialogOpen(true);
   };
 
   return (
@@ -146,34 +129,26 @@ export const ProfileSettings = () => {
           />
 
           <div className={s.buttonGroup}>
-            {isEditing ? (
-              <>
-                <Button type="submit" disabled={!isValid} className={s.saveButton}>
-                  Сохранить изменения
-                </Button>
-              </>
-            ) : (
-              <Button
-                type="button"
-                variant="link"
-                onClick={handleEditToggle}
-                className={s.editButton}
-              >
-                Редактировать пароль
-              </Button>
-            )}
+            <Button type="submit" disabled={!isValid} className={s.saveButton}>
+              Сохранить изменения
+            </Button>
           </div>
         </form>
       </div>
 
-      <Button
-        type="button"
-        variant="primary"
-        onClick={handleDeleteAccount}
-        className={s.deleteButton}
+      <ConfirmationDialog
+        message="Вы действительно хотите удалить аккаунт на нашем сайте?"
+        confirmText="Удалить"
+        cancelText="Отмена"
+        onConfirm={handleDeleteAccount}
+        isOpen={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        variant="danger"
       >
-        Удалить профиль
-      </Button>
+        <Button type="button" variant="primary" className={s.deleteButton}>
+          Удалить профиль
+        </Button>
+      </ConfirmationDialog>
     </div>
   );
 };

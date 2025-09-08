@@ -40,12 +40,12 @@ export const HeaderMobile = ({
             variant="icon_secondary"
             aria-label="Личный кабинет"
           >
-            <UserIcon />
+            <UserIcon className={s.userIcon} />
           </Button>
         ) : (
           <AuthPopup>
             <Button variant="icon_secondary" aria-label="Личный кабинет">
-              <UserIcon />
+              <UserIcon className={s.userIcon} />
             </Button>
           </AuthPopup>
         )}

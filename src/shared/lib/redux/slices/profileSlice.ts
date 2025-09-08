@@ -155,7 +155,7 @@ export const changePassword = createAsyncThunk(
 
 export const deleteAccount = createAsyncThunk(
   'profile/deleteAccount',
-  async (deleteData: DeleteAccountRequest, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
       const state = getState() as { profile: ProfileState };
       const token = state.profile.token;
@@ -164,7 +164,7 @@ export const deleteAccount = createAsyncThunk(
         throw new Error('Токен не найден');
       }
 
-      const data = await deleteAccountApi(token, deleteData);
+      const data = await deleteAccountApi(token);
       return data;
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Ошибка удаления аккаунта');

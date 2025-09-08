@@ -1,4 +1,4 @@
-@use '../../config/styles/functions' as *;
+@use "../../config/styles/functions" as *;
 
 .button {
   cursor: pointer;
@@ -87,6 +87,17 @@
 
   @media (max-width: 768px) {
     padding: 14px 12px;
+  }
+}
+
+.outline {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  padding: vw-1440(15) vw-1440(12);
+  border: 1px solid rgba(17, 20, 52, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 15px 12px;
   }
 }
 

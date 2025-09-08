@@ -16,7 +16,8 @@ export type ButtonProps<T extends ElementType = 'button'> = {
     | 'burger'
     | 'primary'
     | 'category'
-    | 'secondary';
+    | 'secondary'
+    | 'outline';
 } & ComponentPropsWithoutRef<T>;
 
 export const Button = forwardRef(

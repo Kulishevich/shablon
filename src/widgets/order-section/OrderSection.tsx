@@ -19,6 +19,7 @@ import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDisco
 import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
 import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
+import { selectUser } from '@/shared/lib/redux/selectors/ProfileSelectors';
 
 export const OrderSection = ({
   paymentMethods,
@@ -36,6 +37,7 @@ export const OrderSection = ({
   const priceWithDiscount = getPriceWithDiscount(productsState) - promocodeDiscount;
   const dispatch = useDispatch();
   const { storeUrl } = useRuntimeConfig();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     const handleCheckPromocode = async () => {
@@ -81,11 +83,11 @@ export const OrderSection = ({
 
   const form = useForm({
     defaultValues: {
-      name: '',
-      surname: '',
+      name: user?.name || '',
+      surname: user?.last_name || '',
       patronymic: '',
-      phone: '',
-      email: '',
+      phone: user?.phone || '',
+      email: user?.email || '',
       delivery_method_id: deliveryMethods?.[0]?.id,
       delivery_cost: defaultDeliveryCost,
       address: '',
@@ -132,6 +134,7 @@ export const OrderSection = ({
     try {
       const res = await postOrder({
         reqData: orderData,
+        client_id: user?.id,
       });
 
       dispatch(clearCart());

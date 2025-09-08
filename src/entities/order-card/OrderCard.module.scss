@@ -49,24 +49,20 @@
   }
 
   .products {
-    display: flex;
     width: calc(100% + vw-1440(40));
     margin-left: vw-1440(-20);
     padding-left: vw-1440(20);
     padding-right: vw-1440(20);
-    gap: vw-1440(10);
-    overflow-x: auto;
 
     @media (max-width: 768px) {
-      gap: 8px;
       padding-left: 20px;
       padding-right: 20px;
       width: calc(100% + 40px);
       margin-left: -20px;
     }
 
-    &::-webkit-scrollbar {
-      display: none;
+    .slide {
+      width: auto;
     }
 
     .product {

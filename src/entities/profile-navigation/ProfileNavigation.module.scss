@@ -26,6 +26,7 @@
       width: vw-1440(22);
       height: vw-1440(22);
       flex-shrink: 0;
+      transition: all 0.3s ease-in-out;
 
       @media (max-width: 768px) {
         width: 22px;
@@ -33,7 +34,12 @@
       }
     }
 
-    &:hover,
+    &:hover {
+      svg {
+        color: var(--color-accent-1);
+      }
+    }
+
     &.active {
       background-color: var(--color-button-additional);
       color: var(--color-text);

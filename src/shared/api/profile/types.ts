@@ -93,7 +93,6 @@ export interface RefreshTokenResponse {
 
 // Типы для удаления аккаунта
 export interface DeleteAccountRequest {
-  password: string;
   confirmDeletion: boolean;
 }
 

@@ -13,7 +13,7 @@ import {
 import clsx from 'clsx';
 
 import s from './TextField.module.scss';
-import { CloseIcon, EyeIcon, SearchIcon } from '../../assets';
+import { CloseIcon, EyeCloseIcon, EyeIcon, SearchIcon } from '../../assets';
 
 export type TextFieldProps = {
   errorMessage?: ReactNode | string;
@@ -90,15 +90,24 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           type={variant === 'password' ? (isPasswordVisible ? 'text' : 'password') : type}
           {...rest}
         />
-        {variant === 'password' && (
-          <EyeIcon
-            className={s.eyeIcon}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsPasswordVisible((prev) => !prev);
-            }}
-          />
-        )}
+        {variant === 'password' &&
+          (isPasswordVisible ? (
+            <EyeIcon
+              className={s.eyeIcon}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsPasswordVisible((prev) => !prev);
+              }}
+            />
+          ) : (
+            <EyeCloseIcon
+              className={s.eyeIcon}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsPasswordVisible((prev) => !prev);
+              }}
+            />
+          ))}
         {isSearch && (
           <CloseIcon
             className={s.clearIcon}

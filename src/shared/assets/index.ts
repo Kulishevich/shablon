@@ -49,3 +49,4 @@ export { default as UserLogOutIcon } from './UserLogOutIcon';
 export { default as EyeIcon } from './EyeIcon';
 export { default as UserProfileIcon } from './UserProfileIcon';
 export { default as RepeatIcon } from './RepeatIcon';
+export { default as EyeCloseIcon } from './EyeCloseIcon';

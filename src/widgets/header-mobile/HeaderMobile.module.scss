@@ -12,6 +12,13 @@
   @media (min-width: 768px) {
     display: none;
   }
+
+  .userIcon {
+    path {
+      stroke-width: 1px;
+      stroke: var(--color-text);
+    }
+  }
 }
 
 .buttonsContainer {

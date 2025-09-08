@@ -1,9 +1,12 @@
+'use client';
 import React from 'react';
 import s from './OrderCard.module.scss';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui/button';
 import { RepeatIcon } from '@/shared/assets';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 export const OrderCard = () => {
   return (
@@ -12,35 +15,62 @@ export const OrderCard = () => {
         <div className={clsx(s.number, 'h4')}>№ 12345</div>
         <div className={clsx(s.status, s.success, 'body-4')}>Выполнен</div>
       </div>
-      <div className={s.products}>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-        <div className={s.product}>
-          <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
-        </div>
-      </div>
+      <Swiper
+        className={s.products}
+        slidesPerView={'auto'}
+        spaceBetween={8}
+        breakpoints={{
+          768: {
+            spaceBetween: 10,
+          },
+        }}
+      >
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className={s.slide}>
+          <div className={s.product}>
+            <Image src={'/history-product.png'} alt={'Product'} width={64} height={64} />
+          </div>
+        </SwiperSlide>
+      </Swiper>
       <div className={s.orderInfo}>
         <div className={s.orderInfoItem}>
           <div className={clsx(s.orderInfoItemTitle, 'body_6')}>Дата оформления заказа:</div>

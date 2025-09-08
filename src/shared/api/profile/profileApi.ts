@@ -130,23 +130,45 @@ export async function changePassword(
 }
 
 
+export async function getOrders(token?: string | null) {
+  try {
+    const apiUrl = await getApiUrl();
+    const response = await fetch(`${apiUrl}/v1/orders/my`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    console.log(response);
 
+
+    const data = await response.json();
+
+    console.log(data);
+
+
+
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Произошла неожиданная ошибка при получении истории заказов');
+  }
+}
 
 
 // Удаление аккаунта
 export async function deleteAccount(
   token: string,
-  deleteData: DeleteAccountRequest
 ): Promise<DeleteAccountResponse> {
   try {
     const apiUrl = await getApiUrl();
-    const response = await fetch(`${apiUrl}/profile/delete-account`, {
+    const response = await fetch(`${apiUrl}/v1/auth/me`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify(deleteData),
     });
 
     if (!response.ok) {
