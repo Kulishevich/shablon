@@ -14,8 +14,8 @@ export const FaqSection = async () => {
       <h2 className="h2">Ответы на часто задаваемые вопросы</h2>
 
       <div className={s.list}>
-        {faqs.map((faq) => (
-          <FaqItem key={faq.id} faq={faq} />
+        {faqs.map((faq, index) => (
+          <FaqItem key={index} faq={faq} />
         ))}
       </div>
     </div>

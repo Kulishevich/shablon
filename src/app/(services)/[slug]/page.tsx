@@ -19,6 +19,7 @@ import { WorksBlock } from '@/widgets/works-block';
 import { TextBlock } from '@/widgets/text-block';
 import { ImageBlock } from '@/widgets/image-block';
 import s from './page.module.scss';
+import clsx from 'clsx';
 
 export default async function Service({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -48,7 +49,9 @@ export default async function Service({ params }: { params: Promise<{ slug: stri
       <main className={s.main}>
         <h1 className="h1 service-title">{service?.title}</h1>
 
-        <div className={s.blocks}>
+        <div
+          className={clsx(s.blocks, { [s.lowMargin]: service.slug == 'texniceskaia-informaciia' })}
+        >
           {service.blocks?.map((block: any, index: number) => {
             switch (block.type) {
               case 'text_image':
