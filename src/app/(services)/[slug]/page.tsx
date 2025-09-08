@@ -49,7 +49,7 @@ export default async function Service({ params }: { params: Promise<{ slug: stri
         <h1 className="h1 service-title">{service?.title}</h1>
 
         <div className={s.blocks}>
-          {service.blocks?.map((block, index) => {
+          {service.blocks?.map((block: any, index: number) => {
             switch (block.type) {
               case 'text_image':
                 return (

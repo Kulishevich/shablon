@@ -14,7 +14,12 @@ export const TextImageBlock = ({
   return (
     <div className={clsx(s.container, { [s.right]: block.image_position === 'right' })}>
       <div className={s.image}>
-        <Image src={`${storeUrl}/${block.image_path}`} alt={`Изображение`} fill />
+        <Image
+          src={`${storeUrl}/${block.image_path}`}
+          alt={`Изображение`}
+          height={416}
+          width={636}
+        />
       </div>
 
       <div className={s.content}>

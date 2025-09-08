@@ -18,12 +18,4 @@
       margin-top: -48px;
     }
   }
-
-  div.imageBlock:not(:last-child) {
-    margin-bottom: vw-1440(-100);
-
-    @media (max-width: 768px) {
-      margin-bottom: -48px;
-    }
-  }
 }
