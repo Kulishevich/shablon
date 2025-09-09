@@ -98,12 +98,16 @@
       }
 
       @media (max-width: 768px) {
-        position: static;
+        position: relative;
         transform: none;
         width: 100%;
         margin-top: 24px;
         gap: 12px;
+        left: initial;
+        top: initial;
         justify-content: center;
+
+        z-index: 2;
 
         &.hidden {
           display: flex;

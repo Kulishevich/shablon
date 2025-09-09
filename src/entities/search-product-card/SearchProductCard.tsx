@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { useRuntimeConfig } from '@/shared/lib/hooks/useRuntimeConfig';
 
 export const SearchProductCard = ({ ...props }: ProductT) => {
-  const { photo_path, name, price, id } = props;
+  const { photo_path, name, price, id, discount } = props;
   const dispatch = useDispatch();
   const { storeUrl } = useRuntimeConfig();
 
@@ -32,7 +32,7 @@ export const SearchProductCard = ({ ...props }: ProductT) => {
           <p className="body_4">{name}</p>
           <div className={s.price}>
             <h5 className="h5">{price} BYN</h5>
-            {!!price && <p className="discount">{price} BYN</p>}
+            {!!Number(discount) && <p className="discount">{price} BYN</p>}
           </div>
         </div>
       </Link>

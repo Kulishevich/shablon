@@ -50,10 +50,11 @@ export async function generateViewport() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [data, settings, storeUrl] = await Promise.all([
+  const [data, settings, storeUrl, services] = await Promise.all([
     getSeoTag({ tag: 'home' }),
     getSetting(),
     getStoreUrl(),
+    getServices(),
   ]);
 
   return {
@@ -155,7 +156,7 @@ export default async function RootLayout({
         />
         <HeaderMobile categories={categories} contacts={contacts} services={services} />
         {children}
-        <Footer categories={categories} contacts={contacts} />
+        <Footer categories={categories} contacts={contacts} services={services} />
         <Toaster />
         <PhoneAnimation image={settings?.feedback_image || ''} />
         <ToTop />

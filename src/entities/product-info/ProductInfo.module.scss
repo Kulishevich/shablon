@@ -60,9 +60,8 @@
   }
 
   & > li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: vw-1440(8);
     padding: vw-1440(14) 0;
     border-bottom: 1px solid color-mix(in srgb, var(--color-accent-1) 10%, transparent);

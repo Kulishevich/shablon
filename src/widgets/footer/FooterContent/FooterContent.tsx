@@ -9,13 +9,16 @@ import { paths } from '@/shared/config/constants/paths';
 import { ContactsT } from '@/shared/api/design/types';
 import s from './FooterContent.module.scss';
 import { SocialMedia } from '@/entities/social-media';
+import { ServiceT } from '@/shared/api/services/types';
 
 export const FooterContent = ({
   categories,
   contacts,
+  services,
 }: {
   categories: CategoryT[] | null;
   contacts: ContactsT | null;
+  services: ServiceT[] | null;
 }) => {
   return (
     <div className={s.container}>
@@ -43,10 +46,17 @@ export const FooterContent = ({
           <div className="h5">Покупателям</div>
           <nav itemScope itemType="http://schema.org/SiteNavigationElement">
             <ul className={s.navigation}>
-              {navigation.slice(0, 7).map((nav, index) => (
+              {navigation.slice(0, 6).map((nav, index) => (
                 <li key={index}>
                   <Link className="body_3" href={nav.path} itemProp="url">
                     <span itemProp="name">{nav.title}</span>
+                  </Link>
+                </li>
+              ))}
+              {services?.map((service, index) => (
+                <li key={index}>
+                  <Link className="body_3" href={`/${service.slug}`}>
+                    {service.title}
                   </Link>
                 </li>
               ))}

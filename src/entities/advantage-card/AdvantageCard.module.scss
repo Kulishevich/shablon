@@ -50,6 +50,9 @@
 
     @media (max-width: 768px) {
       margin-bottom: 6px;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      min-height: calc(1em * 1.4 * 3);
     }
   }
 

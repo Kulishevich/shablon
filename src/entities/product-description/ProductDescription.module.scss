@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   display: flex;
@@ -12,7 +12,7 @@
   gap: vw-1440(48);
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -117,7 +117,6 @@
 
     & > div {
       flex: 0 0 auto;
-      white-space: nowrap;
     }
 
     & > span {

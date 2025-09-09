@@ -17,9 +17,13 @@
 
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 32px;
     max-width: 335px;
+
+    &.right {
+      flex-direction: column;
+    }
   }
 
   .image {
