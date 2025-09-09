@@ -5,14 +5,59 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui/button';
 import { FeedbackPopup } from '../feedback-popup/FeedbackPopup';
+/* import { Swiper, SwiperSlide } from 'swiper/react';
+import { useRef } from 'react';
+import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/assets';
+import 'swiper/css';
+import { Swiper as SwiperType } from 'swiper'; */
 
 export const TextImageBlock = ({
   storeUrl,
   isButton = false,
   ...block
 }: TextImageBlockT & { storeUrl: string; isButton?: boolean }) => {
+  /*   const swiperRef = useRef<SwiperType>(null);
+
+  const handlePrevSlide = () => {
+    swiperRef.current?.slidePrev();
+  };
+
+  const handleNextSlide = () => {
+    swiperRef.current?.slideNext();
+  };
+ */
   return (
     <div className={clsx(s.container, { [s.right]: block.image_position === 'right' })}>
+      {/* <div className={s.innerContainer}>
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={16}
+          onBeforeInit={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          className={s.swiper}
+        >
+          {new Array(4).fill(0).map((item, index) => (
+            <SwiperSlide key={index} className={s.swiperSlide}>
+              <Image
+                src={`${storeUrl}/${block.image_path}`}
+                alt={item.title || ''}
+                width={416}
+                height={340}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <div className={clsx(s.navigation, { [s.hidden]: new Array(4).fill(0).length <= 1 })}>
+          <Button variant="icon_secondary" className={s.iconLeft} onClick={handlePrevSlide}>
+            <ArrowLeftIcon />
+          </Button>
+          <Button variant="icon_secondary" className={s.iconRight} onClick={handleNextSlide}>
+            <ArrowRightIcon />
+          </Button>
+        </div>
+      </div> */}
+
       <div className={s.image}>
         <Image
           src={`${storeUrl}/${block.image_path}`}

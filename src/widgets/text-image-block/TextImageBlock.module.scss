@@ -26,6 +26,60 @@
     }
   }
 
+  .innerContainer {
+    position: relative;
+    flex-shrink: 0;
+    width: vw-1440(636);
+    height: vw-1440(416);
+
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 320px;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+
+      .swiperSlide {
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: vw-1440(6);
+
+          @media (max-width: 768px) {
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+
+    .navigation {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: space-between;
+      width: calc(100% + vw-1440(80));
+      z-index: 10;
+      pointer-events: none;
+
+      @media (max-width: 768px) {
+        width: calc(100% + 24px);
+      }
+
+      .iconLeft,
+      .iconRight {
+        pointer-events: auto;
+      }
+    }
+  }
+
   .image {
     position: relative;
     flex-shrink: 0;

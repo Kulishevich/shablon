@@ -56,12 +56,29 @@ export const HeaderBurgerMenu = ({
                   <CategoryItem key={index} category={category} onClose={() => setIsOpen(false)} />
                 ))}
               </CollapseHeader>
-              {navigation.slice(0, 3).map((nav, index) => (
+              {navigation.slice(0, 1).map((nav, index) => (
                 <Link className="h3" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
                   {nav.title}
                 </Link>
               ))}
-              <CollapseHeader title={'Услуги'} onClick={() => setIsOpen(false)}>
+              {services?.slice(0, 2).map((service, index) => (
+                <Link
+                  className="h3"
+                  href={`/${service.slug}`}
+                  key={index}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {service.title}
+                </Link>
+              ))}
+
+              {navigation.slice(2, 3).map((nav, index) => (
+                <Link className="h3" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
+                  {nav.title}
+                </Link>
+              ))}
+
+              {/*  <CollapseHeader title={'Услуги'} onClick={() => setIsOpen(false)}>
                 {services?.map((service, index) => (
                   <Link
                     key={index}
@@ -72,7 +89,7 @@ export const HeaderBurgerMenu = ({
                     {service.title}
                   </Link>
                 ))}
-              </CollapseHeader>
+              </CollapseHeader> */}
               {navigation.slice(3, 5).map((nav, index) => (
                 <Link className="h3" href={nav.path} key={index} onClick={() => setIsOpen(false)}>
                   {nav.title}
