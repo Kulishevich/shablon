@@ -115,15 +115,18 @@
 
     &:nth-child(1) {
       width: vw-1440(186);
+      flex: 1 0 auto;
     }
 
     &:nth-child(2) {
-      width: vw-1440(153);
-      flex: 1;
+      width: vw-1440(156);
+      flex: 0 0 auto;
     }
 
     &:nth-child(3) {
-      width: vw-1440(224);
+      width: fit-content;
+      max-width: vw-1440(224);
+      flex: 0 0 auto;
     }
   }
 }
