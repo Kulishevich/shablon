@@ -20,6 +20,9 @@ import { getStoreUrl } from '@/shared/api/base';
 import { CertificatesSection } from '@/widgets/certificates-section/CertificatesSection';
 import { FaqSection } from '@/widgets/faq-section';
 import { getCertificates } from '@/shared/api/certificates/getCertificates';
+import { HomeSecondInfoBlock } from '@/widgets/home-second-info-block/HomeSecondInfoBlock';
+import { HomeFirstInfoBlock } from '@/widgets/home-first-info-block';
+import { CalculationOfTheElectricHeatingSystem } from '@/widgets/calculation-of-the-electric-heating-system';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
@@ -83,6 +86,9 @@ export default async function Home() {
         <MainSlider slides={banners || []} />
       </Suspense>
 
+      <HomeFirstInfoBlock />
+      <CalculationOfTheElectricHeatingSystem image={setting?.feedback_image || ''} />
+      <HomeSecondInfoBlock />
       <MainShortcuts tags={tags} storeUrl={storeUrl} />
       <CatalogProducts categories={categories} />
 
