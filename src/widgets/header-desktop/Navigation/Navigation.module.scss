@@ -1,4 +1,4 @@
-@use "../../../shared/config/styles/functions" as *;
+@use '../../../shared/config/styles/functions' as *;
 
 .container {
   width: 100%;
@@ -72,7 +72,7 @@
       position: absolute;
       top: 100%;
       left: vw-1440(-12);
-      width: vw-1440(150);
+      min-width: vw-1440(150);
       background-color: var(--color-bg);
       border: 1px solid rgba(37, 51, 140, 0.1);
       display: flex;
@@ -87,7 +87,7 @@
 
       a {
         text-decoration: none;
-        white-space: wrap;
+        white-space: nowrap;
       }
     }
   }

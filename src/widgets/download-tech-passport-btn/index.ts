@@ -1,0 +1,1 @@
+export { DownloadTechPassportBtn } from './DownloadTechPassportBtn';

@@ -26,6 +26,7 @@ export const TextImageBlock = ({
     swiperRef.current?.slideNext();
   };
  */
+
   return (
     <div className={clsx(s.container, { [s.right]: block.image_position === 'right' })}>
       {/* <div className={s.innerContainer}>
@@ -60,7 +61,7 @@ export const TextImageBlock = ({
 
       <div className={s.image}>
         <Image
-          src={`${storeUrl}/${block.image_path}`}
+          src={`${storeUrl}/${block.images_data.images[0].image_path}`}
           alt={`Изображение`}
           height={416}
           width={636}

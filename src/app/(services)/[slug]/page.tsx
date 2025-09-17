@@ -2,7 +2,7 @@ import { Breadcrumbs } from '@/shared/ui/breadcrumbs';
 import { Feedback } from '@/widgets/feedback/Feedback';
 import { notFound } from 'next/navigation';
 import { SeoBlock } from '@/entities/seo-block';
-import { getStoreUrl } from '@/shared/api/base';
+import { getApiUrl, getStoreUrl } from '@/shared/api/base';
 import { getServiceBySlug } from '@/shared/api/services/getServiceBySlug';
 import { getAdvantages } from '@/shared/api/advantages/getAdvantages';
 import { getBrands } from '@/shared/api/brands/getBrands';
@@ -20,6 +20,7 @@ import { TextBlock } from '@/widgets/text-block';
 import { ImageBlock } from '@/widgets/image-block';
 import s from './page.module.scss';
 import clsx from 'clsx';
+import { DownloadTechPassportBtn } from '@/widgets/download-tech-passport-btn';
 
 export default async function Service({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -48,6 +49,7 @@ export default async function Service({ params }: { params: Promise<{ slug: stri
       />
       <main className={s.main}>
         <h1 className="h1 service-title">{service?.title}</h1>
+        {slug === 'texniceskaia-informaciia' && <DownloadTechPassportBtn />}
 
         <div
           className={clsx(s.blocks, { [s.lowMargin]: service.slug == 'texniceskaia-informaciia' })}
