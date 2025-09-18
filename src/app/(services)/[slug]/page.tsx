@@ -20,12 +20,15 @@ import { TextBlock } from '@/widgets/text-block';
 import { ImageBlock } from '@/widgets/image-block';
 import s from './page.module.scss';
 import clsx from 'clsx';
-import { DownloadTechPassportBtn } from '@/widgets/download-tech-passport-btn';
+import Link from 'next/link';
+import { Button } from '@/shared/ui/button';
 
 export default async function Service({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = await getServiceBySlug({ slug });
   const storeUrl = await getStoreUrl();
+  const apiUrl = await getApiUrl();
+
   if (!service) {
     notFound();
   }
@@ -48,8 +51,14 @@ export default async function Service({ params }: { params: Promise<{ slug: stri
         ]}
       />
       <main className={s.main}>
-        <h1 className="h1 service-title">{service?.title}</h1>
-        {slug === 'texniceskaia-informaciia' && <DownloadTechPassportBtn />}
+        <div className={s.titleContainer}>
+          <h1 className="h1">{service?.title}</h1>
+          {slug === 'texniceskaia-informaciia' && (
+            <Button as={Link} href={`${apiUrl}/public/passports/download`}>
+              Скачать техпаспорт
+            </Button>
+          )}
+        </div>
 
         <div
           className={clsx(s.blocks, { [s.lowMargin]: service.slug == 'texniceskaia-informaciia' })}

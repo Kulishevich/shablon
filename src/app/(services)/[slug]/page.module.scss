@@ -1,4 +1,4 @@
-@use "../../../shared/config/styles/functions" as *;
+@use '../../../shared/config/styles/functions' as *;
 
 .main {
   .blocks {
@@ -33,5 +33,22 @@
     @media (max-width: 768px) {
       margin-top: -48px;
     }
+  }
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: vw-1440(1296);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    gap: 20px;
+    width: 336px;
   }
 }

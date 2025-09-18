@@ -1,4 +1,4 @@
-@use "./functions" as *;
+@use './functions' as *;
 
 * {
   box-sizing: border-box;
@@ -125,18 +125,6 @@ h2 {
     & > div {
       gap: 16px;
     }
-  }
-}
-
-.service-title {
-  width: vw-1440(1296);
-  margin: 0 auto;
-  margin-bottom: vw-1440(-84);
-
-  @media (max-width: 768px) {
-    width: 335px;
-    margin-bottom: -48px;
-    text-align: center;
   }
 }
 
@@ -418,7 +406,7 @@ h2 {
 
 .required {
   &::after {
-    content: "*";
+    content: '*';
     color: var(--color-accent-red);
   }
 }
