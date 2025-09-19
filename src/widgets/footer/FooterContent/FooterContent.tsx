@@ -39,6 +39,13 @@ export const FooterContent = ({
                 </Link>
               </li>
             ))}
+            {services?.map((service, index) => (
+              <li key={index}>
+                <Link className="body_3" href={`/${service.slug}`}>
+                  {service.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -50,13 +57,6 @@ export const FooterContent = ({
                 <li key={index}>
                   <Link className="body_3" href={nav.path} itemProp="url">
                     <span itemProp="name">{nav.title}</span>
-                  </Link>
-                </li>
-              ))}
-              {services?.map((service, index) => (
-                <li key={index}>
-                  <Link className="body_3" href={`/${service.slug}`}>
-                    {service.title}
                   </Link>
                 </li>
               ))}

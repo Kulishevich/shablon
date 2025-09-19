@@ -110,8 +110,7 @@
 }
 .catalog {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(5, auto);
+
   gap: vw-1440(16) vw-1440(20);
   list-style: none;
 

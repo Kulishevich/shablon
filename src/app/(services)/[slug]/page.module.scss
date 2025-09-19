@@ -1,4 +1,4 @@
-@use '../../../shared/config/styles/functions' as *;
+@use "../../../shared/config/styles/functions" as *;
 
 .main {
   .blocks {
@@ -32,6 +32,16 @@
 
     @media (max-width: 768px) {
       margin-top: -48px;
+    }
+  }
+
+  .downloadButton {
+    width: fit-content;
+    margin-top: vw-1440(24);
+
+    @media (max-width: 768px) {
+      margin: 0 auto;
+      margin-top: 24px;
     }
   }
 }

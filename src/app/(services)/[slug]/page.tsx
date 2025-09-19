@@ -92,6 +92,16 @@ export default async function Service({ params }: { params: Promise<{ slug: stri
 
             return null;
           })}
+
+          {slug === 'texniceskaia-informaciia' && (
+            <Button
+              as={Link}
+              href={`${apiUrl}/public/passports/download`}
+              className={s.downloadButton}
+            >
+              Скачать техпаспорт
+            </Button>
+          )}
         </div>
 
         {!!advantages?.length && <AdvantagesSection advantages={advantages} />}

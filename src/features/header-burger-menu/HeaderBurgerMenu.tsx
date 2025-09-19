@@ -61,7 +61,7 @@ export const HeaderBurgerMenu = ({
                   {nav.title}
                 </Link>
               ))}
-              {services?.slice(0, 2).map((service, index) => (
+              {services?.map((service, index) => (
                 <Link
                   className="h3"
                   href={`/${service.slug}`}

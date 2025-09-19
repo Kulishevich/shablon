@@ -182,7 +182,7 @@ export const ProductCard = ({
           }}
           className={'desktop-only'}
         >
-          Добавить в КП
+          Заказать
         </Button>
         {!productInCart && (
           <Button
@@ -192,7 +192,7 @@ export const ProductCard = ({
               e.preventDefault();
               handleAddInCard();
             }}
-            aria-label="Добавить в КП"
+            aria-label="Заказать"
           >
             <ShoppingCartIcon />
           </Button>

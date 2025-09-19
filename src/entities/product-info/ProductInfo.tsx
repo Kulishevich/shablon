@@ -143,13 +143,13 @@ export const ProductInfo = ({
               </Button>
             </div>
             <Button onClick={handleAddInCard} fullWidth className={'desktop-only'}>
-              Добавить в КП
+              Заказать
             </Button>
             <Button
               variant={'icon_outlined'}
               className={clsx(s.cartButton, 'mobile-only')}
               onClick={handleAddInCard}
-              aria-label="Добавить в КП"
+              aria-label="Заказать"
             >
               <ShoppingCartIcon />
             </Button>
