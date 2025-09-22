@@ -1,0 +1,45 @@
+@use "../../shared/config/styles/functions" as *;
+
+.container {
+  max-width: vw-1440(1296);
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    max-width: 336px;
+  }
+
+  .title {
+    text-align: center;
+    margin-bottom: vw-1440(32);
+
+    @media (max-width: 768px) {
+      margin-bottom: 24px;
+    }
+  }
+
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: vw-1440(24);
+    width: 100%;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .video {
+      width: 100%;
+      height: vw-1440(352);
+      border-radius: vw-1440(6);
+      border: 1px solid rgba(14, 21, 40, 0.3);
+      overflow: hidden;
+
+      @media (max-width: 768px) {
+        height: 186px;
+        border-radius: 6px;
+      }
+    }
+  }
+}

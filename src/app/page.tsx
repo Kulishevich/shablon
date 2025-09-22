@@ -23,6 +23,7 @@ import { getCertificates } from '@/shared/api/certificates/getCertificates';
 import { HomeSecondInfoBlock } from '@/widgets/home-second-info-block/HomeSecondInfoBlock';
 import { HomeFirstInfoBlock } from '@/widgets/home-first-info-block';
 import { CalculationOfTheElectricHeatingSystem } from '@/widgets/calculation-of-the-electric-heating-system';
+import { VideosBlock } from '@/entities/videos-block';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
@@ -117,6 +118,8 @@ export default async function Home() {
       <Suspense>
         <ReviewsSection reviews={reviews} storeUrl={storeUrl} />
       </Suspense>
+
+      <VideosBlock />
 
       {!!newsList?.data?.length && (
         <Suspense>
