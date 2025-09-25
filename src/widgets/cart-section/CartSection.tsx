@@ -12,6 +12,7 @@ import { RootState } from '@/shared/lib/redux/store';
 import { checkCartPriceWitchPromocode } from '@/shared/api/promocode/checkCartPriceWitchPromocode.ts';
 import { getPriceWithoutDiscount } from '@/shared/lib/utils/getPriceWithoutDiscount';
 import { getPriceWithDiscount } from '@/shared/lib/utils/getPriceWithDiscount';
+import { EmptyCart } from '../empty-cart';
 
 export const CartSection = () => {
   const productsCart = useSelector((state: RootState) => state.cart.items);
@@ -60,6 +61,19 @@ export const CartSection = () => {
       setPromocodeDiscount(0);
     }
   }, [promocode, productsCart]);
+
+  if (productsState.length === 0) {
+    return (
+      <SectionAnimationWrapper>
+        <div className={s.container}>
+          <div className={s.title}>
+            <h1 className="h1">Корзина</h1>
+          </div>
+          <EmptyCart />
+        </div>
+      </SectionAnimationWrapper>
+    );
+  }
 
   return (
     <SectionAnimationWrapper>
