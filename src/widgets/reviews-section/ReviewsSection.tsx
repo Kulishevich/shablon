@@ -1,3 +1,4 @@
+'use client';
 import { ReviewCard } from '@/entities/review-card';
 import { SliderWrapper } from '@/entities/slider-wrapper';
 import { ReviewT } from '@/shared/api/reviews/types';

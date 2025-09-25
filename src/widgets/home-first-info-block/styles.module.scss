@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .container {
   width: vw-1440(1296);
@@ -28,7 +28,7 @@
 }
 .image {
   position: relative;
-  width: 50%;
+  width: 100%;
   min-height: 100%;
 
   border-radius: 6px;
@@ -44,9 +44,31 @@
   }
 }
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+  font-family: var(--font-onest);
+  font-weight: 400;
+  font-size: vw-1440(20);
+  line-height: 140%;
+
+  @media (max-width: 768px) {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+  }
+
+  h3 {
+    font-family: var(--font-onest);
+    font-weight: 400;
+    font-size: vw-1440(24);
+    line-height: 140%;
+    margin-bottom: vw-1440(12);
+
+    @media (max-width: 768px) {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 140%;
+      margin-bottom: 8px;
+    }
+  }
 }
 .title {
   margin-bottom: vw-1440(12);
@@ -62,7 +84,9 @@
 }
 .link {
   width: vw-1440(220);
+  margin-top: vw-1440(24);
   @media (max-width: 768px) {
     width: 220px;
+    margin-top: 24px;
   }
 }

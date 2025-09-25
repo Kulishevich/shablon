@@ -34,8 +34,10 @@ export const NewsCard = async ({ news, enableMicrodata = true, storeUrl }: NewsC
         />
       </div>
       <span className={clsx(s.date, 'tag')}>
-        {enableMicrodata && <meta itemProp="datePublished" content={news?.created_at || ''} />}
-        {new Date(news?.created_at || '').toLocaleString('ru-RU', {
+        {enableMicrodata && (
+          <meta itemProp="datePublished" content={news?.publication_date || ''} />
+        )}
+        {new Date(news?.publication_date || '').toLocaleString('ru-RU', {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric',

@@ -11,9 +11,9 @@ export const NewsInfoSection = ({ news, storeUrl }: { news: NewsT | null; storeU
     <div className={s.container} itemScope itemType="http://schema.org/Article">
       <div className={s.titleContainer}>
         <div className={s.title}>
-          <meta itemProp="datePublished" content={news?.created_at || ''} />
+          <meta itemProp="datePublished" content={news?.publication_date || ''} />
           <span className="h5">
-            {new Date(news?.created_at || '').toLocaleDateString('ru-RU', {
+            {new Date(news?.publication_date || '').toLocaleDateString('ru-RU', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',

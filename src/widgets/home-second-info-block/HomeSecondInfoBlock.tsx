@@ -4,12 +4,16 @@ import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { getThirdBlock } from '@/shared/api/main-blocks/getThirdBlock';
+import { getStoreUrl } from '@/shared/api/base';
 
-export const HomeSecondInfoBlock = () => {
+export const HomeSecondInfoBlock = async () => {
+  const thirdBlock = await getThirdBlock();
+  const storeUrl = await getStoreUrl();
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
-        <Image src={'/home-text-image.png'} fill alt="home-image" />
+        <Image src={`${storeUrl}/${thirdBlock?.fields?.image?.path}` || ''} fill alt="home-image" />
       </div>
       <div className={s.content}>
         <h3 className={clsx(s.title, 'body_1')}>Электрическое отопление для вашего домка</h3>

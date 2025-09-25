@@ -40,6 +40,19 @@ export const emailScheme = () =>
     })
     .toLowerCase();
 
+export const optionalEmailScheme = () =>
+  z
+    .string()
+    .trim()
+    .optional()
+    .refine((value) => {
+      if (!value || value === '') return true;
+      return z.string().email().safeParse(value).success;
+    }, {
+      message: validation.email,
+    })
+    .transform((value) => value ? value.toLowerCase() : value);
+
 export const titleScheme = () =>
   z
     .string()

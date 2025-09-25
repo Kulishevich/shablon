@@ -60,15 +60,8 @@ export const OrderForm = ({
             name="surname"
             placeholder="Фамилия"
             label="Фамилия"
-            isRequired
           />
-          <ControlledTextField
-            control={control}
-            name="email"
-            placeholder="Email"
-            label="Email"
-            isRequired
-          />
+          <ControlledTextField control={control} name="email" placeholder="Email" label="Email" />
           <ControlledTextField
             control={control}
             name="patronymic"

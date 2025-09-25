@@ -120,7 +120,7 @@ export const OrderSection = ({
 
     try {
       const res = await postOrder({
-        reqData: orderData,
+        reqData: { ...orderData, email: otherData.email || '' },
       });
 
       dispatch(clearCart());

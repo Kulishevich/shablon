@@ -6,16 +6,17 @@ import {
   nameScheme,
   phoneScheme,
   patronymicScheme,
+  optionalEmailScheme,
 } from '@/shared/validation/validation';
 import { z } from 'zod';
 import { validation } from './validation.errors';
 
 export const createOrderFormSchema = (isPickup: boolean = false) => z.object({
   name: nameScheme(),
-  surname: nameScheme(),
+  surname: z.string().trim().optional(),
   patronymic: patronymicScheme(),
   phone: phoneScheme(),
-  email: emailScheme(),
+  email: optionalEmailScheme(),
   delivery_method_id: z
     .number({
       required_error: 'Выберите способ доставки',

@@ -12,7 +12,7 @@
   background-color: transparent;
 
   width: vw-1440(196);
-  height: vw-1440(174);
+  height: fit-content;
   padding: vw-1440(16);
 
   &:hover {
@@ -26,7 +26,6 @@
 
   @media (max-width: 768px) {
     width: 160px;
-    height: 150px;
     padding: 16px;
   }
 }

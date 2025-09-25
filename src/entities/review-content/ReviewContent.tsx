@@ -14,7 +14,7 @@ export const ReviewContent = ({
   is_card?: boolean;
   storeUrl: string;
 }) => {
-  const { author_name, author_photo, rating, created_at, title, review_text } = review;
+  const { author_name, author_photo, rating, published_at, title, review_text } = review;
 
   return (
     <>
@@ -27,7 +27,7 @@ export const ReviewContent = ({
             {author_name}
           </p>
           <span className={clsx(s.date, 'tag')} itemProp="datePublished">
-            {new Date(created_at).toLocaleDateString()}
+            {new Date(published_at).toLocaleDateString()}
           </span>
         </div>
       </div>

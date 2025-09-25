@@ -1,4 +1,4 @@
-@use '../../shared/config/styles/functions' as *;
+@use "../../shared/config/styles/functions" as *;
 
 .wrapper {
   display: flex;
@@ -28,10 +28,11 @@
 
 .map {
   height: vw-1440(320);
-  width: vw-1440(526);
+  width: 100%;
+  margin-top: vw-1440(24);
 
   @media (max-width: 768px) {
-    width: 303px;
     height: 180px;
+    margin-top: 24px;
   }
 }
