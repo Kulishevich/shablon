@@ -15,6 +15,7 @@
 
     & > img {
       object-fit: cover;
+      background-color: var(--color-bg);
     }
     @media (max-width: 768px) {
       width: 41px;
