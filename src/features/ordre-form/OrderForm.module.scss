@@ -103,6 +103,7 @@
 .paymentMethod {
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
   gap: vw-1440(24);
 
   @media (max-width: 768px) {

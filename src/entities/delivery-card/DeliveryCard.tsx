@@ -13,7 +13,7 @@ export const DeliveryCard = ({
   return (
     <button type="button" className={clsx(s.container, active && s.active)} onClick={onClick}>
       <span className={s.content}>
-        <p className="h5">{name}</p>
+        <p className={clsx(s.name, 'h5')}>{name}</p>
         <p className="body_6">{description}</p>
       </span>
       <p className="h5">{!!Number(cost) ? `${Number(cost)} BYN` : 'Бесплатно'}</p>
