@@ -31,7 +31,11 @@ export const ReviewContent = ({
             {author_name}
           </p>
           <span className={clsx(s.date, 'tag')} itemProp="datePublished">
-            {new Date(published_at).toLocaleDateString()}
+            {new Date(published_at).toLocaleDateString('ru-RU', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })}
           </span>
         </div>
       </div>
