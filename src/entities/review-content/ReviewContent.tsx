@@ -21,7 +21,11 @@ export const ReviewContent = ({
     <>
       <div className={s.head}>
         <div className={s.imageContainer}>
-          <Image src={`${getStoreBaseUrl(variant)}/${author_photo}`} fill alt="profile" />
+          <Image
+            src={author_photo ? `${getStoreBaseUrl(variant)}/${author_photo}` : '/user.svg'}
+            fill
+            alt="profile"
+          />
         </div>
         <div className={s.nameContainer}>
           <p className="body_3" itemProp="author">
