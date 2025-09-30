@@ -14,7 +14,7 @@ export const processCategoryTree = async (categories: CategoryWithSubcategories[
     const currentPath = parentPath ? `${parentPath}/${category.slug}` : category.slug;
 
     fields.push({
-      loc: `${siteUrl}/catalog/${currentPath}`,
+      loc: `${siteUrl}catalog/${currentPath}`,
       lastmod: new Date(category.updated_at || new Date()).toISOString(),
       changefreq: 'daily' as const,
       priority: 0.8,

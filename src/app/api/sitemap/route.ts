@@ -29,7 +29,7 @@ export async function GET() {
     };
 
     const fields: ISitemapField[] = Object.keys(pathWithPriority).map((page) => ({
-      loc: `${siteUrl}/${page == "home" ? "" : page}`,
+      loc: `${siteUrl}${page == "home" ? "" : page}`,
       lastmod: new Date().toISOString(),
       changefreq: 'daily' as const,
       priority: pathWithPriority[page],
@@ -38,7 +38,7 @@ export async function GET() {
     if (newsUrls && newsUrls.data && newsUrls.data.length > 0) {
       fields.push(
         ...newsUrls.data.map((item: NewsT) => ({
-          loc: `${siteUrl}/news/${item.slug}`,
+          loc: `${siteUrl}news/${item.slug}`,
           lastmod: new Date(item.updated_at || new Date()).toISOString(),
           changefreq: 'daily' as const,
           priority: 0.8,
@@ -48,7 +48,7 @@ export async function GET() {
       if (promotionsUrls && promotionsUrls.data && promotionsUrls.data.length > 0) {
         fields.push(
           ...promotionsUrls.data.map((item: PromotionT) => ({
-            loc: `${siteUrl}/shares/${item.slug}`,
+            loc: `${siteUrl}shares/${item.slug}`,
             lastmod: new Date(item.updated_at || new Date()).toISOString(),
             changefreq: 'daily' as const,
             priority: 0.8,
@@ -61,7 +61,7 @@ export async function GET() {
         const enrichedProducts = await enrichProductsWithFullPath({ products: productsUrls });
 
         const productUrls = enrichedProducts.map((item: ProductT) => ({
-          loc: `${siteUrl}/catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
+          loc: `${siteUrl}catalog/${item.fullPath?.join('/') || `${item.category.slug}/${item.slug}`}`,
           lastmod: new Date(item.updated_at || new Date()).toISOString(),
           changefreq: 'daily' as const,
           priority: 0.8,
