@@ -33,7 +33,7 @@ export const NewsCard = async ({ news, enableMicrodata = true }: NewsCardProps) 
         <Image
           src={`${getStoreBaseUrl(variant)}/${news?.photo_path}`}
           fill
-          alt="news"
+          alt={`${news?.title}`}
           {...(enableMicrodata && { itemProp: 'image' })}
         />
       </div>

@@ -31,7 +31,7 @@ export const DiscountCard = async ({
         <Image
           src={`${getStoreBaseUrl(variant)}/${photo_path}`}
           fill
-          alt="discount"
+          alt={`${title}`}
           itemProp="image"
         />
       </div>

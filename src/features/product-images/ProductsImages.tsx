@@ -31,7 +31,7 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
               itemProp="image"
               src={`${getStoreBaseUrl(variant)}/${image.image_path}`}
               fill
-              alt="product"
+              alt={`${product?.name} ${index + 1}`}
             />
           </button>
         ))}
@@ -41,7 +41,7 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
           itemProp="image"
           src={`${getStoreBaseUrl(variant)}/${activeImage}`}
           fill
-          alt="product"
+          alt={`${product?.name} main`}
         />
       </div>
     </div>

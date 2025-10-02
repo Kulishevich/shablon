@@ -28,7 +28,7 @@ export const NewsInfoSection = ({ news, variant }: { news: NewsT | null; variant
           <Image
             src={`${getStoreBaseUrl(variant)}/${news?.photo_path}`}
             fill
-            alt="new"
+            alt={`${news?.title}`}
             itemProp="image"
           />
         </div>
