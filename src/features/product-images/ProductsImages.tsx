@@ -21,12 +21,22 @@ export const ProductsImages = ({ product }: { product: ProductT | null }) => {
               [s.active]: activeImage === image.image_path,
             })}
           >
-            <Image itemProp="image" src={`${storeUrl}/${image.image_path}`} fill alt="product" />
+            <Image
+              itemProp="image"
+              src={`${storeUrl}/${image.image_path}`}
+              fill
+              alt={`${product?.name} ${index + 1}`}
+            />
           </button>
         ))}
       </div>
       <div className={s.imageContainer}>
-        <Image itemProp="image" src={`${storeUrl}/${activeImage}`} fill alt="product" />
+        <Image
+          itemProp="image"
+          src={`${storeUrl}/${activeImage}`}
+          fill
+          alt={`${product?.name} main`}
+        />
       </div>
     </div>
   );
