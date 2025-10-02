@@ -96,7 +96,7 @@ export const ProductCard = ({
           <Image
             src={`${storeUrl}/${main_image?.image_path}`}
             fill
-            alt="product"
+            alt={`${product?.name} image`}
             className={s.image}
           />
         </div>

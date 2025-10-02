@@ -24,7 +24,7 @@ export const DiscountCard = async ({
       itemType="http://schema.org/BlogPosting"
     >
       <div className={s.imageContainer}>
-        <Image src={`${storeUrl}/${photo_path}`} fill alt="discount" itemProp="image" />
+        <Image src={`${storeUrl}/${photo_path}`} fill alt={`${title}`} itemProp="image" />
       </div>
       <div className={s.content}>
         <span className={clsx(s.tag, 'tag')} itemProp="datePublished">
