@@ -69,18 +69,18 @@ export const imageFileScheme = () =>
     .refine(
       (file) => {
         if (!file) return true;
-        return file.size <= 5 * 1024 * 1024; // 5MB
+        return file.size <= 3 * 1024 * 1024; // 3MB
       },
       {
-        message: 'Размер файла не должен превышать 5MB',
+        message: 'Размер файла не должен превышать 3MB',
       }
     )
     .refine(
       (file) => {
         if (!file) return true;
-        return ['image/jpeg', 'image/png'].includes(file.type);
+        return ['image/jpeg', 'image/png', 'image/jpg'].includes(file.type);
       },
       {
-        message: 'Поддерживаются только файлы формата PNG и JPEG',
+        message: 'Поддерживаются только файлы формата PNG, JPEG, JPG',
       }
     );

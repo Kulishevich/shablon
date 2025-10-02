@@ -148,6 +148,9 @@
 
   @media (max-width: 768px) {
     margin-bottom: 4px;
+
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
   }
 }
 
