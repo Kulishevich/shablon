@@ -24,7 +24,12 @@ export const NewsInfoSection = ({ news, storeUrl }: { news: NewsT | null; storeU
           </h1>
         </div>
         <div className={s.imageContainer}>
-          <Image src={`${storeUrl}/${news?.photo_path}`} fill alt="new" itemProp="image" />
+          <Image
+            src={`${storeUrl}/${news?.photo_path}`}
+            fill
+            alt={`${news?.title}`}
+            itemProp="image"
+          />
         </div>
       </div>
       <div className={s.content}>
