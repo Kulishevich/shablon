@@ -105,6 +105,7 @@ export default async function RootLayout({
             --color-heading: ${settings?.colors.heading_color};
           }`}
         </style>
+        <meta name="robots" content="noindex, nofollow" />
         <Script
           src="https://api-maps.yandex.ru/v3/?apikey=e1f9579b-8502-438f-8273-6dff1fc98656&lang=ru_RU"
           strategy="beforeInteractive"

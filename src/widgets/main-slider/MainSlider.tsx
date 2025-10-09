@@ -85,7 +85,7 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
                   <p className="body_1">{slide.subtitle}</p>
                 </div>
                 <Button as={Link} href={slide.button_link}>
-                  Перейти в каталог
+                  {slide.button_text}
                 </Button>
               </div>
             </div>

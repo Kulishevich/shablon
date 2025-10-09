@@ -1,4 +1,5 @@
 import { getNewsMask } from '@/shared/api/meta-tags/getNewsMask';
+import { getAllNews } from '@/shared/api/news/getAllNews';
 import { getNews } from '@/shared/api/news/getNews';
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 
@@ -31,6 +32,13 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
     },
   };
 };
+
+export const generateStaticParams = async () => {
+  const news = await getAllNews({ per_page: '100' });
+  return news?.data?.map((news) => ({ slug: news.slug })) || [];
+};
+
+export const dynamicParams = true;
 
 export default async function NewLayout({
   children,

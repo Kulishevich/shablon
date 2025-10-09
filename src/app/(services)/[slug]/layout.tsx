@@ -1,5 +1,6 @@
 import { getSeoTag } from '@/shared/api/seo/getSeoTag';
 import { getServiceBySlug } from '@/shared/api/services/getServiceBySlug';
+import { getServices } from '@/shared/api/services/getServices';
 
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
@@ -20,6 +21,13 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 
   return {};
 };
+
+export const generateStaticParams = async () => {
+  const services = await getServices();
+  return services?.map((service) => ({ slug: service.slug })) || [];
+};
+
+export const dynamicParams = false;
 
 export default async function ServiceLayout({
   children,

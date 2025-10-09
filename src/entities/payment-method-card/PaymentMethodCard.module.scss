@@ -27,14 +27,15 @@
 
 .icon {
   position: relative;
-  width: 100%;
   height: vw-1440(36);
+  width: vw-1440(36);
 
   & > img {
     object-fit: contain;
   }
   @media (max-width: 768px) {
     height: 36px;
+    width: 36px;
   }
 }
 

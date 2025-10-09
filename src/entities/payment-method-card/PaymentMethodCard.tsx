@@ -13,9 +13,8 @@ export const PaymentMethodCard = ({
 }: PaymentT & { onClick: () => void; active: boolean; storeUrl: string }) => {
   return (
     <button type="button" className={clsx(s.container, active && s.active)} onClick={onClick}>
-      <div className={s.icon}>
-        <Image src={`${storeUrl}/${image}`} fill alt="icon" />
-      </div>
+      <Image className={s.icon} src={`${storeUrl}/${image}`} width={36} height={36} alt="icon" />
+
       <h6 className="h6">{name}</h6>
     </button>
   );

@@ -50,31 +50,30 @@ const VideosBlockWrapper = dynamic(() =>
 );
 
 export default async function Home() {
+  const [banners, setting, tags, storeUrl] = await Promise.all([
+    getBanners(),
+    getSetting(),
+    getTags({}),
+    getStoreUrl(),
+  ]);
+
   const [
     popularProductsRaw,
     newsList,
     advantages,
-    banners,
-    setting,
     contacts,
     categories,
-    brands,
     reviews,
-    tags,
-    storeUrl,
+    brands,
     certificates,
   ] = await Promise.all([
     getPopularProducts(),
     getAllNews({}),
     getAdvantages(),
-    getBanners(),
-    getSetting(),
     getContacts(),
     getCategories(),
-    getBrands(),
     getReviews(),
-    getTags({}),
-    getStoreUrl(),
+    getBrands(),
     getCertificates(),
   ]);
 
