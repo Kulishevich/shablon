@@ -59,6 +59,9 @@ importers:
       next:
         specifier: 15.1.7
         version: 15.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.1)
+      next-runtime-env:
+        specifier: ^3.3.0
+        version: 3.3.0(next@15.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.1))(react@19.1.0)
       next-sitemap:
         specifier: ^4.2.3
         version: 4.2.3(next@15.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.1))
@@ -1680,6 +1683,12 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  next-runtime-env@3.3.0:
+    resolution: {integrity: sha512-JgKVnog9mNbjbjH9csVpMnz2tB2cT5sLF+7O47i6Ze/s/GoiKdV7dHhJHk1gwXpo6h5qPj5PTzryldtSjvrHuQ==}
+    peerDependencies:
+      next: ^14
+      react: ^18
 
   next-sitemap@4.2.3:
     resolution: {integrity: sha512-vjdCxeDuWDzldhCnyFCQipw5bfpl4HmZA7uoo3GAaYGjGgfL4Cxb1CiztPuWGmS+auYs7/8OekRS8C2cjdAsjQ==}
@@ -3742,6 +3751,11 @@ snapshots:
   nanoid@3.3.11: {}
 
   natural-compare@1.4.0: {}
+
+  next-runtime-env@3.3.0(next@15.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.1))(react@19.1.0):
+    dependencies:
+      next: 15.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.1)
+      react: 19.1.0
 
   next-sitemap@4.2.3(next@15.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.1)):
     dependencies:

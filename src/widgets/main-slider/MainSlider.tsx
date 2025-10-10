@@ -66,7 +66,7 @@ export const MainSlider = ({ slides }: { slides: BannerT[] }) => {
                 src={`${storeUrl}/${slide.photo_path}`}
                 alt={`Slide ${index + 1}`}
                 fill
-                priority={index === 0}
+                priority={true}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 placeholder="blur"

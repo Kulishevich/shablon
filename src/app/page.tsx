@@ -23,31 +23,21 @@ import { getCertificates } from '@/shared/api/certificates/getCertificates';
 import { HomeSecondInfoBlock } from '@/widgets/home-second-info-block/HomeSecondInfoBlock';
 import { HomeFirstInfoBlock } from '@/widgets/home-first-info-block';
 import { CalculationOfTheElectricHeatingSystem } from '@/widgets/calculation-of-the-electric-heating-system';
+import { BrandsSection } from '@/widgets/brands-section';
+import { ReviewsSection } from '@/widgets/reviews-section';
+import { VideosBlockWrapper } from '@/entities/videos-block';
+import { NewsSliderSection } from '@/widgets/news-slider-section';
+import { ContactsSection } from '@/widgets/contacts-section';
+import { SeoBlock } from '@/entities/seo-block';
+import { Feedback } from '@/widgets/feedback/Feedback';
 
 // Критические компоненты для FCP
 const MainSlider = dynamic(() => import('@/widgets/main-slider').then((mod) => mod.MainSlider), {
+  ssr: true,
   loading: () => <div style={{ height: '400px', background: '#f5f5f5' }} />,
 });
 
-const SeoBlock = dynamic(() => import('@/entities/seo-block').then((mod) => mod.SeoBlock));
-const ContactsSection = dynamic(() =>
-  import('@/widgets/contacts-section').then((mod) => mod.ContactsSection)
-);
-
-const Feedback = dynamic(() => import('@/widgets/feedback/Feedback').then((mod) => mod.Feedback));
-const ReviewsSection = dynamic(() =>
-  import('@/widgets/reviews-section').then((mod) => mod.ReviewsSection)
-);
-const BrandsSection = dynamic(() =>
-  import('@/widgets/brands-section').then((mod) => mod.BrandsSection)
-);
-const NewsSliderSection = dynamic(() =>
-  import('@/widgets/news-slider-section').then((mod) => mod.NewsSliderSection)
-);
 const MainBanner = dynamic(() => import('@/widgets/main-banner').then((mod) => mod.MainBanner));
-const VideosBlockWrapper = dynamic(() =>
-  import('@/entities/videos-block').then((mod) => mod.VideosBlockWrapper)
-);
 
 export default async function Home() {
   const [banners, setting, tags, storeUrl] = await Promise.all([
@@ -108,41 +98,25 @@ export default async function Home() {
 
       {!!certificates?.length && <CertificatesSection items={certificates} />}
 
-      {!!brands?.length && (
-        <Suspense>
-          <BrandsSection brands={brands} storeUrl={storeUrl} />
-        </Suspense>
-      )}
+      {!!brands?.length && <BrandsSection brands={brands} storeUrl={storeUrl} />}
 
       <MainBanner banner={setting?.main_banner || null} storeUrl={storeUrl} />
 
-      <Suspense>
-        <ReviewsSection reviews={reviews} storeUrl={storeUrl} />
-      </Suspense>
+      <ReviewsSection reviews={reviews} storeUrl={storeUrl} />
 
-      <Suspense>
-        <VideosBlockWrapper />
-      </Suspense>
+      <VideosBlockWrapper />
 
       {!!newsList?.data?.length && (
-        <Suspense>
-          <NewsSliderSection newsList={newsList?.data} storeUrl={storeUrl} />
-        </Suspense>
+        <NewsSliderSection newsList={newsList?.data} storeUrl={storeUrl} />
       )}
 
       <FaqSection />
 
-      <Suspense>
-        <ContactsSection contacts={contacts} isMain />
-      </Suspense>
+      <ContactsSection contacts={contacts} isMain />
 
-      <Suspense>
-        <SeoBlock page="/main" />
-      </Suspense>
+      <SeoBlock page="/main" />
 
-      <Suspense>
-        <Feedback />
-      </Suspense>
+      <Feedback />
     </main>
   );
 }
